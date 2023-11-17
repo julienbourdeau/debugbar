@@ -3,6 +3,7 @@
 require_relative "debugbar_rb/version"
 
 module DebugbarRb
-  class Error < StandardError; end
-  # Your code goes here...
+  def self.hi
+    puts "[#{VERSION}] Hello world!"
+  end
 end
