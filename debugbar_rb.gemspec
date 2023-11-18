@@ -4,6 +4,7 @@ require_relative "lib/debugbar_rb/version"
 
 Gem::Specification.new do |spec|
   spec.name = "debugbar_rb"
+  # spec.version = "0.1.0"
   spec.version = DebugbarRb::VERSION
   spec.authors = ["Julien Bourdeau"]
   spec.email = ["julien@julienbourdeau.com"]
