@@ -8,8 +8,14 @@ module DebugbarRb
 
     def process_action(event)
       payload = event.payload
-      Acc.response(payload.delete :response)
+      response = payload.delete :response
+      Acc.response response
       Acc.meta payload
+
+
+      # TODO: Make this much better lol
+      path = Rails.root.join("request.json")
+      File.write(path, DebugbarRb::Acc.to_json)
     end
   end
 end

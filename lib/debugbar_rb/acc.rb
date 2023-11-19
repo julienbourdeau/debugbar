@@ -10,6 +10,7 @@ module DebugbarRb
         @models = {}
         @queries = []
         @request = nil
+        @meta = nil
       end
 
       def meta(meta)
