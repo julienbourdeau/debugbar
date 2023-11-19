@@ -9,10 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "pinia": "^2.1.7",
     "vue": "^3.3.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vue-tsc": "^1.8.22"

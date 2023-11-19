@@ -1,30 +1,46 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+import TabButton from "./components/TabButton.vue";
+import ModelPanel from "./components/panels/ModelPanel.vue";
+import QueriesPanel from "./components/panels/QueriesPanel.vue";
+import {useRequestsStore} from "./stores/RequestsStore.ts";
+
+let requestsStore = useRequestsStore()
+
+const active = ref('queries')
+
+const summary = {
+  models: {
+    title: 'Models',
+    count: 31,
+  },
+  queries: {
+    title: 'Queries',
+    count: 4,
+  },
+  jobs: {
+    title: 'Jobs',
+    count: 0,
+  },
+}
+
+const models = {
+  'User': 10,
+  'Post': 21,
+  'Comment': 0,
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-</template>
+  <div class="flex items-center justify-between font-mono bg-stone-100 border-b border-stone-200">
+    <div class="flex ">
+      <tab-button v-for="(v, k) in summary" :name="k" :count="v.count" :active="active" @active-tab="active = $event.name" />
+    </div>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+    <div>{{ requestsStore.requests[0].meta.controller }}#{{ requestsStore.requests[0].meta.action }}</div>
+  </div>
+
+  <model-panel :models="models" v-if="active == 'models'" />
+
+  <queries-panel v-if="active == 'queries'" />
+</template>
