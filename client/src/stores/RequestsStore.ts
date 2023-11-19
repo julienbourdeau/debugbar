@@ -3,11 +3,18 @@ import { defineStore } from 'pinia'
 export let useRequestsStore = defineStore('requests', {
   state: () => ({
     requests: [firstHardcodedRequest()],
+    strings: [],
   }),
   actions: {
     addRequest(request) {
       this.requests.push(request)
     },
+    addStr(str: string) {
+      if (this.strings.length > 10) {
+        this.strings.shift()
+      }
+      this.strings.push(str)
+    }
     // removeRequest(request) {
     //   this.requests.splice(this.requests.indexOf(request), 1)
     // },
