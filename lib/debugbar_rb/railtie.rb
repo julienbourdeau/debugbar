@@ -20,7 +20,7 @@ module DebugbarRb
     initializer 'debugbar.track_models' do
       if defined? ActiveRecord::Base
         ActiveRecord::Base.after_initialize do |model|
-          DebugbarRb::Acc.model(model.class.name)
+          DebugbarRb::Acc.inc_model(model.class.name)
         end
       end
     end

@@ -5,6 +5,9 @@ require 'json'
 module DebugbarRb
   class Acc
     class << self
+      attr_reader :request_id, :models, :queries, :meta, :request, :response
+      attr_writer :meta, :request, :response
+
       def init(request_id)
         @request_id = request_id
         @models = {}
@@ -13,19 +16,7 @@ module DebugbarRb
         @meta = nil
       end
 
-      def meta(meta)
-        @meta = meta
-      end
-
-      def request(req)
-        @request = req
-      end
-
-      def response(res)
-        @response = res
-      end
-
-      def model(name)
+      def inc_model(name)
         if @models[name]
           @models[name] += 1
         else
@@ -33,12 +24,8 @@ module DebugbarRb
         end
       end
 
-      def query(str)
+      def add_query(str)
         @queries << str
-      end
-
-      def debug(event)
-        @debug = event
       end
 
       def dump
@@ -49,14 +36,19 @@ module DebugbarRb
           queries: @queries,
           request: @request,
           response: @response,
-          debug: @debug,
         }
       end
 
       def to_json
-        JSON.dump({
+        meta = @meta.dup
+        if meta
+          meta.delete(:headers)
+          meta.delete(:request)
+        end
+
+        JSON.pretty_generate({
           id: @request_id,
-          meta: @meta,
+          meta: meta,
           models: @models,
           queries: @queries,
         })

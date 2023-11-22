@@ -6,7 +6,15 @@ module DebugbarRb
 
     def call(env)
       DebugbarRb::Acc.init(env['action_dispatch.request_id'])
-      @app.call(env)
+
+      res = @app.call(env)
+
+      if DebugbarRb::Acc.meta
+        path = "./_requests/#{env['action_dispatch.request_id']}.json"
+        File.write(path, DebugbarRb::Acc.to_json)
+      end
+
+      res
     end
   end
 
