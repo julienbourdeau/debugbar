@@ -1,12 +1,11 @@
-# frozen_string_literal: true
-
-require 'rails/railtie'
 require_relative 'middlewares/request_metrics'
 require_relative 'subscribers/active_record'
 require_relative 'subscribers/action_controller'
 
 module DebugbarRb
-  class Railtie < ::Rails::Railtie
+  class Engine < ::Rails::Engine
+    isolate_namespace DebugbarRb
+
     initializer 'debugbar.inject_middlewares' do |app|
       app.middleware.insert_after ActionDispatch::RequestId, DebugbarRb::RequestMetrics
     end

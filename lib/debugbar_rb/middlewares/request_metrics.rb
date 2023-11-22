@@ -6,6 +6,7 @@ module DebugbarRb
 
     def call(env)
       DebugbarRb::Acc.init(env['action_dispatch.request_id'])
+      DebugbarRb::Acc.inc
 
       res = @app.call(env)
 
