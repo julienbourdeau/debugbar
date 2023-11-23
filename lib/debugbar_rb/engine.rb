@@ -1,4 +1,4 @@
-require_relative 'middlewares/request_metrics'
+require_relative 'middlewares/track_current_request'
 require_relative 'subscribers/active_record'
 require_relative 'subscribers/action_controller'
 
@@ -7,7 +7,7 @@ module DebugbarRb
     isolate_namespace DebugbarRb
 
     initializer 'debugbar.inject_middlewares' do |app|
-      app.middleware.insert_after ActionDispatch::RequestId, DebugbarRb::RequestMetrics
+      app.middleware.insert_after ActionDispatch::RequestId, DebugbarRb::TrackCurrentRequest
     end
 
     initializer 'debugbar.subscribe' do
@@ -19,7 +19,7 @@ module DebugbarRb
     initializer 'debugbar.track_models' do
       if defined? ActiveRecord::Base
         ActiveRecord::Base.after_initialize do |model|
-          DebugbarRb::Acc.inc_model(model.class.name)
+          DebugbarRb::CurrentRequest.inc_model(model.class.name)
         end
       end
     end
