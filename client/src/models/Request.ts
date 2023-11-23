@@ -1,4 +1,4 @@
-export type BackendRequest = {
+export type BackendRequestData = {
   id: string
   meta: RequestMeta
   models: { [key: string]: number }
@@ -8,21 +8,50 @@ export type BackendRequest = {
 type RequestMeta = {
   controller: string
   action: string
-  request: string
-  params: any
-  headers: string
+  params: { [key: string]: string }
   format: string
   method: string
   path: string
   status: number
   view_runtime: number
   db_runtime: number
+  duration: number
+  cpu_time: number
+  idle_time: number
+  allocations: number
 }
 
 type Query = {
   name: string
   sql: string
   binds: any[]
-  duration: number
   source: string[]
+  duration: number
+  lock_wait: number
+}
+
+export class BackendRequest {
+  id: string
+  meta: RequestMeta
+  models: { [key: string]: number }
+  queries: Query[]
+
+  constructor(data: BackendRequestData) {
+    this.id = data?.id || "null"
+    this.meta = data?.meta || ({} as unknown as RequestMeta) // LOL
+    this.models = data?.models || {}
+    this.queries = data?.queries || []
+  }
+
+  get modelsCount(): number {
+    return Object.values(this.models).reduce((a, b) => a + b, 0)
+  }
+
+  get queryCount(): number {
+    return this.queries.length
+  }
+
+  get pathWithVerb(): string {
+    return `${this.meta.method.toUpperCase()} ${this.meta.path}`
+  }
 }

@@ -1,10 +1,10 @@
 import { defineStore } from "pinia"
-import type { BackendRequest } from "@/models/Request.ts"
+import { BackendRequest, BackendRequestData } from "@/models/Request.ts"
 
 export let useRequestsStore = defineStore("requests", {
   state: () =>
     ({
-      requests: [firstRequest(), secondRequest()],
+      requests: [new BackendRequest(firstRequest()), new BackendRequest(secondRequest())],
       currentRequestId: firstRequest().id,
     }) as {
       requests: BackendRequest[]
@@ -26,9 +26,9 @@ export let useRequestsStore = defineStore("requests", {
   },
 })
 
-function firstRequest() {
+function firstRequest(): BackendRequestData {
   return {
-    id: "1f3c6c58-6b16-46d4-978d-23e3f7d7f5a8",
+    id: "4b37dede-9f0c-4d01-ad41-7b412461b094",
     meta: {
       controller: "DemoController",
       action: "post_list",
@@ -40,8 +40,12 @@ function firstRequest() {
       method: "GET",
       path: "/post_list",
       status: 200,
-      view_runtime: 19.64299997780472,
-      db_runtime: 5.898000090382993,
+      view_runtime: 11.987999896518886,
+      db_runtime: 5.917000002227724,
+      duration: 42.587000012397766,
+      cpu_time: 30.1115,
+      idle_time: 12.475500012397767,
+      allocations: 27964,
     },
     models: {
       Post: 10,
@@ -50,20 +54,20 @@ function firstRequest() {
     },
     queries: [
       {
-        name: "Post Load (0.4ms)",
+        name: "Post Load (1.4ms)",
         sql: "SELECT `posts`.* FROM `posts` ORDER BY `posts`.`id` DESC LIMIT 10 /*action='post_list',application='DemoApp',controller='demo'*/",
-        duration: 0.4,
+        duration: 1.4,
         lock_wait: null,
         binds: null,
-        source: ["/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:3", " `post_list'"],
+        source: ["/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:5", " `post_list'"],
       },
       {
-        name: "PostAuthor Load (0.5ms)",
+        name: "PostAuthor Load (0.7ms)",
         sql: "SELECT `post_authors`.* FROM `post_authors` WHERE `post_authors`.`post_id` IN (5000, 4999, 4998, 4997, 4996, 4995, 4994, 4993, 4992, 4991) /*action='post_list',application='DemoApp',controller='demo'*/",
-        duration: 0.5,
+        duration: 0.7,
         lock_wait: null,
         binds: null,
-        source: ["/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:3", " `post_list'"],
+        source: ["/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:5", " `post_list'"],
       },
       {
         name: "Author Load (0.5ms)",
@@ -71,50 +75,50 @@ function firstRequest() {
         duration: 0.5,
         lock_wait: null,
         binds: null,
-        source: ["/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:3", " `post_list'"],
-      },
-      {
-        name: "Reaction Count (0.4ms)",
-        sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4991 /*action='post_list',application='DemoApp',controller='demo'*/",
-        duration: 0.4,
-        lock_wait: null,
-        binds: null,
-        source: [
-          "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
-          " `block in _app_views_demo_post_list_html_erb__2049320308328158073_25040'",
-        ],
-      },
-      {
-        name: "Reaction Count (0.4ms)",
-        sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4992 /*action='post_list',application='DemoApp',controller='demo'*/",
-        duration: 0.4,
-        lock_wait: null,
-        binds: null,
-        source: [
-          "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
-          " `block in _app_views_demo_post_list_html_erb__2049320308328158073_25040'",
-        ],
+        source: ["/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:5", " `post_list'"],
       },
       {
         name: "Reaction Count (0.6ms)",
-        sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4993 /*action='post_list',application='DemoApp',controller='demo'*/",
+        sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4991 /*action='post_list',application='DemoApp',controller='demo'*/",
         duration: 0.6,
         lock_wait: null,
         binds: null,
         source: [
           "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
-          " `block in _app_views_demo_post_list_html_erb__2049320308328158073_25040'",
+          " `block in _app_views_demo_post_list_html_erb__1445890358838714043_25040'",
+        ],
+      },
+      {
+        name: "Reaction Count (0.3ms)",
+        sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4992 /*action='post_list',application='DemoApp',controller='demo'*/",
+        duration: 0.3,
+        lock_wait: null,
+        binds: null,
+        source: [
+          "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
+          " `block in _app_views_demo_post_list_html_erb__1445890358838714043_25040'",
         ],
       },
       {
         name: "Reaction Count (0.4ms)",
-        sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4994 /*action='post_list',application='DemoApp',controller='demo'*/",
+        sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4993 /*action='post_list',application='DemoApp',controller='demo'*/",
         duration: 0.4,
         lock_wait: null,
         binds: null,
         source: [
           "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
-          " `block in _app_views_demo_post_list_html_erb__2049320308328158073_25040'",
+          " `block in _app_views_demo_post_list_html_erb__1445890358838714043_25040'",
+        ],
+      },
+      {
+        name: "Reaction Count (0.3ms)",
+        sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4994 /*action='post_list',application='DemoApp',controller='demo'*/",
+        duration: 0.3,
+        lock_wait: null,
+        binds: null,
+        source: [
+          "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
+          " `block in _app_views_demo_post_list_html_erb__1445890358838714043_25040'",
         ],
       },
       {
@@ -125,51 +129,51 @@ function firstRequest() {
         binds: null,
         source: [
           "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
-          " `block in _app_views_demo_post_list_html_erb__2049320308328158073_25040'",
+          " `block in _app_views_demo_post_list_html_erb__1445890358838714043_25040'",
         ],
       },
       {
-        name: "Reaction Count (0.6ms)",
+        name: "Reaction Count (0.4ms)",
         sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4996 /*action='post_list',application='DemoApp',controller='demo'*/",
-        duration: 0.6,
+        duration: 0.4,
         lock_wait: null,
         binds: null,
         source: [
           "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
-          " `block in _app_views_demo_post_list_html_erb__2049320308328158073_25040'",
+          " `block in _app_views_demo_post_list_html_erb__1445890358838714043_25040'",
         ],
       },
       {
-        name: "Reaction Count (0.3ms)",
+        name: "Reaction Count (0.2ms)",
         sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4997 /*action='post_list',application='DemoApp',controller='demo'*/",
-        duration: 0.3,
+        duration: 0.2,
         lock_wait: null,
         binds: null,
         source: [
           "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
-          " `block in _app_views_demo_post_list_html_erb__2049320308328158073_25040'",
+          " `block in _app_views_demo_post_list_html_erb__1445890358838714043_25040'",
         ],
       },
       {
-        name: "Reaction Count (0.8ms)",
+        name: "Reaction Count (0.4ms)",
         sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4998 /*action='post_list',application='DemoApp',controller='demo'*/",
-        duration: 0.8,
+        duration: 0.4,
         lock_wait: null,
         binds: null,
         source: [
           "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
-          " `block in _app_views_demo_post_list_html_erb__2049320308328158073_25040'",
+          " `block in _app_views_demo_post_list_html_erb__1445890358838714043_25040'",
         ],
       },
       {
-        name: "Reaction Count (0.3ms)",
+        name: "Reaction Count (0.2ms)",
         sql: "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4999 /*action='post_list',application='DemoApp',controller='demo'*/",
-        duration: 0.3,
+        duration: 0.2,
         lock_wait: null,
         binds: null,
         source: [
           "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
-          " `block in _app_views_demo_post_list_html_erb__2049320308328158073_25040'",
+          " `block in _app_views_demo_post_list_html_erb__1445890358838714043_25040'",
         ],
       },
       {
@@ -180,16 +184,16 @@ function firstRequest() {
         binds: null,
         source: [
           "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post_list.html.erb:21",
-          " `block in _app_views_demo_post_list_html_erb__2049320308328158073_25040'",
+          " `block in _app_views_demo_post_list_html_erb__1445890358838714043_25040'",
         ],
       },
     ],
   }
 }
 
-function secondRequest() {
+function secondRequest(): BackendRequestData {
   return {
-    id: "4aca6827-3612-4c9d-b8df-df855051f8a7",
+    id: "22775dc1-b86b-46e2-bc64-9268d2462713",
     meta: {
       controller: "Rails::WelcomeController",
       action: "index",
@@ -201,22 +205,14 @@ function secondRequest() {
       method: "GET",
       path: "/",
       status: 200,
-      view_runtime: 3.1789999920874834,
+      view_runtime: 1.180000021122396,
       db_runtime: 0.0,
+      duration: 2.8529999256134033,
+      cpu_time: 2.566499999999998,
+      idle_time: 0.28649992561340554,
+      allocations: 1151,
     },
     models: {},
-    queries: [
-      {
-        name: "ActiveRecord::SchemaMigration Load (11.3ms)",
-        sql: "SELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='DemoApp'*/",
-        duration: 11.3,
-        lock_wait: null,
-        binds: null,
-        source: [
-          "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar_rb/middlewares/request_metrics.rb:10",
-          " `call'",
-        ],
-      },
-    ],
+    queries: [],
   }
 }

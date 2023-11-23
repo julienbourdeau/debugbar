@@ -7,11 +7,21 @@ module DebugbarRb
     end
 
     def process_action(event)
-      payload = event.payload
-      response = payload.delete :response
+      meta = event.payload
+
+      meta.delete :request
+      meta.delete :headers
+      response = meta.delete :response
+
+      meta.merge!({
+        duration: event.duration,
+        cpu_time: event.cpu_time,
+        idle_time: event.idle_time,
+        allocations: event.allocations,
+      })
 
       CurrentRequest.response = response
-      CurrentRequest.meta = payload
+      CurrentRequest.meta = meta
     end
   end
 end

@@ -4,12 +4,12 @@ import TabButton from "@/components/TabButton.vue"
 import ModelPanel from "@/components/panels/ModelPanel.vue"
 import QueriesPanel from "@/components/panels/QueriesPanel.vue"
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
-import { BackendRequest } from "@/models/Request.ts"
+import { BackendRequest, BackendRequestData } from "@/models/Request.ts"
 
 let requestsStore = useRequestsStore()
 
 const active = ref("queries")
-const currentRequest = ref({ models: {}, queries: [], id: "init", meta: {} } as unknown as BackendRequest)
+const currentRequest = ref(new BackendRequest({} as unknown as BackendRequestData))
 
 function updateCurrentRequest(target) {
   requestsStore.setCurrentRequestId(target.value)
@@ -24,15 +24,15 @@ const summary = computed(() => {
   return {
     models: {
       title: "Models",
-      count: Object.values(currentRequest.value.models).reduce((a, b) => a + b, 0),
+      count: currentRequest.value.modelsCount,
     },
     queries: {
       title: "Queries",
-      count: currentRequest.value.queries.length || 0,
+      count: currentRequest.value.queryCount,
     },
     jobs: {
       title: "Jobs",
-      count: 0, //currentRequest.value.jobs?.length || 0,
+      count: 0,
     },
   }
 })
@@ -50,14 +50,20 @@ const summary = computed(() => {
       />
     </div>
 
-    <div>
+    <div class="flex items-center space-x-2">
       <select
         class="px-2 py-1.5 bg-white border border-stone-200 rounded"
         name="current_request_id"
         @change="updateCurrentRequest($event.target)"
       >
-        <option v-for="r in requestsStore.requests" v-text="[r.meta.method, r.meta.path].join(' ')" :value="r.id" />
+        <option v-for="r in requestsStore.requests" v-text="r.pathWithVerb" :value="r.id" />
       </select>
+
+      <div>
+        <span class="text-sm font-black" v-if="currentRequest.meta.duration"
+          >{{ currentRequest.meta.duration.toFixed(1) }}ms</span
+        >
+      </div>
     </div>
   </div>
 
