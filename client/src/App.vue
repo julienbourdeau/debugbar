@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue"
+import { computed, onMounted, reactive, ref } from "vue"
 import TabButton from "@/components/TabButton.vue"
 import ModelPanel from "@/components/panels/ModelPanel.vue"
 import QueriesPanel from "@/components/panels/QueriesPanel.vue"
@@ -8,7 +8,14 @@ import { BackendRequest, BackendRequestData } from "@/models/Request.ts"
 
 let requestsStore = useRequestsStore()
 
-const active = ref("")
+const header = ref(null)
+
+const state = reactive({
+  active: "",
+  isResizing: false,
+  height: 300,
+})
+
 const currentRequest = ref(new BackendRequest({} as unknown as BackendRequestData))
 
 function updateCurrentRequest(target) {
@@ -18,6 +25,18 @@ function updateCurrentRequest(target) {
 
 onMounted(() => {
   currentRequest.value = requestsStore.getCurrentRequest()
+
+  document.onmousemove = function (e) {
+    if (!state.isResizing) {
+      return
+    }
+
+    state.height = window.innerHeight - e.clientY - header.value.clientHeight
+  }
+
+  document.onmouseup = function (_e) {
+    state.isResizing = false
+  }
 })
 
 const summary = computed(() => {
@@ -45,7 +64,15 @@ const summary = computed(() => {
     }"
   >
     <div
+      id="drag"
+      @mousedown="state.isResizing = true"
+      @mouseup="state.isResizing = false"
+      class="h-1 bg-red-300 cursor-row-resize"
+    ></div>
+
+    <div
       id="debubgbar-header"
+      ref="header"
       class="flex items-center justify-between font-mono bg-stone-100 border-b border-stone-200"
     >
       <div class="flex">
@@ -53,8 +80,8 @@ const summary = computed(() => {
           v-for="(v, k) in summary"
           :name="k"
           :count="v.count"
-          :active="active"
-          @active-tab="active = $event.name"
+          :active="state.active"
+          @active-tab="state.active = $event.name"
         />
       </div>
 
@@ -73,13 +100,19 @@ const summary = computed(() => {
           <option v-for="r in requestsStore.requests" v-text="r.pathWithVerb" :value="r.id" />
         </select>
 
-        <button class="px-2 py-1.5" @click="active = ''">Close</button>
+        <button class="px-2 py-1.5" @click="state.active = ''">Close</button>
       </div>
     </div>
 
-    <div id="debugbar-body" class="bg-white overflow-scroll" v-if="active != ''" style="height: 300px">
-      <model-panel v-if="active == 'models'" :models="currentRequest?.models" />
-      <queries-panel v-if="active == 'queries'" :current-request="currentRequest" />
+    <div
+      ref="body"
+      id="debugbar-body"
+      class="bg-white overflow-scroll"
+      v-if="state.active != ''"
+      :style="`height: ${state.height}px`"
+    >
+      <model-panel v-if="state.active == 'models'" :models="currentRequest?.models" />
+      <queries-panel v-if="state.active == 'queries'" :current-request="currentRequest" />
     </div>
   </div>
 </template>
