@@ -15,9 +15,11 @@ module DebugbarRb
         "#{payload[:name]} (#{event.duration.round(1)}ms)"
       end
       name  = "CACHE #{name}" if payload[:cached]
-      sql   = payload[:sql]
-      binds = nil
 
+      sql   = payload[:sql]
+      sql.gsub!(/\/\*.*\*\//, "") # remove comments
+
+      binds = nil
       if payload[:binds]&.any?
         casted_params = type_casted_binds(payload[:type_casted_binds])
 
