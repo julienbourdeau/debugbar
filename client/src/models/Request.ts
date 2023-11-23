@@ -1,11 +1,11 @@
-export type Request = {
+export type BackendRequest = {
   id: string
   meta: RequestMeta
-  model: { [key as string]: number }
+  models: { [key: string]: number }
   queries: Query[]
 }
 
-export type RequestMeta = {
+type RequestMeta = {
   controller: string
   action: string
   request: string
@@ -19,9 +19,10 @@ export type RequestMeta = {
   db_runtime: number
 }
 
-export type Query = {
+type Query = {
   name: string
   sql: string
   binds: any[]
   duration: number
+  source: string[]
 }
