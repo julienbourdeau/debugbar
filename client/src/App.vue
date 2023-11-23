@@ -42,15 +42,15 @@ onMounted(() => {
 const summary = computed(() => {
   return {
     models: {
-      title: "Models",
+      label: "Models",
       count: currentRequest.value.modelsCount,
     },
     queries: {
-      title: "Queries",
+      label: "Queries",
       count: currentRequest.value.queryCount,
     },
     jobs: {
-      title: "Jobs",
+      label: "Jobs",
       count: 0,
     },
   }
@@ -63,12 +63,7 @@ const summary = computed(() => {
       'fixed left-0 bottom-0 w-full': true,
     }"
   >
-    <div
-      id="drag"
-      @mousedown="state.isResizing = true"
-      @mouseup="state.isResizing = false"
-      class="h-1 bg-red-300 cursor-row-resize"
-    ></div>
+    <div id="drag" @mousedown="state.isResizing = true" class="h-1 bg-red-rails cursor-row-resize"></div>
 
     <div
       id="debubgbar-header"
@@ -78,10 +73,11 @@ const summary = computed(() => {
       <div class="flex">
         <tab-button
           v-for="(v, k) in summary"
-          :name="k"
+          key="k"
+          :label="v.label"
           :count="v.count"
-          :active="state.active"
-          @active-tab="state.active = $event.name"
+          :is-active="k === state.active"
+          @click="state.active = k"
         />
       </div>
 
