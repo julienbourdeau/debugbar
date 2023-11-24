@@ -7,13 +7,16 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col space-y-4">
-    <div v-for="query in props.currentRequest.queries" class="space-y-2">
+  <div class="flex flex-col space-y-8">
+    <div v-for="query in props.currentRequest.queries" class="space-y-3">
       <div class="font-bold">{{ query.name }}</div>
-      <div class="pl-5">
+      <div class="">
         <highlightjs language="sql" :code="query.sql" />
       </div>
-      <div v-for="s in query.source" class="pl-5 text-stone-400 text-sm" v-text="s"></div>
+      <div class="text-stone-400 text-sm">
+        <div v-text="query.source[0]"></div>
+        <div v-if="query.source.length > 1" v-for="s in query.source.slice(1)" class="pl-4" v-text="'↳ ' + s"></div>
+      </div>
     </div>
   </div>
 </template>

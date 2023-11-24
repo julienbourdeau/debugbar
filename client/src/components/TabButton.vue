@@ -15,7 +15,7 @@ const props = defineProps<{
   >
     {{ props.label }}
     <span
-      class="p-1 rounded-full text-sm"
+      class="p-1 rounded-full text-xs"
       :class="{
         'px-2': props.count < 10,
         'bg-stone-400 text-stone-100': props.count == 0,

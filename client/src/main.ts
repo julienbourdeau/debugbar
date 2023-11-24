@@ -13,8 +13,8 @@ import App from "./App.vue"
 hljs.registerLanguage("sql", sql)
 
 const pinia = createPinia()
-const app = createApp(App)
 
+const app = createApp(App)
 app.use(hljsVuePlugin)
 app.use(pinia)
 app.mount("#app")

@@ -70,17 +70,25 @@ const summary = computed(() => {
       ref="header"
       class="flex items-center justify-between font-mono bg-stone-100 border-b border-stone-200"
     >
-      <div class="flex">
-        <tab-button
-          v-for="(v, k) in summary"
-          key="k"
-          :label="v.label"
-          :count="v.count"
-          :is-active="k === state.active"
-          @click="state.active = k"
-        />
+      <!--  Left  -->
+      <div>
+        <div class="flex">
+          <div class="p-1 pt-1.5">
+            <img class="h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
+          </div>
+
+          <tab-button
+            v-for="(v, k) in summary"
+            key="k"
+            :label="v.label"
+            :count="v.count"
+            :is-active="k === state.active"
+            @click="state.active = k"
+          />
+        </div>
       </div>
 
+      <!--  Right  -->
       <div class="flex items-center space-x-2">
         <div class="flex space-x-1">
           <span class="text-sm font-black" v-if="currentRequest.meta.duration"
@@ -107,8 +115,8 @@ const summary = computed(() => {
       v-if="state.active != ''"
       :style="`height: ${state.height}px`"
     >
-      <model-panel v-if="state.active == 'models'" :models="currentRequest?.models" />
-      <queries-panel v-if="state.active == 'queries'" :current-request="currentRequest" />
+      <model-panel v-if="state.active == 'models'" :models="currentRequest?.models" class="px-3 py-2" />
+      <queries-panel v-if="state.active == 'queries'" :current-request="currentRequest" class="px-3 py-2" />
     </div>
   </div>
 </template>
