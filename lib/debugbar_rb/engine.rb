@@ -6,6 +6,10 @@ module DebugbarRb
   class Engine < ::Rails::Engine
     isolate_namespace DebugbarRb
 
+    initializer 'debugbar.init' do
+      DebugbarRb::RequestBuffer.init
+    end
+
     initializer 'debugbar.inject_middlewares' do |app|
       app.middleware.insert_after ActionDispatch::RequestId, DebugbarRb::TrackCurrentRequest
     end

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from "vue"
+import { createConsumer } from "@rails/actioncable"
+
 import TabButton from "@/components/TabButton.vue"
 import ModelPanel from "@/components/panels/ModelPanel.vue"
 import QueriesPanel from "@/components/panels/QueriesPanel.vue"
@@ -25,6 +27,29 @@ function updateCurrentRequest(target) {
 
 onMounted(() => {
   currentRequest.value = requestsStore.getCurrentRequest()
+
+  const consumer = createConsumer("ws://127.0.0.1:3000/_debugbar/cable")
+  const debugbarChannel = consumer.subscriptions.create(
+    { channel: "DebugbarRb::DebugbarChannel" },
+    {
+      received(data) {
+        console.log("Received: ", data)
+        if (data.length == 0) {
+          return
+        }
+
+        const ids = requestsStore.addRequests(data)
+        currentRequest.value = requestsStore.getCurrentRequest()
+
+        setTimeout(() => {
+          debugbarChannel.send({ ids: ids })
+        }, 50)
+      },
+    }
+  )
+  setTimeout(() => {
+    debugbarChannel.send({ ids: [] })
+  }, 100)
 
   document.onmousemove = function (e) {
     if (!state.isResizing) {

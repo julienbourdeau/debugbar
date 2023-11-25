@@ -4,15 +4,23 @@ import { BackendRequest, BackendRequestData } from "@/models/Request.ts"
 export let useRequestsStore = defineStore("requests", {
   state: () =>
     ({
-      requests: [new BackendRequest(firstRequest()), new BackendRequest(secondRequest())],
-      currentRequestId: firstRequest().id,
+      requests: [new BackendRequest(secondRequest())],
+      currentRequestId: secondRequest().id,
     }) as {
       requests: BackendRequest[]
       currentRequestId: string
     },
   actions: {
-    addRequest(request: BackendRequest) {
-      this.requests.push(request)
+    addRequests(requests: BackendRequest[]): string[] {
+      const ids = []
+      requests.forEach((r) => {
+        this.requests.push(new BackendRequest(r))
+        ids.push(r.id)
+      })
+
+      this.setCurrentRequestId(ids[ids.length - 1])
+
+      return ids
     },
     setCurrentRequestId(id: string) {
       this.currentRequestId = id
