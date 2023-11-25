@@ -6,16 +6,20 @@ import TabButton from "@/components/TabButton.vue"
 import ModelPanel from "@/components/panels/ModelPanel.vue"
 import QueriesPanel from "@/components/panels/QueriesPanel.vue"
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
-import { BackendRequest, BackendRequestData } from "@/models/Request.ts"
 
 let requestsStore = useRequestsStore()
 
 const header = ref(null)
 
 const state = reactive({
-  active: "",
+  activeTab: "",
+  minimized: true,
   isResizing: false,
   height: 300,
+})
+
+const isActive = computed(() => {
+  return state.activeTab != ""
 })
 
 // Websocket connection
@@ -33,7 +37,10 @@ onMounted(() => {
 
         const ids = requestsStore.addRequests(data)
 
-        requestsStore.setCurrentRequestById(ids[ids.length - 1])
+        console.log(isActive)
+        if (!isActive.value) {
+          requestsStore.setCurrentRequestById(ids[ids.length - 1])
+        }
 
         setTimeout(() => {
           debugbarChannel.send({ ids: ids })
@@ -64,12 +71,21 @@ onMounted(() => {
 </script>
 
 <template>
+  <div v-if="state.minimized" @click="state.minimized = false" class="fixed left-0 bottom-0 shadow">
+    <!--    <div class="h-1 bg-red-rails cursor-row-resize" />-->
+    <div class="flex items-center justify-between font-mono border-t-4 border-r-4 border-red-rails">
+      <div class="p-1 pt-1.5">
+        <img class="h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
+      </div>
+    </div>
+  </div>
   <div
+    v-if="!state.minimized"
     :class="{
       'fixed left-0 bottom-0 w-full': true,
     }"
   >
-    <div id="drag" @mousedown="state.isResizing = true" class="h-1 bg-red-rails cursor-row-resize"></div>
+    <div id="drag" @mousedown="state.isResizing = true" class="h-1 bg-red-rails cursor-row-resize" />
 
     <div
       id="debubgbar-header"
@@ -88,8 +104,8 @@ onMounted(() => {
             key="k"
             :label="v.label"
             :count="v.count"
-            :is-active="k === state.active"
-            @click="state.active = k"
+            :is-active="k === state.activeTab"
+            @click="state.activeTab = k"
           />
         </div>
       </div>
@@ -115,7 +131,8 @@ onMounted(() => {
           />
         </select>
 
-        <button class="px-2 py-1.5" @click="state.active = ''">Close</button>
+        <button v-if="isActive" class="px-2 py-1.5" @click="state.activeTab = ''">Close</button>
+        <button v-if="!isActive" class="px-2 py-1.5" @click="state.minimized = true">Mini</button>
       </div>
     </div>
 
@@ -123,12 +140,16 @@ onMounted(() => {
       ref="body"
       id="debugbar-body"
       class="bg-white overflow-scroll"
-      v-if="state.active != ''"
+      v-if="state.activeTab != ''"
       :style="`height: ${state.height}px`"
     >
-      <model-panel v-if="state.active == 'models'" :models="requestsStore.currentRequest?.models" class="px-3 py-2" />
+      <model-panel
+        v-if="state.activeTab == 'models'"
+        :models="requestsStore.currentRequest?.models"
+        class="px-3 py-2"
+      />
       <queries-panel
-        v-if="state.active == 'queries'"
+        v-if="state.activeTab == 'queries'"
         :current-request="requestsStore.currentRequest"
         class="px-3 py-2"
       />
