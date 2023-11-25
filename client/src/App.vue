@@ -13,7 +13,7 @@ const header = ref(null)
 
 const state = reactive({
   activeTab: "",
-  minimized: true,
+  minimized: false,
   isResizing: false,
   height: 300,
 })
@@ -79,12 +79,16 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <div
-    v-if="!state.minimized"
-    :class="{
-      'fixed left-0 bottom-0 w-full': true,
-    }"
-  >
+
+  <div v-if="!state.minimized && requestsStore.currentRequest == null" class="fixed left-0 bottom-0 w-full">
+    <div class="h-1 bg-red-rails cursor-row-resize" />
+    <div class="flex items-center justify-between font-mono bg-stone-100 border-b border-stone-200">
+      <div class="px-5">No request yet</div>
+      <div><button v-if="!isActive" class="px-2 py-1.5" @click="state.minimized = true">Mini</button></div>
+    </div>
+  </div>
+
+  <div v-if="!state.minimized && requestsStore.currentRequest" class="fixed left-0 bottom-0 w-full">
     <div id="drag" @mousedown="state.isResizing = true" class="h-1 bg-red-rails cursor-row-resize" />
 
     <div
