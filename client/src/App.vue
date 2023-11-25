@@ -61,23 +61,6 @@ onMounted(() => {
     state.isResizing = false
   }
 })
-
-const summary = computed(() => {
-  return {
-    models: {
-      label: "Models",
-      count: requestsStore.currentRequest.modelsCount,
-    },
-    queries: {
-      label: "Queries",
-      count: requestsStore.currentRequest.queryCount,
-    },
-    jobs: {
-      label: "Jobs",
-      count: 0,
-    },
-  }
-})
 </script>
 
 <template>
@@ -101,7 +84,7 @@ const summary = computed(() => {
           </div>
 
           <tab-button
-            v-for="(v, k) in summary"
+            v-for="(v, k) in requestsStore.currentRequest.dataForTabs"
             key="k"
             :label="v.label"
             :count="v.count"

@@ -54,4 +54,21 @@ export class BackendRequest {
   get pathWithVerb(): string {
     return `${this.meta.method.toUpperCase()} ${this.meta.path}`
   }
+
+  get dataForTabs(): { [key: string]: any } {
+    return {
+      models: {
+        label: "Models",
+        count: this.modelsCount,
+      },
+      queries: {
+        label: "Queries",
+        count: this.queryCount,
+      },
+      jobs: {
+        label: "Jobs",
+        count: 0,
+      },
+    }
+  }
 }
