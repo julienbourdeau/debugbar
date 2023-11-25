@@ -2,14 +2,16 @@ import { defineStore } from "pinia"
 import { BackendRequest, BackendRequestData } from "@/models/Request.ts"
 
 export let useRequestsStore = defineStore("requests", {
-  state: () =>
-    ({
-      requests: [new BackendRequest(secondRequest())],
-      currentRequestId: secondRequest().id,
-    }) as {
+  state: () => {
+    const req = new BackendRequest(secondRequest())
+    return {
+      requests: [req],
+      currentRequest: req,
+    } as {
       requests: BackendRequest[]
-      currentRequestId: string
-    },
+      currentRequest: BackendRequest
+    }
+  },
   actions: {
     addRequests(requests: BackendRequest[]): string[] {
       const ids = []
@@ -17,16 +19,10 @@ export let useRequestsStore = defineStore("requests", {
         this.requests.push(new BackendRequest(r))
         ids.push(r.id)
       })
-
-      this.setCurrentRequestId(ids[ids.length - 1])
-
       return ids
     },
-    setCurrentRequestId(id: string) {
-      this.currentRequestId = id
-    },
-    getCurrentRequest(): BackendRequest {
-      return this.requests.find((r) => r.id === this.currentRequestId)!
+    setCurrentRequestById(id: string) {
+      this.currentRequest = this.requests.find((r) => r.id === id)!
     },
     // removeRequest(request) {
     //   this.requests.splice(this.requests.indexOf(request), 1)

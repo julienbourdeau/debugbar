@@ -18,17 +18,10 @@ const state = reactive({
   height: 300,
 })
 
-const currentRequest = ref(new BackendRequest({} as unknown as BackendRequestData))
-
-function updateCurrentRequest(target) {
-  requestsStore.setCurrentRequestId(target.value)
-  currentRequest.value = requestsStore.getCurrentRequest()
-}
-
+// Websocket connection
 onMounted(() => {
-  currentRequest.value = requestsStore.getCurrentRequest()
-
   const consumer = createConsumer("ws://127.0.0.1:3000/_debugbar/cable")
+
   const debugbarChannel = consumer.subscriptions.create(
     { channel: "DebugbarRb::DebugbarChannel" },
     {
@@ -39,7 +32,8 @@ onMounted(() => {
         }
 
         const ids = requestsStore.addRequests(data)
-        currentRequest.value = requestsStore.getCurrentRequest()
+
+        requestsStore.setCurrentRequestById(ids[ids.length - 1])
 
         setTimeout(() => {
           debugbarChannel.send({ ids: ids })
@@ -47,10 +41,14 @@ onMounted(() => {
       },
     }
   )
+
   setTimeout(() => {
     debugbarChannel.send({ ids: [] })
   }, 100)
+})
 
+// Resizing the debugbar
+onMounted(() => {
   document.onmousemove = function (e) {
     if (!state.isResizing) {
       return
@@ -68,11 +66,11 @@ const summary = computed(() => {
   return {
     models: {
       label: "Models",
-      count: currentRequest.value.modelsCount,
+      count: requestsStore.currentRequest.modelsCount,
     },
     queries: {
       label: "Queries",
-      count: currentRequest.value.queryCount,
+      count: requestsStore.currentRequest.queryCount,
     },
     jobs: {
       label: "Jobs",
@@ -116,17 +114,22 @@ const summary = computed(() => {
       <!--  Right  -->
       <div class="flex items-center space-x-2">
         <div class="flex space-x-1">
-          <span class="text-sm font-black" v-if="currentRequest.meta.duration"
-            >{{ currentRequest.meta.duration.toFixed(1) }}ms</span
+          <span class="text-sm font-black" v-if="requestsStore.currentRequest.meta.duration"
+            >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
           >
         </div>
 
         <select
           class="px-2 py-1.5 bg-white border border-stone-200 rounded"
           name="current_request_id"
-          @change="updateCurrentRequest($event.target)"
+          @change="requestsStore.setCurrentRequestById($event.target.value)"
         >
-          <option v-for="r in requestsStore.requests" v-text="r.pathWithVerb" :value="r.id" />
+          <option
+            v-for="r in requestsStore.requests"
+            :selected="requestsStore.currentRequest.id == r.id"
+            v-text="r.pathWithVerb"
+            :value="r.id"
+          />
         </select>
 
         <button class="px-2 py-1.5" @click="state.active = ''">Close</button>
@@ -140,8 +143,12 @@ const summary = computed(() => {
       v-if="state.active != ''"
       :style="`height: ${state.height}px`"
     >
-      <model-panel v-if="state.active == 'models'" :models="currentRequest?.models" class="px-3 py-2" />
-      <queries-panel v-if="state.active == 'queries'" :current-request="currentRequest" class="px-3 py-2" />
+      <model-panel v-if="state.active == 'models'" :models="requestsStore.currentRequest?.models" class="px-3 py-2" />
+      <queries-panel
+        v-if="state.active == 'queries'"
+        :current-request="requestsStore.currentRequest"
+        class="px-3 py-2"
+      />
     </div>
   </div>
 </template>
