@@ -25,6 +25,10 @@ export let useRequestsStore = defineStore("requests", {
     setCurrentRequestById(id: string) {
       this.currentRequest = this.requests.find((r) => r.id === id)!
     },
+    clearRequests() {
+      this.requests = []
+      this.currentRequest = null
+    },
     // removeRequest(request) {
     //   this.requests.splice(this.requests.indexOf(request), 1)
     // },

@@ -5,7 +5,14 @@ module DebugbarRb
     end
 
     def receive(data)
-      RequestBuffer.remove(data["ids"])
+      if data["clear"]
+        RequestBuffer.clear!
+      end
+
+      if data["ids"].present?
+        RequestBuffer.remove(data["ids"])
+      end
+
       RequestBuffer.enable!
     end
 

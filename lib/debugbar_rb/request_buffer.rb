@@ -39,8 +39,9 @@ module DebugbarRb
         self
       end
 
-      def clear!(&block)
+      def clear!
         @collection = {}
+        self
       end
     end
   end

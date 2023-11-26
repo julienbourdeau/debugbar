@@ -22,32 +22,36 @@ const isActive = computed(() => {
   return state.activeTab != ""
 })
 
-// Websocket connection
+const consumer = createConsumer("ws://127.0.0.1:3000/_debugbar/cable")
+const debugbarChannel = consumer.subscriptions.create(
+  { channel: "DebugbarRb::DebugbarChannel" },
+  {
+    received(data) {
+      console.log("Received: ", data)
+
+      if (data.length == 0) {
+        return
+      }
+
+      const ids = requestsStore.addRequests(data)
+
+      if (!isActive.value) {
+        requestsStore.setCurrentRequestById(ids[ids.length - 1])
+      }
+
+      setTimeout(() => {
+        debugbarChannel.send({ ids: ids })
+      }, 10)
+    },
+  }
+)
+
+const clearRequests = () => {
+  requestsStore.clearRequests()
+  debugbarChannel.send({ clear: true })
+}
+
 onMounted(() => {
-  const consumer = createConsumer("ws://127.0.0.1:3000/_debugbar/cable")
-
-  const debugbarChannel = consumer.subscriptions.create(
-    { channel: "DebugbarRb::DebugbarChannel" },
-    {
-      received(data) {
-        console.log("Received: ", data)
-        if (data.length == 0) {
-          return
-        }
-
-        const ids = requestsStore.addRequests(data)
-
-        if (!isActive.value) {
-          requestsStore.setCurrentRequestById(ids[ids.length - 1])
-        }
-
-        setTimeout(() => {
-          debugbarChannel.send({ ids: ids })
-        }, 10)
-      },
-    }
-  )
-
   setTimeout(() => {
     debugbarChannel.send({ ids: [] })
   }, 100)
@@ -134,6 +138,7 @@ onMounted(() => {
           />
         </select>
 
+        <button v-if="requestsStore.currentRequest != null" class="px-2 py-1.5" @click="clearRequests">Clear</button>
         <button v-if="isActive" class="px-2 py-1.5" @click="state.activeTab = ''">Close</button>
         <button v-if="!isActive" class="px-2 py-1.5" @click="state.minimized = true">Mini</button>
       </div>
