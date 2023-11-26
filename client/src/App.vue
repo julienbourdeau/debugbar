@@ -37,14 +37,13 @@ onMounted(() => {
 
         const ids = requestsStore.addRequests(data)
 
-        console.log(isActive)
         if (!isActive.value) {
           requestsStore.setCurrentRequestById(ids[ids.length - 1])
         }
 
         setTimeout(() => {
           debugbarChannel.send({ ids: ids })
-        }, 50)
+        }, 10)
       },
     }
   )
