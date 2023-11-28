@@ -9,10 +9,11 @@ module DebugbarRb
 
       res = @app.call(env)
 
+      # TODO: Add proper way exclude requests
+      # Can check env['PATH_INFO'] ~= /assets/ like QuietAssets middleware
+      # can be in config
+      # The debugbar assets should be ignored
       if DebugbarRb::CurrentRequest.meta
-        # path = "./_requests/#{env['action_dispatch.request_id']}.json"
-        # File.write(path, DebugbarRb::CurrentRequest.to_json)
-
         RequestBuffer.push(DebugbarRb::CurrentRequest.pop!)
       end
 

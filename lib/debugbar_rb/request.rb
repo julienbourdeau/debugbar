@@ -7,9 +7,6 @@ module DebugbarRb
       @request_id = request_id
       @models = {}
       @queries = []
-      # @request = nil
-      # @response = nil
-      # @meta = nil
     end
 
     alias_method :id, :request_id
