@@ -8,19 +8,19 @@ const props = defineProps<{
 
 <template>
   <div
-    class="px-3 py-1.5 cursor-pointer"
+    class="bug-px-3 bug-py-1.5 bug-cursor-pointer"
     :class="{
-      'bg-red-rails text-stone-100': props.isActive,
+      'bug-bg-red-rails bug-text-stone-100': props.isActive,
     }"
   >
     {{ props.label }}
     <span
-      class="p-1 rounded-full text-xs"
+      class="bug-p-1 bug-rounded-full bug-text-xs"
       :class="{
-        'px-2': props.count < 10,
-        'bg-stone-400 text-stone-100': props.count == 0,
-        'bg-red-rails text-stone-100': props.count > 0,
-        '!bg-stone-100 !text-red-rails': props.isActive,
+        'bug-px-2': props.count < 10,
+        'bug-bg-stone-400 bug-text-stone-100': props.count == 0,
+        'bug-bg-red-rails bug-text-stone-100': props.count > 0,
+        '!bug-bg-stone-100 !bug-text-red-rails': props.isActive,
       }"
       v-text="props.count"
     />

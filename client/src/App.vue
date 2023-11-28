@@ -80,36 +80,42 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="state.minimized" @click="state.minimized = false" class="fixed left-0 bottom-0 shadow">
-    <!--    <div class="h-1 bg-red-rails cursor-row-resize" />-->
-    <div class="flex items-center justify-between font-mono border-t-4 border-r-4 border-red-rails">
-      <div class="p-1 pt-1.5">
-        <img class="h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
+  <div v-if="state.minimized" @click="state.minimized = false" class="bug-fixed bug-left-0 bug-bottom-0 bug-shadow">
+    <div
+      class="bug-flex bug-items-center bug-justify-between bug-font-mono bug-border-t-4 bug-border-r-4 bug-border-red-rails"
+    >
+      <div class="bug-p-1 bug-pt-1.5">
+        <img class="bug-h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
       </div>
     </div>
   </div>
 
-  <div v-if="!state.minimized && requestsStore.currentRequest == null" class="fixed left-0 bottom-0 w-full">
-    <div class="h-1 bg-red-rails cursor-row-resize" />
-    <div class="flex items-center justify-between font-mono bg-stone-100 border-b border-stone-200">
-      <div class="px-5">No request yet</div>
-      <div><button v-if="!isActive" class="px-2 py-1.5" @click="state.minimized = true">Mini</button></div>
+  <div
+    v-if="!state.minimized && requestsStore.currentRequest == null"
+    class="bug-fixed bug-left-0 bug-bottom-0 bug-w-full"
+  >
+    <div class="bug-h-1 bug-bg-red-rails bug-cursor-row-resize" />
+    <div
+      class="bug-flex bug-items-center bug-justify-between bug-font-mono bug-bg-stone-100 bug-border-b bug-border-stone-200"
+    >
+      <div class="bug-px-5">No request yet</div>
+      <div><button v-if="!isActive" class="bug-px-2 bug-py-1.5" @click="state.minimized = true">Mini</button></div>
     </div>
   </div>
 
-  <div v-if="!state.minimized && requestsStore.currentRequest" class="fixed left-0 bottom-0 w-full">
-    <div id="drag" @mousedown="state.isResizing = true" class="h-1 bg-red-rails cursor-row-resize" />
+  <div v-if="!state.minimized && requestsStore.currentRequest" class="bug-fixed bug-left-0 bug-bottom-0 bug-w-full">
+    <div id="drag" @mousedown="state.isResizing = true" class="bug-h-1 bug-bg-red-rails bug-cursor-row-resize" />
 
     <div
       id="debubgbar-header"
       ref="header"
-      class="flex items-center justify-between font-mono bg-stone-100 border-b border-stone-200"
+      class="bug-flex bug-items-center bug-justify-between bug-font-mono bug-bg-stone-100 bug-border-b bug-border-stone-200"
     >
       <!--  Left  -->
       <div>
-        <div class="flex">
-          <div class="p-1 pt-1.5">
-            <img class="h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
+        <div class="bug-flex">
+          <div class="bug-p-1 bug-pt-1.5">
+            <img class="bug-h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
           </div>
 
           <tab-button
@@ -124,15 +130,15 @@ onMounted(() => {
       </div>
 
       <!--  Right  -->
-      <div class="flex items-center space-x-2">
-        <div class="flex space-x-1">
-          <span class="text-sm font-black" v-if="requestsStore.currentRequest.meta.duration"
+      <div class="bug-flex bug-items-center bug-space-x-2">
+        <div class="bug-flex bug-space-x-1">
+          <span class="bug-text-sm bug-font-black" v-if="requestsStore.currentRequest.meta.duration"
             >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
           >
         </div>
 
         <select
-          class="px-2 py-1.5 bg-white border border-stone-200 rounded"
+          class="bug-px-2 bug-py-1.5 bug-bg-white bug-border bug-border-stone-200 bug-rounded"
           name="current_request_id"
           @change="
             (event) => {
@@ -149,28 +155,30 @@ onMounted(() => {
           />
         </select>
 
-        <button v-if="requestsStore.currentRequest != null" class="px-2 py-1.5" @click="clearRequests">Clear</button>
-        <button v-if="isActive" class="px-2 py-1.5" @click="state.activeTab = ''">Close</button>
-        <button v-if="!isActive" class="px-2 py-1.5" @click="state.minimized = true">Mini</button>
+        <button v-if="requestsStore.currentRequest != null" class="bug-px-2 bug-py-1.5" @click="clearRequests">
+          Clear
+        </button>
+        <button v-if="isActive" class="bug-px-2 bug-py-1.5" @click="state.activeTab = ''">Close</button>
+        <button v-if="!isActive" class="bug-px-2 bug-py-1.5" @click="state.minimized = true">Mini</button>
       </div>
     </div>
 
     <div
       ref="body"
       id="debugbar-body"
-      class="bg-white overflow-scroll"
+      class="bug-bg-white bug-overflow-scroll"
       v-if="state.activeTab != ''"
       :style="`height: ${state.height}px`"
     >
       <model-panel
         v-if="state.activeTab == 'models'"
         :models="requestsStore.currentRequest?.models"
-        class="px-3 py-2"
+        class="bug-px-3 bug-py-2"
       />
       <queries-panel
         v-if="state.activeTab == 'queries'"
         :current-request="requestsStore.currentRequest"
-        class="px-3 py-2"
+        class="bug-px-3 bug-py-2"
       />
     </div>
   </div>
