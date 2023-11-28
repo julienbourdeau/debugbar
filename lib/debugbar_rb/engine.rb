@@ -10,6 +10,14 @@ module DebugbarRb
       DebugbarRb::RequestBuffer.init
     end
 
+    initializer 'debugbar.assets' do
+      manifest_file = File.join(Gem.loaded_specs['debugbar_rb'].full_gem_path, 'client', 'dist', '.vite', 'manifest.json')
+      manifest = JSON.parse(File.read(manifest_file))
+
+      Assets.js = manifest['index.html']['file']
+      Assets.css = manifest['index.html']['css'].first
+    end
+
     initializer 'debugbar.inject_middlewares' do |app|
       app.middleware.insert_after ActionDispatch::RequestId, DebugbarRb::TrackCurrentRequest
     end
