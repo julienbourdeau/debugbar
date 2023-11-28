@@ -26,36 +26,42 @@ const consumer = createConsumer("ws://127.0.0.1:3000/_debugbar/cable")
 const debugbarChannel = consumer.subscriptions.create(
   { channel: "DebugbarRb::DebugbarChannel" },
   {
+    connected() {
+      console.log("Connected to channel, sending initial request")
+      debugbarChannel.send({ ids: [] })
+    },
+
+    disconnected() {
+      console.log("disconnected from channel ")
+    },
     received(data) {
       console.log("Received: ", data)
 
       if (data.length == 0) {
+        console.log("No data received")
         return
       }
 
       const ids = requestsStore.addRequests(data)
 
       if (!isActive.value) {
+        console.log("Setting current request")
         requestsStore.setCurrentRequestById(ids[ids.length - 1])
       }
 
       setTimeout(() => {
+        console.log("Sending ids", ids)
         debugbarChannel.send({ ids: ids })
-      }, 10)
+      }, 50)
     },
   }
 )
 
 const clearRequests = () => {
+  console.log("Clearing requests")
   requestsStore.clearRequests()
   debugbarChannel.send({ clear: true })
 }
-
-onMounted(() => {
-  setTimeout(() => {
-    debugbarChannel.send({ ids: [] })
-  }, 100)
-})
 
 // Resizing the debugbar
 onMounted(() => {
@@ -112,7 +118,7 @@ onMounted(() => {
             :label="v.label"
             :count="v.count"
             :is-active="k === state.activeTab"
-            @click="state.activeTab = k"
+            @click="state.activeTab = k as string"
           />
         </div>
       </div>
@@ -128,7 +134,12 @@ onMounted(() => {
         <select
           class="px-2 py-1.5 bg-white border border-stone-200 rounded"
           name="current_request_id"
-          @change="requestsStore.setCurrentRequestById($event.target.value)"
+          @change="
+            (event) => {
+              const target = event.target as HTMLSelectElement
+              requestsStore.setCurrentRequestById(target.value)
+            }
+          "
         >
           <option
             v-for="r in requestsStore.requests"

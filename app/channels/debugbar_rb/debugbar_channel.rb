@@ -18,7 +18,6 @@ module DebugbarRb
 
     def unsubscribed
       RequestBuffer.disable!
-      RequestBuffer.clear!
     end
   end
 end
