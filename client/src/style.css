@@ -1,3 +1,12 @@
+#__debugbar pre { all: unset; }
+#__debugbar code { all: unset; }
+#__debugbar button { all: unset; }
+#__debugbar input { all: unset; }
+#__debugbar select { all: unset; }
+#__debugbar option { all: unset; }
+#__debugbar a { all: unset; }
+#__debugbar p { all: unset; }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
