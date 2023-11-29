@@ -80,7 +80,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="state.minimized" @click="state.minimized = false" class="bug-fixed bug-left-0 bug-bottom-0 bug-shadow">
+  <div
+    v-if="state.minimized"
+    @click="state.minimized = false"
+    class="bug-z-[9999] bug-fixed bug-left-0 bug-bottom-0 bug-shadow"
+  >
     <div
       class="bug-flex bug-items-center bug-justify-between bug-font-mono bug-border-t-4 bug-border-r-4 bug-border-red-rails"
     >
@@ -92,7 +96,7 @@ onMounted(() => {
 
   <div
     v-if="!state.minimized && requestsStore.currentRequest == null"
-    class="bug-fixed bug-left-0 bug-bottom-0 bug-w-full"
+    class="bug-z-[9999] bug-fixed bug-left-0 bug-bottom-0 bug-w-full"
   >
     <div class="bug-h-1 bug-bg-red-rails bug-cursor-row-resize" />
     <div
@@ -103,7 +107,10 @@ onMounted(() => {
     </div>
   </div>
 
-  <div v-if="!state.minimized && requestsStore.currentRequest" class="bug-fixed bug-left-0 bug-bottom-0 bug-w-full">
+  <div
+    v-if="!state.minimized && requestsStore.currentRequest"
+    class="bug-z-[9999] bug-fixed bug-left-0 bug-bottom-0 bug-w-full"
+  >
     <div id="drag" @mousedown="state.isResizing = true" class="bug-h-1 bug-bg-red-rails bug-cursor-row-resize" />
 
     <div
@@ -138,7 +145,7 @@ onMounted(() => {
         </div>
 
         <select
-          class="bug-px-2 bug-py-1.5 bug-bg-white bug-border bug-border-stone-200 bug-rounded"
+          class="bug-px-2 bug-py-1.5 bug-bg-white bug-border bug-border-stone-200 bug-rounded bug-max-w-[300px]"
           name="current_request_id"
           @change="
             (event) => {

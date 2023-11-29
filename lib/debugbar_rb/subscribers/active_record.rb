@@ -14,10 +14,9 @@ module DebugbarRb
       else
         "#{payload[:name]} (#{event.duration.round(1)}ms)"
       end
-      name  = "CACHE #{name}" if payload[:cached]
+      name = "CACHE #{name}" if payload[:cached]
 
-      sql   = payload[:sql]
-      sql.gsub!(/\/\*.*\*\//, "") # remove comments
+      sql = payload[:sql]&.gsub(/\/\*.*\*\//, "") # remove comments
 
       binds = nil
       if payload[:binds]&.any?

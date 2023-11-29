@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-pre code.hljs {
+#__debugbar pre code.hljs {
     padding: 0 !important;
 }

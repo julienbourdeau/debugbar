@@ -15,8 +15,8 @@ function copyToClipboard(text: string) {
 
 <template>
   <div class="bug-flex bug-flex-col bug-space-y-8">
-    <div v-for="query in props.currentRequest.queries" class="space-y-3">
-      <div class="font-bold">
+    <div v-for="query in props.currentRequest.queries" class="bug-space-y-3">
+      <div class="bug-font-bold">
         {{ query.name }}
         <span
           @click="copyToClipboard(query.sql)"
