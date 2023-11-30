@@ -20,7 +20,7 @@ const props = defineProps<{
       </tr>
     </thead>
     <tbody class="bug-divide-y bug-divide-stone-200">
-      <tr v-for="(v, k) in props.models">
+      <tr v-for="(v, k) in props.models" :key="k">
         <td
           class="bug-whitespace-nowrap bug-py-4 bug-pl-4 bug-pr-3 bug-text-sm bug-font-medium bug-text-stone-900 sm:bug-pl-0"
         >

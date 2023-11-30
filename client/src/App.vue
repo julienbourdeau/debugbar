@@ -3,8 +3,10 @@ import { computed, onMounted, reactive, ref } from "vue"
 import { createConsumer } from "@rails/actioncable"
 
 import TabButton from "@/components/TabButton.vue"
-import ModelPanel from "@/components/panels/ModelPanel.vue"
+import ModelsPanel from "@/components/panels/ModelsPanel.vue"
 import QueriesPanel from "@/components/panels/QueriesPanel.vue"
+import JobsPanel from "@/components/panels/JobsPanel.vue"
+import DebugPanel from "@/components/panels/DebugPanel.vue"
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 
 let requestsStore = useRequestsStore()
@@ -27,30 +29,27 @@ const debugbarChannel = consumer.subscriptions.create(
   { channel: "DebugbarRb::DebugbarChannel" },
   {
     connected() {
-      console.log("Connected to channel, sending initial request")
+      console.log("🟢 Connected to channel")
       debugbarChannel.send({ ids: [] })
     },
 
     disconnected() {
-      console.log("disconnected from channel ")
+      console.log("🔴 Disconnected from channel")
     },
     received(data) {
-      console.log("Received: ", data)
-
       if (data.length == 0) {
-        console.log("No data received")
         return
       }
+
+      console.log("Received: " + data.length + " request(s)")
 
       const ids = requestsStore.addRequests(data)
 
       if (!isActive.value) {
-        console.log("Setting current request")
         requestsStore.setCurrentRequestById(ids[ids.length - 1])
       }
 
       setTimeout(() => {
-        console.log("Sending ids", ids)
         debugbarChannel.send({ ids: ids })
       }, 50)
     },
@@ -116,7 +115,7 @@ onMounted(() => {
     <div
       id="debubgbar-header"
       ref="header"
-      class="bug-flex bug-items-center bug-justify-between bug-font-mono bug-bg-stone-100 bug-border-b bug-border-stone-200"
+      class="bug-flex bug-items-center bug-justify-between bug-font-mono bug-bg-stone-100 bug-border-b-2 bug-border-stone-300"
     >
       <!--  Left  -->
       <div>
@@ -129,7 +128,7 @@ onMounted(() => {
             v-for="(v, k) in requestsStore.currentRequest.dataForTabs"
             key="k"
             :label="v.label"
-            :count="v.count"
+            :count="v?.count"
             :is-active="k === state.activeTab"
             @click="state.activeTab = k as string"
           />
@@ -145,7 +144,7 @@ onMounted(() => {
         </div>
 
         <select
-          class="bug-px-2 bug-py-1.5 bug-bg-white bug-border bug-border-stone-200 bug-rounded bug-max-w-[300px]"
+          class="bug-px-2 bug-py-1.5 bug-bg-white bug-border bug-border-stone-200 bug-rounded bug-max-w-[330px]"
           name="current_request_id"
           @change="
             (event) => {
@@ -177,13 +176,23 @@ onMounted(() => {
       v-if="state.activeTab != ''"
       :style="`height: ${state.height}px`"
     >
-      <model-panel
+      <models-panel
         v-if="state.activeTab == 'models'"
         :models="requestsStore.currentRequest?.models"
         class="bug-px-3 bug-py-2"
       />
       <queries-panel
         v-if="state.activeTab == 'queries'"
+        :current-request="requestsStore.currentRequest"
+        class="bug-px-3 bug-py-2"
+      />
+      <jobs-panel
+        v-if="state.activeTab == 'jobs'"
+        :jobs="requestsStore.currentRequest?.jobs"
+        class="bug-px-3 bug-py-2"
+      />
+      <debug-panel
+        v-if="state.activeTab == 'debug'"
         :current-request="requestsStore.currentRequest"
         class="bug-px-3 bug-py-2"
       />

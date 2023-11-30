@@ -1,7 +1,5 @@
 module DebugbarRb
   class AssetsController < ApplicationController
-    skip_after_action :verify_same_origin_request, only: [:js]
-
     def css
       render file: Assets.css,
         layout: false,
@@ -12,6 +10,12 @@ module DebugbarRb
       render file: Assets.js,
         layout: false,
         content_type: 'text/javascript'
+    end
+
+    private
+
+    def verify_same_origin_request
+      true # YOLO
     end
   end
 end

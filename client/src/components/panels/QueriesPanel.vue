@@ -25,7 +25,7 @@ function copyToClipboard(text: string) {
           >copy</span
         >
       </div>
-      <div class="">
+      <div class="bug-w-full bug-overflow-auto">
         <highlightjs language="sql" :code="query.sql" />
       </div>
       <div class="bug-text-stone-400 bug-text-sm">

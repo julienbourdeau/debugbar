@@ -13,7 +13,7 @@ module DebugbarRb
       # Can check env['PATH_INFO'] ~= /assets/ like QuietAssets middleware
       # can be in config
       # The debugbar assets should be ignored
-      if DebugbarRb::CurrentRequest.meta
+      if DebugbarRb::CurrentRequest.meta && env['PATH_INFO'] !~ /^\/(assets|__debugbar)/
         RequestBuffer.push(DebugbarRb::CurrentRequest.pop!)
       end
 

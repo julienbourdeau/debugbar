@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   label: string
-  count: number
+  count?: number
   isActive: boolean
 }>()
 </script>
@@ -15,6 +15,7 @@ const props = defineProps<{
   >
     {{ props.label }}
     <span
+      v-if="props.count != undefined"
       class="bug-p-1 bug-rounded-full bug-text-xs"
       :class="{
         'bug-px-2': props.count < 10,

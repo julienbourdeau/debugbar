@@ -3,9 +3,10 @@ export type BackendRequestData = {
   meta: RequestMeta
   models: { [key: string]: number }
   queries: Query[]
+  jobs: Job[]
 }
 
-type RequestMeta = {
+export type RequestMeta = {
   controller: string
   action: string
   params: { [key: string]: string }
@@ -21,7 +22,7 @@ type RequestMeta = {
   allocations: number
 }
 
-type Query = {
+export type Query = {
   name: string
   sql: string
   binds: any[]
@@ -30,17 +31,26 @@ type Query = {
   lock_wait: number
 }
 
+export type Job = {
+  class: string
+  queue: string
+  args: any[]
+  at: number
+}
+
 export class BackendRequest {
   id: string
   meta: RequestMeta
   models: { [key: string]: number }
   queries: Query[]
+  jobs: Job[]
 
   constructor(data: BackendRequestData) {
     this.id = data?.id || "null"
     this.meta = data?.meta || ({} as unknown as RequestMeta) // LOL
     this.models = data?.models || {}
     this.queries = data?.queries || []
+    this.jobs = data?.jobs || []
   }
 
   get modelsCount(): number {
@@ -51,8 +61,12 @@ export class BackendRequest {
     return this.queries.length
   }
 
+  get jobsCount(): number {
+    return this.jobs.length
+  }
+
   get pathWithVerb(): string {
-    return `${this.meta.method.toUpperCase()} ${this.meta.path}`
+    return `${this.meta.method.toUpperCase()} ${this.meta.path}`
   }
 
   get dataForTabs(): { [key: string]: any } {
@@ -67,7 +81,10 @@ export class BackendRequest {
       },
       jobs: {
         label: "Jobs",
-        count: 0,
+        count: this.jobsCount,
+      },
+      debug: {
+        label: "Debug",
       },
     }
   }

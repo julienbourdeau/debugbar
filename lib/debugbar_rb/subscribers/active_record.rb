@@ -7,12 +7,12 @@ module DebugbarRb
     def sql(event)
       payload = event.payload
 
-      return if payload[:name].starts_with? "SCHEMA"
+      return if payload[:name]&.starts_with? "SCHEMA"
 
       name = if payload[:async]
         "ASYNC #{payload[:name]} (#{payload[:lock_wait].round(1)}ms) (db time #{event.duration.round(1)}ms)"
       else
-        "#{payload[:name]} (#{event.duration.round(1)}ms)"
+        "#{payload[:name] || "Unnamed"} (#{event.duration.round(1)}ms)"
       end
       name = "CACHE #{name}" if payload[:cached]
 

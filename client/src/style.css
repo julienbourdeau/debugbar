@@ -1,16 +1,11 @@
-#__debugbar pre { all: unset; }
-#__debugbar code { all: unset; }
-#__debugbar button { all: unset; }
-#__debugbar input { all: unset; }
-#__debugbar select { all: unset; }
-#__debugbar option { all: unset; }
-#__debugbar a { all: unset; }
-#__debugbar p { all: unset; }
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-#__debugbar pre code.hljs {
-    padding: 0 !important;
+@layer components {
+  #__debugbar pre,
+  #__debugbar pre code.hljs {
+    /* TODO: Flex here is a terrible idea! lol */
+    @apply bug-w-full bug-m-0 bug-p-0 bug-flex bug-flex-wrap bug-overflow-auto;
+  }
 }

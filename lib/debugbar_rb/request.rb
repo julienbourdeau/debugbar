@@ -1,12 +1,14 @@
 module DebugbarRb
   class Request
-    attr_reader :request_id, :models, :queries, :meta, :request, :response
+    attr_reader :request_id, :models, :queries, :jobs,
+                :meta, :request, :response
     attr_writer :request, :response
 
     def initialize(request_id)
       @request_id = request_id
       @models = {}
       @queries = []
+      @jobs = []
     end
 
     alias_method :id, :request_id
@@ -26,19 +28,12 @@ module DebugbarRb
       end
     end
 
-    def add_query(str)
-      @queries << str
+    def add_query(query)
+      @queries << query
     end
 
-    def dump
-      {
-        id: request_id,
-        meta: meta,
-        models: models,
-        queries: queries,
-        request: request,
-        response: response,
-      }
+    def add_job(job)
+      @jobs << job
     end
 
     def to_h
@@ -47,6 +42,7 @@ module DebugbarRb
         meta: meta,
         models: models,
         queries: queries,
+        jobs: jobs,
       }
     end
 
