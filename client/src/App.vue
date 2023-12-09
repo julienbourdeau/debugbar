@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from "vue"
 import { createConsumer } from "@rails/actioncable"
+import { computed, onMounted, reactive, ref } from "vue"
 
 import TabButton from "@/components/TabButton.vue"
 import ModelsPanel from "@/components/panels/ModelsPanel.vue"
@@ -8,8 +8,10 @@ import QueriesPanel from "@/components/panels/QueriesPanel.vue"
 import JobsPanel from "@/components/panels/JobsPanel.vue"
 import DebugPanel from "@/components/panels/DebugPanel.vue"
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
+import { useConfigStore } from "@/stores/configStore.ts"
 
 let requestsStore = useRequestsStore()
+let configStore = useConfigStore()
 
 const header = ref(null)
 
@@ -24,9 +26,9 @@ const isActive = computed(() => {
   return state.activeTab != ""
 })
 
-const consumer = createConsumer("ws://127.0.0.1:3000/_debugbar/cable")
+const consumer = createConsumer(configStore.config.actionCableUrl)
 const debugbarChannel = consumer.subscriptions.create(
-  { channel: "DebugbarRb::DebugbarChannel" },
+  { channel: configStore.config.options.channelName },
   {
     connected() {
       console.log("🟢 Connected to channel")
@@ -41,7 +43,7 @@ const debugbarChannel = consumer.subscriptions.create(
         return
       }
 
-      console.log("Received: " + data.length + " request(s)")
+      // console.log("Received: " + data.length + " request(s)")
 
       const ids = requestsStore.addRequests(data)
 
