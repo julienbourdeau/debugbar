@@ -4,8 +4,6 @@
 module DebugbarRb
   class CurrentRequest
     class << self
-      delegate_missing_to :current
-
       def new_request!(request_id)
         self.current = Request.new(request_id)
       end
@@ -19,6 +17,15 @@ module DebugbarRb
       end
 
       private
+
+      def method_missing(symbol, *args)
+        return if current.nil?
+        if current.respond_to?(symbol)
+          current.send(symbol, *args)
+        else
+          super
+        end
+      end
 
       def current
         Thread.current[:debugbar_request]
