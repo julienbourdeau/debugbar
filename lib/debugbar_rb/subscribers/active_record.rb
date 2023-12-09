@@ -1,7 +1,7 @@
+# frozen_string_literal: true
+
 module DebugbarRb
   class ActiveRecordLogSubscriber < ActiveSupport::LogSubscriber
-    # attach_to :active_record
-
     class_attribute :backtrace_cleaner, default: ActiveSupport::BacktraceCleaner.new
 
     def sql(event)

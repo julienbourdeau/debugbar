@@ -5,7 +5,6 @@
 @layer components {
   #__debugbar pre,
   #__debugbar pre code.hljs {
-    /* TODO: Flex here is a terrible idea! lol */
-    @apply bug-w-full bug-m-0 bug-p-0 bug-flex bug-flex-wrap bug-overflow-auto;
+    @apply bug-w-full !bug-m-0 !bug-p-0;
   }
 }

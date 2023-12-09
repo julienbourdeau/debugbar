@@ -32,10 +32,13 @@ export type Query = {
 }
 
 export type Job = {
+  id: string
   class: string
   queue: string
   args: any[]
-  at: number
+  successfully_enqueued: boolean
+  scheduled_at?: number
+  logs: string[]
 }
 
 export class BackendRequest {

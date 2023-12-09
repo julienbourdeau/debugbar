@@ -1,7 +1,5 @@
 module DebugbarRb
   class ActionControllerLogSubscriber < ActiveSupport::LogSubscriber
-    # attach_to :action_controller
-
     def start_processing(event)
       CurrentRequest.request = event.payload[:request]
     end

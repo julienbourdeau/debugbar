@@ -1,6 +1,7 @@
 require_relative 'middlewares/track_current_request'
-require_relative 'subscribers/active_record'
 require_relative 'subscribers/action_controller'
+require_relative 'subscribers/active_job'
+require_relative 'subscribers/active_record'
 
 module DebugbarRb
   class Engine < ::Rails::Engine
@@ -25,6 +26,7 @@ module DebugbarRb
     initializer 'debugbar.subscribe' do
       DebugbarRb::ActiveRecordLogSubscriber.attach_to :active_record
       DebugbarRb::ActionControllerLogSubscriber.attach_to :action_controller
+      DebugbarRb::ActiveJobLogSubscriber.attach_to :active_job
       # DebugbarRb::ActionViewLogSubscriber.attach_to :action_view
     end
 

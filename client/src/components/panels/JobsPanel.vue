@@ -6,6 +6,9 @@ const props = defineProps<{
 }>()
 
 function formatTs(ts: number) {
+  if (ts == null) {
+    return "-"
+  }
   return new Date(ts * 1000).toLocaleString()
 }
 </script>
@@ -26,19 +29,25 @@ function formatTs(ts: number) {
           <th scope="col" class="bug-px-3 bug-py-3.5 bug-text-left bug-text-sm bug-font-semibold bug-text-stone-900">
             Args
           </th>
+          <th scope="col" class="bug-px-3 bug-py-3.5 bug-text-left bug-text-sm bug-font-semibold bug-text-stone-900">
+            Logs
+          </th>
         </tr>
       </thead>
       <tbody class="bug-divide-y bug-divide-stone-200">
-        <tr v-for="(v, _k) in props.jobs" :key="v.class + v.at">
-          <td class="bug-whitespace-nowrap bug-py-4 bug-pr-8 bug-text-stone-900">
+        <tr v-for="(v, _k) in props.jobs" :key="v.id">
+          <td class="bug-whitespace-nowrap bug-p-4 bug-pr-8 bug-text-stone-900">
             <div class="bug-text-lg bug-font-bold" v-text="v.class"></div>
             <div class="bug-text-stone-600 bug-text-sm">
               <div v-text="'Queue: ' + v.queue"></div>
-              <div v-text="'At: ' + formatTs(v.at)"></div>
+              <div v-text="'At: ' + formatTs(v.scheduled_at)"></div>
             </div>
           </td>
-          <td class="bug-whitespace-nowrap bug-px-3 bug-py-4 bug-text-sm bug-text-stone-500">
+          <td class="bug-whitespace-nowrap bug-px-3 bug-p-4 bug-pr-8 bug-text-sm">
             <highlightjs language="json" :code="JSON.stringify(v.args, null, 2)" />
+          </td>
+          <td class="bug-whitespace-nowrap bug-px-3 bug-p-4 bug-pr-8 bug-text-sm bug-text-stone-500">
+            <div v-for="(log, k) in v.logs" v-html="(k > 0 ? '&nbsp; '.repeat(k) + '↳ ' : '') + log" class="" />
           </td>
         </tr>
       </tbody>

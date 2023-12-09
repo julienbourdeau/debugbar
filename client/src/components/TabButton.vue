@@ -10,7 +10,7 @@ const props = defineProps<{
   <div
     class="bug-px-3 bug-py-1.5 bug-cursor-pointer"
     :class="{
-      'bug-bg-red-rails bug-text-stone-100': props.isActive,
+      'bug-bg-red-rails bug-text-stone-100 bug-rounded-sm': props.isActive,
     }"
   >
     {{ props.label }}
@@ -20,8 +20,8 @@ const props = defineProps<{
       :class="{
         'bug-px-2': props.count < 10,
         'bug-bg-stone-400 bug-text-stone-100': props.count == 0,
-        'bug-bg-red-rails bug-text-stone-100': props.count > 0,
-        '!bug-bg-stone-100 !bug-text-red-rails': props.isActive,
+        'bug-bg-red-rails bug-text-stone-100': props.count > 0 && !props.isActive,
+        'bug-bg-stone-700': props.count > 0 && props.isActive,
       }"
       v-text="props.count"
     />

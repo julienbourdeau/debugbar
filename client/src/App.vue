@@ -144,7 +144,7 @@ onMounted(() => {
         </div>
 
         <select
-          class="bug-px-2 bug-py-1.5 bug-bg-white bug-border bug-border-stone-200 bug-rounded bug-max-w-[330px]"
+          class="bug-px-2 bug-py-1.5 bug-bg-white bug-border bug-border-stone-200 bug-rounded bug-w-[330px]"
           name="current_request_id"
           @change="
             (event) => {
@@ -161,11 +161,30 @@ onMounted(() => {
           />
         </select>
 
-        <button v-if="requestsStore.currentRequest != null" class="bug-px-2 bug-py-1.5" @click="clearRequests">
-          Clear
-        </button>
-        <button v-if="isActive" class="bug-px-2 bug-py-1.5" @click="state.activeTab = ''">Close</button>
-        <button v-if="!isActive" class="bug-px-2 bug-py-1.5" @click="state.minimized = true">Mini</button>
+        <div class="bug-flex bug-items-center bug-space-x-2">
+          <!--  Not ready yet -->
+          <button
+            v-if="false && requestsStore.currentRequest != null"
+            class="bug-border bug-border-stone-300 bug-shadow bug-px-1.5"
+            @click="clearRequests"
+          >
+            Clear
+          </button>
+          <button
+            v-if="isActive"
+            class="bug-border bug-border-stone-300 bug-shadow bug-px-1.5"
+            @click="state.activeTab = ''"
+          >
+            Close
+          </button>
+          <button
+            v-if="!isActive"
+            class="bug-border bug-border-stone-300 bug-shadow bug-px-1.5"
+            @click="state.minimized = true"
+          >
+            Mini
+          </button>
+        </div>
       </div>
     </div>
 
