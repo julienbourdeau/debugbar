@@ -31,8 +31,8 @@ module DebugbarRb
     end
 
     initializer 'debugbar.track_models' do
-      if defined? ActiveRecord::Base
-        ActiveRecord::Base.after_initialize do |model|
+      ActiveSupport.on_load(:active_record) do
+        after_initialize do |model|
           DebugbarRb::CurrentRequest.inc_model(model.class.name)
         end
       end
