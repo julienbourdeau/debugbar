@@ -1,3 +1,4 @@
+require_relative 'config'
 require_relative 'middlewares/track_current_request'
 require_relative 'subscribers/action_controller'
 require_relative 'subscribers/active_job'
@@ -9,6 +10,10 @@ module DebugbarRb
 
     initializer 'debugbar.init' do
       DebugbarRb::RequestBuffer.init
+    end
+
+    initializer 'debugbar.config' do |app|
+      app.config.debugbar = Config.new(enabled: true)
     end
 
     initializer 'debugbar.assets' do
