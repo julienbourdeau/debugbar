@@ -13,7 +13,7 @@ module DebugbarRb
     end
 
     initializer 'debugbar.config' do |app|
-      app.config.debugbar = Config.new(enabled: true)
+      app.config.debugbar = ::DebugbarRb.config
     end
 
     initializer 'debugbar.assets' do
@@ -25,17 +25,19 @@ module DebugbarRb
     end
 
     initializer 'debugbar.inject_middlewares' do |app|
+      next unless DebugbarRb.config.enabled?
       app.middleware.insert_after ActionDispatch::RequestId, DebugbarRb::TrackCurrentRequest
     end
 
     initializer 'debugbar.subscribe' do
-      DebugbarRb::ActiveRecordLogSubscriber.attach_to :active_record
-      DebugbarRb::ActionControllerLogSubscriber.attach_to :action_controller
-      DebugbarRb::ActiveJobLogSubscriber.attach_to :active_job
+      DebugbarRb::ActiveRecordLogSubscriber.attach_to :active_record if DebugbarRb.config.active_record?
+      DebugbarRb::ActionControllerLogSubscriber.attach_to :action_controller if DebugbarRb.config.action_controller?
+      DbugbarRb::ActiveJobLogSubscriber.attach_to :active_job if DebugbarRb.config.active_job?
       # DebugbarRb::ActionViewLogSubscriber.attach_to :action_view
     end
 
     initializer 'debugbar.track_models' do
+      next unless DebugbarRb.config.active_record?
       ActiveSupport.on_load(:active_record) do
         after_initialize do |model|
           DebugbarRb::Current.request.inc_model(model.class.name)
