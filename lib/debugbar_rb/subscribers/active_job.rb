@@ -18,7 +18,7 @@ module DebugbarRb
       end
       logs << log_enqueue_source
 
-      CurrentRequest.add_job({
+      Current.request.add_job({
         id: job.job_id,
         class: job.class.name,
         queue: queue_name(event),
@@ -44,7 +44,7 @@ module DebugbarRb
       end
       logs << log_enqueue_source
 
-      CurrentRequest.add_job({
+      Current.request.add_job({
         id: job.job_id,
         class: job.class.name,
         queue: queue_name(event),

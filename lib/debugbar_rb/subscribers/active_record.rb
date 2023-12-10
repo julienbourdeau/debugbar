@@ -40,7 +40,7 @@ module DebugbarRb
         binds.prepend("  ")
       end
 
-      CurrentRequest.add_query({
+      Current.request.add_query({
         name: name,
         sql: sql,
         duration: event.duration.round(1),

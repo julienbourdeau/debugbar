@@ -1,7 +1,7 @@
 module DebugbarRb
   class ActionControllerLogSubscriber < ActiveSupport::LogSubscriber
     def start_processing(event)
-      CurrentRequest.request = event.payload[:request]
+      Current.request.request = event.payload[:request]
     end
 
     def process_action(event)
@@ -18,8 +18,8 @@ module DebugbarRb
         allocations: event.allocations,
       })
 
-      CurrentRequest.response = response
-      CurrentRequest.meta = meta
+      Current.request.response = response
+      Current.request.meta = meta
     end
   end
 end

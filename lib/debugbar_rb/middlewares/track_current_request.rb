@@ -5,7 +5,7 @@ module DebugbarRb
     end
 
     def call(env)
-      DebugbarRb::CurrentRequest.new_request!(env['action_dispatch.request_id'])
+      DebugbarRb::Current.new_request!(env['action_dispatch.request_id'])
 
       res = @app.call(env)
 
@@ -13,8 +13,8 @@ module DebugbarRb
       # Can check env['PATH_INFO'] ~= /assets/ like QuietAssets middleware
       # can be in config
       # The debugbar assets should be ignored
-      if DebugbarRb::CurrentRequest.meta && env['PATH_INFO'] !~ /^\/(assets|__debugbar)/
-        RequestBuffer.push(DebugbarRb::CurrentRequest.pop!)
+      if DebugbarRb::Current.request.meta && env['PATH_INFO'] !~ /^\/(assets|__debugbar)/
+        RequestBuffer.push(DebugbarRb::Current.pop_request!)
       end
 
       res
