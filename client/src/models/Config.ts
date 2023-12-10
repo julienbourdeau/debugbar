@@ -1,7 +1,8 @@
 export type DebugbarConfigOptions = {
-  host: string
-  port: number
-  prefix: string
+  cable: {
+    url: string
+    prefix: string
+  }
   channelName: string
 }
 
@@ -14,14 +15,17 @@ export class DebugbarConfig {
 
   get defaultOptions(): DebugbarConfigOptions {
     return {
-      host: "127.0.0.1",
-      port: 3000,
-      prefix: "/_debugbar",
+      cable: {
+        url: "ws://127.0.0.1:3000",
+        prefix: "/_debugbar",
+      },
       channelName: "DebugbarRb::DebugbarChannel",
     }
   }
 
   get actionCableUrl(): string {
-    return `ws://${this.options.host}:${this.options.port}${this.options.prefix}/cable`
+    const { url, prefix } = this.options.cable
+
+    return `${url}${prefix}/cable`
   }
 }
