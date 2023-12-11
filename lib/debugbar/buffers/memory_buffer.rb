@@ -1,4 +1,4 @@
-module DebugbarRb
+module Debugbar
   class MemoryBuffer
     def initialize
       @collection = {}

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module DebugbarRb
+module Debugbar
   class Current < ActiveSupport::CurrentAttributes
     attribute :request
     attribute :ignore

@@ -1,4 +1,4 @@
-module DebugbarRb
+module Debugbar
   class NullBuffer
     def push(_request)
     end

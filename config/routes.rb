@@ -1,4 +1,4 @@
-DebugbarRb::Engine.routes.draw do
+Debugbar::Engine.routes.draw do
   mount ActionCable.server => '/cable'
 
   # TODO: Silence logs for these routes if `::Rails.application.config.assets.quiet` is true

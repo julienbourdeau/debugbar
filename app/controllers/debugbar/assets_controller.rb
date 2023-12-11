@@ -1,4 +1,4 @@
-module DebugbarRb
+module Debugbar
   class AssetsController < ApplicationController
     def css
       render file: Assets.css,

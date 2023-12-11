@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module DebugbarRb
+module Debugbar
   class ActiveJobLogSubscriber < ActiveSupport::LogSubscriber # :nodoc:
     class_attribute :backtrace_cleaner, default: ActiveSupport::BacktraceCleaner.new
 
     def enqueue(event)
-      return if DebugbarRb::Current.ignore?
+      return if Debugbar::Current.ignore?
 
       job = event.payload[:job]
       ex = event.payload[:exception_object] || job.enqueue_error
@@ -33,7 +33,7 @@ module DebugbarRb
     # subscribe_log_level :enqueue, :info # ???
 
     def enqueue_at(event)
-      return if DebugbarRb::Current.ignore?
+      return if Debugbar::Current.ignore?
 
       job = event.payload[:job]
       ex = event.payload[:exception_object] || job.enqueue_error

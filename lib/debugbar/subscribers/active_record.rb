@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module DebugbarRb
+module Debugbar
   class ActiveRecordLogSubscriber < ActiveSupport::LogSubscriber
     class_attribute :backtrace_cleaner, default: ActiveSupport::BacktraceCleaner.new
 
     def sql(event)
-      return if DebugbarRb::Current.ignore?
+      return if Debugbar::Current.ignore?
 
       payload = event.payload
 

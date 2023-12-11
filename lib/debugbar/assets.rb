@@ -1,4 +1,4 @@
-module DebugbarRb
+module Debugbar
   class Assets
     class << self
       def js=(js)
@@ -20,7 +20,7 @@ module DebugbarRb
       private
 
       def path(asset)
-        File.join(Gem.loaded_specs['debugbar_rb'].full_gem_path, 'client', 'dist', asset)
+        File.join(Gem.loaded_specs['debugbar'].full_gem_path, 'client', 'dist', asset)
       end
     end
   end

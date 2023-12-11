@@ -1,4 +1,4 @@
-module DebugbarRb
+module Debugbar
   class RequestBuffer
     class << self
       def init(adapter)

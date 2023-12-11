@@ -1,4 +1,4 @@
-module DebugbarRb
+module Debugbar
   class Config
     attr_accessor :enabled, :prefix, :buffer_adapter, :ignore_request,
                   :active_record, :action_controller, :active_job
@@ -30,7 +30,7 @@ module DebugbarRb
       if ignore_request.is_a? Proc
         ignore_request.call(env)
       else
-        [DebugbarRb.config.prefix, "/assets"].any? { |s| env['PATH_INFO'].starts_with? s }
+        [Debugbar.config.prefix, "/assets"].any? { |s| env['PATH_INFO'].starts_with? s }
       end
     end
 

@@ -1,4 +1,4 @@
-module DebugbarRb
+module Debugbar
   class Request
     attr_reader :request_id, :models, :queries, :jobs,
                 :meta, :request, :response

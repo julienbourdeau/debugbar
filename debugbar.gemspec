@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative "lib/debugbar_rb/version"
+require_relative "lib/debugbar/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "debugbar_rb"
+  spec.name = "debugbar"
   # spec.version = "0.1.0"
-  spec.version = DebugbarRb::VERSION
+  spec.version = Debugbar::VERSION
   spec.authors = ["Julien Bourdeau"]
   spec.email = ["julien@julienbourdeau.com"]
 
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/julienbourdeau/debugbar.rb"
+  spec.metadata["source_code_uri"] = "https://github.com/julienbourdeau/debugbar"
   # spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   # Specify which files should be added to the gem when it is released.

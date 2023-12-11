@@ -19,7 +19,7 @@ export class DebugbarConfig {
         url: "ws://127.0.0.1:3000",
         prefix: "/_debugbar",
       },
-      channelName: "DebugbarRb::DebugbarChannel",
+      channelName: "Debugbar::DebugbarChannel",
     }
   }
 

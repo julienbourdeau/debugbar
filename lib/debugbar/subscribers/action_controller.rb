@@ -1,13 +1,13 @@
-module DebugbarRb
+module Debugbar
   class ActionControllerLogSubscriber < ActiveSupport::LogSubscriber
     def start_processing(event)
-      return if DebugbarRb::Current.ignore?
+      return if Debugbar::Current.ignore?
 
       Current.request.request = event.payload[:request]
     end
 
     def process_action(event)
-      return if DebugbarRb::Current.ignore?
+      return if Debugbar::Current.ignore?
 
       meta = event.payload
 

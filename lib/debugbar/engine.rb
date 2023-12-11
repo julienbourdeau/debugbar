@@ -4,12 +4,12 @@ require_relative 'subscribers/action_controller'
 require_relative 'subscribers/active_job'
 require_relative 'subscribers/active_record'
 
-module DebugbarRb
+module Debugbar
   class Engine < ::Rails::Engine
-    isolate_namespace DebugbarRb
+    isolate_namespace Debugbar
 
     initializer 'debugbar.config' do |app|
-      app.config.debugbar = ::DebugbarRb.config
+      app.config.debugbar = ::Debugbar.config
     end
 
     initializer 'debugbar.init' do |app|
@@ -24,11 +24,11 @@ module DebugbarRb
         throw "Invalid RequestBuffer adapter"
       end
 
-      DebugbarRb::RequestBuffer.init(adapter)
+      Debugbar::RequestBuffer.init(adapter)
     end
 
     initializer 'debugbar.assets' do
-      manifest_file = File.join(Gem.loaded_specs['debugbar_rb'].full_gem_path, 'client', 'dist', '.vite', 'manifest.json')
+      manifest_file = File.join(Gem.loaded_specs['debugbar'].full_gem_path, 'client', 'dist', '.vite', 'manifest.json')
       manifest = JSON.parse(File.read(manifest_file))
 
       Assets.js = manifest['index.html']['file']
@@ -36,22 +36,22 @@ module DebugbarRb
     end
 
     initializer 'debugbar.inject_middlewares' do |app|
-      next unless DebugbarRb.config.enabled?
-      app.middleware.insert_after ActionDispatch::RequestId, DebugbarRb::TrackCurrentRequest
+      next unless Debugbar.config.enabled?
+      app.middleware.insert_after ActionDispatch::RequestId, Debugbar::TrackCurrentRequest
     end
 
     initializer 'debugbar.subscribe' do
-      DebugbarRb::ActiveRecordLogSubscriber.attach_to :active_record if DebugbarRb.config.active_record?
-      DebugbarRb::ActionControllerLogSubscriber.attach_to :action_controller if DebugbarRb.config.action_controller?
-      DebugbarRb::ActiveJobLogSubscriber.attach_to :active_job if DebugbarRb.config.active_job?
-      # DebugbarRb::ActionViewLogSubscriber.attach_to :action_view
+      Debugbar::ActiveRecordLogSubscriber.attach_to :active_record if Debugbar.config.active_record?
+      Debugbar::ActionControllerLogSubscriber.attach_to :action_controller if Debugbar.config.action_controller?
+      Debugbar::ActiveJobLogSubscriber.attach_to :active_job if Debugbar.config.active_job?
+      # Debugbar::ActionViewLogSubscriber.attach_to :action_view
     end
 
     initializer 'debugbar.track_models' do
-      next unless DebugbarRb.config.active_record?
+      next unless Debugbar.config.active_record?
       ActiveSupport.on_load(:active_record) do
         after_initialize do |model|
-          DebugbarRb::Current.request.inc_model(model.class.name)
+          Debugbar::Current.request.inc_model(model.class.name)
         end
       end
     end
