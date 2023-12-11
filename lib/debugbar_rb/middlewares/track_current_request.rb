@@ -5,15 +5,19 @@ module DebugbarRb
     end
 
     def call(env)
+      DebugbarRb::Current.ignore = DebugbarRb.config.ignore_request?(env)
+
+      if DebugbarRb::Current.ignore?
+        DebugbarRb::Current.null_request!
+        return @app.call(env)
+      end
+
       DebugbarRb::Current.new_request!(env['action_dispatch.request_id'])
 
       res = @app.call(env)
 
-      # TODO: Add proper way exclude requests
-      # Can check env['PATH_INFO'] ~= /assets/ like QuietAssets middleware
-      # can be in config
-      # The debugbar assets should be ignored
-      if DebugbarRb::Current.request.meta && env['PATH_INFO'] !~ /^\/(assets|__debugbar)/
+      # TODO: Remove this if meta
+      if DebugbarRb::Current.request.meta
         RequestBuffer.push(DebugbarRb::Current.pop_request!)
 
         if DebugbarRb.connected?

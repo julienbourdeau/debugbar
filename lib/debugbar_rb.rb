@@ -5,6 +5,7 @@ module DebugbarRb
   autoload :Assets, "debugbar_rb/assets"
   autoload :Current, "debugbar_rb/current"
   autoload :Request, "debugbar_rb/request"
+  autoload :NullRequest, "debugbar_rb/null_request"
   autoload :RequestBuffer, "debugbar_rb/buffers/request_buffer"
 
   class << self

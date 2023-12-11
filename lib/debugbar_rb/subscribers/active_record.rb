@@ -5,6 +5,8 @@ module DebugbarRb
     class_attribute :backtrace_cleaner, default: ActiveSupport::BacktraceCleaner.new
 
     def sql(event)
+      return if DebugbarRb::Current.ignore?
+
       payload = event.payload
 
       return if payload[:name]&.starts_with? "SCHEMA"
