@@ -20,7 +20,7 @@ module DebugbarRb
     end
 
     def unsubscribed
-      DebugbarRb::Current.disconnect!
+      DebugbarRb.disconnect!
     end
   end
 end
