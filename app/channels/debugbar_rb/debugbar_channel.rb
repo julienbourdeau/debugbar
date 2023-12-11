@@ -13,11 +13,14 @@ module DebugbarRb
         RequestBuffer.remove(data["ids"])
       end
 
-      RequestBuffer.enable!
+      DebugbarRb.connect!
+
+      data = RequestBuffer.all.map(&:to_h)
+      ActionCable.server.broadcast("debugbar_channel", data)
     end
 
     def unsubscribed
-      RequestBuffer.disable!
+      DebugbarRb::Current.disconnect!
     end
   end
 end

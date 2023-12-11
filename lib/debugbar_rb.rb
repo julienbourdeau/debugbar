@@ -5,7 +5,7 @@ module DebugbarRb
   autoload :Assets, "debugbar_rb/assets"
   autoload :Current, "debugbar_rb/current"
   autoload :Request, "debugbar_rb/request"
-  autoload :RequestBuffer, "debugbar_rb/request_buffer"
+  autoload :RequestBuffer, "debugbar_rb/buffers/request_buffer"
 
   class << self
     def config
@@ -14,6 +14,18 @@ module DebugbarRb
 
     def configure
       yield config
+    end
+
+    def connect!
+      @connected = true
+    end
+
+    def disconnect!
+      @connected = false
+    end
+
+    def connected?
+      @connected
     end
   end
 end

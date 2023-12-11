@@ -15,6 +15,11 @@ module DebugbarRb
       # The debugbar assets should be ignored
       if DebugbarRb::Current.request.meta && env['PATH_INFO'] !~ /^\/(assets|__debugbar)/
         RequestBuffer.push(DebugbarRb::Current.pop_request!)
+
+        if DebugbarRb.connected?
+          data = RequestBuffer.all.map(&:to_h)
+          ActionCable.server.broadcast("debugbar_channel", data)
+        end
       end
 
       res
