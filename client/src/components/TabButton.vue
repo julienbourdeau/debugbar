@@ -7,13 +7,14 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div
-    class="bug-px-3 bug-py-1.5 bug-cursor-pointer"
+  <button
+    class="bug-flex bug-items-center bug-space-x-1 bug-px-3 bug-py-1.5 bug-border-0"
     :class="{
       'bug-bg-red-rails bug-text-stone-100 bug-rounded-sm': props.isActive,
+      'bug-cursor-pointer': !props.isActive,
     }"
   >
-    {{ props.label }}
+    <span><slot /></span>
     <span
       v-if="props.count != undefined"
       class="bug-p-1 bug-rounded-full bug-text-xs"
@@ -25,7 +26,7 @@ const props = defineProps<{
       }"
       v-text="props.count"
     />
-  </div>
+  </button>
 </template>
 
 <style scoped></style>

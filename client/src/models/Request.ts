@@ -74,6 +74,11 @@ export class BackendRequest {
 
   get dataForTabs(): { [key: string]: any } {
     return {
+      messages: {
+        label: "Messages",
+        count: 0,
+        disabled: true,
+      },
       models: {
         label: "Models",
         count: this.modelsCount,
@@ -86,8 +91,18 @@ export class BackendRequest {
         label: "Jobs",
         count: this.jobsCount,
       },
-      debug: {
-        label: "Debug",
+      cache: {
+        label: "Cache",
+        count: 0,
+        disabled: true,
+      },
+      view: {
+        label: "Views",
+        disabled: true,
+      },
+      logs: {
+        label: "Logs",
+        disabled: true,
       },
     }
   }
