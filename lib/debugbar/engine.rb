@@ -27,6 +27,17 @@ module Debugbar
       Debugbar::RequestBuffer.init(adapter)
     end
 
+    initializer 'debugbar.helper' do
+      ActiveSupport.on_load(:action_controller) do
+        ActionController::Base.helper(Debugbar::TagHelpers)
+      end
+
+      ActiveSupport.on_load(:action_view) do
+        include Debugbar::TagHelpers
+      end
+    end
+
+    # TODO: IMPROVE BEFORE RELEASE
     initializer 'debugbar.assets' do
       manifest_file = File.join(Gem.loaded_specs['debugbar'].full_gem_path, 'client', 'dist', '.vite', 'manifest.json')
       manifest = JSON.parse(File.read(manifest_file))
