@@ -1,7 +1,8 @@
 module Debugbar
   class Request
     attr_reader :request_id, :models, :queries, :jobs,
-                :meta, :request, :response
+                :meta, :request, :response,
+                :messages
     attr_writer :request, :response
 
     def initialize(request_id)
@@ -9,6 +10,7 @@ module Debugbar
       @models = {}
       @queries = []
       @jobs = []
+      @messages = []
     end
 
     alias_method :id, :request_id
@@ -36,6 +38,10 @@ module Debugbar
       @jobs << job
     end
 
+    def add_msg(msg, extra)
+      @messages << {msg: msg, extra: extra}
+    end
+
     def to_h
       {
         id: request_id,
@@ -43,6 +49,7 @@ module Debugbar
         models: models,
         queries: queries,
         jobs: jobs,
+        messages: messages,
       }
     end
 

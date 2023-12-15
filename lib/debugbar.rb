@@ -28,6 +28,15 @@ module Debugbar
     def connected?
       @connected
     end
+
+    def msg(msg, *extra)
+      if Current.request.nil?
+        puts "The current request is not set yet. Printing to STDOUT instead."
+        puts msg, extra
+      else
+        Current.request.add_msg(msg, extra)
+      end
+    end
   end
 end
 

@@ -4,6 +4,7 @@ export type BackendRequestData = {
   models: { [key: string]: number }
   queries: Query[]
   jobs: Job[]
+  messages: Message[]
 }
 
 export type RequestMeta = {
@@ -41,12 +42,18 @@ export type Job = {
   logs: string[]
 }
 
+export type Message = {
+  msg: string
+  extra: any
+}
+
 export class BackendRequest {
   id: string
   meta: RequestMeta
   models: { [key: string]: number }
   queries: Query[]
   jobs: Job[]
+  messages: Message[]
 
   constructor(data: BackendRequestData) {
     this.id = data?.id || "null"
@@ -54,6 +61,7 @@ export class BackendRequest {
     this.models = data?.models || {}
     this.queries = data?.queries || []
     this.jobs = data?.jobs || []
+    this.messages = data?.messages || []
   }
 
   get modelsCount(): number {
@@ -68,6 +76,10 @@ export class BackendRequest {
     return this.jobs.length
   }
 
+  get messagesCount(): number {
+    return this.messages.length
+  }
+
   get pathWithVerb(): string {
     return `${this.meta.method.toUpperCase()} ${this.meta.path}`
   }
@@ -76,8 +88,7 @@ export class BackendRequest {
     return {
       messages: {
         label: "Messages",
-        count: 0,
-        disabled: true,
+        count: this.messagesCount,
       },
       models: {
         label: "Models",

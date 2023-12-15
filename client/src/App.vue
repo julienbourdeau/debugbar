@@ -9,6 +9,7 @@ import JobsPanel from "@/components/panels/JobsPanel.vue"
 import DebugPanel from "@/components/panels/DebugPanel.vue"
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import { useConfigStore } from "@/stores/configStore.ts"
+import MessagesPanel from "@/components/panels/MessagesPanel.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -220,6 +221,11 @@ onMounted(() => {
       v-if="state.activeTab != ''"
       :style="`height: ${state.height}px`"
     >
+      <messages-panel
+        v-if="state.activeTab == 'messages'"
+        :messages="requestsStore.currentRequest?.messages"
+        class="bug-px-3 bug-py-2"
+      />
       <models-panel
         v-if="state.activeTab == 'models'"
         :models="requestsStore.currentRequest?.models"
