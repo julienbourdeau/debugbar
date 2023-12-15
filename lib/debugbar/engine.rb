@@ -1,8 +1,5 @@
 require_relative 'config'
 require_relative 'middlewares/track_current_request'
-require_relative 'subscribers/action_controller'
-require_relative 'subscribers/active_job'
-require_relative 'subscribers/active_record'
 
 module Debugbar
   class Engine < ::Rails::Engine
@@ -52,10 +49,22 @@ module Debugbar
     end
 
     initializer 'debugbar.subscribe' do
-      Debugbar::ActiveRecordLogSubscriber.attach_to :active_record if Debugbar.config.active_record?
-      Debugbar::ActionControllerLogSubscriber.attach_to :action_controller if Debugbar.config.action_controller?
-      Debugbar::ActiveJobLogSubscriber.attach_to :active_job if Debugbar.config.active_job?
-      # Debugbar::ActionViewLogSubscriber.attach_to :action_view
+      if Debugbar.config.active_record?
+        require_relative 'subscribers/active_record'
+        subscribe Debugbar::ActiveRecordEventSubscriber => "sql.active_record"
+      end
+
+      if Debugbar.config.action_controller?
+        require_relative 'subscribers/action_controller'
+        subscribe Debugbar::ActionControllerEventSubscriber => [
+          "start_processing.action_controller", "process_action.action_controller"
+        ]
+      end
+
+      if Debugbar.config.active_job?
+        require_relative 'subscribers/active_job'
+        subscribe Debugbar::ActiveJobEventSubscriber => ["enqueue.active_job", "enqueue_at.active_job"]
+      end
     end
 
     initializer 'debugbar.track_models' do
@@ -63,6 +72,18 @@ module Debugbar
       ActiveSupport.on_load(:active_record) do
         after_initialize do |model|
           Debugbar::Current.request.inc_model(model.class.name)
+        end
+      end
+    end
+
+    def subscribe(config)
+      config.each do |subscriber, event_names|
+        event_names = Array.wrap(event_names)
+        event_names.each do |name|
+          method_name = name.split('.').first
+          ActiveSupport::Notifications.subscribe name do |event|
+            subscriber.send method_name, event
+          end
         end
       end
     end
