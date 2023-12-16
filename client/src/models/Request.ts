@@ -5,6 +5,7 @@ export type BackendRequestData = {
   queries: Query[]
   jobs: Job[]
   messages: Message[]
+  cache: Cache[]
 }
 
 export type RequestMeta = {
@@ -47,6 +48,15 @@ export type Message = {
   extra: any
 }
 
+export type Cache = {
+  name: string
+  key: string
+  store: string
+  transaction_id: string
+  hit?: boolean
+  super_operation?: string
+}
+
 export class BackendRequest {
   id: string
   meta: RequestMeta
@@ -54,6 +64,7 @@ export class BackendRequest {
   queries: Query[]
   jobs: Job[]
   messages: Message[]
+  cache: Cache[]
 
   constructor(data: BackendRequestData) {
     this.id = data?.id || "null"
@@ -62,6 +73,7 @@ export class BackendRequest {
     this.queries = data?.queries || []
     this.jobs = data?.jobs || []
     this.messages = data?.messages || []
+    this.cache = data?.cache || []
   }
 
   get modelsCount(): number {
@@ -78,6 +90,16 @@ export class BackendRequest {
 
   get messagesCount(): number {
     return this.messages.length
+  }
+
+  get cacheCount(): number {
+    // count unique cache message per transaction_id
+    return this.cache.reduce((acc, curr) => {
+      if (acc.indexOf(curr.transaction_id) === -1) {
+        acc.push(curr.transaction_id)
+      }
+      return acc
+    }, []).length
   }
 
   get pathWithVerb(): string {
@@ -104,8 +126,7 @@ export class BackendRequest {
       },
       cache: {
         label: "Cache",
-        count: 0,
-        disabled: true,
+        count: this.cacheCount,
       },
       view: {
         label: "Views",

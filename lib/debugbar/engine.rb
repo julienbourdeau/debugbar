@@ -51,20 +51,30 @@ module Debugbar
     initializer 'debugbar.subscribe' do
       if Debugbar.config.active_record?
         require_relative 'subscribers/active_record'
-        subscribe Debugbar::ActiveRecordEventSubscriber => "sql.active_record"
+        subscribe "Debugbar::ActiveRecordEventSubscriber" => "sql.active_record"
       end
 
       if Debugbar.config.action_controller?
         require_relative 'subscribers/action_controller'
-        subscribe Debugbar::ActionControllerEventSubscriber => [
+        subscribe "Debugbar::ActionControllerEventSubscriber" => [
           "start_processing.action_controller", "process_action.action_controller"
         ]
       end
 
       if Debugbar.config.active_job?
         require_relative 'subscribers/active_job'
-        subscribe Debugbar::ActiveJobEventSubscriber => ["enqueue.active_job", "enqueue_at.active_job"]
+        subscribe "Debugbar::ActiveJobEventSubscriber" => ["enqueue.active_job", "enqueue_at.active_job"]
       end
+
+      require_relative 'subscribers/active_support'
+      subscribe "Debugbar::ActiveSupportEventSubscriber.cache" => %w(
+        cache_read.active_support
+        cache_generate.active_support
+        cache_fetch_hit.active_support
+        cache_write.active_support
+        cache_delete.active_support
+        cache_exist?.active_support
+      )
     end
 
     initializer 'debugbar.track_models' do
@@ -79,10 +89,11 @@ module Debugbar
     def subscribe(config)
       config.each do |subscriber, event_names|
         event_names = Array.wrap(event_names)
+        class_name, class_method_name = subscriber.split('.')
         event_names.each do |name|
-          method_name = name.split('.').first
+          method_name = class_method_name || name.split('.').first
           ActiveSupport::Notifications.subscribe name do |event|
-            subscriber.send method_name, event
+            class_name.constantize.send method_name, event
           end
         end
       end

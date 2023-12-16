@@ -2,7 +2,7 @@ module Debugbar
   class Request
     attr_reader :request_id, :models, :queries, :jobs,
                 :meta, :request, :response,
-                :messages
+                :messages, :cache
     attr_writer :request, :response
 
     def initialize(request_id)
@@ -11,6 +11,7 @@ module Debugbar
       @queries = []
       @jobs = []
       @messages = []
+      @cache = []
     end
 
     alias_method :id, :request_id
@@ -42,6 +43,10 @@ module Debugbar
       @messages << {msg: msg, extra: extra}
     end
 
+    def add_cache(c)
+      @cache << c
+    end
+
     def to_h
       {
         id: request_id,
@@ -50,6 +55,7 @@ module Debugbar
         queries: queries,
         jobs: jobs,
         messages: messages,
+        cache: cache,
       }
     end
 
