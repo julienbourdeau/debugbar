@@ -79,6 +79,14 @@ onMounted(() => {
     state.isResizing = false
   }
 })
+
+const setActiveTab = (tab) => {
+  if (state.activeTab == tab) {
+    state.activeTab = ""
+  } else {
+    state.activeTab = tab
+  }
+}
 </script>
 
 <template>
@@ -134,7 +142,7 @@ onMounted(() => {
             :count="v?.count"
             :is-active="k === state.activeTab"
             :disabled="v.disabled"
-            @click="state.activeTab = k as string"
+            @click="setActiveTab(k)"
             >{{ v.label }}</tab-button
           >
 
