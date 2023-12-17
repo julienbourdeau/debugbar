@@ -4,8 +4,8 @@ import { ShadowRoot } from "vue-shadow-dom"
 </script>
 
 <template>
-  <div style="background: #22863a">
-    <shadow-root id="mega-uniq-id">
+  <div>
+    <shadow-root id="__debugbar-shadow-root">
       <debugbar></debugbar>
     </shadow-root>
   </div>
