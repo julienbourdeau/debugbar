@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "prettier": "^3.1.0"
+    "prettier": "^3.1.0",
+    "vue-shadow-dom": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4"
   }
 }
