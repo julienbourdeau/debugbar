@@ -1,10 +1,4 @@
 module Debugbar::TagHelpers
-  def debugbar_stylesheet
-    raw <<-HTML
-      <link rel="stylesheet" href="#{Debugbar.config.prefix}/assets/style">
-      HTML
-  end
-
   def debugbar_javascript(opt = {})
     html = <<-HTML
       <div id="__debugbar"></div>
