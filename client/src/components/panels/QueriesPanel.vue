@@ -14,23 +14,23 @@ function copyToClipboard(text: string) {
 </script>
 
 <template>
-  <div class="bug-flex bug-flex-col bug-space-y-8">
-    <div v-for="query in props.currentRequest.queries" class="bug-space-y-3">
-      <div class="bug-font-bold">
+  <div class="flex flex-col space-y-8">
+    <div v-for="query in props.currentRequest.queries" class="space-y-3">
+      <div class="font-bold">
         {{ query.name }}
         <span
           @click="copyToClipboard(query.sql)"
-          class="bug-px-3 bug-text-xs bug-uppercase bug-text-stone-400 bug-cursor-pointer"
+          class="px-3 text-xs uppercase text-stone-400 cursor-pointer"
           title="Copy SQL query to clipboard"
           >copy</span
         >
       </div>
-      <div class="bug-w-full bug-overflow-auto">
+      <div class="w-full overflow-auto">
         <highlightjs language="sql" :code="query.sql" />
       </div>
-      <div class="bug-text-stone-400 bug-text-sm">
+      <div class="text-stone-400 text-sm">
         <div v-text="query.source[0]"></div>
-        <div v-if="query.source.length > 1" v-for="s in query.source.slice(1)" class="bug-pl-4" v-text="'↳ ' + s"></div>
+        <div v-if="query.source.length > 1" v-for="s in query.source.slice(1)" class="pl-4" v-text="'↳ ' + s"></div>
       </div>
     </div>
   </div>

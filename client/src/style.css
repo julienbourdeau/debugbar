@@ -5,6 +5,6 @@
 @layer components {
   #__debugbar pre,
   #__debugbar pre code.hljs {
-    @apply bug-w-full !bug-m-0 !bug-p-0;
+    @apply w-full !m-0 !p-0;
   }
 }

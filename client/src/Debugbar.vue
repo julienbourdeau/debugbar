@@ -91,49 +91,35 @@ const setActiveTab = (tab) => {
 </script>
 
 <template>
-  <div
-    v-if="state.minimized"
-    @click="state.minimized = false"
-    class="bug-z-[9999] bug-fixed bug-left-0 bug-bottom-0 bug-shadow"
-  >
-    <div
-      class="bug-flex bug-items-center bug-justify-between bug-font-mono bug-border-t-4 bug-border-r-4 bug-border-red-rails"
-    >
-      <div class="bug-p-1 bug-pt-1.5">
-        <img class="bug-h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
+  <div v-if="state.minimized" @click="state.minimized = false" class="z-[9999] fixed left-0 bottom-0 shadow">
+    <div class="flex items-center justify-between font-mono border-t-4 border-r-4 border-red-rails">
+      <div class="p-1 pt-1.5">
+        <img class="h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
       </div>
     </div>
   </div>
 
-  <div
-    v-if="!state.minimized && requestsStore.currentRequest == null"
-    class="bug-z-[9999] bug-fixed bug-left-0 bug-bottom-0 bug-w-full"
-  >
-    <div class="bug-h-1 bug-bg-red-rails bug-cursor-row-resize" />
-    <div
-      class="bug-flex bug-items-center bug-justify-between bug-font-mono bug-bg-stone-100 bug-border-b bug-border-stone-200"
-    >
-      <div class="bug-px-5">No request yet</div>
-      <div><button v-if="!isActive" class="bug-px-2 bug-py-1.5" @click="state.minimized = true">Mini</button></div>
+  <div v-if="!state.minimized && requestsStore.currentRequest == null" class="z-[9999] fixed left-0 bottom-0 w-full">
+    <div class="h-1 bg-red-rails cursor-row-resize" />
+    <div class="flex items-center justify-between font-mono bg-stone-100 border-b border-stone-200">
+      <div class="px-5">No request yet</div>
+      <div><button v-if="!isActive" class="px-2 py-1.5" @click="state.minimized = true">Mini</button></div>
     </div>
   </div>
 
-  <div
-    v-if="!state.minimized && requestsStore.currentRequest"
-    class="bug-z-[9999] bug-fixed bug-left-0 bug-bottom-0 bug-w-full"
-  >
-    <div id="drag" @mousedown="state.isResizing = true" class="bug-h-1 bug-bg-red-rails bug-cursor-row-resize" />
+  <div v-if="!state.minimized && requestsStore.currentRequest" class="z-[9999] fixed left-0 bottom-0 w-full">
+    <div id="drag" @mousedown="state.isResizing = true" class="h-1 bg-red-rails cursor-row-resize" />
 
     <div
       id="debubgbar-header"
       ref="header"
-      class="bug-flex bug-items-center bug-justify-between bug-font-mono bug-bg-stone-100 bug-border-b-2 bug-border-stone-300"
+      class="flex items-center justify-between font-mono bg-stone-100 border-b-2 border-stone-300"
     >
       <!--  Left  -->
       <div>
-        <div class="bug-flex">
-          <div class="bug-p-1 bug-pt-1.5">
-            <img class="bug-h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
+        <div class="flex">
+          <div class="p-1 pt-1.5">
+            <img class="h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
           </div>
 
           <tab-button
@@ -149,11 +135,11 @@ const setActiveTab = (tab) => {
 
           <button
             @click="state.activeTab = 'debug'"
-            class="bug-flex bug-items-center bug-space-x-1 bug-px-3 bug-py-1.5 bug-border-0 bug-text-stone-500"
+            class="flex items-center space-x-1 px-3 py-1.5 border-0 text-stone-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="bug-text-current bug-h-6 bug-w-6"
+              class="text-current h-6 w-6"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
@@ -171,15 +157,15 @@ const setActiveTab = (tab) => {
       </div>
 
       <!--  Right  -->
-      <div class="bug-flex bug-items-center bug-space-x-2">
-        <div class="bug-flex bug-space-x-1">
-          <span class="bug-text-sm bug-font-black" v-if="requestsStore.currentRequest.meta.duration"
+      <div class="flex items-center space-x-2">
+        <div class="flex space-x-1">
+          <span class="text-sm font-black" v-if="requestsStore.currentRequest.meta.duration"
             >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
           >
         </div>
 
         <select
-          class="bug-px-2 bug-py-1.5 bug-bg-white bug-border bug-border-stone-200 bug-rounded bug-w-[330px]"
+          class="px-2 py-1.5 bg-white border border-stone-200 rounded w-[330px]"
           name="current_request_id"
           @change="
             (event) => {
@@ -196,27 +182,19 @@ const setActiveTab = (tab) => {
           />
         </select>
 
-        <div class="bug-flex bug-items-center bug-space-x-2">
+        <div class="flex items-center space-x-2">
           <!--  Not ready yet -->
           <button
             v-if="requestsStore.currentRequest != null"
-            class="bug-border bug-border-stone-300 bug-shadow bug-px-1.5"
+            class="border border-stone-300 shadow px-1.5"
             @click="clearRequests"
           >
             Clear
           </button>
-          <button
-            v-if="isActive"
-            class="bug-border bug-border-stone-300 bug-shadow bug-px-1.5"
-            @click="state.activeTab = ''"
-          >
+          <button v-if="isActive" class="border border-stone-300 shadow px-1.5" @click="state.activeTab = ''">
             Close
           </button>
-          <button
-            v-if="!isActive"
-            class="bug-border bug-border-stone-300 bug-shadow bug-px-1.5"
-            @click="state.minimized = true"
-          >
+          <button v-if="!isActive" class="border border-stone-300 shadow px-1.5" @click="state.minimized = true">
             Mini
           </button>
         </div>
@@ -226,34 +204,30 @@ const setActiveTab = (tab) => {
     <div
       ref="body"
       id="debugbar-body"
-      class="bug-bg-white bug-overflow-scroll"
+      class="bg-white overflow-scroll"
       v-if="state.activeTab != ''"
       :style="`height: ${state.height}px`"
     >
       <messages-panel
         v-if="state.activeTab == 'messages'"
         :messages="requestsStore.currentRequest?.messages"
-        class="bug-px-3 bug-py-2"
+        class="px-3 py-2"
       />
       <models-panel
         v-if="state.activeTab == 'models'"
         :models="requestsStore.currentRequest?.models"
-        class="bug-px-3 bug-py-2"
+        class="px-3 py-2"
       />
       <queries-panel
         v-if="state.activeTab == 'queries'"
         :current-request="requestsStore.currentRequest"
-        class="bug-px-3 bug-py-2"
+        class="px-3 py-2"
       />
-      <jobs-panel
-        v-if="state.activeTab == 'jobs'"
-        :jobs="requestsStore.currentRequest?.jobs"
-        class="bug-px-3 bug-py-2"
-      />
+      <jobs-panel v-if="state.activeTab == 'jobs'" :jobs="requestsStore.currentRequest?.jobs" class="px-3 py-2" />
       <debug-panel
         v-if="state.activeTab == 'debug'"
         :current-request="requestsStore.currentRequest"
-        class="bug-px-3 bug-py-2"
+        class="px-3 py-2"
       />
     </div>
   </div>

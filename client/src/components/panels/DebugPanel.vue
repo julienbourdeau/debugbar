@@ -7,7 +7,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="bug-p-4">
+  <div class="p-4">
     <h2>Debug</h2>
 
     <highlightjs language="json" :code="JSON.stringify(props.currentRequest, null, 2)" />
