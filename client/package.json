@@ -11,10 +11,13 @@
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
     "@rails/actioncable": "^6.1.7",
+    "lodash": "^4.17.21",
     "pinia": "^2.1.7",
-    "vue": "^3.3.8"
+    "vue": "^3.3.8",
+    "vue-shadow-dom": "^4.2.0"
   },
   "devDependencies": {
+    "@types/node": "^20.10.4",
     "@vitejs/plugin-vue": "^4.5.0",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
