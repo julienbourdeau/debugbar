@@ -61,6 +61,7 @@ const debugbarChannel = consumer.subscriptions.create(
 
 const clearRequests = () => {
   console.log("Clearing requests")
+  state.activeTab = ""
   requestsStore.clearRequests()
   debugbarChannel.send({ clear: true })
 }
@@ -198,7 +199,7 @@ const setActiveTab = (tab) => {
         <div class="bug-flex bug-items-center bug-space-x-2">
           <!--  Not ready yet -->
           <button
-            v-if="false && requestsStore.currentRequest != null"
+            v-if="requestsStore.currentRequest != null"
             class="bug-border bug-border-stone-300 bug-shadow bug-px-1.5"
             @click="clearRequests"
           >
