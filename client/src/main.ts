@@ -5,6 +5,7 @@ import hljsVuePlugin from "@highlightjs/vue-plugin"
 
 import { createApp } from "vue"
 import { createPinia } from "pinia"
+import shadow from "vue-shadow-dom"
 
 import "highlight.js/styles/github.css"
 import "./style.css"
@@ -19,4 +20,5 @@ const pinia = createPinia()
 const app = createApp(App)
 app.use(hljsVuePlugin)
 app.use(pinia)
+app.use(shadow)
 app.mount("#__debugbar")

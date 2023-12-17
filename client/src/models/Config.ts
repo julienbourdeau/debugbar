@@ -1,3 +1,5 @@
+import defaultsDeep from "lodash/defaultsDeep"
+
 export type DebugbarConfigOptions = {
   cable: {
     url: string
@@ -10,7 +12,7 @@ export class DebugbarConfig {
   readonly options: DebugbarConfigOptions
 
   constructor(options: DebugbarConfigOptions) {
-    this.options = Object.assign(this.defaultOptions, options)
+    this.options = defaultsDeep(options, this.defaultOptions)
   }
 
   get defaultOptions(): DebugbarConfigOptions {
