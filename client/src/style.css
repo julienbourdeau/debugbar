@@ -7,3 +7,15 @@
     @apply w-full !m-0 !p-0;
   }
 }
+
+button {
+  @apply cursor-pointer;
+}
+
+.simple-button {
+  @apply border border-stone-300 shadow px-1.5 text-sm hover:bg-stone-200 hover:shadow-md;
+}
+
+button[disabled] {
+  @apply opacity-50 cursor-not-allowed;
+}

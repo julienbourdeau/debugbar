@@ -17,6 +17,7 @@
     "vue-shadow-dom": "^4.2.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.202",
     "@types/node": "^20.10.4",
     "@vitejs/plugin-vue": "^4.5.0",
     "autoprefixer": "^10.4.16",

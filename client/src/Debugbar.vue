@@ -7,9 +7,10 @@ import ModelsPanel from "@/components/panels/ModelsPanel.vue"
 import QueriesPanel from "@/components/panels/QueriesPanel.vue"
 import JobsPanel from "@/components/panels/JobsPanel.vue"
 import DebugPanel from "@/components/panels/DebugPanel.vue"
+import MessagesPanel from "@/components/panels/MessagesPanel.vue"
+
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import { useConfigStore } from "@/stores/configStore.ts"
-import MessagesPanel from "@/components/panels/MessagesPanel.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -91,11 +92,13 @@ const setActiveTab = (tab) => {
 </script>
 
 <template>
-  <div v-if="state.minimized" @click="state.minimized = false" class="z-[9999] fixed left-0 bottom-0 shadow">
-    <div class="flex items-center justify-between font-mono border-t-4 border-r-4 border-red-rails">
-      <div class="p-1 pt-1.5">
-        <img class="h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
-      </div>
+  <div
+    v-if="state.minimized"
+    @click="state.minimized = false"
+    class="z-[9999] fixed left-0 bottom-0 bg-transparent cursor-pointer"
+  >
+    <div class="p-1 pt-1.5">
+      <img class="h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
     </div>
   </div>
 
@@ -108,12 +111,12 @@ const setActiveTab = (tab) => {
   </div>
 
   <div v-if="!state.minimized && requestsStore.currentRequest" class="z-[9999] fixed left-0 bottom-0 w-full">
-    <div id="drag" @mousedown="state.isResizing = true" class="h-1 bg-red-rails cursor-row-resize" />
+    <div id="drag" @mousedown="state.isResizing = true" class="h-1 bg-red-700 cursor-row-resize" />
 
     <div
       id="debubgbar-header"
       ref="header"
-      class="flex items-center justify-between font-mono bg-stone-100 border-b-2 border-stone-300"
+      class="flex items-center justify-between bg-stone-100 border-b-2 border-stone-300"
     >
       <!--  Left  -->
       <div>
@@ -134,8 +137,9 @@ const setActiveTab = (tab) => {
           >
 
           <button
-            @click="state.activeTab = 'debug'"
-            class="flex items-center space-x-1 px-3 py-1.5 border-0 text-stone-500"
+            @click="setActiveTab('debug')"
+            class="flex items-center space-x-1 px-3 py-1.5 border-0 text-stone-600"
+            :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -159,13 +163,13 @@ const setActiveTab = (tab) => {
       <!--  Right  -->
       <div class="flex items-center space-x-2">
         <div class="flex space-x-1">
-          <span class="text-sm font-black" v-if="requestsStore.currentRequest.meta.duration"
+          <span class="text-sm font-bold" v-if="requestsStore.currentRequest.meta.duration"
             >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
           >
         </div>
 
         <select
-          class="px-2 py-1.5 bg-white border border-stone-200 rounded w-[330px]"
+          class="px-2 py-1.5 bg-white border border-stone-200 rounded w-[330px] text-sm"
           name="current_request_id"
           @change="
             (event) => {
@@ -183,20 +187,11 @@ const setActiveTab = (tab) => {
         </select>
 
         <div class="flex items-center space-x-2">
-          <!--  Not ready yet -->
-          <button
-            v-if="requestsStore.currentRequest != null"
-            class="border border-stone-300 shadow px-1.5"
-            @click="clearRequests"
-          >
+          <button v-if="requestsStore.currentRequest != null" class="simple-button" @click="clearRequests">
             Clear
           </button>
-          <button v-if="isActive" class="border border-stone-300 shadow px-1.5" @click="state.activeTab = ''">
-            Close
-          </button>
-          <button v-if="!isActive" class="border border-stone-300 shadow px-1.5" @click="state.minimized = true">
-            Mini
-          </button>
+          <button v-if="isActive" class="simple-button" @click="state.activeTab = ''">Close</button>
+          <button v-if="!isActive" class="simple-button" @click="state.minimized = true">Mini</button>
         </div>
       </div>
     </div>

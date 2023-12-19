@@ -8,21 +8,21 @@ const props = defineProps<{
 
 <template>
   <button
-    class="flex items-center space-x-1 px-3 py-1.5 border-0"
+    class="text-sm flex items-center space-x-1 px-3 py-1.5 border-0"
     :class="{
-      'bg-red-rails text-stone-100 rounded-sm': props.isActive,
-      'cursor-pointer': !props.isActive,
+      'bg-stone-300 rounded-sm': props.isActive,
     }"
   >
-    <span><slot /></span>
+    <span :class="{ 'font-medium': props.isActive }"><slot /></span>
     <span
       v-if="props.count != undefined"
       class="p-1 rounded-full text-xs"
       :class="{
         'px-2': props.count < 10,
-        'bg-stone-400 text-stone-100': props.count == 0,
-        'bg-red-rails text-stone-100': props.count > 0 && !props.isActive,
-        'bg-stone-700': props.count > 0 && props.isActive,
+        hidden: props.count == 0,
+        'bg-stone-300': props.count > 0 && !props.isActive,
+        'bg-stone-400': props.count > 0 && props.isActive,
+        // '!bg-red-700 !text-white': props.count > 10, // TODO: Should be PER TAB (30 models is fine but 30 queries is a lot)
       }"
       v-text="props.count"
     />
