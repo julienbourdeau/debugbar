@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import { BackendRequest } from "@/models/Request.ts"
+import { BackendRequest, BackendRequestData } from "@/models/Request.ts"
 
 export let useRequestsStore = defineStore("requests", {
   state: () => {
@@ -12,7 +12,7 @@ export let useRequestsStore = defineStore("requests", {
     }
   },
   actions: {
-    addRequests(requests: BackendRequest[]): string[] {
+    addRequests(requests: BackendRequestData[]): string[] {
       const ids = []
       requests.forEach((r) => {
         if (!this.requests.find((req) => req.id === r.id)) {

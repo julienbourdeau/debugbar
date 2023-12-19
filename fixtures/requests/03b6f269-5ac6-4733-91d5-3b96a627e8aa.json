@@ -1,0 +1,248 @@
+{
+  "id": "03b6f269-5ac6-4733-91d5-3b96a627e8aa",
+  "meta": {
+    "controller": "DemoController",
+    "action": "post_list",
+    "params": {
+      "controller": "demo",
+      "action": "post_list"
+    },
+    "format": "html",
+    "method": "GET",
+    "path": "/post-list",
+    "status": 200,
+    "view_runtime": 53.65000001620501,
+    "db_runtime": 23.50399998249486,
+    "duration": 136.0009999871254,
+    "cpu_time": 88.89724999999999,
+    "idle_time": 47.10374998712541,
+    "allocations": 114372
+  },
+  "models": {
+    "Post": 12,
+    "PostAuthor": 84,
+    "Author": 82
+  },
+  "queries": [
+    {
+      "name": "Post Load (0.4ms)",
+      "sql": "SELECT `posts`.* FROM `posts` ORDER BY `posts`.`id` DESC LIMIT 12 ",
+      "duration": 0.4,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "PostAuthor Load (1.6ms)",
+      "sql": "SELECT `post_authors`.* FROM `post_authors` WHERE `post_authors`.`post_id` IN (5000, 4999, 4998, 4997, 4996, 4995, 4994, 4993, 4992, 4991, 4990, 4989) ",
+      "duration": 1.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Author Load (0.9ms)",
+      "sql": "SELECT `authors`.* FROM `authors` WHERE `authors`.`id` IN (252, 1241, 971, 593, 281, 876, 1941, 1637, 1291, 789, 217, 1325, 652, 1205, 1252, 1007, 1611, 641, 1695, 1433, 1639, 1733, 348, 497, 54, 887, 1934, 1995, 993, 352, 1679, 987, 1644, 1603, 182, 740, 742, 1352, 1293, 1918, 184, 1757, 1884, 1104, 203, 255, 1834, 930, 1341, 1199, 768, 1192, 1643, 991, 687, 1149, 973, 1026, 1214, 1972, 1327, 1266, 612, 379, 1458, 1652, 1483, 1245, 1169, 1459, 1143, 1532, 9, 1859, 1530, 74, 1003, 965, 1993, 1699, 1616, 223) ",
+      "duration": 0.9,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (1.3ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4989 ",
+      "duration": 1.3,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.2ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4990 ",
+      "duration": 0.2,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.6ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4991 ",
+      "duration": 0.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.2ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4992 ",
+      "duration": 0.2,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.6ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4993 ",
+      "duration": 0.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.4ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4994 ",
+      "duration": 0.4,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.5ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4995 ",
+      "duration": 0.5,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.6ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4996 ",
+      "duration": 0.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.3ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4997 ",
+      "duration": 0.3,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.4ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4998 ",
+      "duration": 0.4,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.2ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 4999 ",
+      "duration": 0.2,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    },
+    {
+      "name": "Reaction Count (0.5ms)",
+      "sql": "SELECT COUNT(*) FROM `reactions` WHERE `reactions`.`post_id` = 5000 ",
+      "duration": 0.5,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    }
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+    {
+      "msg": "before_action",
+      "extra": [
+        {
+          "yolo": true,
+          "callee": null
+        }
+      ]
+    },
+    {
+      "msg": "after_action debug",
+      "extra": [
+        "xxx",
+        {
+          "controller": "demo",
+          "action": "post_list"
+        }
+      ]
+    }
+  ],
+  "cache": [
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::MemoryStore",
+      "compress": false,
+      "compress_threshold": 1024,
+      "super_operation": "fetch",
+      "hit": false,
+      "name": "cache_read.active_support",
+      "transaction_id": "063dce35deef6eb74f6d",
+      "time": 270720393.686
+    },
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::MemoryStore",
+      "compress": false,
+      "compress_threshold": 1024,
+      "name": "cache_generate.active_support",
+      "transaction_id": "063dce35deef6eb74f6d",
+      "time": 270720393.715
+    },
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::MemoryStore",
+      "compress": false,
+      "compress_threshold": 1024,
+      "name": "cache_write.active_support",
+      "transaction_id": "063dce35deef6eb74f6d",
+      "time": 270720393.732
+    }
+  ]
+}

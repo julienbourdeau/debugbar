@@ -1,0 +1,69 @@
+{
+  "id": "dc4202bd-9cfa-4978-9320-70502e0af377",
+  "meta": {
+    "controller": "ApiController",
+    "action": "jobs",
+    "params": {
+      "name": "refresh",
+      "post_id": "3003",
+      "controller": "api",
+      "action": "jobs"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/api/jobs?name=refresh&post_id=3003",
+    "status": 200,
+    "view_runtime": null,
+    "db_runtime": 0.4039999912492931,
+    "duration": 21.666999995708466,
+    "cpu_time": 19.97891599999997,
+    "idle_time": 1.6880839957084959,
+    "allocations": 5121
+  },
+  "models": {
+    "Post": 1
+  },
+  "queries": [
+    {
+      "name": "Post Load (0.4ms)",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 3003 LIMIT 1 ",
+      "duration": 0.4,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
+        " `block (3 levels) in subscribe'"
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "id": "bb3117d1-01e9-40b4-a336-715484e5468c",
+      "class": "RefreshPostJob",
+      "queue": "Inline(default)",
+      "args": [
+        "3003"
+      ],
+      "successfully_enqueued": true,
+      "scheduled_at": null,
+      "logs": [
+        "Enqueued RefreshPostJob (Job ID: bb3117d1-01e9-40b4-a336-715484e5468c) to Inline(default) with arguments: \"3003\"",
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
+      ]
+    }
+  ],
+  "messages": [
+
+  ],
+  "cache": [
+    {
+      "key": "post:3003",
+      "store": "ActiveSupport::Cache::MemoryStore",
+      "compress": false,
+      "compress_threshold": 1024,
+      "name": "cache_write.active_support",
+      "transaction_id": "0c389c783d003e167d20",
+      "time": 270729574.848
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "2d052c68-9089-4064-bcb8-d499029d8d03",
+  "meta": {
+    "controller": "Rails::WelcomeController",
+    "action": "index",
+    "params": {
+      "controller": "rails/welcome",
+      "action": "index"
+    },
+    "format": "html",
+    "method": "GET",
+    "path": "/",
+    "status": 200,
+    "view_runtime": 3.1350000062957406,
+    "db_runtime": 0.0,
+    "duration": 549.813000023365,
+    "cpu_time": 529.360708,
+    "idle_time": 20.452292023364976,
+    "allocations": 967332
+  },
+  "models": {
+  },
+  "queries": [
+
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+
+  ],
+  "cache": [
+
+  ]
+}

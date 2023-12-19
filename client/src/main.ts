@@ -10,15 +10,16 @@ import shadow from "vue-shadow-dom"
 import "highlight.js/styles/github.css"
 import "./style.css"
 
-import App from "./App.vue"
-
 hljs.registerLanguage("sql", sql)
 hljs.registerLanguage("json", json)
 
 const pinia = createPinia()
 
-const app = createApp(App)
-app.use(hljsVuePlugin)
-app.use(pinia)
-app.use(shadow)
-app.mount("#__debugbar")
+import AppDev from "./AppDev.vue"
+import App from "./App.vue"
+
+if (import.meta.env.DEV) {
+  createApp(AppDev).use(hljsVuePlugin).use(pinia).mount("#__debugbar__DEV")
+} else {
+  createApp(App).use(hljsVuePlugin).use(pinia).use(shadow).mount("#__debugbar")
+}
