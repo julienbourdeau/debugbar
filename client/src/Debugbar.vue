@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { createConsumer } from "@rails/actioncable"
 import { computed, onMounted, reactive, ref } from "vue"
+import { PaperClipIcon, XCircleIcon, ArrowDownLeftIcon, TrashIcon } from "@heroicons/vue/16/solid"
 
 import TabButton from "@/components/TabButton.vue"
 import ModelsPanel from "@/components/panels/ModelsPanel.vue"
@@ -116,7 +117,7 @@ const setActiveTab = (tab) => {
     <div
       id="debubgbar-header"
       ref="header"
-      class="flex items-center justify-between bg-stone-100 border-b-2 border-stone-300"
+      class="flex px-1 items-center justify-between bg-stone-100 border-b-2 border-stone-300"
     >
       <!--  Left  -->
       <div>
@@ -138,31 +139,17 @@ const setActiveTab = (tab) => {
 
           <button
             @click="setActiveTab('debug')"
-            class="flex items-center space-x-1 px-3 py-1.5 border-0 text-stone-600"
+            class="px-3 py-1.5 text-stone-600"
             :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="text-current h-6 w-6"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-              <path d="M12 8v4" />
-              <path d="M12 16h.01" />
-            </svg>
+            <PaperClipIcon class="w-4 h-4" />
           </button>
         </div>
       </div>
 
       <!--  Right  -->
-      <div class="flex items-center space-x-2">
-        <div class="flex space-x-1">
+      <div class="flex items-center space-x-2 pr-1">
+        <div class="flex space-x-1.5">
           <span class="text-sm font-bold" v-if="requestsStore.currentRequest.meta.duration"
             >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
           >
@@ -186,12 +173,17 @@ const setActiveTab = (tab) => {
           />
         </select>
 
-        <div class="flex items-center space-x-2">
-          <button v-if="requestsStore.currentRequest != null" class="simple-button" @click="clearRequests">
-            Clear
+        <button @click="clearRequests" title="Clear all requests (frontend and backend)">
+          <trash-icon class="w-4 h-4" />
+        </button>
+
+        <div class="flex items-center pl-2 space-x-2">
+          <button @click="state.minimized = true" title="Hide in the corner">
+            <arrow-down-left-icon class="w-4 h-4" />
           </button>
-          <button v-if="isActive" class="simple-button" @click="state.activeTab = ''">Close</button>
-          <button v-if="!isActive" class="simple-button" @click="state.minimized = true">Mini</button>
+          <button :disabled="!isActive" @click="state.activeTab = ''" title="Close">
+            <x-circle-icon class="w-4 h-4" />
+          </button>
         </div>
       </div>
     </div>
