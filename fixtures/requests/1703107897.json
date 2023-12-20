@@ -1,0 +1,98 @@
+{
+  "id": "35c4fcc6-a79c-475e-bfb3-bb72905ab69d",
+  "meta": {
+    "controller": "ApiController",
+    "action": "add_reaction",
+    "params": {
+      "name": "star",
+      "post_id": "2812",
+      "controller": "api",
+      "action": "add_reaction"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/api/add_reaction?name=star&post_id=2812",
+    "status": 200,
+    "view_runtime": null,
+    "db_runtime": 3.121000132523477,
+    "duration": 14.756999969482422,
+    "cpu_time": 11.96633399999996,
+    "idle_time": 2.790665969482461,
+    "allocations": 5466
+  },
+  "models": {
+    "Reaction": 1,
+    "Post": 1
+  },
+  "queries": [
+    {
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "TRANSACTION (1.1ms)",
+      "name": "TRANSACTION",
+      "sql": "BEGIN ",
+      "cached": false,
+      "async": false,
+      "duration": 1.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/api_controller.rb:17",
+        " `add_reaction'"
+      ]
+    },
+    {
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "Post Load (0.6ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 2812 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/api_controller.rb:17",
+        " `add_reaction'"
+      ]
+    },
+    {
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "Reaction Create (0.9ms)",
+      "name": "Reaction Create",
+      "sql": "INSERT INTO `reactions` (`post_id`, `name`) VALUES (2812, 'star') ",
+      "cached": false,
+      "async": false,
+      "duration": 0.9,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/api_controller.rb:17",
+        " `add_reaction'"
+      ]
+    },
+    {
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "TRANSACTION (0.6ms)",
+      "name": "TRANSACTION",
+      "sql": "COMMIT ",
+      "cached": false,
+      "async": false,
+      "duration": 0.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/api_controller.rb:17",
+        " `add_reaction'"
+      ]
+    }
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+
+  ],
+  "cache": [
+
+  ]
+}

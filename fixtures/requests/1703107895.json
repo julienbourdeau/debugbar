@@ -1,0 +1,137 @@
+{
+  "id": "46f76a00-1f85-46ee-bfee-2d36d15d8bd6",
+  "meta": {
+    "controller": "DemoController",
+    "action": "post",
+    "params": {
+      "controller": "demo",
+      "action": "post",
+      "id": "2812"
+    },
+    "format": "html",
+    "method": "GET",
+    "path": "/post/2812",
+    "status": 200,
+    "view_runtime": 4.31900005787611,
+    "db_runtime": 4.308999981731176,
+    "duration": 18.300999999046326,
+    "cpu_time": 12.904333999999999,
+    "idle_time": 5.396665999046327,
+    "allocations": 14314
+  },
+  "models": {
+    "Post": 1,
+    "PostAuthor": 1,
+    "Author": 1,
+    "Reaction": 46
+  },
+  "queries": [
+    {
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "Post Load (0.3ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 2812 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.3,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:7",
+        " `post'"
+      ]
+    },
+    {
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "PostAuthor Load (1.2ms)",
+      "name": "PostAuthor Load",
+      "sql": "SELECT `post_authors`.* FROM `post_authors` WHERE `post_authors`.`post_id` = 2812 ",
+      "cached": false,
+      "async": false,
+      "duration": 1.2,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:7",
+        " `post'"
+      ]
+    },
+    {
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "Author Load (0.2ms)",
+      "name": "Author Load",
+      "sql": "SELECT `authors`.* FROM `authors` WHERE `authors`.`id` = 283 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.2,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:7",
+        " `post'"
+      ]
+    },
+    {
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "Reaction Load (2.6ms)",
+      "name": "Reaction Load",
+      "sql": "SELECT `reactions`.* FROM `reactions` WHERE `reactions`.`post_id` = 2812 ",
+      "cached": false,
+      "async": false,
+      "duration": 2.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:7",
+        " `post'"
+      ]
+    }
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+    {
+      "msg": "before_action",
+      "extra": [
+        {
+          "yolo": true,
+          "callee": null
+        }
+      ]
+    },
+    {
+      "msg": "after_action debug",
+      "extra": [
+        "xxx",
+        {
+          "controller": "demo",
+          "action": "post",
+          "id": "2812"
+        }
+      ]
+    }
+  ],
+  "cache": [
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::MemoryStore",
+      "compress": false,
+      "compress_threshold": 1024,
+      "super_operation": "fetch",
+      "hit": true,
+      "name": "cache_read.active_support",
+      "transaction_id": "c735ff671f0c64e55469",
+      "time": 543106937.047
+    },
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::MemoryStore",
+      "compress": false,
+      "compress_threshold": 1024,
+      "name": "cache_fetch_hit.active_support",
+      "transaction_id": "c735ff671f0c64e55469",
+      "time": 543106937.087
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { format } from "sql-formatter"
 import type { BackendRequest } from "@/models/Request.ts"
 
 const props = defineProps<{
@@ -16,7 +17,7 @@ function copyToClipboard(text: string) {
 <template>
   <div class="flex flex-col space-y-8">
     <div v-for="query in props.currentRequest.queries" class="space-y-3">
-      <div class="font-bold">
+      <div class="font-bold text-lg">
         {{ query.name }}
         <span
           @click="copyToClipboard(query.sql)"
@@ -25,10 +26,10 @@ function copyToClipboard(text: string) {
           >copy</span
         >
       </div>
-      <div class="w-full overflow-auto">
-        <highlightjs language="sql" :code="query.sql" />
+      <div :set="(format = false)" class="ml-4" @click="format = !format">
+        <highlightjs language="sql" :code="format ? format(query.sql) : query.sql" />
       </div>
-      <div class="text-stone-400 text-sm">
+      <div class="ml-4 text-stone-400 text-sm">
         <div v-text="query.source[0]"></div>
         <div v-if="query.source.length > 1" v-for="s in query.source.slice(1)" class="pl-4" v-text="'↳ ' + s"></div>
       </div>

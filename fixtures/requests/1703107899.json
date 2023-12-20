@@ -1,5 +1,5 @@
 {
-  "id": "69e6b5b3-ec6f-420d-a360-43dfbe9aa890",
+  "id": "404cd410-2d98-46fe-92d9-eb285c2fb768",
   "meta": {
     "controller": "DemoController",
     "action": "jobs",
@@ -11,11 +11,11 @@
     "method": "GET",
     "path": "/jobs",
     "status": 200,
-    "view_runtime": 5.048000020906329,
-    "db_runtime": 22.286000021267682,
-    "duration": 30.93699997663498,
-    "cpu_time": 8.284000000000006,
-    "idle_time": 22.652999976634973,
+    "view_runtime": 5.358999944292009,
+    "db_runtime": 20.610000006854534,
+    "duration": 29.707000017166138,
+    "cpu_time": 8.931707999999997,
+    "idle_time": 20.77529201716614,
     "allocations": 5530
   },
   "models": {
@@ -23,14 +23,18 @@
   },
   "queries": [
     {
-      "name": "Post Load (22.3ms)",
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "Post Load (20.6ms)",
+      "name": "Post Load",
       "sql": "SELECT `posts`.* FROM `posts` ORDER BY RAND() LIMIT 12 ",
-      "duration": 22.3,
+      "cached": false,
+      "async": false,
+      "duration": 20.6,
       "lock_wait": null,
       "binds": null,
       "source": [
-        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
-        " `block (3 levels) in subscribe'"
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:16",
+        " `jobs'"
       ]
     }
   ],
@@ -67,8 +71,8 @@
       "super_operation": "fetch",
       "hit": true,
       "name": "cache_read.active_support",
-      "transaction_id": "bd1bd3a7c378fa1bce35",
-      "time": 270726631.754
+      "transaction_id": "1075bd80ac7e40e33f58",
+      "time": 543110515.871
     },
     {
       "key": "yolo_cache",
@@ -76,8 +80,8 @@
       "compress": false,
       "compress_threshold": 1024,
       "name": "cache_fetch_hit.active_support",
-      "transaction_id": "bd1bd3a7c378fa1bce35",
-      "time": 270726631.804
+      "transaction_id": "1075bd80ac7e40e33f58",
+      "time": 543110515.926
     }
   ]
 }

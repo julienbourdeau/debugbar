@@ -1,53 +1,57 @@
 {
-  "id": "0237911b-3910-4f94-ad06-5a2cef3e2afa",
+  "id": "025429d8-d5d2-4186-ba6d-b3fa325d3651",
   "meta": {
     "controller": "ApiController",
     "action": "jobs",
     "params": {
       "name": "refresh",
-      "post_id": "1627",
+      "post_id": "887",
       "controller": "api",
       "action": "jobs"
     },
     "format": "*/*",
     "method": "GET",
-    "path": "/api/jobs?name=refresh&post_id=1627",
+    "path": "/api/jobs?name=refresh&post_id=887",
     "status": 200,
     "view_runtime": null,
-    "db_runtime": 0.3969999961555004,
-    "duration": 14.918999969959259,
-    "cpu_time": 14.477791999999994,
-    "idle_time": 0.44120796995926526,
-    "allocations": 4914
+    "db_runtime": 0.37800008431077003,
+    "duration": 19.610000014305115,
+    "cpu_time": 18.778167000000053,
+    "idle_time": 0.8318330143050616,
+    "allocations": 5078
   },
   "models": {
     "Post": 1
   },
   "queries": [
     {
-      "name": "Post Load (0.4ms)",
-      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 1627 LIMIT 1 ",
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "Post Load (0.4ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 887 LIMIT 1 ",
+      "cached": false,
+      "async": false,
       "duration": 0.4,
       "lock_wait": null,
       "binds": null,
       "source": [
-        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/engine.rb:96",
-        " `block (3 levels) in subscribe'"
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/jobs/refresh_post_job.rb:5",
+        " `perform'"
       ]
     }
   ],
   "jobs": [
     {
-      "id": "c4e9f5cd-2de1-47fb-8514-599bc5f1377b",
+      "id": "7f47bcd5-78a3-4fcd-b97f-63d538677002",
       "class": "RefreshPostJob",
       "queue": "Inline(default)",
       "args": [
-        "1627"
+        "887"
       ],
       "successfully_enqueued": true,
       "scheduled_at": null,
       "logs": [
-        "Enqueued RefreshPostJob (Job ID: c4e9f5cd-2de1-47fb-8514-599bc5f1377b) to Inline(default) with arguments: \"1627\"",
+        "Enqueued RefreshPostJob (Job ID: 7f47bcd5-78a3-4fcd-b97f-63d538677002) to Inline(default) with arguments: \"887\"",
         "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
       ]
     }
@@ -57,13 +61,13 @@
   ],
   "cache": [
     {
-      "key": "post:1627",
+      "key": "post:887",
       "store": "ActiveSupport::Cache::MemoryStore",
       "compress": false,
       "compress_threshold": 1024,
       "name": "cache_write.active_support",
-      "transaction_id": "063dce35deef6eb74f6d",
-      "time": 270731264.19
+      "transaction_id": "faf4a1cd0d3e4780c40d",
+      "time": 543113119.577
     }
   ]
 }

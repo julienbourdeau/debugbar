@@ -1,0 +1,127 @@
+{
+  "id": "e5875b13-f9e5-4072-a3e6-723a48993f1a",
+  "meta": {
+    "controller": "ApiController",
+    "action": "jobs",
+    "params": {
+      "name": "send_email",
+      "post_id": "2474",
+      "controller": "api",
+      "action": "jobs"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/api/jobs?name=send_email&post_id=2474",
+    "status": 204,
+    "view_runtime": null,
+    "db_runtime": 2.7589999372139573,
+    "duration": 81.6269999742508,
+    "cpu_time": 75.35708299999999,
+    "idle_time": 6.269916974250805,
+    "allocations": 22797
+  },
+  "models": {
+    "Post": 12
+  },
+  "queries": [
+    {
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "Post Load (0.3ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 2474 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.3,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/jobs/send_email_job.rb:5",
+        " `perform'"
+      ]
+    },
+    {
+      "id": "faf4a1cd0d3e4780c40d",
+      "title": "Post Load (2.5ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` ORDER BY `posts`.`published_at` DESC LIMIT 5 ",
+      "cached": false,
+      "async": false,
+      "duration": 2.5,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/jobs/send_email_job.rb:6",
+        " `perform'"
+      ]
+    },
+    {
+      "id": "2264b6f3128d62df58ce",
+      "title": "CACHE Post Load (0.0ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 2474 LIMIT 1",
+      "cached": true,
+      "async": null,
+      "duration": 0.0,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/jobs/send_email_job.rb:5",
+        " `perform'"
+      ]
+    },
+    {
+      "id": "2264b6f3128d62df58ce",
+      "title": "CACHE Post Load (0.0ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` ORDER BY `posts`.`published_at` DESC LIMIT 5",
+      "cached": true,
+      "async": null,
+      "duration": 0.0,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/jobs/send_email_job.rb:6",
+        " `perform'"
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "id": "47192315-4fa6-4e74-abac-225c9fae56a5",
+      "class": "SendEmailJob",
+      "queue": "Inline(default)",
+      "args": [
+        "2474"
+      ],
+      "successfully_enqueued": true,
+      "scheduled_at": null,
+      "logs": [
+        "Enqueued SendEmailJob (Job ID: 47192315-4fa6-4e74-abac-225c9fae56a5) to Inline(default) with arguments: \"2474\"",
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
+      ]
+    },
+    {
+      "id": "70d5ba1a-feb0-43a1-893b-8f9d164f5ce0",
+      "class": "SendEmailJob",
+      "queue": "Inline(default)",
+      "args": [
+        "2474",
+        {
+          "admin": true
+        }
+      ],
+      "successfully_enqueued": true,
+      "scheduled_at": null,
+      "logs": [
+        "Enqueued SendEmailJob (Job ID: 70d5ba1a-feb0-43a1-893b-8f9d164f5ce0) to Inline(default) with arguments: \"2474\", {:admin=>true}",
+        "/Users/julien.bourdeau/Personal/rails/debugbar_rb/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
+      ]
+    }
+  ],
+  "messages": [
+
+  ],
+  "cache": [
+
+  ]
+}
