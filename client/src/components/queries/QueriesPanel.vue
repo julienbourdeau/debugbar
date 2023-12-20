@@ -1,40 +1,14 @@
 <script setup lang="ts">
-import { format } from "sql-formatter"
 import type { BackendRequest } from "@/models/Request.ts"
+import QueryItem from "@/components/queries/QueryItem.vue"
 
 const props = defineProps<{
   currentRequest: BackendRequest
 }>()
-
-function copyToClipboard(text: string) {
-  const type = "text/plain"
-  const blob = new Blob([text], { type })
-  const data = [new ClipboardItem({ [type]: blob })]
-  navigator.clipboard.write(data)
-}
 </script>
 
 <template>
   <div class="flex flex-col space-y-8">
-    <div v-for="query in props.currentRequest.queries" class="space-y-3">
-      <div class="font-bold text-lg">
-        {{ query.name }}
-        <span
-          @click="copyToClipboard(query.sql)"
-          class="px-3 text-xs uppercase text-stone-400 cursor-pointer"
-          title="Copy SQL query to clipboard"
-          >copy</span
-        >
-      </div>
-      <div :set="(format = false)" class="ml-4" @click="format = !format">
-        <highlightjs language="sql" :code="format ? format(query.sql) : query.sql" />
-      </div>
-      <div class="ml-4 text-stone-400 text-sm">
-        <div v-text="query.source[0]"></div>
-        <div v-if="query.source.length > 1" v-for="s in query.source.slice(1)" class="pl-4" v-text="'↳ ' + s"></div>
-      </div>
-    </div>
+    <query-item v-for="query in props.currentRequest.queries" :key="query.id" :query="query" />
   </div>
 </template>
-
-<style scoped></style>

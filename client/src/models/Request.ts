@@ -27,6 +27,8 @@ export type RequestMeta = {
 export type Query = {
   name: string
   sql: string
+  cached: boolean
+  async: boolean
   binds: any[]
   source: string[]
   duration: number

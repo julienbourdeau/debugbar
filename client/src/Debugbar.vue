@@ -5,7 +5,7 @@ import { PaperClipIcon, XCircleIcon, ArrowDownLeftIcon, TrashIcon } from "@heroi
 
 import TabButton from "@/components/TabButton.vue"
 import ModelsPanel from "@/components/panels/ModelsPanel.vue"
-import QueriesPanel from "@/components/panels/QueriesPanel.vue"
+import QueriesPanel from "@/components/queries/QueriesPanel.vue"
 import JobsPanel from "@/components/panels/JobsPanel.vue"
 import DebugPanel from "@/components/panels/DebugPanel.vue"
 import MessagesPanel from "@/components/panels/MessagesPanel.vue"
@@ -142,7 +142,7 @@ const setActiveTab = (tab) => {
             class="px-3 py-1.5 text-stone-600"
             :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
           >
-            <PaperClipIcon class="w-4 h-4" />
+            <PaperClipIcon class="size-4" />
           </button>
         </div>
       </div>
@@ -152,6 +152,16 @@ const setActiveTab = (tab) => {
         <div class="flex space-x-1.5">
           <span class="text-sm font-bold" v-if="requestsStore.currentRequest.meta.duration"
             >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
+          >
+          <span
+            class="px-1 py-0.5 rounded text-xs"
+            :class="{
+              'bg-green-600 text-white': requestsStore.currentRequest.meta.status < 300,
+              'bg-amber-600 text-white':
+                requestsStore.currentRequest.meta.status >= 400 && requestsStore.currentRequest.meta.status < 500,
+              'bg-red-600 text-white': requestsStore.currentRequest.meta.status >= 500,
+            }"
+            >{{ requestsStore.currentRequest.meta.status }}</span
           >
         </div>
 
@@ -174,15 +184,15 @@ const setActiveTab = (tab) => {
         </select>
 
         <button @click="clearRequests" title="Clear all requests (frontend and backend)">
-          <trash-icon class="w-4 h-4" />
+          <trash-icon class="size-4" />
         </button>
 
         <div class="flex items-center pl-2 space-x-2">
           <button @click="state.minimized = true" title="Hide in the corner">
-            <arrow-down-left-icon class="w-4 h-4" />
+            <arrow-down-left-icon class="size-4" />
           </button>
           <button :disabled="!isActive" @click="state.activeTab = ''" title="Close">
-            <x-circle-icon class="w-4 h-4" />
+            <x-circle-icon class="size-4" />
           </button>
         </div>
       </div>

@@ -8,7 +8,7 @@ const props = defineProps<{
 
 <template>
   <button
-    class="text-sm flex items-center space-x-1 px-3 py-1.5 border-0"
+    class="text-sm flex items-center space-x-1 px-3 py-2 border-0"
     :class="{
       'bg-stone-300 rounded-sm': props.isActive,
     }"
@@ -16,9 +16,9 @@ const props = defineProps<{
     <span :class="{ 'font-medium': props.isActive }"><slot /></span>
     <span
       v-if="props.count != undefined"
-      class="p-1 rounded-full text-xs"
+      class="p-0.5 rounded-full text-xs"
       :class="{
-        'px-2': props.count < 10,
+        'px-1.5': props.count < 10,
         hidden: props.count == 0,
         'bg-stone-300': props.count > 0 && !props.isActive,
         'bg-stone-400': props.count > 0 && props.isActive,
