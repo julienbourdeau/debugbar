@@ -12,12 +12,12 @@ module Debugbar
 
         return if payload[:name]&.starts_with? "SCHEMA"
 
-        name = if payload[:async]
+        title = if payload[:async]
           "ASYNC #{payload[:name]} (#{payload[:lock_wait].round(1)}ms) (db time #{event.duration.round(1)}ms)"
         else
           "#{payload[:name] || "Unnamed"} (#{event.duration.round(1)}ms)"
         end
-        name = "CACHE #{name}" if payload[:cached]
+        title = "CACHE #{title}" if payload[:cached]
 
         sql = payload[:sql]&.gsub(/\/\*.*\*\//, "") # remove comments
 
@@ -44,8 +44,12 @@ module Debugbar
         end
 
         Current.request.add_query({
-          name: name,
+          id: event.transaction_id,
+          title: title,
+          name: payload[:name],
           sql: sql,
+          cached: payload[:cached].present?,
+          async: payload[:async],
           duration: event.duration.round(1),
           lock_wait: payload[:lock_wait]&.round(1),
           binds: binds,
@@ -54,7 +58,7 @@ module Debugbar
       end
 
       def query_source_location
-        backtrace_cleaner.clean(caller(1))[1]
+        backtrace_cleaner.clean(caller(3))[0]
       end
     end
   end

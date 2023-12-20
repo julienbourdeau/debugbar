@@ -25,6 +25,7 @@ export type RequestMeta = {
 }
 
 export type Query = {
+  id: string
   name: string
   sql: string
   cached: boolean
