@@ -52,7 +52,9 @@ export type Message = {
 }
 
 export type Cache = {
+  time: string
   name: string
+  label: string
   key: string
   store: string
   transaction_id: string

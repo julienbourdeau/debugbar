@@ -8,6 +8,8 @@ module Debugbar
   autoload :NullRequest, "debugbar/null_request"
   autoload :RequestBuffer, "debugbar/buffers/request_buffer"
 
+  TIME_FORMAT = "%H:%M:%S.%L"
+
   class << self
     def config
       @config ||= Config.new(enabled: true)

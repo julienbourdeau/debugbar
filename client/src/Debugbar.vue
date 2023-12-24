@@ -12,6 +12,7 @@ import MessagesPanel from "@/components/panels/MessagesPanel.vue"
 
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import { useConfigStore } from "@/stores/configStore.ts"
+import CachePanel from "@/components/panels/CachePanel.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -205,22 +206,11 @@ const setActiveTab = (tab) => {
       v-if="state.activeTab != ''"
       :style="`height: ${state.height}px`"
     >
-      <messages-panel
-        v-if="state.activeTab == 'messages'"
-        :messages="requestsStore.currentRequest?.messages"
-        class="px-3 py-2"
-      />
-      <models-panel
-        v-if="state.activeTab == 'models'"
-        :models="requestsStore.currentRequest?.models"
-        class="px-3 py-2"
-      />
-      <queries-panel
-        v-if="state.activeTab == 'queries'"
-        :current-request="requestsStore.currentRequest"
-        class="px-3 py-2"
-      />
-      <jobs-panel v-if="state.activeTab == 'jobs'" :jobs="requestsStore.currentRequest?.jobs" class="px-3 py-2" />
+      <messages-panel v-if="state.activeTab == 'messages'" :messages="requestsStore.currentRequest?.messages" />
+      <models-panel v-if="state.activeTab == 'models'" :models="requestsStore.currentRequest?.models" />
+      <queries-panel v-if="state.activeTab == 'queries'" :current-request="requestsStore.currentRequest" />
+      <jobs-panel v-if="state.activeTab == 'jobs'" :jobs="requestsStore.currentRequest?.jobs" />
+      <cache-panel v-if="state.activeTab == 'cache'" :cache="requestsStore.currentRequest?.cache" />
       <debug-panel
         v-if="state.activeTab == 'debug'"
         :current-request="requestsStore.currentRequest"
