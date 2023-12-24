@@ -1,7 +1,8 @@
 module Debugbar
   class Config
     attr_accessor :enabled, :prefix, :buffer_adapter, :ignore_request,
-                  :active_record, :action_controller, :active_job
+                  :active_record, :action_controller, :active_job,
+                  :min_log_level
 
     alias_method :enabled?, :enabled
 
@@ -12,6 +13,7 @@ module Debugbar
       @active_record = opt[:active_record]
       @action_controller = opt[:action_controller]
       @active_job = opt[:active_job]
+      @min_log_level = opt[:min_log_level]
       @buffer_adapter = opt[:buffer_adapter]
     end
 
@@ -22,6 +24,7 @@ module Debugbar
         active_record: true,
         action_controller: true,
         active_job: true,
+        min_log_level: -1,
         buffer_adapter: :memory,
       }
     end
@@ -32,6 +35,10 @@ module Debugbar
       else
         [Debugbar.config.prefix, "/assets"].any? { |s| env['PATH_INFO'].starts_with? s }
       end
+    end
+
+    def use_logger?
+      @enabled && @min_log_level >= 0
     end
 
     %w(active_record action_controller active_job).each do |name|

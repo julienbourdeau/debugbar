@@ -48,6 +48,14 @@ module Debugbar
       app.middleware.insert_after ActionDispatch::RequestId, Debugbar::TrackCurrentRequest
     end
 
+    # initializer 'debugbar.features' do |app|
+    #   pp "USE???", Debugbar.config.min_log_level
+    #   if Debugbar.config.use_logger?
+    #     # require_relative 'loggers/simple_logger'
+    #     app.config.logger = Debugbar::SimpleLogger.new(Debugbar.config.min_log_level)
+    #   end
+    # end
+
     initializer 'debugbar.subscribe' do
       if Debugbar.config.active_record?
         require_relative 'subscribers/active_record'

@@ -7,6 +7,7 @@ module Debugbar
   autoload :Request, "debugbar/request"
   autoload :NullRequest, "debugbar/null_request"
   autoload :RequestBuffer, "debugbar/buffers/request_buffer"
+  autoload :SimpleLogger, "debugbar/loggers/simple_logger"
 
   TIME_FORMAT = "%H:%M:%S.%L"
 

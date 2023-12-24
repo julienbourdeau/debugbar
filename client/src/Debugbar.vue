@@ -7,6 +7,7 @@ import TabButton from "@/components/TabButton.vue"
 import ModelsPanel from "@/components/panels/ModelsPanel.vue"
 import QueriesPanel from "@/components/queries/QueriesPanel.vue"
 import JobsPanel from "@/components/panels/JobsPanel.vue"
+import LogsPanel from "@/components/panels/LogsPanel.vue"
 import DebugPanel from "@/components/panels/DebugPanel.vue"
 import MessagesPanel from "@/components/panels/MessagesPanel.vue"
 
@@ -211,6 +212,7 @@ const setActiveTab = (tab) => {
       <queries-panel v-if="state.activeTab == 'queries'" :current-request="requestsStore.currentRequest" />
       <jobs-panel v-if="state.activeTab == 'jobs'" :jobs="requestsStore.currentRequest?.jobs" />
       <cache-panel v-if="state.activeTab == 'cache'" :cache="requestsStore.currentRequest?.cache" />
+      <logs-panel v-if="state.activeTab == 'logs'" :logs="requestsStore.currentRequest?.logs" />
       <debug-panel
         v-if="state.activeTab == 'debug'"
         :current-request="requestsStore.currentRequest"

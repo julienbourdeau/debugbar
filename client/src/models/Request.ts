@@ -6,6 +6,7 @@ export type BackendRequestData = {
   jobs: Job[]
   messages: Message[]
   cache: Cache[]
+  logs: Log[]
 }
 
 export type RequestMeta = {
@@ -62,6 +63,14 @@ export type Cache = {
   super_operation?: string
 }
 
+export type Log = {
+  time: string
+  severity: number
+  severity_label: string
+  message: string
+  progname: string
+}
+
 export class BackendRequest {
   id: string
   meta: RequestMeta
@@ -70,6 +79,7 @@ export class BackendRequest {
   jobs: Job[]
   messages: Message[]
   cache: Cache[]
+  logs: Log[]
 
   constructor(data: BackendRequestData) {
     this.id = data?.id || "null"
@@ -79,6 +89,7 @@ export class BackendRequest {
     this.jobs = data?.jobs || []
     this.messages = data?.messages || []
     this.cache = data?.cache || []
+    this.logs = data?.logs || []
   }
 
   get modelsCount(): number {
@@ -107,6 +118,10 @@ export class BackendRequest {
     }, []).length
   }
 
+  get logsCount(): number {
+    return this.logs.length
+  }
+
   get pathWithVerb(): string {
     return `${this.meta.method.toUpperCase()} ${this.meta.path}`
   }
@@ -114,8 +129,9 @@ export class BackendRequest {
   get dataForTabs(): { [key: string]: any } {
     return {
       messages: {
-        label: "Messages",
+        label: "Debug",
         count: this.messagesCount,
+        disabled: this.messagesCount === 0,
       },
       models: {
         label: "Models",
@@ -133,13 +149,13 @@ export class BackendRequest {
         label: "Cache",
         count: this.cacheCount,
       },
-      view: {
-        label: "Views",
-        disabled: true,
-      },
+      // view: {
+      //   label: "Views",
+      //   disabled: true,
+      // },
       logs: {
         label: "Logs",
-        disabled: true,
+        // count: this.logsCount,
       },
     }
   }
