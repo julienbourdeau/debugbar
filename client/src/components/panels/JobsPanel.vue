@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Job } from "@/models/Request.ts"
+import Panel from "@/components/panels/Panel.vue"
 
 const props = defineProps<{
   jobs: Job[]
@@ -14,7 +15,7 @@ function formatTs(ts: number) {
 </script>
 
 <template>
-  <div class="p-4">
+  <panel>
     <h2>Jobs</h2>
 
     <table class="my-4 mx-6 divide-y divide-stone-300">
@@ -43,7 +44,7 @@ function formatTs(ts: number) {
         </tr>
       </tbody>
     </table>
-  </div>
+  </panel>
 </template>
 
 <style scoped></style>
