@@ -1,0 +1,160 @@
+{
+  "id": "4b57700c-3457-4611-8853-c077964b11bf",
+  "meta": {
+    "controller": "ApiController",
+    "action": "jobs",
+    "params": {
+      "name": "refresh",
+      "post_id": "4673",
+      "controller": "api",
+      "action": "jobs"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/api/jobs?name=refresh&post_id=4673",
+    "status": 200,
+    "view_runtime": null,
+    "db_runtime": 0.31800009310245514,
+    "duration": 17.790000081062317,
+    "cpu_time": 17.227249999999998,
+    "idle_time": 0.5627500810623189,
+    "allocations": 5248
+  },
+  "models": {
+    "Post": 1
+  },
+  "queries": [
+    {
+      "id": "d7d846aee14d911cec81",
+      "title": "Post Load (0.3ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 4673 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.3,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/jobs/refresh_post_job.rb:5",
+        " `perform'"
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "id": "5031aac8-e9b6-4ac5-9038-40af7df8daca",
+      "class": "RefreshPostJob",
+      "queue": "Inline(default)",
+      "args": [
+        "4673"
+      ],
+      "successfully_enqueued": true,
+      "scheduled_at": null,
+      "logs": [
+        "Enqueued RefreshPostJob (Job ID: 5031aac8-e9b6-4ac5-9038-40af7df8daca) to Inline(default) with arguments: \"4673\"",
+        "/Users/julien.bourdeau/Personal/debugbar/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
+      ]
+    }
+  ],
+  "messages": [
+
+  ],
+  "cache": [
+    {
+      "key": "post:4673",
+      "store": "ActiveSupport::Cache::NullStore",
+      "compress": true,
+      "compress_threshold": 1024,
+      "name": "cache_write.active_support",
+      "transaction_id": "35423ae7e9478ef756bf",
+      "time": "13:11:36.077",
+      "label": "write"
+    }
+  ],
+  "logs": [
+    {
+      "time": "14:54:24.269",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Started GET \"/api/jobs?name=refresh&post_id=4673\" for 127.0.0.1 at 2023-12-24 14:54:24 +0100",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.299",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Processing by ApiController#jobs as */*",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.299",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "  Parameters: {\"name\"=>\"refresh\", \"post_id\"=>\"4673\"}",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.312",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Performing RefreshPostJob (Job ID: 5031aac8-e9b6-4ac5-9038-40af7df8daca) from Inline(default) enqueued at 2023-12-24T13:54:24.300387000Z with arguments: \"4673\"",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.313",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "↳ app/controllers/api_controller.rb:9:in `jobs'",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.315",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  \u001b[1m\u001b[36mPost Load (0.3ms)\u001b[0m  \u001b[1m\u001b[34mSELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 4673 LIMIT 1 /*action='jobs',application='DemoApp',controller='api',job='RefreshPostJob'*/\u001b[0m",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.315",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  ↳ app/jobs/refresh_post_job.rb:5:in `perform'",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.316",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Performed RefreshPostJob (Job ID: 5031aac8-e9b6-4ac5-9038-40af7df8daca) from Inline(default) in 3.51ms",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.316",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "↳ app/controllers/api_controller.rb:9:in `jobs'",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.316",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Enqueued RefreshPostJob (Job ID: 5031aac8-e9b6-4ac5-9038-40af7df8daca) to Inline(default) with arguments: \"4673\"",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.316",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "↳ app/controllers/api_controller.rb:9:in `jobs'",
+      "progname": null
+    },
+    {
+      "time": "14:54:24.316",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Completed 200 OK in 18ms (ActiveRecord: 0.3ms | Allocations: 5248)\n\n",
+      "progname": null
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "id": "9b484484-1add-434e-840f-a796d472ac0f",
+  "meta": {
+    "controller": "DemoController",
+    "action": "jobs",
+    "params": {
+      "controller": "demo",
+      "action": "jobs"
+    },
+    "format": "html",
+    "method": "GET",
+    "path": "/jobs",
+    "status": 200,
+    "view_runtime": 33.53999997489154,
+    "db_runtime": 17.220999929122627,
+    "duration": 637.1390000581741,
+    "cpu_time": 579.557917,
+    "idle_time": 57.58108305817416,
+    "allocations": 1030691
+  },
+  "models": {
+    "Post": 12
+  },
+  "queries": [
+    {
+      "id": "d7d846aee14d911cec81",
+      "title": "Post Load (16.0ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` ORDER BY RAND() LIMIT 12 ",
+      "cached": false,
+      "async": false,
+      "duration": 16.0,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:17",
+        " `jobs'"
+      ]
+    }
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+    {
+      "msg": "before_action",
+      "extra": [
+        {
+          "yolo": true,
+          "callee": null
+        }
+      ]
+    },
+    {
+      "msg": "Rendering navigation",
+      "extra": [
+
+      ]
+    },
+    {
+      "msg": "after_action debug",
+      "extra": [
+        "xxx",
+        {
+          "controller": "demo",
+          "action": "jobs"
+        }
+      ]
+    }
+  ],
+  "cache": [
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::NullStore",
+      "compress": true,
+      "compress_threshold": 1024,
+      "super_operation": "fetch",
+      "hit": false,
+      "name": "cache_read.active_support",
+      "transaction_id": "2a45127b398efed0db06",
+      "time": "12:09:59.320",
+      "label": "read"
+    },
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::NullStore",
+      "compress": true,
+      "compress_threshold": 1024,
+      "name": "cache_generate.active_support",
+      "transaction_id": "2a45127b398efed0db06",
+      "time": "12:09:59.414",
+      "label": "generate"
+    },
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::NullStore",
+      "compress": true,
+      "compress_threshold": 1024,
+      "name": "cache_write.active_support",
+      "transaction_id": "2a45127b398efed0db06",
+      "time": "12:09:59.452",
+      "label": "write"
+    }
+  ],
+  "logs": [
+    {
+      "time": "14:54:20.562",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Started GET \"/jobs\" for 127.0.0.1 at 2023-12-24 14:54:20 +0100",
+      "progname": null
+    },
+    {
+      "time": "14:54:20.616",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Processing by DemoController#jobs as HTML",
+      "progname": null
+    },
+    {
+      "time": "14:54:20.653",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  \u001b[1m\u001b[36mPost Load (16.0ms)\u001b[0m  \u001b[1m\u001b[34mSELECT `posts`.* FROM `posts` ORDER BY RAND() LIMIT 12 /*action='jobs',application='DemoApp',controller='demo'*/\u001b[0m",
+      "progname": null
+    },
+    {
+      "time": "14:54:20.654",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  ↳ app/controllers/demo_controller.rb:17:in `jobs'",
+      "progname": null
+    },
+    {
+      "time": "14:54:21.223",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  Rendering layout layouts/application.html.erb",
+      "progname": null
+    },
+    {
+      "time": "14:54:21.223",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  Rendering demo/jobs.html.erb within layouts/application",
+      "progname": null
+    },
+    {
+      "time": "14:54:21.225",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "  Rendered demo/jobs.html.erb within layouts/application (Duration: 1.5ms | Allocations: 1133)",
+      "progname": null
+    },
+    {
+      "time": "14:54:21.253",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "  Rendered layout layouts/application.html.erb (Duration: 30.1ms | Allocations: 40592)",
+      "progname": null
+    },
+    {
+      "time": "14:54:21.253",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Completed 200 OK in 637ms (Views: 33.5ms | ActiveRecord: 17.2ms | Allocations: 1030691)\n\n",
+      "progname": null
+    }
+  ]
+}

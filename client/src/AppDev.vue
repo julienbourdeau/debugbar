@@ -6,7 +6,6 @@ import { BackendRequestData } from "@/models/Request.ts"
 
 onMounted(() => {
   if (import.meta.env.DEV && import.meta.env.VITE_LOAD_FIXTURES) {
-    console.log(`Loading fixtures in "../../fixtures/requests/*.json"`)
     const requests = import.meta.glob("../../fixtures/requests/*.json", { eager: true })
     const lastId = useRequestsStore()
       .addRequests(Object.values(requests) as BackendRequestData[])

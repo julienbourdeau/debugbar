@@ -1,0 +1,184 @@
+{
+  "id": "9e3571b2-5ba5-454d-af00-33953b90d57c",
+  "meta": {
+    "controller": "ApiController",
+    "action": "add_reaction",
+    "params": {
+      "name": "up",
+      "post_id": "4731",
+      "controller": "api",
+      "action": "add_reaction"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/api/add_reaction?name=up&post_id=4731",
+    "status": 200,
+    "view_runtime": null,
+    "db_runtime": 14.140999992378056,
+    "duration": 20.49899995326996,
+    "cpu_time": 6.449792000000002,
+    "idle_time": 14.049207953269956,
+    "allocations": 7416
+  },
+  "models": {
+    "Reaction": 1,
+    "Post": 1
+  },
+  "queries": [
+    {
+      "id": "d7d846aee14d911cec81",
+      "title": "TRANSACTION (0.1ms)",
+      "name": "TRANSACTION",
+      "sql": "BEGIN ",
+      "cached": false,
+      "async": false,
+      "duration": 0.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/api_controller.rb:17",
+        " `add_reaction'"
+      ]
+    },
+    {
+      "id": "d7d846aee14d911cec81",
+      "title": "Post Load (0.3ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 4731 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.3,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/api_controller.rb:17",
+        " `add_reaction'"
+      ]
+    },
+    {
+      "id": "d7d846aee14d911cec81",
+      "title": "Reaction Create (12.6ms)",
+      "name": "Reaction Create",
+      "sql": "INSERT INTO `reactions` (`post_id`, `name`) VALUES (4731, 'up') ",
+      "cached": false,
+      "async": false,
+      "duration": 12.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/api_controller.rb:17",
+        " `add_reaction'"
+      ]
+    },
+    {
+      "id": "d7d846aee14d911cec81",
+      "title": "TRANSACTION (1.1ms)",
+      "name": "TRANSACTION",
+      "sql": "COMMIT ",
+      "cached": false,
+      "async": false,
+      "duration": 1.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/api_controller.rb:17",
+        " `add_reaction'"
+      ]
+    }
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+
+  ],
+  "cache": [
+
+  ],
+  "logs": [
+    {
+      "time": "14:54:32.720",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Started GET \"/api/add_reaction?name=up&post_id=4731\" for 127.0.0.1 at 2023-12-24 14:54:32 +0100",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.744",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Processing by ApiController#add_reaction as */*",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.744",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "  Parameters: {\"name\"=>\"up\", \"post_id\"=>\"4731\"}",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.746",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  \u001b[1m\u001b[36mTRANSACTION (0.1ms)\u001b[0m  \u001b[1m\u001b[35mBEGIN /*action='add_reaction',application='DemoApp',controller='api'*/\u001b[0m",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.747",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  ↳ app/controllers/api_controller.rb:17:in `add_reaction'",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.748",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  \u001b[1m\u001b[36mPost Load (0.3ms)\u001b[0m  \u001b[1m\u001b[34mSELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 4731 LIMIT 1 /*action='add_reaction',application='DemoApp',controller='api'*/\u001b[0m",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.748",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  ↳ app/controllers/api_controller.rb:17:in `add_reaction'",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.762",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  \u001b[1m\u001b[36mReaction Create (12.6ms)\u001b[0m  \u001b[1m\u001b[32mINSERT INTO `reactions` (`post_id`, `name`) VALUES (4731, 'up') /*action='add_reaction',application='DemoApp',controller='api'*/\u001b[0m",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.763",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  ↳ app/controllers/api_controller.rb:17:in `add_reaction'",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.765",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  \u001b[1m\u001b[36mTRANSACTION (1.1ms)\u001b[0m  \u001b[1m\u001b[35mCOMMIT /*action='add_reaction',application='DemoApp',controller='api'*/\u001b[0m",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.765",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  ↳ app/controllers/api_controller.rb:17:in `add_reaction'",
+      "progname": null
+    },
+    {
+      "time": "14:54:32.765",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Completed 200 OK in 20ms (ActiveRecord: 14.1ms | Allocations: 7416)\n\n",
+      "progname": null
+    }
+  ]
+}

@@ -64,8 +64,8 @@ module Debugbar
 
       if Debugbar.config.action_controller?
         require_relative 'subscribers/action_controller'
-        subscribe "Debugbar::ActionControllerEventSubscriber" => [
-          "start_processing.action_controller", "process_action.action_controller"
+        subscribe "Debugbar::ActionControllerEventSubscriber" => %w[
+          start_processing.action_controller process_action.action_controller
         ]
       end
 

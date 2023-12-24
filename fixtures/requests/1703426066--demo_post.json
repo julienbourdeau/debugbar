@@ -1,0 +1,269 @@
+{
+  "id": "44171240-287a-4564-be2e-94ca99dc8caf",
+  "meta": {
+    "controller": "DemoController",
+    "action": "post",
+    "params": {
+      "controller": "demo",
+      "action": "post",
+      "id": "4731"
+    },
+    "format": "html",
+    "method": "GET",
+    "path": "/post/4731",
+    "status": 200,
+    "view_runtime": 4.108000081032515,
+    "db_runtime": 3.136000013910234,
+    "duration": 19.57199990749359,
+    "cpu_time": 15.671832999999992,
+    "idle_time": 3.900166907493599,
+    "allocations": 18401
+  },
+  "models": {
+    "Post": 1,
+    "PostAuthor": 9,
+    "Author": 9,
+    "Reaction": 196
+  },
+  "queries": [
+    {
+      "id": "d7d846aee14d911cec81",
+      "title": "Post Load (0.3ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 4731 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.3,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:8",
+        " `post'"
+      ]
+    },
+    {
+      "id": "d7d846aee14d911cec81",
+      "title": "PostAuthor Load (0.4ms)",
+      "name": "PostAuthor Load",
+      "sql": "SELECT `post_authors`.* FROM `post_authors` WHERE `post_authors`.`post_id` = 4731 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.4,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:8",
+        " `post'"
+      ]
+    },
+    {
+      "id": "d7d846aee14d911cec81",
+      "title": "Author Load (0.3ms)",
+      "name": "Author Load",
+      "sql": "SELECT `authors`.* FROM `authors` WHERE `authors`.`id` IN (137, 1407, 326, 1428, 572, 1155, 595, 1344, 891) ",
+      "cached": false,
+      "async": false,
+      "duration": 0.3,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:8",
+        " `post'"
+      ]
+    },
+    {
+      "id": "d7d846aee14d911cec81",
+      "title": "Reaction Load (2.1ms)",
+      "name": "Reaction Load",
+      "sql": "SELECT `reactions`.* FROM `reactions` WHERE `reactions`.`post_id` = 4731 ",
+      "cached": false,
+      "async": false,
+      "duration": 2.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:8",
+        " `post'"
+      ]
+    }
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+    {
+      "msg": "before_action",
+      "extra": [
+        {
+          "yolo": true,
+          "callee": null
+        }
+      ]
+    },
+    {
+      "msg": "Rendering navigation",
+      "extra": [
+
+      ]
+    },
+    {
+      "msg": "after_action debug",
+      "extra": [
+        "xxx",
+        {
+          "controller": "demo",
+          "action": "post",
+          "id": "4731"
+        }
+      ]
+    }
+  ],
+  "cache": [
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::NullStore",
+      "compress": true,
+      "compress_threshold": 1024,
+      "super_operation": "fetch",
+      "hit": false,
+      "name": "cache_read.active_support",
+      "transaction_id": "35423ae7e9478ef756bf",
+      "time": "13:50:58.447",
+      "label": "read"
+    },
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::NullStore",
+      "compress": true,
+      "compress_threshold": 1024,
+      "name": "cache_generate.active_support",
+      "transaction_id": "35423ae7e9478ef756bf",
+      "time": "13:50:58.511",
+      "label": "generate"
+    },
+    {
+      "key": "yolo_cache",
+      "store": "ActiveSupport::Cache::NullStore",
+      "compress": true,
+      "compress_threshold": 1024,
+      "name": "cache_write.active_support",
+      "transaction_id": "35423ae7e9478ef756bf",
+      "time": "13:50:58.537",
+      "label": "write"
+    }
+  ],
+  "logs": [
+    {
+      "time": "14:54:26.666",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Started GET \"/post/4731\" for 127.0.0.1 at 2023-12-24 14:54:26 +0100",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.677",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Processing by DemoController#post as HTML",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.677",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "  Parameters: {\"id\"=>\"4731\"}",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.679",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  \u001b[1m\u001b[36mPost Load (0.3ms)\u001b[0m  \u001b[1m\u001b[34mSELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 4731 LIMIT 1 /*action='post',application='DemoApp',controller='demo'*/\u001b[0m",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.679",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  ↳ app/controllers/demo_controller.rb:8:in `post'",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.681",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  \u001b[1m\u001b[36mPostAuthor Load (0.4ms)\u001b[0m  \u001b[1m\u001b[34mSELECT `post_authors`.* FROM `post_authors` WHERE `post_authors`.`post_id` = 4731 /*action='post',application='DemoApp',controller='demo'*/\u001b[0m",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.681",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  ↳ app/controllers/demo_controller.rb:8:in `post'",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.683",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  \u001b[1m\u001b[36mAuthor Load (0.3ms)\u001b[0m  \u001b[1m\u001b[34mSELECT `authors`.* FROM `authors` WHERE `authors`.`id` IN (137, 1407, 326, 1428, 572, 1155, 595, 1344, 891) /*action='post',application='DemoApp',controller='demo'*/\u001b[0m",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.683",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  ↳ app/controllers/demo_controller.rb:8:in `post'",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.687",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  \u001b[1m\u001b[36mReaction Load (2.1ms)\u001b[0m  \u001b[1m\u001b[34mSELECT `reactions`.* FROM `reactions` WHERE `reactions`.`post_id` = 4731 /*action='post',application='DemoApp',controller='demo'*/\u001b[0m",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.687",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  ↳ app/controllers/demo_controller.rb:8:in `post'",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.693",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  Rendering layout layouts/application.html.erb",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.693",
+      "severity": 0,
+      "severity_label": "DEBUG",
+      "message": "  Rendering demo/post.html.erb within layouts/application",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.694",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "  Rendered demo/post.html.erb within layouts/application (Duration: 1.1ms | Allocations: 1220)",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.697",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "  Rendered layout layouts/application.html.erb (Duration: 3.8ms | Allocations: 4202)",
+      "progname": null
+    },
+    {
+      "time": "14:54:26.697",
+      "severity": 1,
+      "severity_label": "INFO",
+      "message": "Completed 200 OK in 20ms (Views: 4.1ms | ActiveRecord: 3.1ms | Allocations: 18401)\n\n",
+      "progname": null
+    }
+  ]
+}
