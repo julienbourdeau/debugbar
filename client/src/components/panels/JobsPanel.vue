@@ -16,9 +16,11 @@ function formatTs(ts: number) {
 
 <template>
   <panel>
-    <h2>Jobs</h2>
+    <div v-if="props.jobs.length == 0">
+      <div class="text-gray-500">No jobs enqueued.</div>
+    </div>
 
-    <table class="my-4 mx-6 divide-y divide-stone-300">
+    <table v-if="props.jobs.length > 0" class="my-4 mx-6 divide-y divide-stone-300">
       <thead>
         <tr>
           <th scope="col" class="w-36 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-stone-900 sm:pl-0">Job</th>

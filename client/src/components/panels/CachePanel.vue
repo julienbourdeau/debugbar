@@ -10,7 +10,7 @@ const props = defineProps<{
 <template>
   <panel>
     <div v-if="props.cache.length == 0">
-      <div class="text-gray-500">It seems that Cache wasn't used.</div>
+      <div class="text-gray-500">No cache used.</div>
     </div>
 
     <div class="space-y-3">

@@ -131,7 +131,6 @@ export class BackendRequest {
       messages: {
         label: "Debug",
         count: this.messagesCount,
-        disabled: this.messagesCount === 0,
       },
       models: {
         label: "Models",

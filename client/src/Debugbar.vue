@@ -31,6 +31,10 @@ const isActive = computed(() => {
   return state.activeTab != ""
 })
 
+const devMode = computed(() => {
+  return import.meta.env.DEV
+})
+
 const routeAlias = computed(() => {
   return requestsStore.currentRequest?.meta.params.controller + "#" + requestsStore.currentRequest?.meta.params.action
 })
@@ -119,9 +123,9 @@ const setActiveTab = (tab) => {
   </div>
 
   <div v-if="!state.minimized && requestsStore.currentRequest == null" class="z-[9999] fixed left-0 bottom-0 w-full">
-    <div class="h-1 bg-red-rails cursor-row-resize" />
+    <div class="h-0.5 bg-red-700 cursor-row-resize" />
     <div class="flex items-center justify-between bg-stone-100 border-b border-stone-200">
-      <div class="px-5 py-2 italic">No request yet</div>
+      <div class="px-5 py-1.5 italic">No request yet</div>
       <div class="px-3">
         <button @click="state.minimized = true" title="Hide in the corner">
           <arrow-down-left-icon class="size-4" />
@@ -131,7 +135,7 @@ const setActiveTab = (tab) => {
   </div>
 
   <div v-if="!state.minimized && requestsStore.currentRequest" class="z-[9999] fixed left-0 bottom-0 w-full">
-    <div id="drag" @mousedown="state.isResizing = true" class="h-1 bg-red-700 cursor-row-resize" />
+    <div id="draggable-bar" @mousedown="state.isResizing = true" class="h-0.5 bg-red-700 cursor-row-resize" />
 
     <div
       id="debubgbar-header"
@@ -151,12 +155,13 @@ const setActiveTab = (tab) => {
             :label="v.label"
             :count="v?.count"
             :is-active="k === state.activeTab"
-            :disabled="v.disabled"
+            :disabled="v.count == 0"
             @click="setActiveTab(k)"
             >{{ v.label }}</tab-button
           >
 
           <button
+            v-if="devMode"
             @click="setActiveTab('debug')"
             class="px-3 py-1.5 text-stone-600"
             :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
@@ -175,6 +180,7 @@ const setActiveTab = (tab) => {
           <span class="text-sm font-bold" v-if="requestsStore.currentRequest.meta.duration"
             >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
           >
+
           <span
             class="px-1 py-0.5 rounded text-xs"
             :class="{
@@ -234,7 +240,7 @@ const setActiveTab = (tab) => {
       <cache-panel v-if="state.activeTab == 'cache'" :cache="requestsStore.currentRequest?.cache" />
       <logs-panel v-if="state.activeTab == 'logs'" :logs="requestsStore.currentRequest?.logs" />
       <debug-panel
-        v-if="state.activeTab == 'debug'"
+        v-if="devMode && state.activeTab == 'debug'"
         :current-request="requestsStore.currentRequest"
         class="px-3 py-2"
       />
