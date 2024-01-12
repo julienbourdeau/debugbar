@@ -14,6 +14,7 @@ import MessagesPanel from "@/components/panels/MessagesPanel.vue"
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import { useConfigStore } from "@/stores/configStore.ts"
 import CachePanel from "@/components/panels/CachePanel.vue"
+import RequestPanel from "@/components/panels/RequestPanel.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -174,9 +175,10 @@ const setActiveTab = (tab) => {
       <!--  Right  -->
       <div class="flex items-center space-x-2.5 pr-1">
         <div class="flex space-x-2">
-          <span class="text-sm text-stone-600 font-medium tracking-wide">
+          <button @click="setActiveTab('request')" class="text-sm text-stone-600 font-medium tracking-wide">
             {{ routeAlias }}
-          </span>
+          </button>
+
           <span class="text-sm font-bold" v-if="requestsStore.currentRequest.meta.duration"
             >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
           >
@@ -233,6 +235,7 @@ const setActiveTab = (tab) => {
       v-if="state.activeTab != ''"
       :style="`height: ${state.height}px`"
     >
+      <request-panel v-if="state.activeTab == 'request'" :request="requestsStore.currentRequest" />
       <messages-panel v-if="state.activeTab == 'messages'" :messages="requestsStore.currentRequest?.messages" />
       <models-panel v-if="state.activeTab == 'models'" :models="requestsStore.currentRequest?.models" />
       <queries-panel v-if="state.activeTab == 'queries'" :current-request="requestsStore.currentRequest" />
