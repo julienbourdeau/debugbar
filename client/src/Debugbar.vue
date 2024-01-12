@@ -31,37 +31,50 @@ const isActive = computed(() => {
   return state.activeTab != ""
 })
 
-const consumer = createConsumer(configStore.config.actionCableUrl)
-const debugbarChannel = consumer.subscriptions.create(
-  { channel: configStore.config.options.channelName },
-  {
-    connected() {
-      console.log("🟢 Connected to channel")
-      debugbarChannel.send({ ids: [] })
-    },
+const routeAlias = computed(() => {
+  return requestsStore.currentRequest?.meta.params.controller + "#" + requestsStore.currentRequest?.meta.params.action
+})
 
-    disconnected() {
-      console.log("🔴 Disconnected from channel")
-    },
-    received(data) {
-      if (data.length == 0) {
-        return
-      }
+let debugbarChannel
 
-      // console.log("Received: " + data.length + " request(s)")
+if (configStore.config.mode == "ws") {
+  debugbarChannel = createConsumer(configStore.config.actionCableUrl).subscriptions.create(
+    { channel: configStore.config.channelName },
+    {
+      connected() {
+        console.log("🟢 Connected to channel")
+        debugbarChannel.send({ ids: [] })
+      },
 
-      const ids = requestsStore.addRequests(data)
+      disconnected() {
+        console.log("🔴 Disconnected from channel")
+      },
+      received(data) {
+        if (data.length == 0) {
+          return
+        }
 
-      if (!isActive.value) {
-        requestsStore.setCurrentRequestById(ids[ids.length - 1])
-      }
+        const ids = requestsStore.addRequests(data)
 
-      setTimeout(() => {
-        debugbarChannel.send({ ids: ids })
-      }, 50)
+        if (!isActive.value) {
+          requestsStore.setCurrentRequestById(ids[ids.length - 1])
+        }
+
+        setTimeout(() => {
+          debugbarChannel.send({ ids: ids })
+        }, 50)
+      },
+    }
+  )
+} else {
+  console.log(`Using debugbar in "offline mode", ideal for demoing with fixtures.`)
+  debugbarChannel = {
+    send: (data) => {
+      // No-op
+      console.log("Ignoring `send` call", data)
     },
   }
-)
+}
 
 const clearRequests = () => {
   console.log("Clearing requests")
@@ -101,15 +114,19 @@ const setActiveTab = (tab) => {
     class="z-[9999] fixed left-0 bottom-0 bg-transparent cursor-pointer"
   >
     <div class="p-1 pt-1.5">
-      <img class="h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
+      <img class="h-5" src="./assets/ruby-logo.svg" alt="Logo" />
     </div>
   </div>
 
   <div v-if="!state.minimized && requestsStore.currentRequest == null" class="z-[9999] fixed left-0 bottom-0 w-full">
     <div class="h-1 bg-red-rails cursor-row-resize" />
-    <div class="flex items-center justify-between font-mono bg-stone-100 border-b border-stone-200">
-      <div class="px-5">No request yet</div>
-      <div><button v-if="!isActive" class="px-2 py-1.5" @click="state.minimized = true">Mini</button></div>
+    <div class="flex items-center justify-between bg-stone-100 border-b border-stone-200">
+      <div class="px-5 py-2 italic">No request yet</div>
+      <div class="px-3">
+        <button @click="state.minimized = true" title="Hide in the corner">
+          <arrow-down-left-icon class="size-4" />
+        </button>
+      </div>
     </div>
   </div>
 
@@ -150,8 +167,11 @@ const setActiveTab = (tab) => {
       </div>
 
       <!--  Right  -->
-      <div class="flex items-center space-x-2 pr-1">
-        <div class="flex space-x-1.5">
+      <div class="flex items-center space-x-2.5 pr-1">
+        <div class="flex space-x-2">
+          <span class="text-sm text-stone-600 font-medium tracking-wide">
+            {{ routeAlias }}
+          </span>
           <span class="text-sm font-bold" v-if="requestsStore.currentRequest.meta.duration"
             >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
           >

@@ -39,8 +39,8 @@ module Debugbar
       manifest_file = File.join(Gem.loaded_specs['debugbar'].full_gem_path, 'client', 'dist', '.vite', 'manifest.json')
       manifest = JSON.parse(File.read(manifest_file))
 
-      Assets.js = manifest['index.html']['file']
-      Assets.css = manifest['index.html']['css'].first
+      Assets.js = manifest['src/main.ts']['file']
+      Assets.css = manifest['src/main.ts']['css'].first
     end
 
     initializer 'debugbar.inject_middlewares' do |app|

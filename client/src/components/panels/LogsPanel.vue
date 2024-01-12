@@ -24,7 +24,7 @@ function message(log: Log): string {
         <span
           class="px-1 py-0.5 rounded text-white text-xs font-mono font-medium"
           :class="{
-            'bg-slate-400': log.severity == 0,
+            'bg-stone-400': log.severity == 0,
             'bg-blue-500': log.severity == 1,
             'bg-amber-400': log.severity == 2,
             'bg-red-400': log.severity == 2,

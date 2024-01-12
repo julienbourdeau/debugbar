@@ -33,7 +33,7 @@ module Debugbar
       if ignore_request.is_a? Proc
         ignore_request.call(env)
       else
-        [Debugbar.config.prefix, "/assets"].any? { |s| env['PATH_INFO'].starts_with? s }
+        [Debugbar.config.prefix, "/assets"].any? { |s| env['PATH_INFO'].start_with? s }
       end
     end
 

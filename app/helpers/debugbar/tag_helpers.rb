@@ -16,7 +16,7 @@ module Debugbar::TagHelpers
 
     html += <<-HTML
       <script type="module">
-        import sheet from '#{Debugbar.config.prefix}/assets/style' assert { type: 'css' };
+        import sheet from '#{Debugbar.config.prefix}/assets/style' assert { type: 'css' }
         const debugbar = document.getElementById('__debugbar-shadow-root')
         debugbar.shadowRoot.adoptedStyleSheets = [sheet];
       </script>

@@ -1,6 +1,7 @@
 import defaultsDeep from "lodash/defaultsDeep"
 
 export type DebugbarConfigOptions = {
+  mode: "ws" | "off"
   cable: {
     url: string
     prefix: string
@@ -8,26 +9,17 @@ export type DebugbarConfigOptions = {
   channelName: string
 }
 
-export class DebugbarConfig {
-  readonly options: DebugbarConfigOptions
+export function newDebugbarConfig(options: DebugbarConfigOptions) {
+  const obj = defaultsDeep(options, {
+    mode: "ws",
+    cable: {
+      url: "ws://127.0.0.1:3000",
+      prefix: "/_debugbar",
+    },
+    channelName: "Debugbar::DebugbarChannel",
+  } as DebugbarConfigOptions)
 
-  constructor(options: DebugbarConfigOptions) {
-    this.options = defaultsDeep(options, this.defaultOptions)
-  }
+  obj.actionCableUrl = `${obj.cable.url}${obj.cable.prefix}/cable`
 
-  get defaultOptions(): DebugbarConfigOptions {
-    return {
-      cable: {
-        url: "ws://127.0.0.1:3000",
-        prefix: "/_debugbar",
-      },
-      channelName: "Debugbar::DebugbarChannel",
-    }
-  }
-
-  get actionCableUrl(): string {
-    const { url, prefix } = this.options.cable
-
-    return `${url}${prefix}/cable`
-  }
+  return obj
 }
