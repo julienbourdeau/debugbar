@@ -7,6 +7,7 @@ export type DebugbarConfigOptions = {
     prefix: string
   }
   channelName: string
+  height: number
 }
 
 export function newDebugbarConfig(options: DebugbarConfigOptions) {
@@ -17,6 +18,7 @@ export function newDebugbarConfig(options: DebugbarConfigOptions) {
       prefix: "/_debugbar",
     },
     channelName: "Debugbar::DebugbarChannel",
+    height: 360,
   } as DebugbarConfigOptions)
 
   obj.actionCableUrl = `${obj.cable.url}${obj.cable.prefix}/cable`

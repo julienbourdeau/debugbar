@@ -25,7 +25,7 @@ const state = reactive({
   activeTab: "",
   minimized: false,
   isResizing: false,
-  height: 300,
+  height: configStore.config.height,
 })
 
 const isActive = computed(() => {
