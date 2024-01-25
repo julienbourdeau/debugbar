@@ -148,14 +148,17 @@ export class BackendRequest {
         label: "Cache",
         count: this.cacheCount,
       },
+
       // view: {
       //   label: "Views",
       //   disabled: true,
       // },
-      logs: {
-        label: "Logs",
-        // count: this.logsCount,
-      },
+
+      // DISABLED UNTIL I CAN FIX IT
+      // logs: {
+      //   label: "Logs",
+      //   // count: this.logsCount,
+      // },
     }
   }
 }

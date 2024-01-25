@@ -237,7 +237,11 @@ const setActiveTab = (tab) => {
     >
       <request-panel v-if="state.activeTab == 'request'" :request="requestsStore.currentRequest" />
       <messages-panel v-if="state.activeTab == 'messages'" :messages="requestsStore.currentRequest?.messages" />
-      <models-panel v-if="state.activeTab == 'models'" :models="requestsStore.currentRequest?.models" />
+      <models-panel
+        v-if="state.activeTab == 'models'"
+        :models="requestsStore.currentRequest?.models"
+        :count="requestsStore.currentRequest?.modelsCount"
+      />
       <queries-panel v-if="state.activeTab == 'queries'" :current-request="requestsStore.currentRequest" />
       <jobs-panel v-if="state.activeTab == 'jobs'" :jobs="requestsStore.currentRequest?.jobs" />
       <cache-panel v-if="state.activeTab == 'cache'" :cache="requestsStore.currentRequest?.cache" />

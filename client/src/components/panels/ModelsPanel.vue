@@ -2,13 +2,18 @@
 import Panel from "@/components/panels/Panel.vue"
 
 const props = defineProps<{
-  models: { [key: string]: Number }
+  models: { [key: string]: number }
+  count: number
 }>()
 </script>
 
 <template>
   <panel>
-    <table class="divide-y divide-stone-300">
+    <div v-if="props.count == 0">
+      <div class="text-gray-500">No models were initialized.</div>
+    </div>
+
+    <table v-if="props.count > 0" class="divide-y divide-stone-300">
       <thead>
         <tr>
           <th scope="col" class="w-36 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-stone-900 sm:pl-0">

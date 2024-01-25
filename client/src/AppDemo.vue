@@ -9,10 +9,9 @@ onMounted(() => {
   console.log(`Using debugbar in DEMO mode`)
 
   const requests = import.meta.glob("../../fixtures/requests/*.json", { eager: true })
-  const lastId = useRequestsStore()
-    .addRequests(Object.values(requests) as BackendRequestData[])
-    .pop()
-  useRequestsStore().setCurrentRequestById(lastId)
+  const firstId = useRequestsStore().addRequests(Object.values(requests) as BackendRequestData[])[0]
+
+  useRequestsStore().setCurrentRequestById(firstId)
 })
 </script>
 
