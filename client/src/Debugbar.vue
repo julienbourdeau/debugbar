@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { createConsumer } from "@rails/actioncable"
 import { computed, onMounted, reactive, ref } from "vue"
-import { PaperClipIcon, XCircleIcon, ArrowDownLeftIcon, TrashIcon } from "@heroicons/vue/16/solid"
+import { CodeBracketIcon, XCircleIcon, ArrowDownLeftIcon, TrashIcon } from "@heroicons/vue/16/solid"
 
 import TabButton from "@/components/TabButton.vue"
 import ModelsPanel from "@/components/panels/ModelsPanel.vue"
 import QueriesPanel from "@/components/queries/QueriesPanel.vue"
 import JobsPanel from "@/components/panels/JobsPanel.vue"
 import LogsPanel from "@/components/panels/LogsPanel.vue"
-import DebugPanel from "@/components/panels/DebugPanel.vue"
 import MessagesPanel from "@/components/panels/MessagesPanel.vue"
 
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import { useConfigStore } from "@/stores/configStore.ts"
 import CachePanel from "@/components/panels/CachePanel.vue"
 import RequestPanel from "@/components/panels/RequestPanel.vue"
+import JsonPanel from "@/components/panels/JsonPanel.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -90,6 +90,12 @@ const clearRequests = () => {
 
 // Resizing the debugbar
 onMounted(() => {
+  window.onresize = function () {
+    if (window.innerHeight < state.height) {
+      state.height = window.innerHeight - header.value.clientHeight
+    }
+  }
+
   document.onmousemove = function (e) {
     if (!state.isResizing) {
       return
@@ -105,8 +111,11 @@ onMounted(() => {
 
 const setActiveTab = (tab) => {
   if (state.activeTab == tab) {
-    state.activeTab = ""
+    state.activeTab = "" // Close if you click on active tab
   } else {
+    if (window.innerHeight < state.height) {
+      state.height = window.innerHeight - header.value.clientHeight * 2
+    }
     state.activeTab = tab
   }
 }
@@ -167,20 +176,30 @@ const setActiveTab = (tab) => {
             class="px-3 py-1.5 text-stone-600"
             :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
           >
-            <PaperClipIcon class="size-4" />
+            <CodeBracketIcon class="size-4" />
           </button>
         </div>
       </div>
 
       <!--  Right  -->
       <div class="flex items-center space-x-2.5 pr-1">
-        <div class="flex space-x-2">
-          <button @click="setActiveTab('request')" class="text-sm text-stone-600 font-medium tracking-wide">
+        <div @click="setActiveTab('request')" class="flex space-x-2 cursor-pointer">
+          <span class="text-sm text-stone-600 font-medium tracking-wide">
             {{ routeAlias }}
-          </button>
+          </span>
 
-          <span class="text-sm font-bold" v-if="requestsStore.currentRequest.meta.duration"
+          <span
+            class="text-sm font-bold"
+            v-if="requestsStore.currentRequest.meta.duration < 1000"
+            :class="{
+              'text-orange-600': requestsStore.currentRequest.meta.duration >= 800,
+            }"
             >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
+          >
+          <span
+            class="text-sm font-bold text-red-600 bg-red-100 px-1 rounded"
+            v-if="requestsStore.currentRequest.meta.duration >= 1000"
+            >{{ (requestsStore.currentRequest.meta.duration / 1000).toFixed(2) }}s</span
           >
 
           <span
@@ -246,7 +265,7 @@ const setActiveTab = (tab) => {
       <jobs-panel v-if="state.activeTab == 'jobs'" :jobs="requestsStore.currentRequest?.jobs" />
       <cache-panel v-if="state.activeTab == 'cache'" :cache="requestsStore.currentRequest?.cache" />
       <logs-panel v-if="state.activeTab == 'logs'" :logs="requestsStore.currentRequest?.logs" />
-      <debug-panel
+      <json-panel
         v-if="devMode && state.activeTab == 'debug'"
         :current-request="requestsStore.currentRequest"
         class="px-3 py-2"

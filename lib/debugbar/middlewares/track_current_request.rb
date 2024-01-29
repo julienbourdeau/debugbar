@@ -17,7 +17,7 @@ module Debugbar
       res = @app.call(env)
 
       # TODO: Remove this if meta
-      if Debugbar::Current.request.meta
+      if Debugbar::Current.request&.meta
         # File.open(Rails.root.join('_requests', "#{Time.now.to_i}--#{Debugbar::Current.request.meta.dig(:params, :controller)}_#{Debugbar::Current.request.meta.dig(:params, :action)}.json"), "w") do |f|
         #   f.write(Debugbar::Current.request.to_json)
         # end

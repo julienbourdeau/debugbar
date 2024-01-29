@@ -1,9 +1,9 @@
 module Debugbar
   class Request
-    attr_reader :request_id, :models, :queries, :jobs,
-                :meta, :request, :response,
+    attr_reader :request_id, :meta,
+                :models, :queries, :jobs,
                 :messages, :cache, :logs
-    attr_writer :request, :response
+    attr_accessor :request, :response, :headers
 
     def initialize(request_id)
       @request_id = request_id
@@ -56,6 +56,8 @@ module Debugbar
       {
         id: request_id,
         meta: meta,
+        request: request_hash,
+        response: response_hash,
         models: models,
         queries: queries,
         jobs: jobs,
@@ -67,6 +69,29 @@ module Debugbar
 
     def to_json
       JSON.pretty_generate(to_h)
+    end
+
+    private
+
+    def request_hash
+      {
+        method: request.method,
+        path: request.path,
+        format: meta[:format],
+        params: meta[:params],
+        headers: request.env.select { |k,v| k.start_with? 'HTTP_'} # https://stackoverflow.com/a/55406700/1001125
+                        .transform_keys { |k| k.sub(/^HTTP_/, '').split('_').map(&:capitalize).join('-') }
+                        .sort.to_h
+      }
+    end
+
+    def response_hash
+      return {}
+      {
+        status: response.status,
+        headers: response.headers.to_h.transform_keys { |s| s.split('-').map(&:capitalize).join('-') },
+        body: response.body,
+      }
     end
   end
 end

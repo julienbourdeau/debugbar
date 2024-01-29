@@ -8,7 +8,7 @@ module Debugbar
 
     def initialize(options = {})
       opt = defaults.merge options
-      @enabled = opt[:enabled]
+      @enabled = opt[:enabled] && !defined?(Rails::Console)
       @prefix = opt[:prefix]
       @active_record = opt[:active_record]
       @action_controller = opt[:action_controller]

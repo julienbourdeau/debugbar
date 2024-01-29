@@ -12,8 +12,8 @@ module Debugbar
 
         meta = event.payload
 
-        meta.delete :request
         meta.delete :headers
+        request = meta.delete :request
         response = meta.delete :response
 
         meta.merge!({
@@ -23,8 +23,10 @@ module Debugbar
           allocations: event.allocations,
         })
 
+        Current.request.request = request
         Current.request.response = response
         Current.request.meta = meta
+
       end
     end
   end

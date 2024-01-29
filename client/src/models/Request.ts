@@ -1,6 +1,7 @@
 export type BackendRequestData = {
   id: string
   meta: RequestMeta
+  request: { [key: string]: any }
   models: { [key: string]: number }
   queries: Query[]
   jobs: Job[]
@@ -74,6 +75,7 @@ export type Log = {
 export class BackendRequest {
   id: string
   meta: RequestMeta
+  request: { [key: string]: any }
   models: { [key: string]: number }
   queries: Query[]
   jobs: Job[]
@@ -82,8 +84,13 @@ export class BackendRequest {
   logs: Log[]
 
   constructor(data: BackendRequestData) {
+    if (import.meta.env.DEV) {
+      console.log(data)
+    }
+
     this.id = data?.id || "null"
     this.meta = data?.meta || ({} as unknown as RequestMeta) // LOL
+    this.request = data?.request || {}
     this.models = data?.models || {}
     this.queries = data?.queries || []
     this.jobs = data?.jobs || []
