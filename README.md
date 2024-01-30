@@ -1,3 +1,5 @@
 # Debugbar for Rails
 
-![debugbar screesnhot](https://debugbar.dev/assets/images/debugbar-hero-2.png)
+Find all documentation on [debugbar.dev](https://debugbar.dev/)
+
+[![debugbar screesnhot](https://debugbar.dev/assets/screenshots/home.png)](https://debugbar.dev/docs/)
