@@ -19,7 +19,7 @@ module Debugbar
 
     def defaults
       {
-        enabled: false,
+        enabled: Rails.env.development?,
         prefix: "/_debugbar",
         active_record: true,
         action_controller: true,

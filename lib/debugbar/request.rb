@@ -86,7 +86,8 @@ module Debugbar
     end
 
     def response_hash
-      return {}
+      return nil if response.nil?
+
       {
         status: response.status,
         headers: response.headers.to_h.transform_keys { |s| s.split('-').map(&:capitalize).join('-') },

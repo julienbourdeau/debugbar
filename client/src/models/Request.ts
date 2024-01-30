@@ -1,7 +1,8 @@
 export type BackendRequestData = {
   id: string
   meta: RequestMeta
-  request: { [key: string]: any }
+  request: RequestRequest
+  response: RequestResponse
   models: { [key: string]: number }
   queries: Query[]
   jobs: Job[]
@@ -25,6 +26,22 @@ export type RequestMeta = {
   idle_time: number
   allocations: number
 }
+
+export type RequestRequest = {
+  method: string
+  path: string
+  format: string
+  headers: Headers
+  params: { [key: string]: any }
+}
+
+export type RequestResponse = {
+  status: number
+  headers: Headers
+  body: string
+}
+
+export type Headers = { [key: string]: string }
 
 export type Query = {
   id: string
@@ -75,7 +92,8 @@ export type Log = {
 export class BackendRequest {
   id: string
   meta: RequestMeta
-  request: { [key: string]: any }
+  request: RequestRequest
+  response: RequestResponse
   models: { [key: string]: number }
   queries: Query[]
   jobs: Job[]
@@ -89,8 +107,9 @@ export class BackendRequest {
     }
 
     this.id = data?.id || "null"
-    this.meta = data?.meta || ({} as unknown as RequestMeta) // LOL
-    this.request = data?.request || {}
+    this.meta = data?.meta || ({} as unknown as RequestMeta)
+    this.request = data?.request || ({} as unknown as RequestRequest)
+    this.response = data?.response || ({} as unknown as RequestResponse)
     this.models = data?.models || {}
     this.queries = data?.queries || []
     this.jobs = data?.jobs || []
