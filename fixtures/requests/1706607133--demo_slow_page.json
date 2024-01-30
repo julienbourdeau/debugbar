@@ -1,0 +1,130 @@
+{
+  "id": "9ef55b46-3953-4901-868b-19b86c80a1b4",
+  "meta": {
+    "controller": "DemoController",
+    "action": "slow_page",
+    "params": {
+      "controller": "demo",
+      "action": "slow_page"
+    },
+    "format": "html",
+    "method": "GET",
+    "path": "/slow-page",
+    "status": 200,
+    "view_runtime": 52.8460000641644,
+    "db_runtime": 3.154000034555793,
+    "duration": 5069.930000066757,
+    "cpu_time": 50.03016699999999,
+    "idle_time": 5019.899833066757,
+    "allocations": 27333
+  },
+  "request": {
+    "method": "GET",
+    "path": "/slow-page",
+    "format": "html",
+    "params": {
+      "controller": "demo",
+      "action": "slow_page"
+    },
+    "headers": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "fr,en;q=0.9",
+      "Connection": "keep-alive",
+      "Cookie": "_demo_app_session=eq1z3nueUv0xrZcSj%2FWeJq73FFRrM0IZNT2KPq8mb195ScqdPPuP6bgBBpjRh3iZRPDoFVc%2BtALhiLF1Wu%2BPunVuuM%2F4muqZL8PIbAJHTsTx3eXbFVvVuJXYnrwCIhcg4BWtzeyWN9LrddjrkTpre8dcCFpZ8A0xQXuqBzBeOEMWj2eCnU%2Fq8q%2Bgff18iHhHzLsK5AUmd2jSm09usHS%2Bv1rf7b1V4pMP33Xuw66UxQiQUFW0Vn8Lld6ptzyB3pEswMdOwMLM7uWwh4oWP2q1xDgrIBhWhWrWCw%3D%3D--yu91yFNij6NW0A4N--RM%2FMVqNZrsoyC%2FXBBStDww%3D%3D",
+      "Dnt": "1",
+      "Host": "127.0.0.1:3000",
+      "If-None-Match": "W/\"9ec262e15d1de5a948ea376aadf0467f\"",
+      "Referer": "http://127.0.0.1:3000/post-list",
+      "Sec-Ch-Ua": "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\", \"Google Chrome\";v=\"120\"",
+      "Sec-Ch-Ua-Mobile": "?0",
+      "Sec-Ch-Ua-Platform": "\"macOS\"",
+      "Sec-Fetch-Dest": "document",
+      "Sec-Fetch-Mode": "navigate",
+      "Sec-Fetch-Site": "same-origin",
+      "Sec-Fetch-User": "?1",
+      "Upgrade-Insecure-Requests": "1",
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Version": "HTTP/1.1"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-Xss-Protection": "0",
+      "X-Content-Type-Options": "nosniff",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Link": "</assets/application-f8c090dd3cd5575b45894e4b6478d0b328f7a89e69c744e74f1153c5eca55e4e.css>; rel=preload; as=style; nopush,</assets/es-module-shims.min-4ca9b3dd5e434131e3bb4b0c1d7dff3bfd4035672a5086deec6f73979a49be73.js>; rel=preload; as=script; nopush",
+      "Content-Type": "text/html; charset=utf-8",
+      "Etag": "W/\"864d5fabd6f11d8c86c28559b93ec819\"",
+      "Cache-Control": "max-age=0, private, must-revalidate"
+    },
+    "body": "<!DOCTYPE html>\n<html>\n  <head>\n    <title>DemoApp</title>\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n    <meta name=\"csrf-param\" content=\"authenticity_token\" />\n<meta name=\"csrf-token\" content=\"jkANCVc1y22rmM8YKU9seDSeSv3Jau1PJl99VLJo39ZICB3vzDcvN8r1xzwOrE713viWxdWsSZfx_pYnPAaNMQ\" />\n    \n\n\n    <link rel=\"stylesheet\" href=\"/assets/application-f8c090dd3cd5575b45894e4b6478d0b328f7a89e69c744e74f1153c5eca55e4e.css\" data-turbo-track=\"reload\" />\n    <script type=\"importmap\" data-turbo-track=\"reload\">{\n  \"imports\": {\n    \"application\": \"/assets/application-f3e871e7be89ccb0adccd09d1fb0f2c5f0583d0626142906e3b227e5641284be.js\",\n    \"@hotwired/turbo-rails\": \"/assets/turbo.min-dfd93b3092d1d0ff56557294538d069bdbb28977d3987cb39bc0dd892f32fc57.js\",\n    \"@hotwired/stimulus\": \"/assets/stimulus.min-dd364f16ec9504dfb72672295637a1c8838773b01c0b441bd41008124c407894.js\",\n    \"@hotwired/stimulus-loading\": \"/assets/stimulus-loading-3576ce92b149ad5d6959438c6f291e2426c86df3b874c525b30faad51b0d96b3.js\",\n    \"controllers/application\": \"/assets/controllers/application-368d98631bccbf2349e0d4f8269afb3fe9625118341966de054759d96ea86c7e.js\",\n    \"controllers/hello_controller\": \"/assets/controllers/hello_controller-549135e8e7c683a538c3d6d517339ba470fcfb79d62f738a0a089ba41851a554.js\",\n    \"controllers\": \"/assets/controllers/index-2db729dddcc5b979110e98de4b6720f83f91a123172e87281d5a58410fc43806.js\"\n  }\n}</script>\n<link rel=\"modulepreload\" href=\"/assets/application-f3e871e7be89ccb0adccd09d1fb0f2c5f0583d0626142906e3b227e5641284be.js\">\n<link rel=\"modulepreload\" href=\"/assets/turbo.min-dfd93b3092d1d0ff56557294538d069bdbb28977d3987cb39bc0dd892f32fc57.js\">\n<link rel=\"modulepreload\" href=\"/assets/stimulus.min-dd364f16ec9504dfb72672295637a1c8838773b01c0b441bd41008124c407894.js\">\n<link rel=\"modulepreload\" href=\"/assets/stimulus-loading-3576ce92b149ad5d6959438c6f291e2426c86df3b874c525b30faad51b0d96b3.js\">\n<script src=\"/assets/es-module-shims.min-4ca9b3dd5e434131e3bb4b0c1d7dff3bfd4035672a5086deec6f73979a49be73.js\" async=\"async\" data-turbo-track=\"reload\"></script>\n<script type=\"module\">import \"application\"</script>\n\n  </head>\n\n  <body>\n    <div class=\"container mb-5\">\n\n\n      <nav class=\"mt-2 mb-4 navbar navbar-expand-lg navbar-light bg-light\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"#\">Rails Demo app</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n          <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n            <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/post-list\">Post List</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/random\">Random</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/slow-page\">Slow page</a>\n              </li>\n            </ul>\n            <ul class=\"navbar-nav\">\n              <li class=\"nav-item\">\n                <button type=\"button\" class=\"nav-link\" onclick=\"fetch('/api/errors?code=404'); fetch('/api/errors?code=401'); fetch('/api/errors?code=500')\">Errors</button>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </nav>\n\n      <div class=\"mb-5\">\n        <div class=\"d-grid gap-5\">\n\n  <h1>\n    Mother Night\n    <span class=\"text-muted\">(#5000)</span>\n  </h1>\n\n  <div>\n    <h4>Quo</h4>\n\n<p>Aperiam modi et. Eius vel sit. Illum corporis hic.\n<code>Voluptatem.</code></p>\n\n  </div>\n\n  <pre>\n    #### Quo\nAperiam modi et. Eius vel sit. Illum corporis hic.\n`Voluptatem.`\n  </pre>\n\n  <div class=\"d-flex gap-5\">\n    <button type=\"button\" onclick=\"fetch('/api/add_reaction?name=up&post_id=5000')\" class=\"btn btn-primary position-relative\">\n      Like 👍\n      <span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black\">\n        242\n      </span>\n    </button>\n\n    <button type=\"button\" onclick=\"fetch('/api/add_reaction?name=down&post_id=5000')\" class=\"btn btn-danger position-relative\">\n      Nope 👎\n      <span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black\">\n        220\n      </span>\n    </button>\n\n    <button type=\"button\" onclick=\"fetch('/api/add_reaction?name=star&post_id=5000')\" class=\"btn btn-success position-relative\">\n      Awesome 🤩\n      <span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black\">\n        226\n      </span>\n    </button>\n  </div>\n\n</div>\n\n      </div>\n\n    </div>\n\n          <div id=\"__debugbar\"></div>\n      <script type=\"text/javascript\">\n        window._debugbarConfigOptions = {}\n      </script>\n      <script defer src=\"/_debugbar/assets/script\"></script>\n      <script type=\"module\">\n        import sheet from '/_debugbar/assets/style' assert { type: 'css' }\n        const debugbar = document.getElementById('__debugbar-shadow-root')\n        debugbar.shadowRoot.adoptedStyleSheets = [sheet];\n      </script>\n\n  </body>\n</html>\n"
+  },
+  "models": {
+    "Post": 1,
+    "Reaction": 688
+  },
+  "queries": [
+    {
+      "id": "a49beead96b5a5e5ec7b",
+      "title": "Post Load (0.9ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` ORDER BY `posts`.`id` DESC LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.9,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/controllers/demo_controller.rb:26",
+        " `slow_page'"
+      ]
+    },
+    {
+      "id": "a49beead96b5a5e5ec7b",
+      "title": "Reaction Load (2.3ms)",
+      "name": "Reaction Load",
+      "sql": "SELECT `reactions`.* FROM `reactions` WHERE `reactions`.`post_id` = 5000 ",
+      "cached": false,
+      "async": false,
+      "duration": 2.3,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/views/demo/post.html.erb:20",
+        " `_app_views_demo_post_html_erb__3830923846294067042_28740'"
+      ]
+    }
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+    {
+      "msg": "before_action",
+      "extra": [
+        {
+          "params": {
+            "controller": "demo",
+            "action": "slow_page"
+          }
+        }
+      ]
+    },
+    {
+      "msg": "Rendering navigation",
+      "extra": [
+
+      ]
+    }
+  ],
+  "cache": [
+
+  ],
+  "logs": [
+
+  ]
+}

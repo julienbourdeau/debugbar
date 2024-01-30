@@ -1,0 +1,176 @@
+{
+  "id": "be72e954-78a4-4307-ad4a-a86199b62947",
+  "meta": {
+    "controller": "ApiController",
+    "action": "jobs",
+    "params": {
+      "name": "send_email",
+      "post_id": "4604",
+      "controller": "api",
+      "action": "jobs"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/api/jobs?name=send_email&post_id=4604",
+    "status": 200,
+    "view_runtime": null,
+    "db_runtime": 2.7160001918673515,
+    "duration": 35.46600008010864,
+    "cpu_time": 32.441666999999995,
+    "idle_time": 3.024333080108647,
+    "allocations": 14318
+  },
+  "request": {
+    "method": "GET",
+    "path": "/api/jobs",
+    "format": "*/*",
+    "params": {
+      "name": "send_email",
+      "post_id": "4604",
+      "controller": "api",
+      "action": "jobs"
+    },
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "fr,en;q=0.9",
+      "Connection": "keep-alive",
+      "Cookie": "_demo_app_session=eq1z3nueUv0xrZcSj%2FWeJq73FFRrM0IZNT2KPq8mb195ScqdPPuP6bgBBpjRh3iZRPDoFVc%2BtALhiLF1Wu%2BPunVuuM%2F4muqZL8PIbAJHTsTx3eXbFVvVuJXYnrwCIhcg4BWtzeyWN9LrddjrkTpre8dcCFpZ8A0xQXuqBzBeOEMWj2eCnU%2Fq8q%2Bgff18iHhHzLsK5AUmd2jSm09usHS%2Bv1rf7b1V4pMP33Xuw66UxQiQUFW0Vn8Lld6ptzyB3pEswMdOwMLM7uWwh4oWP2q1xDgrIBhWhWrWCw%3D%3D--yu91yFNij6NW0A4N--RM%2FMVqNZrsoyC%2FXBBStDww%3D%3D",
+      "Dnt": "1",
+      "Host": "127.0.0.1:3000",
+      "Referer": "http://127.0.0.1:3000/post-list",
+      "Sec-Ch-Ua": "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\", \"Google Chrome\";v=\"120\"",
+      "Sec-Ch-Ua-Mobile": "?0",
+      "Sec-Ch-Ua-Platform": "\"macOS\"",
+      "Sec-Fetch-Dest": "empty",
+      "Sec-Fetch-Mode": "cors",
+      "Sec-Fetch-Site": "same-origin",
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Version": "HTTP/1.1"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-Xss-Protection": "0",
+      "X-Content-Type-Options": "nosniff",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Content-Type": "text/html",
+      "Cache-Control": "no-cache"
+    },
+    "body": ""
+  },
+  "models": {
+    "Post": 12
+  },
+  "queries": [
+    {
+      "id": "a49beead96b5a5e5ec7b",
+      "title": "Post Load (0.3ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 4604 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.3,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/jobs/send_email_job.rb:5",
+        " `perform'"
+      ]
+    },
+    {
+      "id": "a49beead96b5a5e5ec7b",
+      "title": "Post Load (2.4ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` ORDER BY `posts`.`published_at` DESC LIMIT 5 ",
+      "cached": false,
+      "async": false,
+      "duration": 2.4,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/jobs/send_email_job.rb:6",
+        " `perform'"
+      ]
+    },
+    {
+      "id": "eb457f8705c4d0ce73d4",
+      "title": "CACHE Post Load (0.0ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 4604 LIMIT 1",
+      "cached": true,
+      "async": null,
+      "duration": 0.0,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/jobs/send_email_job.rb:5",
+        " `perform'"
+      ]
+    },
+    {
+      "id": "eb457f8705c4d0ce73d4",
+      "title": "CACHE Post Load (0.0ms)",
+      "name": "Post Load",
+      "sql": "SELECT `posts`.* FROM `posts` ORDER BY `posts`.`published_at` DESC LIMIT 5",
+      "cached": true,
+      "async": null,
+      "duration": 0.0,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien.bourdeau/Personal/rails/demo_app/app/jobs/send_email_job.rb:6",
+        " `perform'"
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "id": "2ee83a02-2e93-4287-b1a9-80950eee537d",
+      "class": "SendEmailJob",
+      "queue": "Inline(default)",
+      "args": [
+        "4604",
+        {
+          "user_id": 99
+        }
+      ],
+      "successfully_enqueued": true,
+      "scheduled_at": null,
+      "logs": [
+        "Enqueued SendEmailJob (Job ID: 2ee83a02-2e93-4287-b1a9-80950eee537d) to Inline(default) with arguments: \"4604\", {:user_id=>99}",
+        "/Users/julien.bourdeau/Personal/debugbar/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
+      ]
+    },
+    {
+      "id": "e7c3e08a-53c7-4564-832b-286d43a2f73d",
+      "class": "SendEmailJob",
+      "queue": "Inline(default)",
+      "args": [
+        "4604",
+        {
+          "user_id": 1,
+          "admin": true
+        }
+      ],
+      "successfully_enqueued": true,
+      "scheduled_at": null,
+      "logs": [
+        "Enqueued SendEmailJob (Job ID: e7c3e08a-53c7-4564-832b-286d43a2f73d) to Inline(default) with arguments: \"4604\", {:user_id=>1, :admin=>true}",
+        "/Users/julien.bourdeau/Personal/debugbar/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
+      ]
+    }
+  ],
+  "messages": [
+
+  ],
+  "cache": [
+
+  ],
+  "logs": [
+
+  ]
+}
