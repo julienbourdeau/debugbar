@@ -7,10 +7,7 @@
     "assets": [
       "assets/ruby-logo-kn_8RniZ.svg"
     ],
-    "css": [
-      "assets/debugbar-eZ_KEm34.css"
-    ],
-    "file": "assets/debugbar-aADO-GfK.js",
+    "file": "assets/debugbar-Pc13_trp.js",
     "isEntry": true,
     "src": "src/main.ts"
   }

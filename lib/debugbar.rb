@@ -2,7 +2,6 @@
 
 module Debugbar
   autoload :VERSION, "debugbar/version"
-  autoload :Assets, "debugbar/assets"
   autoload :Current, "debugbar/current"
   autoload :Request, "debugbar/request"
   autoload :NullRequest, "debugbar/null_request"
@@ -30,6 +29,13 @@ module Debugbar
 
     def connected?
       @connected
+    end
+
+    def js_file=(js_file)
+      @js_file = js_file
+    end
+    def js_file
+      @js_file
     end
 
     def msg(msg, *extra)

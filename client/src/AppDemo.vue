@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import Debugbar from "@/Debugbar.vue"
-import { ShadowRoot } from "vue-shadow-dom"
+import { ShadowRoot, ShadowStyle } from "vue-shadow-dom"
 import { onMounted } from "vue"
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import { BackendRequestData } from "@/models/Request.ts"
+
+import css from "./style.css?inline"
 
 onMounted(() => {
   console.log(`Using debugbar in DEMO mode`)
@@ -19,6 +21,9 @@ onMounted(() => {
   <div>
     <shadow-root id="__debugbar-shadow-root">
       <debugbar></debugbar>
+      <shadow-style>
+        {{ css }}
+      </shadow-style>
     </shadow-root>
   </div>
 </template>

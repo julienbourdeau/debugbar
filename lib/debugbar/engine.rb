@@ -36,11 +36,11 @@ module Debugbar
 
     # TODO: IMPROVE BEFORE RELEASE
     initializer 'debugbar.assets' do
-      manifest_file = File.join(Gem.loaded_specs['debugbar'].full_gem_path, 'client', 'dist', '.vite', 'manifest.json')
+      dist = File.join(Gem.loaded_specs['debugbar'].full_gem_path, 'client', 'dist')
+      manifest_file =  File.join(dist, '.vite', 'manifest.json')
       manifest = JSON.parse(File.read(manifest_file))
 
-      Assets.js = manifest['src/main.ts']['file']
-      Assets.css = manifest['src/main.ts']['css'].first
+      Debugbar.js_file = File.join(dist, manifest['src/main.ts']['file'])
     end
 
     initializer 'debugbar.inject_middlewares' do |app|
@@ -49,7 +49,6 @@ module Debugbar
     end
 
     # initializer 'debugbar.features' do |app|
-    #   pp "USE???", Debugbar.config.min_log_level
     #   if Debugbar.config.use_logger?
     #     # require_relative 'loggers/simple_logger'
     #     app.config.logger = Debugbar::SimpleLogger.new(Debugbar.config.min_log_level)

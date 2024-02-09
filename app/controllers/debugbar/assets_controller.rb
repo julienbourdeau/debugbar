@@ -1,13 +1,7 @@
 module Debugbar
   class AssetsController < ApplicationController
-    def css
-      render file: Assets.css,
-        layout: false,
-        content_type: 'text/css'
-    end
-
     def js
-      render file: Assets.js,
+      render file: Debugbar.js_file,
         layout: false,
         content_type: 'text/javascript'
     end
