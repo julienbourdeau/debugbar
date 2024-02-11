@@ -4,7 +4,6 @@ module Debugbar
   autoload :VERSION, "debugbar/version"
   autoload :Current, "debugbar/current"
   autoload :Request, "debugbar/request"
-  autoload :NullRequest, "debugbar/null_request"
   autoload :RequestBuffer, "debugbar/buffers/request_buffer"
   autoload :SimpleLogger, "debugbar/loggers/simple_logger"
 

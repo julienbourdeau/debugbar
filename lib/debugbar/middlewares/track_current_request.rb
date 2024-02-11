@@ -7,11 +7,7 @@ module Debugbar
     def call(env)
       Debugbar::Current.ignore = Debugbar.config.ignore_request?(env)
 
-      if Debugbar::Current.ignore?
-        # TODO: Remove null_request concept?
-        Debugbar::Current.null_request!
-        return @app.call(env)
-      end
+      return @app.call(env) if Debugbar::Current.ignore?
 
       Debugbar::Current.new_request!(env['action_dispatch.request_id'])
 
