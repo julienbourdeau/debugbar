@@ -144,16 +144,12 @@ export class BackendRequest {
     }, []).length
   }
 
-  get logsCount(): number {
-    return this.logs.length
-  }
-
   get pathWithVerb(): string {
     return `${this.meta.method.toUpperCase()} ${this.meta.path}`
   }
 
   get dataForTabs(): { [key: string]: any } {
-    return {
+    const tabs = {
       messages: {
         label: "Debug",
         count: this.messagesCount,
@@ -174,17 +170,14 @@ export class BackendRequest {
         label: "Cache",
         count: this.cacheCount,
       },
-
-      // view: {
-      //   label: "Views",
-      //   disabled: true,
-      // },
-
-      // DISABLED UNTIL I CAN FIX IT
-      // logs: {
-      //   label: "Logs",
-      //   // count: this.logsCount,
-      // },
     }
+
+    if (this.logs.length > 0) {
+      tabs["logs"] = {
+        label: "Logs",
+      }
+    }
+
+    return tabs
   }
 }

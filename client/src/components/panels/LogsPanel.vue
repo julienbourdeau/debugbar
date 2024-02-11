@@ -19,8 +19,8 @@ function message(log: Log): string {
     </div>
 
     <div v-for="log in props.logs" class="flex items-center space-y-1 space-x-3">
-      <div class="w-24 text-right text-gray-400">{{ log.time }}</div>
-      <div class="w-16 text-center">
+      <div class="w-32 text-right text-gray-400">{{ log.time }}</div>
+      <div class="w-20 text-center">
         <span
           class="px-1 py-0.5 rounded text-white text-xs font-mono font-medium"
           :class="{

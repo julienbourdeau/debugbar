@@ -34,7 +34,6 @@ module Debugbar
       end
     end
 
-    # TODO: IMPROVE BEFORE RELEASE
     initializer 'debugbar.assets' do
       dist = File.join(Gem.loaded_specs['debugbar'].full_gem_path, 'client', 'dist')
       manifest_file =  File.join(dist, '.vite', 'manifest.json')
@@ -47,13 +46,6 @@ module Debugbar
       next unless Debugbar.config.enabled?
       app.middleware.insert_after ActionDispatch::RequestId, Debugbar::TrackCurrentRequest
     end
-
-    # initializer 'debugbar.features' do |app|
-    #   if Debugbar.config.use_logger?
-    #     # require_relative 'loggers/simple_logger'
-    #     app.config.logger = Debugbar::SimpleLogger.new(Debugbar.config.min_log_level)
-    #   end
-    # end
 
     initializer 'debugbar.subscribe' do
       if Debugbar.config.active_record?
