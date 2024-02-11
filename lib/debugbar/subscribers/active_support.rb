@@ -23,7 +23,7 @@ module Debugbar
             "unknown"
           end
 
-        Current.request.add_cache evt
+        Debugbar::Tracker.add_cache evt
       end
     end
   end

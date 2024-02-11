@@ -21,7 +21,7 @@ module Debugbar
         end
         logs << log_enqueue_source
 
-        Current.request.add_job({
+        Debugbar::Tracker.add_job({
           id: job.job_id,
           class: job.class.name,
           queue: queue_name(event),
@@ -49,7 +49,7 @@ module Debugbar
         end
         logs << log_enqueue_source
 
-        Current.request.add_job({
+        Debugbar::Tracker.add_job({
           id: job.job_id,
           class: job.class.name,
           queue: queue_name(event),

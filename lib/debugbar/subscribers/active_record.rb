@@ -43,7 +43,7 @@ module Debugbar
           binds.prepend("  ")
         end
 
-        Current.request.add_query({
+        Debugbar::Tracker.add_query({
           id: event.transaction_id,
           title: title,
           name: payload[:name],

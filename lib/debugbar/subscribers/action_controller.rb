@@ -4,7 +4,7 @@ module Debugbar
       def start_processing(event)
         return if Debugbar::Current.ignore?
 
-        Current.request.request = event.payload[:request]
+        Debugbar::Tracker.request = event.payload[:request]
       end
 
       def process_action(event)
@@ -23,9 +23,9 @@ module Debugbar
           allocations: event.allocations,
         })
 
-        Current.request.request = request
-        Current.request.response = response
-        Current.request.meta = meta
+        Debugbar::Tracker.request = request
+        Debugbar::Tracker.response = response
+        Debugbar::Tracker.meta = meta
 
       end
     end

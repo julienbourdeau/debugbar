@@ -16,7 +16,7 @@ module Debugbar
         end
       end
 
-      Current.request.add_log({
+      Debugbar::Tracker.add_log({
         time: Time.now.strftime(Debugbar::TIME_FORMAT),
         severity: severity,
         severity_label: SEV_LABEL[severity],

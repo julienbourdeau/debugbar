@@ -8,6 +8,7 @@ module Debugbar
       Debugbar::Current.ignore = Debugbar.config.ignore_request?(env)
 
       if Debugbar::Current.ignore?
+        # TODO: Remove null_request concept?
         Debugbar::Current.null_request!
         return @app.call(env)
       end
@@ -16,8 +17,8 @@ module Debugbar
 
       res = @app.call(env)
 
-      # TODO: Remove this if meta
-      if Debugbar::Current.request&.meta
+      # TODO: Remove this if statement?
+      if Debugbar::Current.request&.id
         # filename = "#{Time.now.to_i}--#{Debugbar::Current.request.meta.dig(:params, :controller)}_#{Debugbar::Current.request.meta.dig(:params, :action).gsub('/', '_')}.json"
         # File.open(Rails.root.join('_requests', filename), "w") do |f|
         #   f.write(Debugbar::Current.request.to_json)

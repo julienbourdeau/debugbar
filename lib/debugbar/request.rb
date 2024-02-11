@@ -77,8 +77,8 @@ module Debugbar
       {
         method: request.method,
         path: request.path,
-        format: meta[:format],
-        params: meta[:params],
+        format: meta.dig(:format),
+        params: meta.dig(:params),
         headers: request.env.select { |k,v| k.start_with? 'HTTP_'} # https://stackoverflow.com/a/55406700/1001125
                         .transform_keys { |k| k.sub(/^HTTP_/, '').split('_').map(&:capitalize).join('-') }
                         .sort.to_h

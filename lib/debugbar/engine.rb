@@ -88,7 +88,7 @@ module Debugbar
       next unless Debugbar.config.active_record?
       ActiveSupport.on_load(:active_record) do
         after_initialize do |model|
-          Debugbar::Current.request.inc_model(model.class.name)
+          Debugbar::Tracker.inc_model(model.class.name)
         end
       end
     end
