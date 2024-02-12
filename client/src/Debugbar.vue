@@ -15,6 +15,7 @@ import { useConfigStore } from "@/stores/configStore.ts"
 import CachePanel from "@/components/panels/CachePanel.vue"
 import RequestPanel from "@/components/panels/RequestPanel.vue"
 import JsonPanel from "@/components/panels/JsonPanel.vue"
+import LogoRuby from "@/components/ui/logo-ruby.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -156,7 +157,7 @@ const setActiveTab = (tab) => {
       <div>
         <div class="flex">
           <div class="p-1 pt-1.5">
-            <img class="h-5" src="./assets/ruby-logo.svg" alt="Rails logo" />
+            <logo-ruby />
           </div>
 
           <tab-button
