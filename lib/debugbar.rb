@@ -27,12 +27,14 @@ module Debugbar
 
       METHODS.each do |m|
         define_method(m) do |*args, &block|
-          if Current.request.nil?
-            # TODO: Much, much better logging needed
+          if Current.request
+            return Current.request.send(m, *args, &block)
+          end
+
+          if Current.request.nil? && ENV["DEBUGBAR_VERBOSE_MODE"] == "true"
             puts "The current request is not set yet. Was trying to call #{m}(#{args.map{ _1.class.name}.join(',')})."
             pp args
-          else
-            Current.request.send(m, *args, &block)
+            nil
           end
         end
       end
