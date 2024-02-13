@@ -73,13 +73,6 @@ module Debugbar
       @connected
     end
 
-    def js_file=(js_file)
-      @js_file = js_file
-    end
-    def js_file
-      @js_file
-    end
-
     def msg(msg, *extra)
       Tracker.msg(msg, *extra)
     end

@@ -6,3 +6,6 @@
 /pkg/
 /spec/reports/
 /tmp/
+client/dist/
+debugbar*.gem
+public/debugbar.js

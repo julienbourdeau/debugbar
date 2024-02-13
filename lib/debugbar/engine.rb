@@ -34,14 +34,6 @@ module Debugbar
       end
     end
 
-    initializer 'debugbar.assets' do
-      dist = File.join(Gem.loaded_specs['debugbar'].full_gem_path, 'client', 'dist')
-      manifest_file =  File.join(dist, '.vite', 'manifest.json')
-      manifest = JSON.parse(File.read(manifest_file))
-
-      Debugbar.js_file = File.join(dist, manifest['src/main.ts']['file'])
-    end
-
     initializer 'debugbar.inject_middlewares' do |app|
       next unless Debugbar.config.enabled?
       app.middleware.insert_after ActionDispatch::RequestId, Debugbar::TrackCurrentRequest

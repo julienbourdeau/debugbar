@@ -129,7 +129,7 @@ const setActiveTab = (tab) => {
     class="z-[9999] fixed left-0 bottom-0 bg-transparent cursor-pointer"
   >
     <div class="p-1 pt-1.5">
-      <img class="h-5" src="./assets/ruby-logo.svg" alt="Logo" />
+      <logo-ruby />
     </div>
   </div>
 
