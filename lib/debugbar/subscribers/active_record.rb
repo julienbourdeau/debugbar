@@ -60,6 +60,27 @@ module Debugbar
       def query_source_location
         backtrace_cleaner.clean(caller(3))[0]
       end
+
+      private
+
+      def type_casted_binds(casted_binds)
+        casted_binds.respond_to?(:call) ? casted_binds.call : casted_binds
+      end
+
+      def render_bind(attr, value)
+        case attr
+        when ActiveModel::Attribute
+          if attr.type.binary? && attr.value
+            value = "<#{attr.value_for_database.to_s.bytesize} bytes of binary data>"
+          end
+        when Array
+          attr = attr.first
+        else
+          attr = nil
+        end
+
+        [attr&.name, value]
+      end
     end
   end
 end
