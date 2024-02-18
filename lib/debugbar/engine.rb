@@ -1,5 +1,6 @@
 require_relative 'config'
 require_relative 'middlewares/track_current_request'
+require_relative '../../app/helpers/debugbar/tag_helpers'
 
 module Debugbar
   class Engine < ::Rails::Engine
