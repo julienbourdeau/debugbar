@@ -22,26 +22,9 @@ module Debugbar
         sql = payload[:sql]&.gsub(/\/\*.*\*\//, "") # remove comments
 
         binds = nil
-        if payload[:binds]&.any?
-          casted_params = type_casted_binds(payload[:type_casted_binds])
-
-          binds = []
-          payload[:binds].each_with_index do |attr, i|
-            attribute_name = if attr.respond_to?(:name)
-              attr.name
-            elsif attr.respond_to?(:[]) && attr[i].respond_to?(:name)
-              attr[i].name
-            else
-              nil
-            end
-
-            filtered_params = filter(attribute_name, casted_params[i])
-
-            binds << render_bind(attr, filtered_params)
-          end
-          binds = binds.inspect
-          binds.prepend("  ")
-        end
+        # if payload[:binds]&.any?
+        #   TODO: Restore binds when I can figure out how to get something in poayload[:binds]
+        # end
 
         Debugbar::Tracker.add_query({
           id: event.transaction_id,
@@ -59,27 +42,6 @@ module Debugbar
 
       def query_source_location
         backtrace_cleaner.clean(caller(3))[0]
-      end
-
-      private
-
-      def type_casted_binds(casted_binds)
-        casted_binds.respond_to?(:call) ? casted_binds.call : casted_binds
-      end
-
-      def render_bind(attr, value)
-        case attr
-        when ActiveModel::Attribute
-          if attr.type.binary? && attr.value
-            value = "<#{attr.value_for_database.to_s.bytesize} bytes of binary data>"
-          end
-        when Array
-          attr = attr.first
-        else
-          attr = nil
-        end
-
-        [attr&.name, value]
       end
     end
   end
