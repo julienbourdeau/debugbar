@@ -37,7 +37,7 @@ module Debugbar
 
     initializer 'debugbar.inject_middlewares' do |app|
       next unless Debugbar.config.enabled?
-      app.middleware.insert_after ActionDispatch::RequestId, Debugbar::TrackCurrentRequest
+      app.middleware.insert_after ActionDispatch::Executor, Debugbar::TrackCurrentRequest
     end
 
     initializer 'debugbar.subscribe' do
