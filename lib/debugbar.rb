@@ -16,17 +16,25 @@ module Debugbar
 
       SETTERS.each do |m|
         define_method("#{m}=") do |val|
-          if Current.request.nil?
+          return if Debugbar::Current.ignore?
+
+          if Current.request
+            return Current.request.send("#{m}=", val)
+          end
+
+          if Current.request.nil? && ENV["DEBUGBAR_VERBOSE_MODE"] == "true"
             # TODO: Much, much better logging needed
-            puts "The current request is not set yet. Was trying to set #{m}=[#{val.class.name}]."
-          else
-            Current.request.send("#{m}=", val)
+            puts "The current request is not set yet. Was trying to set #{m} = #{val.class.name}."
+            pp val
+            nil
           end
         end
       end
 
       METHODS.each do |m|
         define_method(m) do |*args, &block|
+          return if Debugbar::Current.ignore?
+
           if Current.request
             return Current.request.send(m, *args, &block)
           end
