@@ -1,4 +1,5 @@
 require_relative 'config'
+require_relative 'middlewares/quiet_routes'
 require_relative 'middlewares/track_current_request'
 require_relative '../../app/helpers/debugbar/tag_helpers'
 
@@ -38,6 +39,7 @@ module Debugbar
     initializer 'debugbar.inject_middlewares' do |app|
       next unless Debugbar.config.enabled?
       app.middleware.insert_after ActionDispatch::Executor, Debugbar::TrackCurrentRequest
+      app.middleware.insert_after Sprockets::Rails::QuietAssets, Debugbar::QuietRoutes
     end
 
     initializer 'debugbar.subscribe' do
