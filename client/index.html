@@ -68,9 +68,13 @@
 
   <div id="__debugbar"></div>
   <script type="text/javascript">
-      window._debugbarConfigOptions = {
-          height: 600,
-      }
+    window._debugbarConfigOptions = {
+      mode: "poll",
+      height: 600,
+      // poll: {
+      //     interval: 1000,
+      // },
+    }
   </script>
   <script type="module" src="/src/dev.ts"></script>
 

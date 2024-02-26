@@ -1,27 +1,41 @@
 import defaultsDeep from "lodash/defaultsDeep"
 
 export type DebugbarConfigOptions = {
-  mode: "ws" | "off"
+  mode: "ws" | "poll" | "off"
+  prefix: string
   cable: {
     url: string
-    prefix: string
+    channelName: string
   }
-  channelName: string
+  poll: {
+    url: string
+    interval: number
+  }
   height: number
 }
 
+export type DebugbarConfig = DebugbarConfigOptions & {
+  actionCableUrl: string
+  pollUrl: string
+}
+
 export function newDebugbarConfig(options: DebugbarConfigOptions) {
-  const obj = defaultsDeep(options, {
+  const obj: DebugbarConfig = defaultsDeep(options, {
     mode: "ws",
+    prefix: "/_debugbar",
     cable: {
       url: "ws://127.0.0.1:3000",
-      prefix: "/_debugbar",
+      channelName: "Debugbar::DebugbarChannel",
     },
-    channelName: "Debugbar::DebugbarChannel",
+    poll: {
+      url: "http://127.0.0.1:3000",
+      interval: 500,
+    },
     height: 360,
   } as DebugbarConfigOptions)
 
-  obj.actionCableUrl = `${obj.cable.url}${obj.cable.prefix}/cable`
+  obj.actionCableUrl = `${obj.cable.url}${obj.prefix}/cable`
+  obj.pollUrl = `${obj.poll.url}${obj.prefix}/poll`
 
   return obj
 }

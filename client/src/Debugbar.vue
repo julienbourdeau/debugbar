@@ -41,11 +41,11 @@ const routeAlias = computed(() => {
   return requestsStore.currentRequest?.meta.params.controller + "#" + requestsStore.currentRequest?.meta.params.action
 })
 
-let debugbarChannel
+let debugbarChannel = null
 
-if (configStore.config.mode == "ws") {
+if (configStore.config.mode === "ws") {
   debugbarChannel = createConsumer(configStore.config.actionCableUrl).subscriptions.create(
-    { channel: configStore.config.channelName },
+    { channel: configStore.config.cable.channelName },
     {
       connected() {
         console.log("🟢 Connected to channel")
@@ -72,21 +72,45 @@ if (configStore.config.mode == "ws") {
       },
     }
   )
+} else if (configStore.config.mode === "poll") {
+  console.log(
+    `Using debugbar in "polling mode". Consider using "ws" mode for better performance (requires ActionCable).`
+  )
+  setInterval(() => {
+    fetch(configStore.config.pollUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.length == 0) {
+          return
+        }
+
+        console.log(data)
+
+        const ids = requestsStore.addRequests(data)
+
+        if (!isActive.value) {
+          requestsStore.setCurrentRequestById(ids[ids.length - 1])
+        }
+
+        fetch(configStore.config.pollUrl + "/confirm", {
+          // mode: "no-cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ids: ids }),
+        })
+      })
+  }, configStore.config.poll.interval)
 } else {
-  console.log(`Using debugbar in "offline mode", ideal for demoing with fixtures.`)
-  debugbarChannel = {
-    send: (data) => {
-      // No-op
-      console.log("Ignoring `send` call", data)
-    },
-  }
+  console.log(`Using debugbar in "offline mode", ideal for demos using fixtures.`)
 }
 
 const clearRequests = () => {
   console.log("Clearing requests")
   state.activeTab = ""
   requestsStore.clearRequests()
-  debugbarChannel.send({ clear: true })
+  debugbarChannel?.send({ clear: true })
 }
 
 // Resizing the debugbar
