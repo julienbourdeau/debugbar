@@ -22,7 +22,7 @@ import { useConfigStore } from "@/stores/configStore.ts"
 import CachePanel from "@/components/panels/CachePanel.vue"
 import RequestPanel from "@/components/panels/RequestPanel.vue"
 import JsonPanel from "@/components/panels/JsonPanel.vue"
-import LogoRuby from "@/components/ui/logo-ruby.vue"
+import RubyLogo from "@/components/ui/RubyLogo.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -170,7 +170,7 @@ const setActiveTab = (tab) => {
     class="z-[9999] fixed left-0 bottom-0 bg-transparent cursor-pointer"
   >
     <div class="p-1 pt-1.5">
-      <logo-ruby />
+      <ruby-logo />
     </div>
   </div>
 
@@ -198,7 +198,7 @@ const setActiveTab = (tab) => {
       <div>
         <div class="flex">
           <div class="p-1 pt-1.5">
-            <logo-ruby />
+            <ruby-logo />
           </div>
 
           <tab-button
