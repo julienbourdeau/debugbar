@@ -1,0 +1,96 @@
+{
+  "id": "26808211-87cb-4b61-a30b-dd5332584403",
+  "meta": {
+    "controller": "DemoController",
+    "action": "random_post",
+    "params": {
+      "controller": "demo",
+      "action": "random_post"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/random",
+    "status": 302,
+    "view_runtime": null,
+    "db_runtime": 1.0089999996125698,
+    "duration": 3.787000000476837,
+    "cpu_time": 3.7858750000000327,
+    "idle_time": 0.0011250004768044164,
+    "allocations": 1379
+  },
+  "request": {
+    "method": "GET",
+    "path": "/random",
+    "format": "*/*",
+    "params": {
+      "controller": "demo",
+      "action": "random_post"
+    },
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+      "Host": "127.0.0.1:3000",
+      "User-Agent": "Ruby",
+      "Version": "HTTP/1.1"
+    }
+  },
+  "response": {
+    "status": 302,
+    "headers": {
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-Xss-Protection": "0",
+      "X-Content-Type-Options": "nosniff",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Location": "http://127.0.0.1:3000/post/173",
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "no-cache",
+      "X-Request-Id": "73b55941-b25a-4380-928a-fdd4f47f3584",
+      "X-Runtime": "0.016149",
+      "Server-Timing": "start_processing.action_controller;dur=0.02, sql.active_record;dur=1.01, instantiation.active_record;dur=0.13, redirect_to.action_controller;dur=0.32, process_action.action_controller;dur=3.79"
+    },
+    "body": ""
+  },
+  "models": {
+    "Post": 1
+  },
+  "queries": [
+    {
+      "id": "75a8c824f6fe6572b063",
+      "title": "Post Load (1.0ms)",
+      "name": "Post Load",
+      "sql": "SELECT \"posts\".* FROM \"posts\" ORDER BY RANDOM() LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 1.0,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/controllers/demo_controller.rb:29",
+        " `random_post'"
+      ]
+    }
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+    {
+      "msg": "before_action",
+      "extra": [
+        {
+          "params": {
+            "controller": "demo",
+            "action": "random_post"
+          }
+        }
+      ]
+    }
+  ],
+  "cache": [
+
+  ],
+  "logs": [
+
+  ]
+}

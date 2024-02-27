@@ -1,0 +1,111 @@
+{
+  "id": "9816e60d-c941-4bf5-804f-3b48faae2a6a",
+  "meta": {
+    "controller": "ApiController",
+    "action": "jobs",
+    "params": {
+      "name": "refresh",
+      "post_id": "123",
+      "controller": "api",
+      "action": "jobs"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/api/jobs?name=refresh&post_id=123",
+    "status": 200,
+    "view_runtime": null,
+    "db_runtime": 0.10400003520771861,
+    "duration": 11.712999999523163,
+    "cpu_time": 11.666749999999865,
+    "idle_time": 0.04624999952329745,
+    "allocations": 5262
+  },
+  "request": {
+    "method": "GET",
+    "path": "/api/jobs",
+    "format": "*/*",
+    "params": {
+      "name": "refresh",
+      "post_id": "123",
+      "controller": "api",
+      "action": "jobs"
+    },
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+      "Host": "127.0.0.1:3000",
+      "User-Agent": "Ruby",
+      "Version": "HTTP/1.1"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-Xss-Protection": "0",
+      "X-Content-Type-Options": "nosniff",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Content-Type": "text/html",
+      "Cache-Control": "no-cache",
+      "X-Request-Id": "647bf2af-9189-44e8-a2a0-5dbbe0fe62c1",
+      "X-Runtime": "0.025575",
+      "Server-Timing": "start_processing.action_controller;dur=0.02, perform_start.active_job;dur=0.00, sql.active_record;dur=0.11, instantiation.active_record;dur=0.06, cache_write.active_support;dur=0.04, perform.active_job;dur=2.05, enqueue.active_job;dur=10.50, process_action.action_controller;dur=11.71"
+    },
+    "body": ""
+  },
+  "models": {
+    "Post": 1
+  },
+  "queries": [
+    {
+      "id": "75a8c824f6fe6572b063",
+      "title": "Post Load (0.1ms)",
+      "name": "Post Load",
+      "sql": "SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"id\" = 123 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/jobs/refresh_post_job.rb:5",
+        " `perform'"
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "id": "953f912c-073b-4194-adef-4681840b5b97",
+      "class": "RefreshPostJob",
+      "queue": "Inline(default)",
+      "args": [
+        "123"
+      ],
+      "successfully_enqueued": true,
+      "scheduled_at": null,
+      "logs": [
+        "Enqueued RefreshPostJob (Job ID: 953f912c-073b-4194-adef-4681840b5b97) to Inline(default) with arguments: \"123\"",
+        "/Users/julien/Personal/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
+      ]
+    }
+  ],
+  "messages": [
+
+  ],
+  "cache": [
+    {
+      "key": "post:123",
+      "store": "ActiveSupport::Cache::NullStore",
+      "compress": true,
+      "compress_threshold": 1024,
+      "name": "cache_write.active_support",
+      "transaction_id": "6f19a233a9f34d3cbc0d",
+      "time": "21:57:11.930",
+      "label": "write"
+    }
+  ],
+  "logs": [
+
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "id": "bc414a9e-9c66-4180-a492-0e93dc5537f5",
+  "meta": {
+    "controller": "DemoController",
+    "action": "post",
+    "params": {
+      "controller": "demo",
+      "action": "post",
+      "id": "240"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/post/240",
+    "status": 200,
+    "view_runtime": 1.8339999951422215,
+    "db_runtime": 0.9800000116229057,
+    "duration": 16.51800000667572,
+    "cpu_time": 16.402417000000014,
+    "idle_time": 0.1155830066757062,
+    "allocations": 16634
+  },
+  "request": {
+    "method": "GET",
+    "path": "/post/240",
+    "format": "*/*",
+    "params": {
+      "controller": "demo",
+      "action": "post",
+      "id": "240"
+    },
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+      "Host": "127.0.0.1:3000",
+      "User-Agent": "Ruby",
+      "Version": "HTTP/1.1"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-Xss-Protection": "0",
+      "X-Content-Type-Options": "nosniff",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Link": "</assets/application-f8c090dd3cd5575b45894e4b6478d0b328f7a89e69c744e74f1153c5eca55e4e.css>; rel=preload; as=style; nopush",
+      "Content-Type": "text/html; charset=utf-8",
+      "Vary": "Accept",
+      "Etag": "W/\"2524e082f8ef4f401e6d170facf95642\"",
+      "Cache-Control": "max-age=0, private, must-revalidate"
+    },
+    "body": "<!DOCTYPE html>\n<html>\n  <head>\n    <title>DemoApp</title>\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n    <meta name=\"csrf-param\" content=\"authenticity_token\" />\n<meta name=\"csrf-token\" content=\"TnWDgybx7s1oRumGihk53yMn38E3aMdzg6XrnDREe7RtroHrRPW4SSiDAQWqhh8I9RQsL8m--36KW7XCTQzXpQ\" />\n    \n\n\n    <link rel=\"stylesheet\" href=\"/assets/application-f8c090dd3cd5575b45894e4b6478d0b328f7a89e69c744e74f1153c5eca55e4e.css\" data-turbo-track=\"reload\" />\n    <script type=\"importmap\" data-turbo-track=\"reload\">{\n  \"imports\": {\n    \"application\": \"/assets/application-3897b39d0f7fe7e947af9b84a1e1304bb30eb1dadb983104797d0a5e26a08736.js\"\n  }\n}</script>\n<link rel=\"modulepreload\" href=\"/assets/application-3897b39d0f7fe7e947af9b84a1e1304bb30eb1dadb983104797d0a5e26a08736.js\">\n<script type=\"module\">import \"application\"</script>\n\n  </head>\n\n  <body>\n    <div class=\"container mb-5\">\n\n\n      <nav class=\"mt-2 mb-4 navbar navbar-expand-lg navbar-light bg-light\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"/\">Rails Demo app</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n          <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n            <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/post-list\">Post List</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/random\">Random</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/slow-page\">Slow page</a>\n              </li>\n            </ul>\n            <ul class=\"navbar-nav\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/export-csv\">Export</a>\n              </li>\n              <li class=\"nav-item\">\n                <button type=\"button\" class=\"nav-link\" onclick=\"fetch('/api/errors?code=404'); fetch('/api/errors?code=401'); fetch('/api/errors?code=500')\">Errors</button>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </nav>\n\n      <div class=\"mb-5\">\n        <div class=\"d-grid gap-5\">\n\n  <h1>\n    Specimen Days\n    <span class=\"text-muted\">(#240)</span>\n  </h1>\n\n  <div>\n    <h1>Ut</h1>\n\n<p>Eum facilis eligendi. Quod nostrum consequuntur. Dolores sed porro.\n<code>ruby\nAut.\n</code></p>\n\n  </div>\n\n  <pre>\n    # Ut\nEum facilis eligendi. Quod nostrum consequuntur. Dolores sed porro.\n```ruby\nAut.\n```\n  </pre>\n\n  <div class=\"d-flex gap-5\">\n    <button type=\"button\" onclick=\"fetch('/api/add_reaction?name=up&post_id=240')\" class=\"btn btn-primary position-relative\">\n      Like 👍\n      <span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black\">\n        119\n      </span>\n    </button>\n\n    <button type=\"button\" onclick=\"fetch('/api/add_reaction?name=down&post_id=240')\" class=\"btn btn-danger position-relative\">\n      Nope 👎\n      <span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black\">\n        98\n      </span>\n    </button>\n\n    <button type=\"button\" onclick=\"fetch('/api/add_reaction?name=star&post_id=240')\" class=\"btn btn-success position-relative\">\n      Awesome 🤩\n      <span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black\">\n        119\n      </span>\n    </button>\n  </div>\n\n</div>\n\n      </div>\n\n    </div>\n\n          <div id=\"__debugbar\"></div>\n      <script type=\"text/javascript\">\n        window._debugbarConfigOptions = {\"height\":800,\"mode\":\"poll\",\"poll\":{\"interval\":10000}}\n      </script>\n      <script defer src=\"/_debugbar/assets/script\"></script>\n\n  </body>\n</html>\n"
+  },
+  "models": {
+    "Post": 1,
+    "PostAuthor": 12,
+    "Author": 12,
+    "Reaction": 336
+  },
+  "queries": [
+    {
+      "id": "75a8c824f6fe6572b063",
+      "title": "Post Load (0.1ms)",
+      "name": "Post Load",
+      "sql": "SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"id\" = 240 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/controllers/demo_controller.rb:25",
+        " `post'"
+      ]
+    },
+    {
+      "id": "75a8c824f6fe6572b063",
+      "title": "PostAuthor Load (0.1ms)",
+      "name": "PostAuthor Load",
+      "sql": "SELECT \"post_authors\".* FROM \"post_authors\" WHERE \"post_authors\".\"post_id\" = 240 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/controllers/demo_controller.rb:25",
+        " `post'"
+      ]
+    },
+    {
+      "id": "75a8c824f6fe6572b063",
+      "title": "Author Load (0.2ms)",
+      "name": "Author Load",
+      "sql": "SELECT \"authors\".* FROM \"authors\" WHERE \"authors\".\"id\" IN (850, 833, 607, 320, 1282, 656, 367, 1264, 1681, 1521, 1631, 719) ",
+      "cached": false,
+      "async": false,
+      "duration": 0.2,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/controllers/demo_controller.rb:25",
+        " `post'"
+      ]
+    },
+    {
+      "id": "75a8c824f6fe6572b063",
+      "title": "Reaction Load (0.6ms)",
+      "name": "Reaction Load",
+      "sql": "SELECT \"reactions\".* FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 240 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/controllers/demo_controller.rb:25",
+        " `post'"
+      ]
+    }
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+    {
+      "msg": "before_action",
+      "extra": [
+        {
+          "params": {
+            "controller": "demo",
+            "action": "post",
+            "id": "240"
+          }
+        }
+      ]
+    },
+    {
+      "msg": "Rendering navigation",
+      "extra": [
+
+      ]
+    }
+  ],
+  "cache": [
+
+  ],
+  "logs": [
+
+  ]
+}

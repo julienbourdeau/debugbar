@@ -1,0 +1,62 @@
+{
+  "id": "a4c60a10-3931-40c9-b3f8-044fd748ef07",
+  "meta": {
+    "controller": "ApiController",
+    "action": "errors",
+    "params": {
+      "code": "500",
+      "controller": "api",
+      "action": "errors"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/api/errors?code=500",
+    "status": 500,
+    "view_runtime": null,
+    "db_runtime": 0.0,
+    "exception": [
+      "RuntimeError",
+      "This is a test error"
+    ],
+    "exception_object": "This is a test error",
+    "duration": 0.6930000185966492,
+    "cpu_time": 0.6912079999999605,
+    "idle_time": 0.0017920185966886493,
+    "allocations": 496
+  },
+  "request": {
+    "method": "GET",
+    "path": "/api/errors",
+    "format": "*/*",
+    "params": {
+      "code": "500",
+      "controller": "api",
+      "action": "errors"
+    },
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+      "Host": "127.0.0.1:3000",
+      "User-Agent": "Ruby",
+      "Version": "HTTP/1.1"
+    }
+  },
+  "response": null,
+  "models": {
+  },
+  "queries": [
+
+  ],
+  "jobs": [
+
+  ],
+  "messages": [
+
+  ],
+  "cache": [
+
+  ],
+  "logs": [
+
+  ]
+}
