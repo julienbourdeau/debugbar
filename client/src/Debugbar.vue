@@ -27,6 +27,7 @@ import RequestPanel from "@/components/panels/RequestPanel.vue"
 import JsonPanel from "@/components/panels/JsonPanel.vue"
 import RubyLogo from "@/components/ui/RubyLogo.vue"
 import Timing from "@/components/ui/Timing.vue"
+import StatusCode from "@/components/ui/StatusCode.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -168,6 +169,7 @@ const setActiveTab = (tab) => {
 </script>
 
 <template>
+  <!--  Minimized bar, just a clickable ruby logo in the bottom left corner -->
   <div
     v-if="state.minimized"
     @click="state.minimized = false"
@@ -178,6 +180,7 @@ const setActiveTab = (tab) => {
     </div>
   </div>
 
+  <!--  No request yet, the debugbar is full width but empty  -->
   <div
     v-if="!state.minimized && requestsStore.currentRequest == null"
     class="z-[9999] text-stone-900 fixed left-0 bottom-0 w-full"
@@ -193,6 +196,7 @@ const setActiveTab = (tab) => {
     </div>
   </div>
 
+  <!--  The glorious debugbar  -->
   <div
     v-if="!state.minimized && requestsStore.currentRequest"
     class="z-[9999] text-stone-900 fixed left-0 bottom-0 w-full"
@@ -259,16 +263,7 @@ const setActiveTab = (tab) => {
             {{ routeAlias }}
           </span>
 
-          <span
-            class="px-1 py-0.5 rounded text-xs"
-            :class="{
-              'bg-green-600 text-white': requestsStore.currentRequest.meta.status < 300,
-              'bg-amber-600 text-white':
-                requestsStore.currentRequest.meta.status >= 400 && requestsStore.currentRequest.meta.status < 500,
-              'bg-red-600 text-white': requestsStore.currentRequest.meta.status >= 500,
-            }"
-            >{{ requestsStore.currentRequest.meta.status }}</span
-          >
+          <status-code :code="requestsStore.currentRequest.meta.status" />
         </div>
 
         <select
@@ -301,10 +296,10 @@ const setActiveTab = (tab) => {
           <button @click="clearRequests" title="Clear all requests (frontend and backend)">
             <trash-icon class="size-3" />
           </button>
-          <button @click="state.minimized = true" title="Hide in the corner">
+          <button v-if="!isActive" @click="state.minimized = true" title="Hide in the corner">
             <arrow-down-left-icon class="size-4" />
           </button>
-          <button :disabled="!isActive" @click="state.activeTab = ''" title="Close">
+          <button v-if="isActive" @click="state.activeTab = ''" title="Close">
             <x-circle-icon class="size-4" />
           </button>
         </div>
