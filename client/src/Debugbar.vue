@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { createConsumer } from "@rails/actioncable"
 import { computed, onMounted, reactive, ref } from "vue"
-import { CodeBracketIcon, XCircleIcon, ArrowDownLeftIcon, TrashIcon } from "@heroicons/vue/16/solid"
+import {
+  CodeBracketIcon,
+  XCircleIcon,
+  ArrowDownLeftIcon,
+  TrashIcon,
+  PauseIcon,
+  PlayIcon,
+} from "@heroicons/vue/16/solid"
 
 import TabButton from "@/components/TabButton.vue"
 import ModelsPanel from "@/components/panels/ModelsPanel.vue"
@@ -26,6 +33,7 @@ const state = reactive({
   activeTab: "",
   minimized: false,
   isResizing: false,
+  isPolling: configStore.config.mode === "poll",
   height: configStore.config.height,
 })
 
@@ -77,6 +85,10 @@ if (configStore.config.mode === "ws") {
     `Using debugbar in "polling mode". Consider using "ws" mode for better performance (requires ActionCable).`
   )
   setInterval(() => {
+    if (!state.isPolling) {
+      return
+    }
+
     fetch(configStore.config.pollUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -111,6 +123,11 @@ const clearRequests = () => {
   state.activeTab = ""
   requestsStore.clearRequests()
   debugbarChannel?.send({ clear: true })
+  state.isPolling = true
+}
+
+const togglePolling = () => {
+  state.isPolling = !state.isPolling
 }
 
 // Resizing the debugbar
@@ -257,11 +274,18 @@ const setActiveTab = (tab) => {
           />
         </select>
 
-        <button @click="clearRequests" title="Clear all requests (frontend and backend)">
-          <trash-icon class="size-4" />
-        </button>
-
-        <div class="flex items-center pl-2 space-x-2">
+        <div class="flex items-center pl-1 space-x-2">
+          <button
+            v-if="configStore.config.mode == 'poll'"
+            @click="togglePolling"
+            :title="state.isPolling ? 'Pause polling' : 'Resume polling'"
+          >
+            <pause-icon v-if="state.isPolling" class="size-4" />
+            <play-icon v-if="!state.isPolling" class="size-4" />
+          </button>
+          <button @click="clearRequests" title="Clear all requests (frontend and backend)">
+            <trash-icon class="size-4" />
+          </button>
           <button @click="state.minimized = true" title="Hide in the corner">
             <arrow-down-left-icon class="size-4" />
           </button>
