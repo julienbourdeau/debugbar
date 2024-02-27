@@ -1,5 +1,12 @@
 module Debugbar::TagHelpers
   def debugbar_javascript(opt = {})
+    opt = ActiveSupport::HashWithIndifferentAccess.new(opt)
+
+    # See https://github.com/julienbourdeau/debugbar/issues/8
+    if !defined?(ActionCable) && opt[:mode].nil?
+      opt[:mode] = 'poll'
+    end
+
     html = <<-HTML
       <div id="__debugbar"></div>
     HTML
