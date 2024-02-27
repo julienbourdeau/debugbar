@@ -7,7 +7,7 @@ const props = withDefaults(
     slowThreshold?: number
     tooSlowThreshold?: number
   }>(),
-  { slowThreshold: 1000, tooSlowThreshold: 1500 }
+  { slowThreshold: 1000, tooSlowThreshold: 1500 } // TODO: make this configurable
 )
 
 const formattedDuration = computed(() => {

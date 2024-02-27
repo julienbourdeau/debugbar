@@ -240,11 +240,11 @@ const setActiveTab = (tab) => {
       <!--  Right  -->
       <div class="flex items-center space-x-3 pr-1">
         <div class="flex space-x-2">
-          <timing :duration-ms="requestsStore.currentRequest.meta.db_runtime">
+          <timing :duration-ms="requestsStore.currentRequest.meta.db_runtime" title="DB runtime">
             <circle-stack-icon class="text-stone-600 size-3" />
           </timing>
 
-          <timing :duration-ms="requestsStore.currentRequest.meta.cpu_time">
+          <timing :duration-ms="requestsStore.currentRequest.meta.cpu_time" title="CPU time">
             <cpu-chip-icon class="text-stone-600 size-3" />
           </timing>
 
@@ -253,6 +253,7 @@ const setActiveTab = (tab) => {
             :too-slow-threshold="1000"
             :slow-threshold="750"
             class="font-bold"
+            title="Total duration"
           >
             <arrows-up-down-icon class="text-stone-800 size-4" />
           </timing>
