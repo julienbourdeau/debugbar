@@ -8,6 +8,9 @@ import {
   TrashIcon,
   PauseIcon,
   PlayIcon,
+  CircleStackIcon,
+  ArrowsUpDownIcon,
+  CpuChipIcon,
 } from "@heroicons/vue/16/solid"
 
 import TabButton from "@/components/TabButton.vue"
@@ -23,6 +26,7 @@ import CachePanel from "@/components/panels/CachePanel.vue"
 import RequestPanel from "@/components/panels/RequestPanel.vue"
 import JsonPanel from "@/components/panels/JsonPanel.vue"
 import RubyLogo from "@/components/ui/RubyLogo.vue"
+import Timing from "@/components/ui/Timing.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -167,14 +171,17 @@ const setActiveTab = (tab) => {
   <div
     v-if="state.minimized"
     @click="state.minimized = false"
-    class="z-[9999] fixed left-0 bottom-0 bg-transparent cursor-pointer"
+    class="z-[9999] text-stone-900 fixed left-0 bottom-0 bg-transparent cursor-pointer"
   >
     <div class="p-1 pt-1.5">
       <ruby-logo />
     </div>
   </div>
 
-  <div v-if="!state.minimized && requestsStore.currentRequest == null" class="z-[9999] fixed left-0 bottom-0 w-full">
+  <div
+    v-if="!state.minimized && requestsStore.currentRequest == null"
+    class="z-[9999] text-stone-900 fixed left-0 bottom-0 w-full"
+  >
     <div class="h-0.5 bg-red-700 cursor-row-resize" />
     <div class="flex items-center justify-between bg-stone-100 border-b border-stone-200">
       <div class="px-5 py-1.5 italic">No request yet</div>
@@ -186,7 +193,10 @@ const setActiveTab = (tab) => {
     </div>
   </div>
 
-  <div v-if="!state.minimized && requestsStore.currentRequest" class="z-[9999] fixed left-0 bottom-0 w-full">
+  <div
+    v-if="!state.minimized && requestsStore.currentRequest"
+    class="z-[9999] text-stone-900 fixed left-0 bottom-0 w-full"
+  >
     <div id="draggable-bar" @mousedown="state.isResizing = true" class="h-0.5 bg-red-700 cursor-row-resize" />
 
     <div
@@ -224,25 +234,30 @@ const setActiveTab = (tab) => {
       </div>
 
       <!--  Right  -->
-      <div class="flex items-center space-x-2.5 pr-1">
+      <div class="flex items-center space-x-3 pr-1">
+        <div class="flex space-x-2">
+          <timing :duration-ms="requestsStore.currentRequest.meta.db_runtime">
+            <circle-stack-icon class="text-stone-600 size-3" />
+          </timing>
+
+          <timing :duration-ms="requestsStore.currentRequest.meta.cpu_time">
+            <cpu-chip-icon class="text-stone-600 size-3" />
+          </timing>
+
+          <timing
+            :duration-ms="requestsStore.currentRequest.meta.duration"
+            :too-slow-threshold="1000"
+            :slow-threshold="750"
+            class="font-bold"
+          >
+            <arrows-up-down-icon class="text-stone-800 size-4" />
+          </timing>
+        </div>
+
         <div @click="setActiveTab('request')" class="flex space-x-2 cursor-pointer">
           <span class="text-sm text-stone-600 font-medium tracking-wide">
             {{ routeAlias }}
           </span>
-
-          <span
-            class="text-sm font-bold"
-            v-if="requestsStore.currentRequest.meta.duration < 1000"
-            :class="{
-              'text-orange-600': requestsStore.currentRequest.meta.duration >= 800,
-            }"
-            >{{ requestsStore.currentRequest.meta.duration.toFixed(1) }}ms</span
-          >
-          <span
-            class="text-sm font-bold text-red-600 bg-red-100 px-1 rounded"
-            v-if="requestsStore.currentRequest.meta.duration >= 1000"
-            >{{ (requestsStore.currentRequest.meta.duration / 1000).toFixed(2) }}s</span
-          >
 
           <span
             class="px-1 py-0.5 rounded text-xs"
@@ -284,7 +299,7 @@ const setActiveTab = (tab) => {
             <play-icon v-if="!state.isPolling" class="size-4" />
           </button>
           <button @click="clearRequests" title="Clear all requests (frontend and backend)">
-            <trash-icon class="size-4" />
+            <trash-icon class="size-3" />
           </button>
           <button @click="state.minimized = true" title="Hide in the corner">
             <arrow-down-left-icon class="size-4" />
