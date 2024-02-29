@@ -39,7 +39,8 @@ module Debugbar
     initializer 'debugbar.inject_middlewares' do |app|
       next unless Debugbar.config.enabled?
       app.middleware.insert_after ActionDispatch::Executor, Debugbar::TrackCurrentRequest
-      app.middleware.insert_after Sprockets::Rails::QuietAssets, Debugbar::QuietRoutes
+      app.middleware.insert_after Sprockets::Rails::QuietAssets, Debugbar::QuietRoutes if defined? Sprockets
+      app.middleware.insert_after Propshaft::QuietAssets, Debugbar::QuietRoutes if defined? Propshaft
     end
 
     initializer 'debugbar.subscribe' do
