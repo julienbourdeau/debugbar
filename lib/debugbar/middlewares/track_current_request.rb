@@ -25,7 +25,8 @@ module Debugbar
 
         RequestBuffer.push(Debugbar::Current.pop_request!)
 
-        if Debugbar.connected?
+        # TODO: Refactor has not having ActionCable might more common than I thought
+        if Debugbar.connected? && defined?(ActionCable)
           data = RequestBuffer.all.map(&:to_h)
           ActionCable.server.broadcast("debugbar_channel", data)
         end

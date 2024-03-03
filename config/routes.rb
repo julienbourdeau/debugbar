@@ -1,5 +1,7 @@
 Debugbar::Engine.routes.draw do
-  mount ActionCable.server => '/cable'
+  if defined? ActionCable
+    mount ActionCable.server => '/cable'
+  end
 
   get 'poll' => "polling#poll"
   options 'poll/confirm' => "polling#confirm"
