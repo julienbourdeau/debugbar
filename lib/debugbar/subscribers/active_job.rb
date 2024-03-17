@@ -82,15 +82,25 @@ module Debugbar
       #     else
       #       failed_enqueue_count = jobs.size - enqueued_count
       #       "Failed enqueuing #{failed_enqueue_count} #{'job'.pluralize(failed_enqueue_count)} "\
-      #         "to #{ActiveJob.adapter_name(adapter)}"
+      #         "to #{adapter_name(adapter)}"
       #     end
       #   end
       # end
       # # subscribe_log_level :enqueue_all, :info
 
       private
+
+      # See ActiveJob.adapter_name for orignal implementation. This is redefined here
+      # to be compatible with the older Rails version.
+      def adapter_name(adapter) # :nodoc:
+        return adapter.queue_adapter_name if adapter.respond_to?(:queue_adapter_name)
+
+        adapter_class = adapter.is_a?(Module) ? adapter : adapter.class
+        "#{adapter_class.name.demodulize.delete_suffix('Adapter')}"
+      end
+
       def queue_name(event)
-        ActiveJob.adapter_name(event.payload[:adapter]) + "(#{event.payload[:job].queue_name})"
+        adapter_name(event.payload[:adapter]) + "(#{event.payload[:job].queue_name})"
       end
 
       def args_info(job)
@@ -150,7 +160,7 @@ module Debugbar
       def enqueued_jobs_message(adapter, enqueued_jobs)
         enqueued_count = enqueued_jobs.size
         job_classes_counts = enqueued_jobs.map(&:class).tally.sort_by { |_k, v| -v }
-        "Enqueued #{enqueued_count} #{'job'.pluralize(enqueued_count)} to #{ActiveJob.adapter_name(adapter)}"\
+        "Enqueued #{enqueued_count} #{'job'.pluralize(enqueued_count)} to #{adapter_name(adapter)}"\
           " (#{job_classes_counts.map { |klass, count| "#{count} #{klass}" }.join(', ')})"
       end
     end
