@@ -7,20 +7,12 @@ module Debugbar::TagHelpers
       opt[:mode] = 'poll'
     end
 
-    html = <<-HTML
-      <div id="__debugbar"></div>
-    HTML
-
-    html += <<-HTML
+    raw(<<~HTML)
+      <div id="__debugbar" data-turbo-permanent></div>
       <script type="text/javascript">
         window._debugbarConfigOptions = #{opt.to_json}
       </script>
-    HTML
-
-    html += <<-HTML
       <script defer src="#{Debugbar.config.prefix}/assets/script"></script>
-      HTML
-
-    raw html
+    HTML
   end
 end
