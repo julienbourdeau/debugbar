@@ -206,10 +206,10 @@ const setActiveTab = (tab) => {
     <div
       id="debubgbar-header"
       ref="header"
-      class="flex px-1 items-center justify-between bg-stone-100 border-b-2 border-stone-300"
+      class="flex flex-wrap px-1 items-center justify-end bg-stone-100 border-b-2 border-stone-300"
     >
       <!--  Left  -->
-      <div>
+      <div class="grow">
         <div class="flex">
           <div class="p-1 pt-1.5">
             <ruby-logo />
