@@ -3,7 +3,7 @@
 ## v0.3.0 - 2024-03-30
 
 * Add support for Turbo Drive - See [#25](https://github.com/julienbourdeau/debugbar/pull/25) and [#26](https://github.com/julienbourdeau/debugbar/pull/26)
-* 
+* Fix error "undefined method `adapter_name' for ActiveJob:Module" for Rails < 7.1 - See [#24](https://github.com/julienbourdeau/debugbar/pull/24)
 
 ## v0.2.0 - 2024-02-28
 
