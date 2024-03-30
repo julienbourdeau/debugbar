@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.3.0 - 2024-03-30
+
+* Add support for Turbo Drive - See [#25](https://github.com/julienbourdeau/debugbar/pull/25) and [#26](https://github.com/julienbourdeau/debugbar/pull/26)
+* 
+
 ## v0.2.0 - 2024-02-28
 
 * Introduce polling in case someone cannot use ActiveCable - See [8b262be7](https://github.com/julienbourdeau/debugbar/commit/8b262be7b644c7b587a6c3348bb02076053a344f)
