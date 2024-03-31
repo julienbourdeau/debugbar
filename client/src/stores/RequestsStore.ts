@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
 import { BackendRequest, BackendRequestData } from "@/models/Request.ts"
+import { useConfigStore } from "@/stores/configStore.ts"
 
 export let useRequestsStore = defineStore("requests", {
   state: () => {
@@ -20,6 +21,11 @@ export let useRequestsStore = defineStore("requests", {
         }
         ids.push(r.id)
       })
+
+      while (this.requests.length > useConfigStore().config.maxRequests) {
+        this.requests.shift()
+      }
+
       return ids
     },
     setCurrentRequestById(id: string) {
@@ -29,8 +35,5 @@ export let useRequestsStore = defineStore("requests", {
       this.requests = []
       this.currentRequest = null
     },
-    // removeRequest(request) {
-    //   this.requests.splice(this.requests.indexOf(request), 1)
-    // },
   },
 })

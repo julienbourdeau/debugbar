@@ -12,6 +12,7 @@ export type DebugbarConfigOptions = {
     interval: number
   }
   height: number
+  maxRequests: number
 }
 
 export type DebugbarConfig = DebugbarConfigOptions & {
@@ -32,6 +33,7 @@ export function newDebugbarConfig(options: DebugbarConfigOptions) {
       interval: 500,
     },
     height: 360,
+    maxRequests: 25,
   } as DebugbarConfigOptions)
 
   obj.actionCableUrl = `${obj.cable.url}${obj.prefix}/cable`
