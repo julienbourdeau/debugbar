@@ -29,7 +29,7 @@ module Debugbar::TagHelpers
   def debugbar_javascript(opt = {})
     errors = [""]
     errors << "debugbar_javascript was removed in 0.3.0."
-    errors << "Please use `debugbar_head` inside <head> and `debugbar_body(opt_hash)` at the end of <body> instead."
+    errors << "Please use `debugbar_head` inside <head> and `debugbar_body` at the end of <body> instead."
     errors << "It was split to support Turbo Drive."
     errors << "See https://debugbar.dev/changelog/ for more information."
     errors << ""

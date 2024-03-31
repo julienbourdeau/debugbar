@@ -1,5 +1,5 @@
 {
-  "id": "9816e60d-c941-4bf5-804f-3b48faae2a6a",
+  "id": "dc480418-c66e-4cdf-89b9-14470a680947",
   "meta": {
     "controller": "ApiController",
     "action": "jobs",
@@ -14,11 +14,11 @@
     "path": "/api/jobs?name=refresh&post_id=123",
     "status": 200,
     "view_runtime": null,
-    "db_runtime": 0.10400003520771861,
-    "duration": 11.712999999523163,
-    "cpu_time": 11.666749999999865,
-    "idle_time": 0.04624999952329745,
-    "allocations": 5262
+    "db_runtime": 0.09300000965595245,
+    "duration": 12.072999954223633,
+    "cpu_time": 11.777124999999998,
+    "idle_time": 0.29587495422363475,
+    "allocations": 6495
   },
   "request": {
     "method": "GET",
@@ -48,9 +48,9 @@
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Content-Type": "text/html",
       "Cache-Control": "no-cache",
-      "X-Request-Id": "647bf2af-9189-44e8-a2a0-5dbbe0fe62c1",
-      "X-Runtime": "0.025575",
-      "Server-Timing": "start_processing.action_controller;dur=0.02, perform_start.active_job;dur=0.00, sql.active_record;dur=0.11, instantiation.active_record;dur=0.06, cache_write.active_support;dur=0.04, perform.active_job;dur=2.05, enqueue.active_job;dur=10.50, process_action.action_controller;dur=11.71"
+      "X-Request-Id": "817eb11f-9041-4a84-b8b6-eacf0fc339cc",
+      "X-Runtime": "0.028179",
+      "Server-Timing": "start_processing.action_controller;dur=0.01, perform_start.active_job;dur=0.00, sql.active_record;dur=0.10, instantiation.active_record;dur=0.05, cache_write.active_support;dur=0.07, perform.active_job;dur=2.32, enqueue.active_job;dur=10.31, process_action.action_controller;dur=12.07"
     },
     "body": ""
   },
@@ -59,7 +59,7 @@
   },
   "queries": [
     {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "Post Load (0.1ms)",
       "name": "Post Load",
       "sql": "SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"id\" = 123 LIMIT 1 ",
@@ -76,7 +76,7 @@
   ],
   "jobs": [
     {
-      "id": "953f912c-073b-4194-adef-4681840b5b97",
+      "id": "0bdcda84-6a03-48e4-85ee-c7464352a233",
       "class": "RefreshPostJob",
       "queue": "Inline(default)",
       "args": [
@@ -85,7 +85,7 @@
       "successfully_enqueued": true,
       "scheduled_at": null,
       "logs": [
-        "Enqueued RefreshPostJob (Job ID: 953f912c-073b-4194-adef-4681840b5b97) to Inline(default) with arguments: \"123\"",
+        "Enqueued RefreshPostJob (Job ID: 0bdcda84-6a03-48e4-85ee-c7464352a233) to Inline(default) with arguments: \"123\"",
         "/Users/julien/Personal/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
       ]
     }
@@ -100,8 +100,8 @@
       "compress": true,
       "compress_threshold": 1024,
       "name": "cache_write.active_support",
-      "transaction_id": "6f19a233a9f34d3cbc0d",
-      "time": "21:57:11.930",
+      "transaction_id": "5f9356d2f435fb999850",
+      "time": "18:53:53.928",
       "label": "write"
     }
   ],

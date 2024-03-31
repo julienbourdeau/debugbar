@@ -1,5 +1,5 @@
 {
-  "id": "26808211-87cb-4b61-a30b-dd5332584403",
+  "id": "d0226fb4-8743-4375-89a7-5319d733db52",
   "meta": {
     "controller": "DemoController",
     "action": "random_post",
@@ -12,11 +12,11 @@
     "path": "/random",
     "status": 302,
     "view_runtime": null,
-    "db_runtime": 1.0089999996125698,
-    "duration": 3.787000000476837,
-    "cpu_time": 3.7858750000000327,
-    "idle_time": 0.0011250004768044164,
-    "allocations": 1379
+    "db_runtime": 0.9240000508725643,
+    "duration": 3.9800000190734863,
+    "cpu_time": 3.978917000000001,
+    "idle_time": 0.0010830190734854028,
+    "allocations": 1551
   },
   "request": {
     "method": "GET",
@@ -42,12 +42,12 @@
       "X-Content-Type-Options": "nosniff",
       "X-Permitted-Cross-Domain-Policies": "none",
       "Referrer-Policy": "strict-origin-when-cross-origin",
-      "Location": "http://127.0.0.1:3000/post/173",
+      "Location": "http://127.0.0.1:3000/post/478",
       "Content-Type": "text/html; charset=utf-8",
       "Cache-Control": "no-cache",
-      "X-Request-Id": "73b55941-b25a-4380-928a-fdd4f47f3584",
-      "X-Runtime": "0.016149",
-      "Server-Timing": "start_processing.action_controller;dur=0.02, sql.active_record;dur=1.01, instantiation.active_record;dur=0.13, redirect_to.action_controller;dur=0.32, process_action.action_controller;dur=3.79"
+      "X-Request-Id": "292b3ef8-f197-4e4c-99c9-b3dfac506a67",
+      "X-Runtime": "0.017654",
+      "Server-Timing": "start_processing.action_controller;dur=0.02, sql.active_record;dur=0.93, instantiation.active_record;dur=0.10, redirect_to.action_controller;dur=0.55, process_action.action_controller;dur=3.98"
     },
     "body": ""
   },
@@ -56,13 +56,13 @@
   },
   "queries": [
     {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Post Load (1.0ms)",
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Post Load (0.9ms)",
       "name": "Post Load",
       "sql": "SELECT \"posts\".* FROM \"posts\" ORDER BY RANDOM() LIMIT 1 ",
       "cached": false,
       "async": false,
-      "duration": 1.0,
+      "duration": 0.9,
       "lock_wait": null,
       "binds": null,
       "source": [

@@ -1,5 +1,5 @@
 {
-  "id": "a4c60a10-3931-40c9-b3f8-044fd748ef07",
+  "id": "473d6fa2-543f-4b31-b2d2-4813431ad25c",
   "meta": {
     "controller": "ApiController",
     "action": "errors",
@@ -19,10 +19,10 @@
       "This is a test error"
     ],
     "exception_object": "This is a test error",
-    "duration": 0.6930000185966492,
-    "cpu_time": 0.6912079999999605,
-    "idle_time": 0.0017920185966886493,
-    "allocations": 496
+    "duration": 0.6979999542236328,
+    "cpu_time": 0.6962499999999991,
+    "idle_time": 0.0017499542236336652,
+    "allocations": 524
   },
   "request": {
     "method": "GET",

@@ -1,5 +1,5 @@
 {
-  "id": "1a80b736-b812-409a-ae86-6373edeea3ee",
+  "id": "376c69b7-1f7c-4c19-a925-08090ab96c99",
   "meta": {
     "controller": "DemoController",
     "action": "post_list",
@@ -11,12 +11,12 @@
     "method": "GET",
     "path": "/post-list",
     "status": 200,
-    "view_runtime": 10.557000117842108,
-    "db_runtime": 5.936999979894608,
-    "duration": 33.83500003814697,
-    "cpu_time": 29.622041999999965,
-    "idle_time": 4.212958038147008,
-    "allocations": 47421
+    "view_runtime": 19.326998852193356,
+    "db_runtime": 18.60400103032589,
+    "duration": 653.5549998283386,
+    "cpu_time": 607.844333,
+    "idle_time": 45.71066682833862,
+    "allocations": 1071498
   },
   "request": {
     "method": "GET",
@@ -45,25 +45,40 @@
       "Link": "</assets/application-f8c090dd3cd5575b45894e4b6478d0b328f7a89e69c744e74f1153c5eca55e4e.css>; rel=preload; as=style; nopush",
       "Content-Type": "text/html; charset=utf-8",
       "Vary": "Accept",
-      "Etag": "W/\"be92178ac96af161bc85de61a765ac4d\"",
+      "Etag": "W/\"255d8dc4f35a64b5dd4c7c291018aba1\"",
       "Cache-Control": "max-age=0, private, must-revalidate"
     },
-    "body": "<!DOCTYPE html>\n<html>\n  <head>\n    <title>DemoApp</title>\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n    <meta name=\"csrf-param\" content=\"authenticity_token\" />\n<meta name=\"csrf-token\" content=\"osBwvi-qwMjhSYlnx8Jw4lBnIPHwDeqL5KHxUIeB4nPZwek1GooDFL7rotYBfeeJ4hz6Abzkin3b_DJqAB-IDQ\" />\n    \n\n\n    <link rel=\"stylesheet\" href=\"/assets/application-f8c090dd3cd5575b45894e4b6478d0b328f7a89e69c744e74f1153c5eca55e4e.css\" data-turbo-track=\"reload\" />\n    <script type=\"importmap\" data-turbo-track=\"reload\">{\n  \"imports\": {\n    \"application\": \"/assets/application-3897b39d0f7fe7e947af9b84a1e1304bb30eb1dadb983104797d0a5e26a08736.js\"\n  }\n}</script>\n<link rel=\"modulepreload\" href=\"/assets/application-3897b39d0f7fe7e947af9b84a1e1304bb30eb1dadb983104797d0a5e26a08736.js\">\n<script type=\"module\">import \"application\"</script>\n\n  </head>\n\n  <body>\n    <div class=\"container mb-5\">\n\n\n      <nav class=\"mt-2 mb-4 navbar navbar-expand-lg navbar-light bg-light\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"/\">Rails Demo app</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n          <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n            <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/post-list\">Post List</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/random\">Random</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/slow-page\">Slow page</a>\n              </li>\n            </ul>\n            <ul class=\"navbar-nav\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/export-csv\">Export</a>\n              </li>\n              <li class=\"nav-item\">\n                <button type=\"button\" class=\"nav-link\" onclick=\"fetch('/api/errors?code=404'); fetch('/api/errors?code=401'); fetch('/api/errors?code=500')\">Errors</button>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </nav>\n\n      <div class=\"mb-5\">\n        <table class=\"table table-hover table-striped\">\n  <thead>\n    <tr class=\"table-secondary\">\n      <th scope=\"col\">#</th>\n      <th scope=\"col\">Title</th>\n      <th scope=\"col\">Published on</th>\n      <th scope=\"col\">Reactions</th>\n      <th scope=\"col\">Actions</th>\n    </tr>\n  </thead>\n  <tbody>\n\n    <tr>\n      <th scope=\"row\">2937</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/2937\">\n          <strong>All Passion Spent</strong>\n        </a>\n        <br> by Augusta Kihn\n        and 2 others\n      </td>\n      <td>2022-11-15</td>\n      <td>913</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=2937')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=2937')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">2749</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/2749\">\n          <strong>Sleep the Brave</strong>\n        </a>\n        <br> by Lizette Tillman\n        and 2 others\n      </td>\n      <td>2022-02-07</td>\n      <td>464</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=2749')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=2749')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">4951</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/4951\">\n          <strong>Time To Murder And Create</strong>\n        </a>\n        <br> by Sen. Berniece Mitchell\n        and 6 others\n      </td>\n      <td>2022-12-11</td>\n      <td>657</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=4951')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=4951')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">4235</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/4235\">\n          <strong>By Grand Central Station I Sat Down and Wept</strong>\n        </a>\n        <br> by The Hon. Austin Kunze\n        and 9 others\n      </td>\n      <td>2023-10-24</td>\n      <td>79</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=4235')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=4235')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">2432</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/2432\">\n          <strong>The Golden Apples of the Sun</strong>\n        </a>\n        <br> by Cassie Gibson\n        \n      </td>\n      <td>2021-10-08</td>\n      <td>761</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=2432')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=2432')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">828</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/828\">\n          <strong>In Dubious Battle</strong>\n        </a>\n        <br> by Denis Little\n        and 3 others\n      </td>\n      <td>2023-06-28</td>\n      <td>636</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=828')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=828')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">4239</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/4239\">\n          <strong>The Monkey&#39;s Raincoat</strong>\n        </a>\n        <br> by Jimmy Jast\n        and 4 others\n      </td>\n      <td>2023-08-24</td>\n      <td>605</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=4239')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=4239')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">3155</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/3155\">\n          <strong>The Glory and the Dream</strong>\n        </a>\n        <br> by Denisha Bahringer\n        and 11 others\n      </td>\n      <td>2022-03-13</td>\n      <td>717</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=3155')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=3155')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">479</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/479\">\n          <strong>The Stars&#39; Tennis Balls</strong>\n        </a>\n        <br> by Zachary Stracke\n        and 1 others\n      </td>\n      <td>2021-11-22</td>\n      <td>387</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=479')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=479')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">136</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/136\">\n          <strong>Cover Her Face</strong>\n        </a>\n        <br> by Lucas Krajcik\n        and 8 others\n      </td>\n      <td>2021-08-28</td>\n      <td>298</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=136')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=136')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">1682</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/1682\">\n          <strong>The Line of Beauty</strong>\n        </a>\n        <br> by Hertha Hermiston\n        and 5 others\n      </td>\n      <td>2023-01-20</td>\n      <td>933</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=1682')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=1682')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">1327</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/1327\">\n          <strong>This Side of Paradise</strong>\n        </a>\n        <br> by Pres. Emil Langosh\n        and 2 others\n      </td>\n      <td>2023-05-01</td>\n      <td>910</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=1327')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=1327')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">512</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/512\">\n          <strong>Paths of Glory</strong>\n        </a>\n        <br> by August Hoppe Esq.\n        \n      </td>\n      <td>2023-11-23</td>\n      <td>956</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=512')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=512')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">4035</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/4035\">\n          <strong>Tiger! Tiger!</strong>\n        </a>\n        <br> by Otis King\n        and 5 others\n      </td>\n      <td>2023-08-06</td>\n      <td>291</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=4035')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=4035')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">3805</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/3805\">\n          <strong>This Lime Tree Bower</strong>\n        </a>\n        <br> by Claude Quigley\n        \n      </td>\n      <td>2023-08-12</td>\n      <td>808</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=3805')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=3805')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">694</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/694\">\n          <strong>A Farewell to Arms</strong>\n        </a>\n        <br> by Dudley Runolfsdottir\n        and 10 others\n      </td>\n      <td>2023-09-25</td>\n      <td>451</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=694')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=694')\">Refresh</button>\n      </td>\n    </tr>\n\n  </tbody>\n</table>\n\nShowing 16 posts out of 5000 in total.\n\n      </div>\n\n    </div>\n\n          <div id=\"__debugbar\"></div>\n      <script type=\"text/javascript\">\n        window._debugbarConfigOptions = {\"height\":800,\"mode\":\"poll\",\"poll\":{\"interval\":10000}}\n      </script>\n      <script defer src=\"/_debugbar/assets/script\"></script>\n\n  </body>\n</html>\n"
+    "body": "<!DOCTYPE html>\n<html>\n  <head>\n    <title>DemoApp</title>\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n    <meta name=\"csrf-param\" content=\"authenticity_token\" />\n<meta name=\"csrf-token\" content=\"ifyM3BUt60bwSqkncJzm5yc3Oa5-6oiBFenevyC7sA9aX3OrjJa7yyGdf2t2K95PF0QCSkHR_zfWqkKCwUWqHA\" />\n    \n\n\n    <link rel=\"stylesheet\" href=\"/assets/application-f8c090dd3cd5575b45894e4b6478d0b328f7a89e69c744e74f1153c5eca55e4e.css\" data-turbo-track=\"reload\" />\n    <script type=\"importmap\" data-turbo-track=\"reload\">{\n  \"imports\": {\n    \"application\": \"/assets/application-753d1a7d22585b73b12d1c10b44a7f93dc90824626ae714b63189efa43dff969.js\",\n    \"@hotwired/turbo-rails\": \"/assets/turbo.min-c6325b8b56619b34aa6e0f34dfed82b010fe049f81b320a4cd0e2d99d3245118.js\"\n  }\n}</script>\n<link rel=\"modulepreload\" href=\"/assets/application-753d1a7d22585b73b12d1c10b44a7f93dc90824626ae714b63189efa43dff969.js\">\n<link rel=\"modulepreload\" href=\"/assets/turbo.min-c6325b8b56619b34aa6e0f34dfed82b010fe049f81b320a4cd0e2d99d3245118.js\">\n<script type=\"module\">import \"application\"</script>\n\n          <script defer src=\"/_debugbar/assets/script\"></script>\n\n  </head>\n\n  <body>\n    <div class=\"container mb-5\">\n\n      <nav class=\"mt-2 mb-4 navbar navbar-expand-lg navbar-light bg-light\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"/\">Rails Demo app</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n          <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n            <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/post-list\">Post List</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/random\">Random</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/slow-page\">Slow page</a>\n              </li>\n            </ul>\n            <ul class=\"navbar-nav\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/export-csv\">Export</a>\n              </li>\n              <li class=\"nav-item\">\n                <button type=\"button\" class=\"nav-link\" onclick=\"fetch('/api/errors?code=404'); fetch('/api/errors?code=401'); fetch('/api/errors?code=500')\">Errors</button>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </nav>\n\n      <div class=\"mb-5\">\n        <table class=\"table table-hover table-striped\">\n  <thead>\n    <tr class=\"table-secondary\">\n      <th scope=\"col\">#</th>\n      <th scope=\"col\">Title</th>\n      <th scope=\"col\">Published on</th>\n      <th scope=\"col\">Reactions</th>\n      <th scope=\"col\">Actions</th>\n    </tr>\n  </thead>\n  <tbody>\n\n    <tr>\n      <th scope=\"row\">1764</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/1764\">\n          <strong>Have His Carcase</strong>\n        </a>\n        <br> by Daisey Harvey III\n        and 9 others\n      </td>\n      <td>2022-11-04</td>\n      <td>703</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=1764')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=1764')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">4634</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/4634\">\n          <strong>Gone with the Wind</strong>\n        </a>\n        <br> by Reggie Berge\n        and 11 others\n      </td>\n      <td>2021-08-30</td>\n      <td>98</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=4634')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=4634')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">599</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/599\">\n          <strong>A Summer Bird-Cage</strong>\n        </a>\n        <br> by Jeremy Welch\n        and 8 others\n      </td>\n      <td>2022-06-10</td>\n      <td>967</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=599')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=599')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">3405</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/3405\">\n          <strong>Cover Her Face</strong>\n        </a>\n        <br> by Felix Stokes\n        \n      </td>\n      <td>2022-10-23</td>\n      <td>342</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=3405')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=3405')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">2800</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/2800\">\n          <strong>To a God Unknown</strong>\n        </a>\n        <br> by Jackson Raynor\n        and 3 others\n      </td>\n      <td>2022-07-11</td>\n      <td>529</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=2800')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=2800')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">3999</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/3999\">\n          <strong>Taming a Sea Horse</strong>\n        </a>\n        <br> by Douglas Schroeder\n        and 5 others\n      </td>\n      <td>2023-02-08</td>\n      <td>894</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=3999')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=3999')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">2115</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/2115\">\n          <strong>Jesting Pilate</strong>\n        </a>\n        <br> by Cordell Schoen\n        and 10 others\n      </td>\n      <td>2021-10-03</td>\n      <td>947</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=2115')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=2115')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">477</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/477\">\n          <strong>Jesting Pilate</strong>\n        </a>\n        <br> by Mrs. Leonora Hahn\n        and 8 others\n      </td>\n      <td>2022-12-16</td>\n      <td>562</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=477')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=477')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">4718</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/4718\">\n          <strong>For Whom the Bell Tolls</strong>\n        </a>\n        <br> by Sen. Gavin Murray\n        and 1 others\n      </td>\n      <td>2022-06-28</td>\n      <td>594</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=4718')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=4718')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">614</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/614\">\n          <strong>Butter In a Lordly Dish</strong>\n        </a>\n        <br> by Fred Hamill\n        and 5 others\n      </td>\n      <td>2021-11-15</td>\n      <td>865</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=614')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=614')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">3687</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/3687\">\n          <strong>A Farewell to Arms</strong>\n        </a>\n        <br> by Ima Blanda JD\n        and 5 others\n      </td>\n      <td>2021-12-29</td>\n      <td>783</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=3687')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=3687')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">1207</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/1207\">\n          <strong>Frequent Hearses</strong>\n        </a>\n        <br> by Pasquale Johns\n        and 6 others\n      </td>\n      <td>2024-01-08</td>\n      <td>726</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=1207')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=1207')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">1172</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/1172\">\n          <strong>Arms and the Man</strong>\n        </a>\n        <br> by Burl Hyatt\n        and 9 others\n      </td>\n      <td>2021-07-04</td>\n      <td>868</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=1172')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=1172')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">4304</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/4304\">\n          <strong>No Longer at Ease</strong>\n        </a>\n        <br> by Buster Bahringer\n        \n      </td>\n      <td>2021-08-19</td>\n      <td>243</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=4304')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=4304')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">561</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/561\">\n          <strong>To a God Unknown</strong>\n        </a>\n        <br> by Gerald Bartoletti\n        and 1 others\n      </td>\n      <td>2022-07-03</td>\n      <td>659</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=561')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=561')\">Refresh</button>\n      </td>\n    </tr>\n    <tr>\n      <th scope=\"row\">4496</th>\n      <td>\n        <a href=\"http://127.0.0.1:3000/post/4496\">\n          <strong>Infinite Jest</strong>\n        </a>\n        <br> by Pres. Barney Williamson\n        and 7 others\n      </td>\n      <td>2023-12-20</td>\n      <td>208</td>\n      <td>\n        <button class=\"btn btn-sm btn-outline-secondary\" onclick=\"fetch('/api/jobs?name=send_email&post_id=4496')\">Send email</button>\n        <button class=\"btn btn-sm btn-outline-primary\" onclick=\"fetch('/api/jobs?name=refresh&post_id=4496')\">Refresh</button>\n      </td>\n    </tr>\n\n  </tbody>\n</table>\n\nShowing 16 posts out of 5000 in total.\n\n      </div>\n\n    </div>\n\n          <div id=\"__debugbar\" data-turbo-permanent></div>\n      <script type=\"text/javascript\" data-turbo-permanent>\n        window._debugbarConfigOptions = {\"height\":800,\"mode\":\"poll\",\"poll\":{\"interval\":10000}}\n      </script>\n\n\n  </body>\n</html>\n"
   },
   "models": {
     "Post": 16,
-    "PostAuthor": 84,
-    "Author": 83
+    "PostAuthor": 104,
+    "Author": 98
   },
   "queries": [
     {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Post Load (0.5ms)",
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "ActiveRecord::SchemaMigration Load (0.1ms)",
+      "name": "ActiveRecord::SchemaMigration Load",
+      "sql": "SELECT \"schema_migrations\".\"version\" FROM \"schema_migrations\" ORDER BY \"schema_migrations\".\"version\" ASC ",
+      "cached": false,
+      "async": false,
+      "duration": 0.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/debugbar/lib/debugbar/middlewares/quiet_routes.rb:19",
+        " `call'"
+      ]
+    },
+    {
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Post Load (6.7ms)",
       "name": "Post Load",
       "sql": "SELECT \"posts\".* FROM \"posts\" ORDER BY RANDOM() LIMIT 16 ",
       "cached": false,
       "async": false,
-      "duration": 0.5,
+      "duration": 6.7,
       "lock_wait": null,
       "binds": null,
       "source": [
@@ -72,13 +87,13 @@
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
-      "title": "PostAuthor Load (0.1ms)",
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "PostAuthor Load (2.5ms)",
       "name": "PostAuthor Load",
-      "sql": "SELECT \"post_authors\".* FROM \"post_authors\" WHERE \"post_authors\".\"post_id\" IN (2937, 2749, 4951, 4235, 2432, 828, 4239, 3155, 479, 136, 1682, 1327, 512, 4035, 3805, 694) ",
+      "sql": "SELECT \"post_authors\".* FROM \"post_authors\" WHERE \"post_authors\".\"post_id\" IN (1764, 4634, 599, 3405, 2800, 3999, 2115, 477, 4718, 614, 3687, 1207, 1172, 4304, 561, 4496) ",
       "cached": false,
       "async": false,
-      "duration": 0.1,
+      "duration": 2.5,
       "lock_wait": null,
       "binds": null,
       "source": [
@@ -87,13 +102,13 @@
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Author Load (0.1ms)",
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Author Load (0.7ms)",
       "name": "Author Load",
-      "sql": "SELECT \"authors\".* FROM \"authors\" WHERE \"authors\".\"id\" IN (1602, 992, 258, 1440, 1196, 895, 1102, 552, 1778, 1885, 1014, 629, 1306, 1760, 698, 356, 753, 98, 581, 296, 1313, 149, 1925, 348, 28, 1037, 141, 152, 371, 380, 1814, 1959, 741, 877, 1262, 762, 175, 1377, 1531, 1303, 1867, 441, 593, 388, 1205, 1738, 1381, 49, 266, 1857, 1912, 1742, 459, 305, 655, 1945, 625, 1555, 1287, 1522, 1410, 725, 619, 252, 144, 171, 643, 1250, 1452, 769, 1782, 726, 1335, 1806, 907, 1251, 1694, 729, 1392, 663, 1999, 1165, 1819) ",
+      "sql": "SELECT \"authors\".* FROM \"authors\" WHERE \"authors\".\"id\" IN (1358, 477, 411, 842, 1067, 1715, 1496, 1618, 1881, 209, 389, 1797, 257, 74, 1457, 41, 387, 272, 516, 307, 106, 652, 817, 705, 1848, 1917, 191, 942, 1087, 328, 1017, 1015, 591, 1283, 1247, 1235, 859, 334, 83, 1780, 976, 1044, 1661, 1718, 783, 1854, 969, 1543, 7, 227, 1255, 1155, 768, 1747, 1168, 123, 1869, 437, 691, 1820, 175, 4, 148, 1281, 1594, 1008, 1320, 1337, 292, 129, 2000, 1470, 1083, 1146, 556, 1604, 1832, 1205, 247, 997, 615, 1272, 1178, 725, 847, 1834, 560, 703, 493, 648, 1294, 1334, 1914, 1636, 1285, 125, 1657, 1263) ",
       "cached": false,
       "async": false,
-      "duration": 0.1,
+      "duration": 0.7,
       "lock_wait": null,
       "binds": null,
       "source": [
@@ -102,7 +117,7 @@
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "Post Count (0.0ms)",
       "name": "Post Count",
       "sql": "SELECT COUNT(*) FROM \"posts\" ",
@@ -117,70 +132,10 @@
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Reaction Count (0.7ms)",
-      "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 2937 ",
-      "cached": false,
-      "async": false,
-      "duration": 0.7,
-      "lock_wait": null,
-      "binds": null,
-      "source": [
-        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
-      ]
-    },
-    {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Reaction Count (0.3ms)",
-      "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 2749 ",
-      "cached": false,
-      "async": false,
-      "duration": 0.3,
-      "lock_wait": null,
-      "binds": null,
-      "source": [
-        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
-      ]
-    },
-    {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Reaction Count (0.3ms)",
-      "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 4951 ",
-      "cached": false,
-      "async": false,
-      "duration": 0.3,
-      "lock_wait": null,
-      "binds": null,
-      "source": [
-        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
-      ]
-    },
-    {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Reaction Count (0.0ms)",
-      "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 4235 ",
-      "cached": false,
-      "async": false,
-      "duration": 0.0,
-      "lock_wait": null,
-      "binds": null,
-      "source": [
-        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
-      ]
-    },
-    {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "Reaction Count (0.6ms)",
       "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 2432 ",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 1764 ",
       "cached": false,
       "async": false,
       "duration": 0.6,
@@ -188,74 +143,14 @@
       "binds": null,
       "source": [
         "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Reaction Count (0.0ms)",
-      "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 828 ",
-      "cached": false,
-      "async": false,
-      "duration": 0.0,
-      "lock_wait": null,
-      "binds": null,
-      "source": [
-        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
-      ]
-    },
-    {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Reaction Count (0.0ms)",
-      "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 4239 ",
-      "cached": false,
-      "async": false,
-      "duration": 0.0,
-      "lock_wait": null,
-      "binds": null,
-      "source": [
-        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
-      ]
-    },
-    {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Reaction Count (0.5ms)",
-      "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 3155 ",
-      "cached": false,
-      "async": false,
-      "duration": 0.5,
-      "lock_wait": null,
-      "binds": null,
-      "source": [
-        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
-      ]
-    },
-    {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Reaction Count (0.5ms)",
-      "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 479 ",
-      "cached": false,
-      "async": false,
-      "duration": 0.5,
-      "lock_wait": null,
-      "binds": null,
-      "source": [
-        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
-      ]
-    },
-    {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "Reaction Count (0.3ms)",
       "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 136 ",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 4634 ",
       "cached": false,
       "async": false,
       "duration": 0.3,
@@ -263,14 +158,44 @@
       "binds": null,
       "source": [
         "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Reaction Count (0.6ms)",
+      "name": "Reaction Count",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 599 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
+      ]
+    },
+    {
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Reaction Count (0.5ms)",
+      "name": "Reaction Count",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 3405 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.5,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
+      ]
+    },
+    {
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "Reaction Count (0.4ms)",
       "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 1682 ",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 2800 ",
       "cached": false,
       "async": false,
       "duration": 0.4,
@@ -278,29 +203,44 @@
       "binds": null,
       "source": [
         "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Reaction Count (0.1ms)",
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Reaction Count (0.4ms)",
       "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 1327 ",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 3999 ",
       "cached": false,
       "async": false,
-      "duration": 0.1,
+      "duration": 0.4,
       "lock_wait": null,
       "binds": null,
       "source": [
         "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Reaction Count (0.6ms)",
+      "name": "Reaction Count",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 2115 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
+      ]
+    },
+    {
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "Reaction Count (0.5ms)",
       "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 512 ",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 477 ",
       "cached": false,
       "async": false,
       "duration": 0.5,
@@ -308,29 +248,29 @@
       "binds": null,
       "source": [
         "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Reaction Count (0.3ms)",
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Reaction Count (0.6ms)",
       "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 4035 ",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 4718 ",
       "cached": false,
       "async": false,
-      "duration": 0.3,
+      "duration": 0.6,
       "lock_wait": null,
       "binds": null,
       "source": [
         "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "Reaction Count (0.5ms)",
       "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 3805 ",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 614 ",
       "cached": false,
       "async": false,
       "duration": 0.5,
@@ -338,14 +278,89 @@
       "binds": null,
       "source": [
         "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Reaction Count (0.5ms)",
+      "name": "Reaction Count",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 3687 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.5,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
+      ]
+    },
+    {
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Reaction Count (0.6ms)",
+      "name": "Reaction Count",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 1207 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
+      ]
+    },
+    {
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Reaction Count (0.6ms)",
+      "name": "Reaction Count",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 1172 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.6,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
+      ]
+    },
+    {
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Reaction Count (0.4ms)",
+      "name": "Reaction Count",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 4304 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.4,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
+      ]
+    },
+    {
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Reaction Count (0.5ms)",
+      "name": "Reaction Count",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 561 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.5,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
+      ]
+    },
+    {
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "Reaction Count (0.3ms)",
       "name": "Reaction Count",
-      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 694 ",
+      "sql": "SELECT COUNT(*) FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 4496 ",
       "cached": false,
       "async": false,
       "duration": 0.3,
@@ -353,50 +368,50 @@
       "binds": null,
       "source": [
         "/Users/julien/Personal/rails-demo-blog-app/app/views/demo/post_list.html.erb:24",
-        " `block in _app_views_demo_post_list_html_erb___715573743745160925_76180'"
+        " `block in _app_views_demo_post_list_html_erb__3203255375914839132_26920'"
       ]
     }
   ],
   "jobs": [
     {
-      "id": "861bbdd3-4195-4539-9475-5ceb8e3ce7c0",
+      "id": "86041f53-9fdd-43d7-bbed-b96e66824b50",
       "class": "WarmupCacheJob",
       "queue": "Inline(default)",
       "args": [
-        2937
+        1764
       ],
       "successfully_enqueued": true,
       "scheduled_at": null,
       "logs": [
-        "Enqueued WarmupCacheJob (Job ID: 861bbdd3-4195-4539-9475-5ceb8e3ce7c0) to Inline(default) with arguments: 2937",
+        "Enqueued WarmupCacheJob (Job ID: 86041f53-9fdd-43d7-bbed-b96e66824b50) to Inline(default) with arguments: 1764",
         "/Users/julien/Personal/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
       ]
     },
     {
-      "id": "a5707a7f-5509-4faf-a5f5-ca7acb20f362",
+      "id": "e0e23c86-d38d-453a-b375-ec841cfae6ab",
       "class": "WarmupCacheJob",
       "queue": "Inline(default)",
       "args": [
-        2749
+        4634
       ],
       "successfully_enqueued": true,
       "scheduled_at": null,
       "logs": [
-        "Enqueued WarmupCacheJob (Job ID: a5707a7f-5509-4faf-a5f5-ca7acb20f362) to Inline(default) with arguments: 2749",
+        "Enqueued WarmupCacheJob (Job ID: e0e23c86-d38d-453a-b375-ec841cfae6ab) to Inline(default) with arguments: 4634",
         "/Users/julien/Personal/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
       ]
     },
     {
-      "id": "b151776a-5e0d-4f41-9012-f6e7235685b2",
+      "id": "1042f138-c442-4b20-b6d6-9820b56db6db",
       "class": "WarmupCacheJob",
       "queue": "Inline(default)",
       "args": [
-        4951
+        599
       ],
       "successfully_enqueued": true,
       "scheduled_at": null,
       "logs": [
-        "Enqueued WarmupCacheJob (Job ID: b151776a-5e0d-4f41-9012-f6e7235685b2) to Inline(default) with arguments: 4951",
+        "Enqueued WarmupCacheJob (Job ID: 1042f138-c442-4b20-b6d6-9820b56db6db) to Inline(default) with arguments: 599",
         "/Users/julien/Personal/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
       ]
     }
@@ -423,12 +438,6 @@
           }
         }
       ]
-    },
-    {
-      "msg": "Rendering navigation",
-      "extra": [
-
-      ]
     }
   ],
   "cache": [
@@ -440,8 +449,8 @@
       "super_operation": "fetch",
       "hit": false,
       "name": "cache_read.active_support",
-      "transaction_id": "75a8c824f6fe6572b063",
-      "time": "20:13:51.421",
+      "transaction_id": "5c6e1f3c884b3947a7d6",
+      "time": "17:20:55.822",
       "label": "read"
     },
     {
@@ -450,8 +459,8 @@
       "compress": true,
       "compress_threshold": 1024,
       "name": "cache_generate.active_support",
-      "transaction_id": "75a8c824f6fe6572b063",
-      "time": "20:13:51.467",
+      "transaction_id": "5c6e1f3c884b3947a7d6",
+      "time": "17:20:55.894",
       "label": "generate"
     },
     {
@@ -460,8 +469,8 @@
       "compress": true,
       "compress_threshold": 1024,
       "name": "cache_write.active_support",
-      "transaction_id": "75a8c824f6fe6572b063",
-      "time": "20:13:51.941",
+      "transaction_id": "5c6e1f3c884b3947a7d6",
+      "time": "17:20:56.461",
       "label": "write"
     }
   ],

@@ -1,5 +1,5 @@
 {
-  "id": "18ae70d6-60b8-43d9-aedf-57573c357a0c",
+  "id": "00bbe94d-5e06-4542-b319-9a5d16e40067",
   "meta": {
     "controller": "ApiController",
     "action": "jobs",
@@ -14,11 +14,11 @@
     "path": "/api/jobs?name=send_email&post_id=123",
     "status": 200,
     "view_runtime": null,
-    "db_runtime": 0.2740000491030514,
-    "duration": 19.82700002193451,
-    "cpu_time": 19.749709000000053,
-    "idle_time": 0.0772910219344567,
-    "allocations": 12958
+    "db_runtime": 0.16199983656406403,
+    "duration": 29.263000011444092,
+    "cpu_time": 28.744332999999983,
+    "idle_time": 0.5186670114441085,
+    "allocations": 13213
   },
   "request": {
     "method": "GET",
@@ -48,9 +48,9 @@
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Content-Type": "text/html",
       "Cache-Control": "no-cache",
-      "X-Request-Id": "9af48b1d-f3d5-4131-b210-1e7339ea4369",
-      "X-Runtime": "0.032257",
-      "Server-Timing": "start_processing.action_controller;dur=0.01, perform_start.active_job;dur=0.01, sql.active_record;dur=0.28, instantiation.active_record;dur=0.24, perform.active_job;dur=5.94, enqueue.active_job;dur=18.53, process_action.action_controller;dur=19.83"
+      "X-Request-Id": "c72d44a9-2a15-4de8-88d0-7b2dc3cf321e",
+      "X-Runtime": "0.036798",
+      "Server-Timing": "start_processing.action_controller;dur=0.00, perform_start.active_job;dur=0.01, sql.active_record;dur=0.17, instantiation.active_record;dur=0.25, perform.active_job;dur=15.90, enqueue.active_job;dur=27.41, process_action.action_controller;dur=29.26"
     },
     "body": ""
   },
@@ -59,13 +59,13 @@
   },
   "queries": [
     {
-      "id": "75a8c824f6fe6572b063",
-      "title": "Post Load (0.2ms)",
+      "id": "5c6e1f3c884b3947a7d6",
+      "title": "Post Load (0.1ms)",
       "name": "Post Load",
       "sql": "SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"id\" = 123 LIMIT 1 ",
       "cached": false,
       "async": false,
-      "duration": 0.2,
+      "duration": 0.1,
       "lock_wait": null,
       "binds": null,
       "source": [
@@ -74,7 +74,7 @@
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "Post Load (0.1ms)",
       "name": "Post Load",
       "sql": "SELECT \"posts\".* FROM \"posts\" ORDER BY \"posts\".\"published_at\" DESC LIMIT 5 ",
@@ -89,7 +89,7 @@
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "CACHE Post Load (0.0ms)",
       "name": "Post Load",
       "sql": "SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"id\" = 123 LIMIT 1",
@@ -104,7 +104,7 @@
       ]
     },
     {
-      "id": "75a8c824f6fe6572b063",
+      "id": "5c6e1f3c884b3947a7d6",
       "title": "CACHE Post Load (0.0ms)",
       "name": "Post Load",
       "sql": "SELECT \"posts\".* FROM \"posts\" ORDER BY \"posts\".\"published_at\" DESC LIMIT 5",
@@ -121,7 +121,7 @@
   ],
   "jobs": [
     {
-      "id": "9ddc06b8-66da-4b6d-8598-a015d70d9dd7",
+      "id": "3c4ccf33-47a3-48b0-bce4-ce9efa553724",
       "class": "SendEmailJob",
       "queue": "Inline(default)",
       "args": [
@@ -133,12 +133,12 @@
       "successfully_enqueued": true,
       "scheduled_at": null,
       "logs": [
-        "Enqueued SendEmailJob (Job ID: 9ddc06b8-66da-4b6d-8598-a015d70d9dd7) to Inline(default) with arguments: \"123\", {:user_id=>99}",
+        "Enqueued SendEmailJob (Job ID: 3c4ccf33-47a3-48b0-bce4-ce9efa553724) to Inline(default) with arguments: \"123\", {:user_id=>99}",
         "/Users/julien/Personal/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
       ]
     },
     {
-      "id": "a137c8f4-e27e-4b25-8b64-21260813cab5",
+      "id": "ea056a59-445b-4d6f-8cfa-ed22fc2fc770",
       "class": "SendEmailJob",
       "queue": "Inline(default)",
       "args": [
@@ -151,7 +151,7 @@
       "successfully_enqueued": true,
       "scheduled_at": null,
       "logs": [
-        "Enqueued SendEmailJob (Job ID: a137c8f4-e27e-4b25-8b64-21260813cab5) to Inline(default) with arguments: \"123\", {:user_id=>1, :admin=>true}",
+        "Enqueued SendEmailJob (Job ID: ea056a59-445b-4d6f-8cfa-ed22fc2fc770) to Inline(default) with arguments: \"123\", {:user_id=>1, :admin=>true}",
         "/Users/julien/Personal/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
       ]
     }
