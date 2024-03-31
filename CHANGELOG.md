@@ -1,9 +1,10 @@
 # Changelog
 
-## v0.3.0 - 2024-03-30
+## v0.3.0 - 2024-03-31
 
 * Add support for Turbo Drive - See [#25](https://github.com/julienbourdeau/debugbar/pull/25) and [#26](https://github.com/julienbourdeau/debugbar/pull/26)
 * Fix error "undefined method `adapter_name' for ActiveJob:Module" for Rails < 7.1 - See [#24](https://github.com/julienbourdeau/debugbar/pull/24)
+* Limit the number of request to 25, configurable with `maxRequests` option - See [664f2c11](https://github.com/julienbourdeau/debugbar/commit/664f2c11e56f18a7c3e4a9fb83ba5b7e19fbb9a9)
 
 ## v0.2.0 - 2024-02-28
 
