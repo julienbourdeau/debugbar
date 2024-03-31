@@ -6,6 +6,29 @@
 * Fix error "undefined method `adapter_name' for ActiveJob:Module" for Rails < 7.1 - See [#24](https://github.com/julienbourdeau/debugbar/pull/24)
 * Limit the number of request to 25, configurable with `maxRequests` option - See [664f2c11](https://github.com/julienbourdeau/debugbar/commit/664f2c11e56f18a7c3e4a9fb83ba5b7e19fbb9a9)
 
+### Breaking changes
+
+In order to support Turbo Drive, I had to split the helper into two parts. Before the JavaScript file was loaded, 
+directly in the body, but it has to be loaded in the head now. 
+
+If you were passing configuation t `debugbar_javascript`, you must now pass it to `debugbar_body`.
+
+```diff
+<!DOCTYPE html>
+<html>
+  <head>
+    ... 
++    <%= debugbar_head %>
+  </head>
+    
+  <body>
+    ...
+-    <%= debugbar_javascript %>
++    <%= debugbar_body %>
+  </body>
+</html>
+```
+
 ## v0.2.0 - 2024-02-28
 
 * Introduce polling in case someone cannot use ActiveCable - See [8b262be7](https://github.com/julienbourdeau/debugbar/commit/8b262be7b644c7b587a6c3348bb02076053a344f)
