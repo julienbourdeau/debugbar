@@ -36,7 +36,7 @@ const header = ref(null)
 
 const state = reactive({
   activeTab: "",
-  minimized: false,
+  minimized: configStore.config.minimized,
   isResizing: false,
   isPolling: configStore.config.mode === "poll",
   height: configStore.config.height,
@@ -211,7 +211,7 @@ const setActiveTab = (tab) => {
       <!--  Left  -->
       <div class="grow">
         <div class="flex">
-          <div class="p-1 pt-1.5">
+          <div @click="state.minimized = true" class="p-1 pt-1.5">
             <ruby-logo />
           </div>
 

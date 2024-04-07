@@ -13,6 +13,7 @@ export type DebugbarConfigOptions = {
   }
   height: number
   maxRequests: number
+  minimized: boolean
 }
 
 export type DebugbarConfig = DebugbarConfigOptions & {
@@ -34,6 +35,7 @@ export function newDebugbarConfig(options: DebugbarConfigOptions) {
     },
     height: 360,
     maxRequests: 25,
+    minimized: false,
   } as DebugbarConfigOptions)
 
   obj.actionCableUrl = `${obj.cable.url}${obj.prefix}/cable`

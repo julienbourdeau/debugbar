@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.1 - UNRELEASED
+
+* Add `minimized` config key to start the debugbar minimized - See COMMIT
+
 ## v0.3.0 - 2024-03-31
 
 * Add support for Turbo Drive - See [#25](https://github.com/julienbourdeau/debugbar/pull/25) and [#26](https://github.com/julienbourdeau/debugbar/pull/26)
