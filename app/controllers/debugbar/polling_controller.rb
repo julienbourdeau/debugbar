@@ -1,6 +1,6 @@
 module Debugbar
   class PollingController < ApplicationController
-    skip_before_action :verify_authenticity_token, only: [:confirm]
+    protect_from_forgery with: :null_session
     before_action :cors_set_access_control_headers
 
     def poll
