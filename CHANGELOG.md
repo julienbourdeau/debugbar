@@ -1,8 +1,10 @@
 # Changelog
 
-## v0.3.1 - UNRELEASED
+## v0.3.1 - 2024-05-01
 
-* Add `minimized` config key to start the debugbar minimized - See COMMIT
+* Add `active_record.adapter` config to help frontend format SQL queries - See [#35](https://github.com/julienbourdeau/debugbar/pull/35)
+* Add `minimized` config key to start the debugbar minimized - See [2046b054](https://github.com/julienbourdeau/debugbar/commit/0178443d268d2a740a0d73b4039a03dd)
+* Use `:null_session` to disable forgery protection when using polling - See [#27](https://github.com/julienbourdeau/debugbar/pull/27)
 
 ## v0.3.0 - 2024-03-31
 
