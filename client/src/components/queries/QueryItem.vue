@@ -4,6 +4,7 @@ import { ChevronDownIcon } from "@heroicons/vue/16/solid"
 
 import { Query } from "@/models/Request.ts"
 import { reactive } from "vue"
+import { useConfigStore } from "@/stores/configStore.ts"
 
 const props = defineProps<{
   query: Query
@@ -14,11 +15,17 @@ const state = reactive({
   isFormatted: false,
 })
 
+let configStore = useConfigStore()
+
 function copyToClipboard(text: string) {
   const type = "text/plain"
   const blob = new Blob([text], { type })
   const data = [new ClipboardItem({ [type]: blob })]
   navigator.clipboard.write(data)
+}
+
+function sqlFormat(query: string) {
+  return format(query, { language: configStore.config.activeRecord.adapter })
 }
 </script>
 
@@ -54,7 +61,7 @@ function copyToClipboard(text: string) {
 
     <div v-if="state.isOpen" class="mt-4 ml-4">
       <div class="">
-        <highlightjs language="sql" :code="state.isFormatted ? format(query.sql) : query.sql" />
+        <highlightjs language="sql" :code="state.isFormatted ? sqlFormat(query.sql) : query.sql" />
       </div>
       <div class="mt-3 text-stone-400 text-sm">
         <div v-text="query.source[0]"></div>

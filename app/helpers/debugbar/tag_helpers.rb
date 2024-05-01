@@ -13,6 +13,10 @@ module Debugbar::TagHelpers
       opt[:mode] = 'poll'
     end
 
+    if opt[:active_record].nil?
+      opt[:active_record] = { adapter: db_adapter }
+    end
+
     html = <<-HTML
       <div id="__debugbar" data-turbo-permanent></div>
     HTML
@@ -34,5 +38,11 @@ module Debugbar::TagHelpers
     errors << "See https://debugbar.dev/changelog/ for more information."
     errors << ""
     raise errors.join("\n")
+  end
+
+  private
+
+  def db_adapter
+    ActiveRecord::Base.connection.adapter_name.downcase
   end
 end
