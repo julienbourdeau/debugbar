@@ -36,12 +36,13 @@ module Debugbar
           duration: event.duration.round(1),
           lock_wait: payload[:lock_wait]&.round(1),
           binds: binds,
-          source: query_source_location&.split(":in"),
+          source: query_source_location
         })
       end
 
       def query_source_location
-        backtrace_cleaner.clean(caller(3))[0]
+        str = backtrace_cleaner.clean(caller(3))[0]
+        str&.split(":in")&.map { |s| s.delete_prefix("#{Rails.root}/").strip.tr("`'", '' ) }
       end
     end
   end
