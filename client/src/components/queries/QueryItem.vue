@@ -6,6 +6,7 @@ import { Query } from "@/models/Request.ts"
 import { reactive } from "vue"
 import { useConfigStore } from "@/stores/configStore.ts"
 import Timing from "@/components/ui/Timing.vue"
+import { copyToClipboard } from "@/helpers.ts"
 
 const props = defineProps<{
   query: Query
@@ -18,13 +19,6 @@ const state = reactive({
 })
 
 let configStore = useConfigStore()
-
-function copyToClipboard(text: string) {
-  const type = "text/plain"
-  const blob = new Blob([text], { type })
-  const data = [new ClipboardItem({ [type]: blob })]
-  navigator.clipboard.write(data)
-}
 
 function sqlFormat(query: string) {
   return format(query, { language: configStore.config.sqlDialect })

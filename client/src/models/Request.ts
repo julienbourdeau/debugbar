@@ -66,8 +66,10 @@ export type Job = {
 }
 
 export type Message = {
+  id: string
   msg: string
   extra: any
+  source: string[]
 }
 
 export type Cache = {

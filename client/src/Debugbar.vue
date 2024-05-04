@@ -18,7 +18,7 @@ import ModelsPanel from "@/components/panels/ModelsPanel.vue"
 import QueriesPanel from "@/components/queries/QueriesPanel.vue"
 import JobsPanel from "@/components/panels/JobsPanel.vue"
 import LogsPanel from "@/components/panels/LogsPanel.vue"
-import MessagesPanel from "@/components/panels/MessagesPanel.vue"
+import MessagesPanel from "@/components/messages/MessagesPanel.vue"
 
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import { useConfigStore } from "@/stores/configStore.ts"

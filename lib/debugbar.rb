@@ -47,12 +47,12 @@ module Debugbar
         end
       end
 
-      def msg(msg, *extra)
+      def msg(msg, extra, source)
         if Current.request.nil?
           puts "The current request is not set yet. Printing to STDOUT instead."
-          puts msg, extra
+          puts msg, extra, source
         else
-          Current.request.add_msg(msg, extra)
+          Current.request.add_msg(msg, extra, source)
         end
       end
     end
@@ -82,7 +82,8 @@ module Debugbar
     end
 
     def msg(msg, *extra)
-      Tracker.msg(msg, *extra)
+      source = caller.first&.split(":in")&.map { |s| s.delete_prefix("#{Rails.root}/").strip.tr("`'", '' ) }
+      Tracker.msg(msg, extra, source)
     end
   end
 end
