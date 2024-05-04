@@ -15,10 +15,8 @@ import {
 
 import TabButton from "@/components/TabButton.vue"
 import ModelsPanel from "@/components/panels/ModelsPanel.vue"
-import QueriesPanel from "@/components/queries/QueriesPanel.vue"
 import JobsPanel from "@/components/panels/JobsPanel.vue"
 import LogsPanel from "@/components/panels/LogsPanel.vue"
-import MessagesPanel from "@/components/panels/MessagesPanel.vue"
 
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import { useConfigStore } from "@/stores/configStore.ts"
@@ -28,6 +26,9 @@ import JsonPanel from "@/components/panels/JsonPanel.vue"
 import RubyLogo from "@/components/ui/RubyLogo.vue"
 import Timing from "@/components/ui/Timing.vue"
 import StatusCode from "@/components/ui/StatusCode.vue"
+import PanelList from "@/components/panels/PanelList.vue"
+import MessageItem from "@/components/messages/MessageItem.vue"
+import QueryItem from "@/components/queries/QueryItem.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -315,13 +316,17 @@ const setActiveTab = (tab) => {
       :style="`height: ${state.height}px`"
     >
       <request-panel v-if="state.activeTab == 'request'" :request="requestsStore.currentRequest" />
-      <messages-panel v-if="state.activeTab == 'messages'" :messages="requestsStore.currentRequest?.messages" />
+      <panel-list v-if="state.activeTab == 'messages'">
+        <message-item v-for="msg in requestsStore.currentRequest?.messages" :msg="msg" :key="msg.id" />
+      </panel-list>
       <models-panel
         v-if="state.activeTab == 'models'"
         :models="requestsStore.currentRequest?.models"
         :count="requestsStore.currentRequest?.modelsCount"
       />
-      <queries-panel v-if="state.activeTab == 'queries'" :current-request="requestsStore.currentRequest" />
+      <panel-list v-if="state.activeTab == 'queries'">
+        <query-item v-for="query in requestsStore.currentRequest.queries" :key="query.id" :query="query" />
+      </panel-list>
       <jobs-panel v-if="state.activeTab == 'jobs'" :jobs="requestsStore.currentRequest?.jobs" />
       <cache-panel v-if="state.activeTab == 'cache'" :cache="requestsStore.currentRequest?.cache" />
       <logs-panel v-if="state.activeTab == 'logs'" :logs="requestsStore.currentRequest?.logs" />

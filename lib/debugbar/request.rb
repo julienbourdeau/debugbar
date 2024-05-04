@@ -40,8 +40,8 @@ module Debugbar
       @jobs << job
     end
 
-    def add_msg(msg, extra)
-      @messages << {msg: msg, extra: extra}
+    def add_msg(msg, extra, source)
+      @messages << {id: SecureRandom.hex(8), msg: msg, extra: extra, source: source}
     end
 
     def add_cache(c)

@@ -42,7 +42,7 @@ module Debugbar
 
       def query_source_location
         str = backtrace_cleaner.clean(caller(3))[0]
-        str&.split(":in")&.map { |s| s.delete_prefix("#{Rails.root}/").strip.tr("`'", '' ) }
+        str&.split(":in")&.map { |s| s.delete_prefix("#{Rails.root}/").strip.tr("`'", '' ) } # Duplicated in Debugbar.msg
       end
     end
   end
