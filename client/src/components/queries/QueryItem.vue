@@ -27,7 +27,7 @@ function copyToClipboard(text: string) {
 }
 
 function sqlFormat(query: string) {
-  return format(query, { language: configStore.config.activeRecord.adapter })
+  return format(query, { language: configStore.config.sqlDialect })
 }
 </script>
 
