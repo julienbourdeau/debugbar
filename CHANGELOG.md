@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.2 - 2024-05-04
+
+* Improved Debug panel (to be in par with Queries panel) - See [#36](https://github.com/julienbourdeau/debugbar/pull/36)
+* Better SQL dialect detection - See [c40e2405](https://github.com/julienbourdeau/debugbar/commit/c40e240524308c7ecf09fecbb548e97c2ef4e8b7)
+* Add timings to SQL queries 🎨 - See [ebf8edcd](https://github.com/julienbourdeau/debugbar/commit/ebf8edcd8598a4a7b490a774a7374d51a3efc6b8)
+
 ## v0.3.1 - 2024-05-01
 
 * Add `active_record.adapter` config to help frontend format SQL queries - See [#35](https://github.com/julienbourdeau/debugbar/pull/35)
