@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.3 - 2024-06-15
+
+* Allow nonce to be set for content security policies - See [#38](https://github.com/julienbourdeau/debugbar/pull/38)
+
 ## v0.3.2 - 2024-05-04
 
 * Improved Debug panel (to be in par with Queries panel) - See [#36](https://github.com/julienbourdeau/debugbar/pull/36)
