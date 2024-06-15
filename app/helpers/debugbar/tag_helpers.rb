@@ -22,7 +22,7 @@ module Debugbar::TagHelpers
     HTML
 
     html += <<-HTML
-      <script type="text/javascript" data-turbo-permanent>
+      <script type="text/javascript" data-turbo-permanent nonce="#{opt.delete(:nonce)}">
         window._debugbarConfigOptions = #{opt.to_json}
       </script>
     HTML
