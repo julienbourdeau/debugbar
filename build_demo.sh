@@ -1,8 +1,9 @@
 #!/bin/bash
 
 ruby ./build_fixtures.rb
+
 rm -rf client/dist-demo
-(cd client/ && VITE_DEMO_MODE=true npm run build)
+(cd client/ && npm run build:demo)
 
 if [ -d "../debugbar.dev/source/assets/debugbar" ]; then
   echo
@@ -10,4 +11,8 @@ if [ -d "../debugbar.dev/source/assets/debugbar" ]; then
   echo " -> Copying assets"
   rm -f ../debugbar.dev/source/assets/debugbar/*
   cp ./client/dist-demo/assets/* ../debugbar.dev/source/assets/debugbar/
+else
+  echo "####################################################"
+  echo "## debugbar.dev was NOT FOUND in parent directory ##"
+  echo "####################################################"
 fi

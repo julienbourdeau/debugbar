@@ -1,3 +1,9 @@
+<!-- This file is used when developing the frontend. -->
+<!-- ./index.html will load `dev.ts` which build the app with this AppDev.vue component. -->
+<!-- This component makes pre-registered calls to a rails backend to load data so you can edit -->
+<!--  the app and with HMR, you never have leave the page. -->
+<!-- Use with `npm run dev` and open http://localhost:5173/ -->
+
 <script setup lang="ts">
 import Debugbar from "@/Debugbar.vue"
 import { onMounted } from "vue"

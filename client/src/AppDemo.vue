@@ -1,3 +1,9 @@
+<!-- This file is used when building the demo assets. -->
+<!-- The demo is a self-contained version of the app with fixtures. It's meant to be displayed on debugbar.dev -->
+<!-- The demo is built with `./build_demo.sh` which build the assets with the `vite.demo.config.ts` (via `npm run build:demo`) -->
+<!-- The dedicated config allows is to have sourcemap and vite devtools. -->
+<!-- This component load fixturs onMounted and show the app in a shadow DOM. -->
+
 <script setup lang="ts">
 import Debugbar from "@/Debugbar.vue"
 import { ShadowRoot, ShadowStyle } from "vue-shadow-dom"

@@ -1,3 +1,6 @@
+<!-- This is the main component of the debugbar. -->
+<!--It's imported in the different App*.vue components.-->
+
 <script setup lang="ts">
 import { createConsumer } from "@rails/actioncable"
 import { computed, onMounted, reactive, ref } from "vue"

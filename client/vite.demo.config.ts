@@ -3,12 +3,10 @@ import { fileURLToPath, URL } from "node:url"
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
 
-const isNotProd = () => process.env.NODE_ENV != "production"
-
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
-    __VUE_PROD_DEVTOOLS__: isNotProd(),
+    __VUE_PROD_DEVTOOLS__: true, // nice for demo mode
   },
   plugins: [
     vue({
@@ -28,12 +26,12 @@ export default defineConfig({
   },
   build: {
     manifest: true,
-    sourcemap: isNotProd(),
+    sourcemap: true, // very nice for demo mode
     emptyOutDir: false,
-    outDir: "./dist",
+    outDir: "./dist-demo",
     rollupOptions: {
       input: {
-        debugbar: fileURLToPath(new URL("./src/main.ts", import.meta.url)),
+        debugbar: fileURLToPath(new URL("./src/demo.ts", import.meta.url)),
       },
     },
   },

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "build:demo": "vue-tsc && vite build -c vite.demo.config.ts"
   },
   "dependencies": {
     "@heroicons/vue": "^2.1.1",
