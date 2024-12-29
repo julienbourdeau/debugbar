@@ -5,12 +5,28 @@ module Debugbar
         @adapter = adapter
       end
 
-      # Maybe making this explicit is better :D
-      %w(push each all remove clear!).each do |name|
-        define_method(name) do |*args, &block|
-          ret = @adapter.send(name, *args, &block)
-          ret == :self ? self : ret
-        end
+      def push(request)
+        @adapter.push(request)
+        nil # Why not return self?
+      end
+
+      def remove(ids)
+        @adapter.remove(ids)
+        self
+      end
+
+      def to_h
+        @adapter.to_h
+      end
+
+      def each(&block)
+        @adapter.each(&block)
+        self
+      end
+
+      def clear!
+        @adapter.clear!
+        self
       end
     end
   end

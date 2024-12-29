@@ -5,6 +5,9 @@ module Debugbar
     end
 
     def call(env)
+      # we don't check if debugbar is enabled because this middleware is only added when it is
+
+      # Set `ignore` attribute to reuse it anywhere
       Debugbar::Current.ignore = Debugbar.config.ignore_request?(env)
 
       return @app.call(env) if Debugbar::Current.ignore?
@@ -18,17 +21,11 @@ module Debugbar
       # It might happen with ActionController::Live where the following code
       # will run BEFORE ActionControllerEventSubscriber.process_action is called
       if Debugbar::Current.request&.meta
-        # filename = "#{Time.now.to_i}--#{Debugbar::Current.request.meta.dig(:params, :controller)}_#{Debugbar::Current.request.meta.dig(:params, :action).gsub('/', '_')}.json"
-        # File.open(Rails.root.join('_requests', filename), "w") do |f|
-        #   f.write(Debugbar::Current.request.to_json)
-        # end
-
         RequestBuffer.push(Debugbar::Current.pop_request!)
 
-        # TODO: Refactor has not having ActionCable might more common than I thought
+        # TODO: Refactor since not having ActionCable might be more common than I thought
         if Debugbar.connected? && defined?(ActionCable)
-          data = RequestBuffer.all.map(&:to_h)
-          ActionCable.server.broadcast("debugbar_channel", data)
+          ActionCable.server.broadcast("debugbar_channel", RequestBuffer.to_h)
         end
       end
 

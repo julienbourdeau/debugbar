@@ -4,7 +4,6 @@ module Debugbar
       collection = get_collection
       collection[request.id] = request.to_h
       set_collection(collection)
-      nil
     end
 
     def remove(ids)
@@ -15,22 +14,19 @@ module Debugbar
         collection.delete(id)
       end
       set_collection(collection)
-
-      :self
     end
 
-    def all
-      get_collection.values
+    def to_h
+      get_collection.values.map(&:to_h)
     end
 
     def each(&block)
       get_collection.each(&block)
-      :self
+
     end
 
     def clear!
       Rails.cache.delete("debugbar-requests")
-      :self
     end
 
     private

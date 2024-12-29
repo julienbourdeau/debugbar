@@ -15,8 +15,7 @@ module Debugbar
 
       Debugbar.connect!
 
-      data = RequestBuffer.all.map(&:to_h)
-      ActionCable.server.broadcast("debugbar_channel", data)
+      ActionCable.server.broadcast("debugbar_channel", RequestBuffer.to_h)
     end
 
     def unsubscribed
