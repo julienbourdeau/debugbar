@@ -12,7 +12,7 @@ module Debugbar
           when "cache_generate.active_support"
             "generate"
           when "cache_fetch_hit.active_support"
-            "fetch hit"
+            "fetch hit"
           when "cache_write.active_support"
             "write"
           when "cache_delete.active_support"
