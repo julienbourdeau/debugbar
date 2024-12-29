@@ -1,5 +1,9 @@
 # Changelog
 
+## UNRELEASED
+
+* Handle multi-processes service (cluster mode in Puma) - See [#45](https://github.com/julienbourdeau/debugbar/pull/45)
+
 ## v0.3.3 - 2024-06-15
 
 * Allow nonce to be set for content security policies - See [#38](https://github.com/julienbourdeau/debugbar/pull/38)
