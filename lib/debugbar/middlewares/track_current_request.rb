@@ -24,7 +24,7 @@ module Debugbar
         RequestBuffer.push(Debugbar::Current.pop_request!)
 
         # TODO: Refactor since not having ActionCable might be more common than I thought
-        if Debugbar.connected? && defined?(ActionCable)
+        if defined?(ActionCable)
           ActionCable.server.broadcast("debugbar_channel", RequestBuffer.to_h)
         end
       end

@@ -69,18 +69,6 @@ module Debugbar
       yield config
     end
 
-    def connect!
-      @connected = true
-    end
-
-    def disconnect!
-      @connected = false
-    end
-
-    def connected?
-      @connected
-    end
-
     def msg(msg, *extra)
       source = caller.first&.split(":in")&.map { |s| s.delete_prefix("#{Rails.root}/").strip.tr("`'", '' ) }
       Tracker.msg(msg, extra, source)
