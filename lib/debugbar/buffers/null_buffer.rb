@@ -6,7 +6,8 @@ module Debugbar
     def remove(_ids)
     end
 
-    def all
+    def to_h
+      {}
     end
 
     def each

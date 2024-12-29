@@ -6,7 +6,6 @@ module Debugbar
 
     def push(request)
       @collection[request.id] = request
-      nil
     end
 
     def remove(ids)
@@ -14,21 +13,18 @@ module Debugbar
       ids.each do |id|
         @collection.delete(id)
       end
-      :self
     end
 
-    def all
-      @collection.values
+    def to_h
+      @collection.values.map(&:to_h)
     end
 
     def each(&block)
       @collection.each(&block)
-      :self
     end
 
     def clear!
       @collection = {}
-      :self
     end
   end
 end

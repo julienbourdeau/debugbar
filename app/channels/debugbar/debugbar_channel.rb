@@ -13,14 +13,11 @@ module Debugbar
         RequestBuffer.remove(data["ids"])
       end
 
-      Debugbar.connect!
-
-      data = RequestBuffer.all.map(&:to_h)
-      ActionCable.server.broadcast("debugbar_channel", data)
+      ActionCable.server.broadcast("debugbar_channel", RequestBuffer.to_h)
     end
 
     def unsubscribed
-      Debugbar.disconnect!
+      # Nothing to do
     end
   end
 end

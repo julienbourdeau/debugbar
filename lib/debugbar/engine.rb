@@ -12,7 +12,33 @@ module Debugbar
     end
 
     initializer 'debugbar.init' do |app|
+      # Display error message if running in multi-process mode without proper configuration
+      if ENV["WEB_CONCURRENCY"].to_i > 1
+        cache_nok = %i[null_store memory_store].include?(Rails.configuration.cache_store.first.to_sym)
+        action_cable_nok = ActionCable.server.config.cable[:adapter].to_s == "async"
+        adapter_nok = app.config.debugbar.buffer_adapter != :cache
+
+        if cache_nok || action_cable_nok || adapter_nok
+          msg = [
+            "############################################################################################################",
+            "# Debugbar: You are using a multi-process server configuration (like Puma in cluster mode)",
+            "# Debugbar: You can use puma in single mode by setting the environment variable WEB_CONCURRENCY to 0",
+            "# Debugbar: If you want to use multiple processes, you must ensure that the following conditions are met:",
+            "# Debugbar: \t Use a persistent cache store (like files or database) in your Application config",
+            "# Debugbar: \t Use a persistent adapter for ActionCable (like Redis or SolidCable)",
+            "# Debugbar: \t Use the :cache buffer_adapter in config/initializers/debugbar.rb",
+            "############################################################################################################",
+          ]
+
+          logger = Logger.new(STDOUT)
+          msg.each { |m| logger.warn(m) }
+        end
+      end
+
       adapter = case(app.config.debugbar.buffer_adapter)
+      when :cache
+        require_relative 'buffers/cache_buffer'
+        CacheBuffer.new
       when :memory
         require_relative 'buffers/memory_buffer'
         MemoryBuffer.new
