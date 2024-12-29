@@ -13,6 +13,9 @@ module Debugbar
 
     initializer 'debugbar.init' do |app|
       adapter = case(app.config.debugbar.buffer_adapter)
+      when :cache
+        require_relative 'buffers/cache_buffer'
+        CacheBuffer.new
       when :memory
         require_relative 'buffers/memory_buffer'
         MemoryBuffer.new
