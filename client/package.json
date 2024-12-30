@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev ./dev/ -c ./dev/vite.dev.config.ts",
     "build": "vue-tsc && vite build",
     "build:demo": "vue-tsc && vite build -c vite.demo.config.ts"
   },

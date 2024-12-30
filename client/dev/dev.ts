@@ -8,13 +8,13 @@ import hljsVuePlugin from "@highlightjs/vue-plugin"
 import { createApp } from "vue"
 import { createPinia } from "pinia"
 
-import "./style.css"
+import "../src/style.css"
 
-hljs.registerLanguage("sql", sql)
+// hljs.registerLanguage("sql", sql)
 hljs.registerLanguage("json", json)
 
 const pinia = createPinia()
 
-import AppDev from "./AppDev.vue"
+import AppDev from "../src/AppDev.vue"
 
 createApp(AppDev).use(hljsVuePlugin).use(pinia).mount("#__debugbar")
