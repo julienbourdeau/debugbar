@@ -208,7 +208,7 @@ const setActiveTab = (tab) => {
     <div id="draggable-bar" @mousedown="state.isResizing = true" class="h-0.5 bg-red-700 cursor-row-resize" />
 
     <div
-      id="debubgbar-header"
+      id="debugbar-header"
       ref="header"
       class="flex flex-wrap px-1 items-center justify-end bg-stone-100 border-b-2 border-stone-300"
     >
