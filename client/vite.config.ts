@@ -29,11 +29,12 @@ export default defineConfig({
   build: {
     manifest: true,
     sourcemap: isNotProd(),
-    emptyOutDir: false,
+    emptyOutDir: true,
     outDir: "./dist",
     rollupOptions: {
       input: {
         debugbar: fileURLToPath(new URL("./src/main.ts", import.meta.url)),
+        devtools: fileURLToPath(new URL("./src/devtools-panel.ts", import.meta.url)),
       },
     },
   },
