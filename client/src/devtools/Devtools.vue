@@ -149,46 +149,39 @@ const setActiveTab = (tab) => {
 
 <template>
   <!--  No request yet, the debugbar is full width but empty  -->
-  <div v-if="requestsStore.currentRequest == null" class="z-[9999] text-stone-900 fixed left-0 top-0 w-full">
+  <div v-if="requestsStore.currentRequest == null" class="z-[9999] text-stone-900 w-full">
     <div class="flex items-center justify-between bg-stone-100 border-b border-stone-200">
       <div class="px-5 py-1.5 italic">No request yet</div>
     </div>
   </div>
 
   <!--  The glorious debugbar  -->
-  <div v-if="requestsStore.currentRequest" class="z-[9999] text-stone-900 fixed left-0 top-0 w-full">
+  <div v-if="requestsStore.currentRequest" class="z-[9999] text-stone-900 w-full">
     <div
       id="debugbar-header"
       ref="header"
-      class="flex flex-wrap px-1 items-center justify-end bg-stone-100 border-b-2 border-stone-300"
+      class="flex flex-col px-1 items-center justify-between bg-stone-100 border-b-2 border-stone-300"
     >
-      <!--  Left  -->
-      <div class="grow">
-        <div class="flex">
-          <tab-button
-            v-for="(v, k) in requestsStore.currentRequest.dataForTabs"
-            key="k"
-            :label="v.label"
-            :count="v?.count"
-            :is-active="k === state.activeTab"
-            :disabled="v.count == 0"
-            @click="setActiveTab(k)"
-            >{{ v.label }}</tab-button
+      <div class="flex w-full justify-between items-center space-x-3 pr-1">
+        <div>
+          <select
+            class="px-2 py-1.5 bg-white border border-stone-200 rounded w-[330px] text-sm"
+            name="current_request_id"
+            @change="
+              (event) => {
+                const target = event.target as HTMLSelectElement
+                requestsStore.setCurrentRequestById(target.value)
+              }
+            "
           >
-
-          <button
-            v-if="devMode"
-            @click="setActiveTab('debug')"
-            class="px-3 py-1.5 text-stone-600"
-            :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
-          >
-            <CodeBracketIcon class="size-4" />
-          </button>
+            <option
+              v-for="r in requestsStore.requests"
+              :selected="requestsStore.currentRequest.id == r.id"
+              v-text="r.pathWithVerb"
+              :value="r.id"
+            />
+          </select>
         </div>
-      </div>
-
-      <!--  Right  -->
-      <div class="flex items-center space-x-3 pr-1">
         <div class="flex space-x-2">
           <timing :duration-ms="requestsStore.currentRequest.meta.db_runtime" title="DB runtime">
             <circle-stack-icon class="text-stone-600 size-3" />
@@ -217,24 +210,6 @@ const setActiveTab = (tab) => {
           <status-code :code="requestsStore.currentRequest.meta.status" />
         </div>
 
-        <select
-          class="px-2 py-1.5 bg-white border border-stone-200 rounded w-[330px] text-sm"
-          name="current_request_id"
-          @change="
-            (event) => {
-              const target = event.target as HTMLSelectElement
-              requestsStore.setCurrentRequestById(target.value)
-            }
-          "
-        >
-          <option
-            v-for="r in requestsStore.requests"
-            :selected="requestsStore.currentRequest.id == r.id"
-            v-text="r.pathWithVerb"
-            :value="r.id"
-          />
-        </select>
-
         <div class="flex items-center pl-1 space-x-2">
           <button
             v-if="configStore.config.mode == 'poll'"
@@ -251,6 +226,28 @@ const setActiveTab = (tab) => {
             <x-circle-icon class="size-4" />
           </button>
         </div>
+      </div>
+
+      <div class="flex grow justify-start items-center">
+        <tab-button
+          v-for="(v, k) in requestsStore.currentRequest.dataForTabs"
+          key="k"
+          :label="v.label"
+          :count="v?.count"
+          :is-active="k === state.activeTab"
+          :disabled="v.count == 0"
+          @click="setActiveTab(k)"
+          >{{ v.label }}</tab-button
+        >
+
+        <button
+          v-if="devMode"
+          @click="setActiveTab('debug')"
+          class="px-3 py-1.5 text-stone-600"
+          :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
+        >
+          <CodeBracketIcon class="size-4" />
+        </button>
       </div>
     </div>
 
