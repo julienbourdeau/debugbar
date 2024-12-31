@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ShadowRoot, ShadowStyle } from "vue-shadow-dom"
 import { onMounted } from "vue"
-
-import css from "./style.css?inline"
 import Devtools from "@/devtools/Devtools.vue"
 
+import css from "./style.css?inline"
+
 onMounted(() => {
-  console.log(`Using debugbar in DEVTOOLS !!`)
+  console.log(`Using debugbar in broswer devtools! 😎`)
 })
 </script>
 
