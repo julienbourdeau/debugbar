@@ -32,9 +32,11 @@ export default defineConfig({
     emptyOutDir: true,
     outDir: "./dist",
     rollupOptions: {
+      output: {
+        inlineDynamicImports: true, // Ensure debugbar-[xx].js contains everything
+      },
       input: {
         debugbar: fileURLToPath(new URL("./src/main.ts", import.meta.url)),
-        devtools: fileURLToPath(new URL("./src/devtools-panel.ts", import.meta.url)),
       },
     },
   },
