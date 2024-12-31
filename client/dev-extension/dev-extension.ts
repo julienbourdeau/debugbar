@@ -15,6 +15,6 @@ hljs.registerLanguage("json", json)
 
 const pinia = createPinia()
 
-import AppDev from "../src/AppDev.vue"
+import AppDev from "../src/AppDevtoolsDev.vue"
 
-createApp(AppDev).use(hljsVuePlugin).use(pinia).mount("#__debugbar")
+createApp(AppDev).use(hljsVuePlugin).use(pinia).mount("#__debugbar-devtools-panel-for-dev")
