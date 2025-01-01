@@ -164,23 +164,21 @@ const setActiveTab = (tab) => {
       <!--      THE PANEL-->
       <div v-if="isActive" class="w-full">
         <div class="flex w-full justify-between items-center">
-          <div class="flex item-center space-x-3 py-2 border-0">
-            <http-verb :verb="requestsStore.currentRequest.meta.method" />
-            <span>{{ requestsStore.currentRequest.meta.path }}</span>
+          <request-list-item :request="requestsStore.currentRequest" />
+          <div>
+            <button
+              v-if="configStore.config.mode == 'poll'"
+              @click="togglePolling"
+              :title="state.isPolling ? 'Pause polling' : 'Resume polling'"
+            >
+              <pause-icon v-if="state.isPolling" class="size-4" />
+              <play-icon v-if="!state.isPolling" class="size-4" />
+            </button>
+
+            <button @click="state.activeTab = ''" title="Close">
+              <x-circle-icon class="size-4" />
+            </button>
           </div>
-
-          <button
-            v-if="configStore.config.mode == 'poll'"
-            @click="togglePolling"
-            :title="state.isPolling ? 'Pause polling' : 'Resume polling'"
-          >
-            <pause-icon v-if="state.isPolling" class="size-4" />
-            <play-icon v-if="!state.isPolling" class="size-4" />
-          </button>
-
-          <button @click="state.activeTab = ''" title="Close">
-            <x-circle-icon class="size-4" />
-          </button>
         </div>
 
         <div class="flex w-full justify-between items-center">
