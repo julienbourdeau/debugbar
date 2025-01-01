@@ -4,7 +4,7 @@
 <script setup lang="ts">
 import { createConsumer } from "@rails/actioncable"
 import { computed, reactive, ref } from "vue"
-import { CodeBracketIcon, XCircleIcon, TrashIcon, PauseIcon, PlayIcon } from "@heroicons/vue/16/solid"
+import { CodeBracketIcon, XCircleIcon, PauseIcon, PlayIcon } from "@heroicons/vue/16/solid"
 
 import TabButton from "@/components/TabButton.vue"
 import ModelsPanel from "@/components/panels/ModelsPanel.vue"
@@ -22,7 +22,6 @@ import MessageItem from "@/components/messages/MessageItem.vue"
 import QueryItem from "@/components/queries/QueryItem.vue"
 import RequestTimings from "@/components/RequestTimings.vue"
 import RequestListItem from "@/components/RequestListItem.vue"
-import HttpVerb from "@/components/HttpVerb.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -117,13 +116,13 @@ if (configStore.config.mode === "ws") {
   console.log(`Using debugbar in "offline mode", ideal for demos using fixtures.`)
 }
 
-const clearRequests = () => {
-  console.log("Clearing requests")
-  state.activeTab = ""
-  requestsStore.clearRequests()
-  debugbarChannel?.send({ clear: true })
-  state.isPolling = true
-}
+// const clearRequests = () => {
+//   console.log("Clearing requests")
+//   state.activeTab = ""
+//   requestsStore.clearRequests()
+//   debugbarChannel?.send({ clear: true })
+//   state.isPolling = true
+// }
 
 const togglePolling = () => {
   state.isPolling = !state.isPolling

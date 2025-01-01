@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue"
-
 const props = defineProps<{
   verb: string
 }>()
