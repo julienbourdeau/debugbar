@@ -11,6 +11,7 @@
     "vite.extension.config.ts",
     "vite.demo.config.ts",
     "./dev/vite.dev.config.ts",
-    "./dev-extension/vite.dev-extension.config.ts"
+    "./dev-extension/vite.dev-extension.config.ts",
+    "./extension/manifest.ts",
   ],
 }
