@@ -21,6 +21,8 @@ import PanelList from "@/components/panels/PanelList.vue"
 import MessageItem from "@/components/messages/MessageItem.vue"
 import QueryItem from "@/components/queries/QueryItem.vue"
 import RequestTimings from "@/components/RequestTimings.vue"
+import RequestListItem from "@/components/RequestListItem.vue"
+import HttpVerb from "@/components/HttpVerb.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -138,7 +140,6 @@ const setActiveTab = (tab) => {
     <div class="px-5 py-1.5 italic">No request yet</div>
   </div>
 
-  <!--  The glorious debugbar  -->
   <div v-if="requestsStore.currentRequest" class="z-[9999] text-stone-900 w-full">
     <div
       id="debugbar-header"
@@ -146,7 +147,7 @@ const setActiveTab = (tab) => {
       class="flex flex-col px-1 items-center justify-between bg-stone-100 border-b-2 border-stone-300"
     >
       <!--      THE LIST-->
-      <div class="w-full space-y-1">
+      <div v-if="!isActive" class="w-full space-y-1">
         <div
           v-for="r in requestsStore.requests"
           @click="
@@ -155,19 +156,35 @@ const setActiveTab = (tab) => {
               state.activeTab = defaultTabName
             }
           "
-          v-text="r.pathWithVerb"
-        ></div>
+        >
+          <request-list-item :request="r" />
+        </div>
       </div>
 
       <!--      THE PANEL-->
       <div v-if="isActive" class="w-full">
-        <div class="flex w-full justify-between items-center space-x-3 pr-1">
-          <request-timings :current-request="requestsStore.currentRequest" />
+        <div class="flex w-full justify-between items-center">
+          <div class="flex item-center space-x-3 py-2 border-0">
+            <http-verb :verb="requestsStore.currentRequest.meta.method" />
+            <span>{{ requestsStore.currentRequest.meta.path }}</span>
+          </div>
+
+          <button
+            v-if="configStore.config.mode == 'poll'"
+            @click="togglePolling"
+            :title="state.isPolling ? 'Pause polling' : 'Resume polling'"
+          >
+            <pause-icon v-if="state.isPolling" class="size-4" />
+            <play-icon v-if="!state.isPolling" class="size-4" />
+          </button>
+
+          <button @click="state.activeTab = ''" title="Close">
+            <x-circle-icon class="size-4" />
+          </button>
         </div>
 
         <div class="flex w-full justify-between items-center">
           <div class="flex items-center">
-            <status-code :code="requestsStore.currentRequest.meta.status" />
             <tab-button
               v-for="(v, k) in requestsStore.currentRequest.dataForTabs"
               key="k"
@@ -190,31 +207,20 @@ const setActiveTab = (tab) => {
           </div>
 
           <div class="flex items-center space-x-3">
+            <request-timings :current-request="requestsStore.currentRequest" />
+
             <div @click="setActiveTab('request')" class="flex cursor-pointer">
               <span class="text-sm text-stone-600 font-medium tracking-wide">
                 {{ routeAlias }}
               </span>
-            </div>
-
-            <div class="flex items-center pl-1 space-x-2">
-              <button
-                v-if="configStore.config.mode == 'poll'"
-                @click="togglePolling"
-                :title="state.isPolling ? 'Pause polling' : 'Resume polling'"
-              >
-                <pause-icon v-if="state.isPolling" class="size-4" />
-                <play-icon v-if="!state.isPolling" class="size-4" />
-              </button>
-
-              <button @click="state.activeTab = ''" title="Close">
-                <x-circle-icon class="size-4" />
-              </button>
+              <status-code :code="requestsStore.currentRequest.meta.status" class="ml-3" />
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!--    TODO: extract this to dedicated component ?-->
     <div ref="body" id="debugbar-body" class="bg-white overflow-scroll" v-if="state.activeTab != ''">
       <request-panel v-if="state.activeTab == 'request'" :request="requestsStore.currentRequest" />
       <panel-list v-if="state.activeTab == 'messages'">
