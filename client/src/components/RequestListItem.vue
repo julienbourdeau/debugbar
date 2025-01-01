@@ -3,7 +3,7 @@ import type { BackendRequest } from "@/models/Request.ts"
 import HttpVerb from "@/components/HttpVerb.vue"
 import RequestTimings from "@/components/RequestTimings.vue"
 
-const props = defineProps<{
+defineProps<{
   request: BackendRequest
 }>()
 </script>
