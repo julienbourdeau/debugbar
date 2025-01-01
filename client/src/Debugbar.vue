@@ -11,9 +11,6 @@ import {
   TrashIcon,
   PauseIcon,
   PlayIcon,
-  CircleStackIcon,
-  ArrowsUpDownIcon,
-  CpuChipIcon,
 } from "@heroicons/vue/16/solid"
 
 import TabButton from "@/components/TabButton.vue"
@@ -21,9 +18,9 @@ import TabButton from "@/components/TabButton.vue"
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import { useConfigStore } from "@/stores/configStore.ts"
 import RubyLogo from "@/components/ui/RubyLogo.vue"
-import Timing from "@/components/ui/Timing.vue"
 import StatusCode from "@/components/ui/StatusCode.vue"
 import DebugbarBody from "@/DebugbarBody.vue"
+import RequestTimings from "@/components/RequestTimings.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -239,23 +236,7 @@ const setActiveTab = (tab) => {
       <!--  Right  -->
       <div class="flex flex-wrap-reverse justify-end items-center space-x-3 pr-1">
         <div class="flex space-x-2">
-          <timing :duration-ms="requestsStore.currentRequest.meta.db_runtime" title="DB runtime">
-            <circle-stack-icon class="text-stone-600 size-3" />
-          </timing>
-
-          <timing :duration-ms="requestsStore.currentRequest.meta.cpu_time" title="CPU time">
-            <cpu-chip-icon class="text-stone-600 size-3" />
-          </timing>
-
-          <timing
-            :duration-ms="requestsStore.currentRequest.meta.duration"
-            :too-slow-threshold="1000"
-            :slow-threshold="750"
-            class="font-bold"
-            title="Total duration"
-          >
-            <arrows-up-down-icon class="text-stone-800 size-4" />
-          </timing>
+          <request-timings :current-request="requestsStore.currentRequest" />
         </div>
 
         <div @click="setActiveTab('request')" class="flex space-x-2 cursor-pointer">

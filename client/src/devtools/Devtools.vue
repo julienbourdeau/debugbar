@@ -4,16 +4,7 @@
 <script setup lang="ts">
 import { createConsumer } from "@rails/actioncable"
 import { computed, reactive, ref } from "vue"
-import {
-  CodeBracketIcon,
-  XCircleIcon,
-  TrashIcon,
-  PauseIcon,
-  PlayIcon,
-  CircleStackIcon,
-  ArrowsUpDownIcon,
-  CpuChipIcon,
-} from "@heroicons/vue/16/solid"
+import { CodeBracketIcon, XCircleIcon, TrashIcon, PauseIcon, PlayIcon } from "@heroicons/vue/16/solid"
 
 import TabButton from "@/components/TabButton.vue"
 import ModelsPanel from "@/components/panels/ModelsPanel.vue"
@@ -25,11 +16,11 @@ import { useConfigStore } from "@/stores/configStore.ts"
 import CachePanel from "@/components/panels/CachePanel.vue"
 import RequestPanel from "@/components/panels/RequestPanel.vue"
 import JsonPanel from "@/components/panels/JsonPanel.vue"
-import Timing from "@/components/ui/Timing.vue"
 import StatusCode from "@/components/ui/StatusCode.vue"
 import PanelList from "@/components/panels/PanelList.vue"
 import MessageItem from "@/components/messages/MessageItem.vue"
 import QueryItem from "@/components/queries/QueryItem.vue"
+import RequestTimings from "@/components/RequestTimings.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -39,8 +30,9 @@ const header = ref(null)
 const state = reactive({
   activeTab: "",
   isPolling: configStore.config.mode === "poll",
-  height: configStore.config.height,
 })
+
+const defaultTabName = "queries"
 
 const isActive = computed(() => {
   return state.activeTab != ""
@@ -136,23 +128,14 @@ const togglePolling = () => {
 }
 
 const setActiveTab = (tab) => {
-  if (state.activeTab == tab) {
-    state.activeTab = "" // Close if you click on active tab
-  } else {
-    if (window.innerHeight < state.height) {
-      state.height = window.innerHeight - header.value.clientHeight * 2
-    }
-    state.activeTab = tab
-  }
+  state.activeTab = tab
 }
 </script>
 
 <template>
   <!--  No request yet, the debugbar is full width but empty  -->
-  <div v-if="requestsStore.currentRequest == null" class="z-[9999] text-stone-900 w-full">
-    <div class="flex items-center justify-between bg-stone-100 border-b border-stone-200">
-      <div class="px-5 py-1.5 italic">No request yet</div>
-    </div>
+  <div v-if="requestsStore.currentRequest == null">
+    <div class="px-5 py-1.5 italic">No request yet</div>
   </div>
 
   <!--  The glorious debugbar  -->
@@ -162,102 +145,77 @@ const setActiveTab = (tab) => {
       ref="header"
       class="flex flex-col px-1 items-center justify-between bg-stone-100 border-b-2 border-stone-300"
     >
-      <div class="flex w-full justify-between items-center space-x-3 pr-1">
-        <div>
-          <select
-            class="px-2 py-1.5 bg-white border border-stone-200 rounded w-[330px] text-sm"
-            name="current_request_id"
-            @change="
-              (event) => {
-                const target = event.target as HTMLSelectElement
-                requestsStore.setCurrentRequestById(target.value)
-              }
-            "
-          >
-            <option
-              v-for="r in requestsStore.requests"
-              :selected="requestsStore.currentRequest.id == r.id"
-              v-text="r.pathWithVerb"
-              :value="r.id"
-            />
-          </select>
-        </div>
-        <div class="flex space-x-2">
-          <timing :duration-ms="requestsStore.currentRequest.meta.db_runtime" title="DB runtime">
-            <circle-stack-icon class="text-stone-600 size-3" />
-          </timing>
-
-          <timing :duration-ms="requestsStore.currentRequest.meta.cpu_time" title="CPU time">
-            <cpu-chip-icon class="text-stone-600 size-3" />
-          </timing>
-
-          <timing
-            :duration-ms="requestsStore.currentRequest.meta.duration"
-            :too-slow-threshold="1000"
-            :slow-threshold="750"
-            class="font-bold"
-            title="Total duration"
-          >
-            <arrows-up-down-icon class="text-stone-800 size-4" />
-          </timing>
-        </div>
-
-        <div @click="setActiveTab('request')" class="flex space-x-2 cursor-pointer">
-          <span class="text-sm text-stone-600 font-medium tracking-wide">
-            {{ routeAlias }}
-          </span>
-
-          <status-code :code="requestsStore.currentRequest.meta.status" />
-        </div>
-
-        <div class="flex items-center pl-1 space-x-2">
-          <button
-            v-if="configStore.config.mode == 'poll'"
-            @click="togglePolling"
-            :title="state.isPolling ? 'Pause polling' : 'Resume polling'"
-          >
-            <pause-icon v-if="state.isPolling" class="size-4" />
-            <play-icon v-if="!state.isPolling" class="size-4" />
-          </button>
-          <button @click="clearRequests" title="Clear all requests (frontend and backend)">
-            <trash-icon class="size-3" />
-          </button>
-          <button v-if="isActive" @click="state.activeTab = ''" title="Close">
-            <x-circle-icon class="size-4" />
-          </button>
-        </div>
+      <!--      THE LIST-->
+      <div class="w-full space-y-1">
+        <div
+          v-for="r in requestsStore.requests"
+          @click="
+            (_event) => {
+              requestsStore.setCurrentRequestById(r.id)
+              state.activeTab = defaultTabName
+            }
+          "
+          v-text="r.pathWithVerb"
+        ></div>
       </div>
 
-      <div class="flex grow justify-start items-center">
-        <tab-button
-          v-for="(v, k) in requestsStore.currentRequest.dataForTabs"
-          key="k"
-          :label="v.label"
-          :count="v?.count"
-          :is-active="k === state.activeTab"
-          :disabled="v.count == 0"
-          @click="setActiveTab(k)"
-          >{{ v.label }}</tab-button
-        >
+      <!--      THE PANEL-->
+      <div v-if="isActive" class="w-full">
+        <div class="flex w-full justify-between items-center space-x-3 pr-1">
+          <request-timings :current-request="requestsStore.currentRequest" />
+        </div>
 
-        <button
-          v-if="devMode"
-          @click="setActiveTab('debug')"
-          class="px-3 py-1.5 text-stone-600"
-          :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
-        >
-          <CodeBracketIcon class="size-4" />
-        </button>
+        <div class="flex w-full justify-between items-center">
+          <div class="flex items-center">
+            <status-code :code="requestsStore.currentRequest.meta.status" />
+            <tab-button
+              v-for="(v, k) in requestsStore.currentRequest.dataForTabs"
+              key="k"
+              :label="v.label"
+              :count="v?.count"
+              :is-active="k === state.activeTab"
+              :disabled="v.count == 0"
+              @click="setActiveTab(k)"
+              >{{ v.label }}</tab-button
+            >
+
+            <button
+              v-if="devMode"
+              @click="setActiveTab('debug')"
+              class="px-3 py-1.5 text-stone-600"
+              :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
+            >
+              <CodeBracketIcon class="size-4" />
+            </button>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div @click="setActiveTab('request')" class="flex cursor-pointer">
+              <span class="text-sm text-stone-600 font-medium tracking-wide">
+                {{ routeAlias }}
+              </span>
+            </div>
+
+            <div class="flex items-center pl-1 space-x-2">
+              <button
+                v-if="configStore.config.mode == 'poll'"
+                @click="togglePolling"
+                :title="state.isPolling ? 'Pause polling' : 'Resume polling'"
+              >
+                <pause-icon v-if="state.isPolling" class="size-4" />
+                <play-icon v-if="!state.isPolling" class="size-4" />
+              </button>
+
+              <button @click="state.activeTab = ''" title="Close">
+                <x-circle-icon class="size-4" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div
-      ref="body"
-      id="debugbar-body"
-      class="bg-white overflow-scroll"
-      v-if="state.activeTab != ''"
-      :style="`height: ${state.height}px`"
-    >
+    <div ref="body" id="debugbar-body" class="bg-white overflow-scroll" v-if="state.activeTab != ''">
       <request-panel v-if="state.activeTab == 'request'" :request="requestsStore.currentRequest" />
       <panel-list v-if="state.activeTab == 'messages'">
         <message-item v-for="msg in requestsStore.currentRequest?.messages" :msg="msg" :key="msg.id" />
