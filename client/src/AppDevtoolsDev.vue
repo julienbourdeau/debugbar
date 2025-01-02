@@ -19,7 +19,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="h-full">
     <devtools></devtools>
   </div>
 </template>

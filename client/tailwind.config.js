@@ -1,3 +1,4 @@
+const defaultTheme = require("tailwindcss/defaultTheme")
 /** @type {import('tailwindcss').Config} */
 const content = ["./src/**/*.{vue,js,ts,jsx,tsx}"]
 
@@ -13,6 +14,9 @@ export default {
       colors: {
         "red-rails": "#D30001",
         "gray-rails": "#F0E7E9",
+      },
+      fontFamily: {
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
     },
   },
