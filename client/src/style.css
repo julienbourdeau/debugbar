@@ -10,7 +10,8 @@ body {
 }
 
 @layer components {
-  pre, pre code.hljs {
+  pre,
+  pre code.hljs {
     @apply w-full !m-0 !p-0;
   }
 

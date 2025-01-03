@@ -4,15 +4,7 @@
 <script setup lang="ts">
 import { createConsumer } from "@rails/actioncable"
 import { computed, reactive, ref } from "vue"
-import {
-  CodeBracketIcon,
-  XCircleIcon,
-  PauseIcon,
-  PlayIcon,
-  CircleStackIcon,
-  CpuChipIcon,
-  ArrowsUpDownIcon,
-} from "@heroicons/vue/16/solid"
+import { CodeBracketIcon, XCircleIcon, PauseIcon, PlayIcon, TrashIcon } from "@heroicons/vue/16/solid"
 
 import TabButton from "@/components/TabButton.vue"
 import ModelsPanel from "@/components/panels/ModelsPanel.vue"
@@ -31,15 +23,14 @@ import QueryItem from "@/components/queries/QueryItem.vue"
 import RequestListItem from "@/components/RequestListItem.vue"
 import RequestTimings from "@/components/RequestTimings.vue"
 import HttpVerb from "@/components/ui/HttpVerb.vue"
-import Timing from "@/components/ui/Timing.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
 
-const header = ref(null)
-
 const state = reactive({
+  mode: configStore.config.mode,
   activeTab: "",
+  isConnected: false,
   isPolling: configStore.config.mode === "poll",
 })
 
@@ -64,12 +55,12 @@ if (configStore.config.mode === "ws") {
     { channel: configStore.config.cable.channelName },
     {
       connected() {
-        console.log("🟢 Connected to channel")
+        state.isConnected = true
         debugbarChannel.send({ ids: [] })
       },
 
       disconnected() {
-        console.log("🔴 Disconnected from channel")
+        state.isConnected = false
       },
       received(data) {
         if (data.length == 0) {
@@ -126,13 +117,12 @@ if (configStore.config.mode === "ws") {
   console.log(`Using debugbar in "offline mode", ideal for demos using fixtures.`)
 }
 
-// const clearRequests = () => {
-//   console.log("Clearing requests")
-//   state.activeTab = ""
-//   requestsStore.clearRequests()
-//   debugbarChannel?.send({ clear: true })
-//   state.isPolling = true
-// }
+const clearRequests = () => {
+  state.activeTab = ""
+  requestsStore.clearRequests()
+  debugbarChannel?.send({ clear: true })
+  state.isPolling = true
+}
 
 const togglePolling = () => {
   state.isPolling = !state.isPolling
@@ -145,13 +135,43 @@ const setActiveTab = (tab) => {
 
 <template>
   <div class="">
+    <div class="px-1 flex items-center justify-between w-full bg-stone-700 text-white">
+      <div class="py-0.5">{{ requestsStore.requestCount }} requests</div>
+      <div class="pl-1.5 flex items-center space-x-2">
+        <div
+          v-if="state.mode == 'ws'"
+          class="rounded-full w-2 h-2"
+          :class="{
+            'bg-emerald-500': state.isConnected,
+            'bg-rose-500': !state.isConnected,
+          }"
+          :title="state.isConnected ? 'Connected to backend via websocket' : 'Cannot connect to backend via websocket'"
+        ></div>
+        <button
+          @click="togglePolling"
+          v-if="state.mode == 'poll'"
+          :title="state.isPolling ? 'Pause polling' : 'Resume polling'"
+        >
+          <pause-icon v-if="state.isPolling" class="size-4" />
+          <play-icon v-if="!state.isPolling" class="size-4" />
+        </button>
+
+        <button @click="clearRequests" title="Clear all requests (frontend and backend)">
+          <trash-icon class="size-3.5" />
+        </button>
+      </div>
+    </div>
+
     <!--  No request yet, the debugbar is full width but empty  -->
     <div v-if="requestsStore.currentRequest == null">
-      <div class="px-5 py-1.5 italic">No request yet</div>
+      <p class="px-1 py-2">
+        No request detected yet.
+        <a class="text-blue-700 font-medium underline" href="https://debugbar.dev/docs/troubleshooting/">Learn more</a>
+      </p>
     </div>
 
     <div v-if="requestsStore.currentRequest" class="z-[9999] text-stone-900 w-full">
-      <div id="debugbar-header" ref="header" class="flex flex-col px-1 items-center justify-between bg-stone-50">
+      <div id="debugbar-header" class="flex flex-col px-1 items-center justify-between bg-stone-50">
         <!--      THE LIST-->
         <div v-if="!isActive" class="w-full space-y-1">
           <div
