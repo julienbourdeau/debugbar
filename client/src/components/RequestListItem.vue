@@ -11,12 +11,10 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex items-center justify-between">
-    <div class="flex item-center space-x-2 py-2 border-0">
-      <status-code :code="request.meta.status" />
-      <http-verb :verb="request.meta.method" />
-      <span>{{ request.meta.path }}</span>
-    </div>
+  <div class="flex items-center space-x-2 py-2 border-0">
+    <status-code :code="request.meta.status" />
+    <http-verb :verb="request.meta.method" />
+    <div class="grow text-nowrap overflow-hidden">{{ request.meta.path }}</div>
 
     <div class="flex space-x-3">
       <div class="flex items-center">

@@ -3,23 +3,12 @@
 
 <script setup lang="ts">
 import { createConsumer } from "@rails/actioncable"
-import { computed, reactive, ref } from "vue"
+import { computed, reactive } from "vue"
 import { CodeBracketIcon, XCircleIcon, PauseIcon, PlayIcon, TrashIcon } from "@heroicons/vue/16/solid"
-
 import TabButton from "@/components/TabButton.vue"
-import ModelsPanel from "@/components/panels/ModelsPanel.vue"
-import JobsPanel from "@/components/panels/JobsPanel.vue"
-import LogsPanel from "@/components/panels/LogsPanel.vue"
-
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import { useConfigStore } from "@/stores/configStore.ts"
-import CachePanel from "@/components/panels/CachePanel.vue"
-import RequestPanel from "@/components/panels/RequestPanel.vue"
-import JsonPanel from "@/components/panels/JsonPanel.vue"
 import StatusCode from "@/components/ui/StatusCode.vue"
-import PanelList from "@/components/panels/PanelList.vue"
-import MessageItem from "@/components/messages/MessageItem.vue"
-import QueryItem from "@/components/queries/QueryItem.vue"
 import RequestListItem from "@/components/RequestListItem.vue"
 import RequestTimings from "@/components/RequestTimings.vue"
 import HttpVerb from "@/components/ui/HttpVerb.vue"
@@ -188,15 +177,16 @@ const setActiveTab = (tab) => {
         <!--      THE PANEL-->
         <div v-if="isActive" class="w-full">
           <div class="flex w-full justify-between items-center">
-            <div class="w-full items-center space-y-1">
-              <div class="flex items-center justify-between">
-                <div class="flex item-center space-x-2 py-2 border-0">
-                  <http-verb :verb="requestsStore.currentRequest.meta.method" />
-                  <span>{{ requestsStore.currentRequest.meta.path }}</span>
-                </div>
-
-                <request-timings :request="requestsStore.currentRequest" />
+            <div class="py-1.5 w-full flex items-center">
+              <http-verb :verb="requestsStore.currentRequest.meta.method" />
+              <div
+                class="pl-1 grow text-nowrap overflow-hidden font-mono"
+                :title="requestsStore.currentRequest.meta.path"
+              >
+                {{ requestsStore.currentRequest.meta.path }}
               </div>
+
+              <request-timings :request="requestsStore.currentRequest" />
             </div>
 
             <div class="pl-1.5 flex items-center space-x-1">
@@ -215,8 +205,8 @@ const setActiveTab = (tab) => {
             </div>
           </div>
 
-          <div class="flex w-full justify-between items-center">
-            <div class="flex items-center">
+          <div class="flex w-full justify-end flex-wrap-reverse items-center">
+            <div class="flex grow justify-start items-center">
               <tab-button
                 v-for="(v, k) in requestsStore.currentRequest.dataForTabs"
                 key="k"
