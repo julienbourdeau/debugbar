@@ -23,6 +23,7 @@ import QueryItem from "@/components/queries/QueryItem.vue"
 import RequestListItem from "@/components/RequestListItem.vue"
 import RequestTimings from "@/components/RequestTimings.vue"
 import HttpVerb from "@/components/ui/HttpVerb.vue"
+import DebugbarBody from "@/DebugbarBody.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -42,10 +43,6 @@ const isActive = computed(() => {
 
 const devMode = computed(() => {
   return import.meta.env.DEV
-})
-
-const routeAlias = computed(() => {
-  return requestsStore.currentRequest?.meta.params.controller + "#" + requestsStore.currentRequest?.meta.params.action
 })
 
 let debugbarChannel = null
@@ -244,7 +241,7 @@ const setActiveTab = (tab) => {
             <div class="flex items-center space-x-3">
               <div @click="setActiveTab('request')" class="flex cursor-pointer">
                 <span class="text-sm text-stone-600 font-medium tracking-wide">
-                  {{ routeAlias }}
+                  {{ requestsStore.currentRequest.routeAlias }}
                 </span>
                 <status-code :code="requestsStore.currentRequest.meta.status" class="ml-3" />
               </div>
@@ -253,29 +250,7 @@ const setActiveTab = (tab) => {
         </div>
       </div>
 
-      <!--    TODO: extract this to dedicated component ?-->
-      <div ref="body" id="debugbar-body" class="bg-white overflow-scroll" v-if="state.activeTab != ''">
-        <request-panel v-if="state.activeTab == 'request'" :request="requestsStore.currentRequest" />
-        <panel-list v-if="state.activeTab == 'messages'">
-          <message-item v-for="msg in requestsStore.currentRequest?.messages" :msg="msg" :key="msg.id" />
-        </panel-list>
-        <models-panel
-          v-if="state.activeTab == 'models'"
-          :models="requestsStore.currentRequest?.models"
-          :count="requestsStore.currentRequest?.modelsCount"
-        />
-        <panel-list v-if="state.activeTab == 'queries'">
-          <query-item v-for="query in requestsStore.currentRequest.queries" :key="query.id" :query="query" />
-        </panel-list>
-        <jobs-panel v-if="state.activeTab == 'jobs'" :jobs="requestsStore.currentRequest?.jobs" />
-        <cache-panel v-if="state.activeTab == 'cache'" :cache="requestsStore.currentRequest?.cache" />
-        <logs-panel v-if="state.activeTab == 'logs'" :logs="requestsStore.currentRequest?.logs" />
-        <json-panel
-          v-if="devMode && state.activeTab == 'debug'"
-          :current-request="requestsStore.currentRequest"
-          class="px-3 py-2"
-        />
-      </div>
+      <debugbar-body :request="requestsStore.currentRequest" :active-tab="state.activeTab" />
     </div>
   </div>
 </template>
