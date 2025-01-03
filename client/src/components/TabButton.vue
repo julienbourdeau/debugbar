@@ -10,7 +10,7 @@ const props = defineProps<{
   <button
     class="text-sm flex items-center space-x-1 px-3 py-2 border-0"
     :class="{
-      'bg-stone-300 rounded-sm': props.isActive,
+      'bg-stone-300 rounded-sm cursor-auto': props.isActive,
     }"
   >
     <span :class="{ 'font-medium': props.isActive }"><slot /></span>

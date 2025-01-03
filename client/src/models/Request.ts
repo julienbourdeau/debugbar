@@ -150,6 +150,10 @@ export class BackendRequest {
     return `${this.meta.method.toUpperCase()} ${this.meta.path}`
   }
 
+  get routeAlias(): string {
+    return `${this.meta.controller}#${this.meta.action}`
+  }
+
   get dataForTabs(): { [key: string]: any } {
     const tabs = {
       messages: {
