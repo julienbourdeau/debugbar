@@ -36,7 +36,7 @@ module Debugbar
     end
 
     def set_collection(collection)
-      Rails.cache.write("debugbar-requests", collection)
+      Rails.cache.write("debugbar-requests", collection, expires_in: 10.minutes)
     end
   end
 end
