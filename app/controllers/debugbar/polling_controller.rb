@@ -4,7 +4,7 @@ module Debugbar
     before_action :cors_set_access_control_headers
 
     def poll
-      render json: RequestBuffer.all.map(&:to_h)
+      render json: RequestBuffer.to_h
     end
 
     def confirm
