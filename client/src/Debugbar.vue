@@ -237,7 +237,7 @@ const setActiveTab = (tab) => {
 
       <!--  Right  -->
       <div class="flex items-center space-x-3 pr-1">
-        <request-timings :current-request="requestsStore.currentRequest" />
+        <request-timings :request="requestsStore.currentRequest" />
 
         <div @click="setActiveTab('request')" class="flex space-x-2 cursor-pointer">
           <span class="text-sm text-stone-600 font-medium tracking-wide">
