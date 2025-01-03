@@ -8,9 +8,9 @@ const props = defineProps<{
 
 <template>
   <button
-    class="text-sm flex items-center space-x-1 px-3 py-2 border-0"
+    class="text-sm flex items-center space-x-1 px-2 py-1.5 border-0"
     :class="{
-      'bg-stone-300 rounded-sm cursor-auto': props.isActive,
+      'bg-stone-300 rounded-t-sm cursor-auto': props.isActive,
     }"
   >
     <span :class="{ 'font-medium': props.isActive }"><slot /></span>

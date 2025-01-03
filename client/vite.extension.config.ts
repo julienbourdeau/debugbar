@@ -2,6 +2,8 @@ import { fileURLToPath, URL } from "node:url"
 
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
+import webExtension from "@samrum/vite-plugin-web-extension"
+import manifest from "./extension/manifest"
 
 const isNotProd = () => process.env.NODE_ENV != "production"
 
@@ -20,6 +22,9 @@ export default defineConfig({
         },
       },
     }),
+    webExtension({
+      manifest,
+    }),
   ],
   resolve: {
     alias: {
@@ -30,13 +35,13 @@ export default defineConfig({
     manifest: true,
     sourcemap: isNotProd(),
     emptyOutDir: true,
-    outDir: "./dist",
+    outDir: "./dist-extension",
     rollupOptions: {
-      output: {
-        inlineDynamicImports: true, // Ensure debugbar-[xx].js contains everything
-      },
+      // output: {
+      //   inlineDynamicImports: true,
+      // },
       input: {
-        debugbar: fileURLToPath(new URL("./src/main.ts", import.meta.url)),
+        devpanel: fileURLToPath(new URL("./src/devtools-panel.ts", import.meta.url)),
       },
     },
   },
