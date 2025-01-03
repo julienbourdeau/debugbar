@@ -236,7 +236,7 @@ const setActiveTab = (tab) => {
       <!--  Right  -->
       <div class="flex flex-wrap-reverse justify-end items-center space-x-3 pr-1">
         <div class="flex space-x-2">
-          <request-timings :current-request="requestsStore.currentRequest" />
+          <request-timings :request="requestsStore.currentRequest" />
         </div>
 
         <div @click="setActiveTab('request')" class="flex space-x-2 cursor-pointer">
