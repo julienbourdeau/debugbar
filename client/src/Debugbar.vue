@@ -21,6 +21,7 @@ import RubyLogo from "@/components/ui/RubyLogo.vue"
 import StatusCode from "@/components/ui/StatusCode.vue"
 import DebugbarBody from "@/DebugbarBody.vue"
 import RequestTimings from "@/components/RequestTimings.vue"
+import RequestsDropdown from "@/components/ui/RequestsDropdown.vue"
 
 let requestsStore = useRequestsStore()
 let configStore = useConfigStore()
@@ -248,23 +249,11 @@ const setActiveTab = (tab) => {
         </div>
 
         <div class="flex items-center">
-          <select
-            class="px-2 py-1.5 bg-white border border-stone-200 rounded w-[330px] text-sm"
-            name="current_request_id"
-            @change="
-              (event) => {
-                const target = event.target as HTMLSelectElement
-                requestsStore.setCurrentRequestById(target.value)
-              }
-            "
-          >
-            <option
-              v-for="r in requestsStore.requests"
-              :selected="requestsStore.currentRequest.id == r.id"
-              v-text="r.pathWithVerb"
-              :value="r.id"
-            />
-          </select>
+          <requests-dropdown
+            :requests="requestsStore.requests"
+            :current-request-id="requestsStore.currentRequest.id"
+            @select="(requestId) => requestsStore.setCurrentRequestById(requestId)"
+          />
 
           <div class="flex items-center pl-1 space-x-2">
             <button @click="clearRequests" title="Clear all requests (frontend and backend)">
