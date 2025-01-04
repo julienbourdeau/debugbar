@@ -12,6 +12,11 @@ export let useRequestsStore = defineStore("requests", {
       currentRequest: BackendRequest
     }
   },
+  getters: {
+    requestCount(state) {
+      return state.requests.length
+    },
+  },
   actions: {
     addRequests(requests: BackendRequestData[]): string[] {
       const ids = []

@@ -4,20 +4,26 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-sans antialiased text-sm;
+  font-optical-sizing: auto;
+}
+
 @layer components {
-  pre, pre code.hljs {
+  pre,
+  pre code.hljs {
     @apply w-full !m-0 !p-0;
   }
-}
 
-button {
-  @apply cursor-pointer;
-}
+  button {
+    @apply cursor-pointer;
+  }
 
-.simple-button {
-  @apply border border-stone-300 shadow px-1.5 text-sm hover:bg-stone-200 hover:shadow-md;
-}
+  .simple-button {
+    @apply border border-stone-300 shadow px-1.5 text-sm hover:bg-stone-200 hover:shadow-md;
+  }
 
-button[disabled] {
-  @apply opacity-50 cursor-not-allowed;
+  button[disabled] {
+    @apply opacity-50 cursor-not-allowed;
+  }
 }

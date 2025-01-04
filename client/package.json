@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev ./dev/ -c ./dev/vite.dev.config.ts",
-    "build": "vue-tsc && vite build",
-    "build:demo": "vue-tsc && vite build -c vite.demo.config.ts"
+    "dev:extension": "vite dev ./dev-extension/ -c ./dev-extension/vite.dev-extension.config.ts",
+    "build": "vue-tsc && vite build -c vite.config.ts",
+    "build:extension": "vue-tsc && vite build -c vite.extension.config.ts",
+    "build:demo": "vue-tsc && vite build -c vite.demo.config.ts",
+    "watch:extension": "vite build --watch --mode development -c vite.extension.config.ts"
   },
   "dependencies": {
     "@heroicons/vue": "^2.1.1",
@@ -19,6 +22,7 @@
     "vue-shadow-dom": "^4.2.0"
   },
   "devDependencies": {
+    "@samrum/vite-plugin-web-extension": "^5.1.1",
     "@types/lodash": "^4.14.202",
     "@types/node": "^22.10.2",
     "@vitejs/plugin-vue": "^5.0.0",
