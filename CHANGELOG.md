@@ -3,7 +3,8 @@
 ## UNRELEASED
 
 * Handle multi-processes service (cluster mode in Puma) - See [#45](https://github.com/julienbourdeau/debugbar/pull/45)
-* Ignore OPTIONS requests - See [xx](https://github.com/julienbourdeau/debugbar/commit/xx)
+* Ignore OPTIONS requests - See [08e7ee06](https://github.com/julienbourdeau/debugbar/commit/08e7ee0665f18f419a9a9bbcea00c414d05c2084)
+* Automatically set `action_cable.disable_request_forgery_protection` to true - See [449fc496](https://github.com/julienbourdeau/debugbar/commit/449fc49691182ecedf7cbbe1e5ca276894a70fee)
 
 ## v0.3.3 - 2024-06-15
 
