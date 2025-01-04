@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick } from "vue"
+import { ref, onMounted, onUnmounted, nextTick, computed } from "vue"
 import { BackendRequest } from "@/models/Request.ts"
+import HttpVerb from "@/components/ui/HttpVerb.vue"
+import { ChevronUpDownIcon } from "@heroicons/vue/16/solid"
 
 const props = defineProps<{
   requests: BackendRequest[]
@@ -13,9 +15,9 @@ const dropdownButton = ref(null)
 const dropdownList = ref(null)
 const showAbove = ref(false)
 
-const getCurrentRequest = () => {
+const currentRequest = computed(() => {
   return props.requests.find((r) => r.id === props.currentRequestId)
-}
+})
 
 const handleSelect = (requestId) => {
   emit("select", requestId)
@@ -54,29 +56,38 @@ onUnmounted(() => {
   window.removeEventListener("scroll", updatePosition, true)
   window.removeEventListener("resize", updatePosition)
 })
+
+// Add this function to split the path
+const getPathParts = (request: BackendRequest) => {
+  const basePath = request.request.path
+  const fullPath = request.meta.path
+
+  // If they're the same, return the full path as the first part
+  if (basePath === fullPath) {
+    return { base: fullPath, params: "" }
+  }
+
+  // Otherwise split into base and params
+  return {
+    base: basePath,
+    params: fullPath.slice(basePath.length),
+  }
+}
 </script>
 
 <template>
-  <div class="relative">
+  <div class="">
     <button
       ref="dropdownButton"
       @click="toggleDropdown"
-      class="w-[330px] px-2 py-1.5 bg-white border border-stone-200 rounded text-sm flex items-center justify-between hover:bg-stone-50"
+      class="w-[360px] px-2 py-1.5 bg-white border border-stone-200 rounded text-sm flex items-center justify-start space-x-1.5 hover:bg-stone-50"
     >
-      <span class="truncate">{{ getCurrentRequest()?.pathWithVerb }}</span>
-      <svg
-        class="w-4 h-4 ml-2"
-        :class="{ 'rotate-180': isOpen }"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-          clip-rule="evenodd"
-        />
-      </svg>
+      <http-verb :verb="currentRequest.request.method" />
+      <span class="truncate grow text-left">
+        <span class="text-stone-900">{{ getPathParts(currentRequest).base }}</span>
+        <span class="text-stone-500">{{ getPathParts(currentRequest).params }}</span>
+      </span>
+      <chevron-up-down-icon class="size-4" :class="{ 'rotate-180': isOpen }" />
     </button>
 
     <div
@@ -96,8 +107,11 @@ onUnmounted(() => {
           class="w-full px-2 py-1.5 flex items-center justify-start space-x-2 text-sm hover:bg-stone-200"
           :class="{ 'bg-stone-100': request.id === currentRequestId }"
         >
-          <span>{{ request.meta.method }}</span>
-          <span class="truncate">{{ request.meta.path }}</span>
+          <http-verb :verb="request.request.method" />
+          <span class="">
+            <span class="text-stone-900">{{ getPathParts(request).base }}</span>
+            <span class="text-stone-500">{{ getPathParts(request).params }}</span>
+          </span>
         </button>
       </div>
     </div>

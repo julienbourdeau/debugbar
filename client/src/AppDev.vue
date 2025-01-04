@@ -30,6 +30,9 @@ onMounted(() => {
     fetch("http://127.0.0.1:3000/api/errors?code=404", { mode: "no-cors" })
     // fetch("http://127.0.0.1:3000/api/errors?code=401", { mode: "no-cors" })
     fetch("http://127.0.0.1:3000/api/errors?code=500", { mode: "no-cors" })
+    fetch("http://127.0.0.1:3000/a/very/deeply/nested/route-with-looong-path-to-test-UI?with=random-param#ok", {
+      mode: "no-cors",
+    })
   }, 600)
 })
 </script>
