@@ -7,8 +7,20 @@ module Debugbar
   class Engine < ::Rails::Engine
     isolate_namespace Debugbar
 
+    def log(msg)
+      @logger ||= Logger.new(STDOUT)
+      Array.wrap(msg).each { |m| @logger.warn(m) }
+    end
+
     initializer 'debugbar.config' do |app|
       app.config.debugbar = ::Debugbar.config
+    end
+
+    initializer 'debugbar.override_config' do |app|
+      unless app.config.action_cable.disable_request_forgery_protection
+        app.config.action_cable.disable_request_forgery_protection = true
+        log "Debugbar: Action Cable request forgery protection is enabled. This can cause issues with Debugbar. Overriding setting config.action_cable.disable_request_forgery_protection = true now. Update your configuration to get rid of this message."
+      end
     end
 
     initializer 'debugbar.init' do |app|
@@ -30,8 +42,7 @@ module Debugbar
             "############################################################################################################",
           ]
 
-          logger = Logger.new(STDOUT)
-          msg.each { |m| logger.warn(m) }
+          log msg
         end
       end
 
