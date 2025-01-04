@@ -1,29 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from "vue"
+import { BackendRequest } from "@/models/Request.ts"
 
-const props = defineProps({
-  requests: {
-    type: Array,
-    required: true
-  },
-  currentRequestId: {
-    type: String,
-    required: true
-  }
-})
+const props = defineProps<{
+  requests: BackendRequest[]
+  currentRequestId: string
+}>()
 
-const emit = defineEmits(['select'])
+const emit = defineEmits(["select"])
 const isOpen = ref(false)
 const dropdownButton = ref(null)
 const dropdownList = ref(null)
 const showAbove = ref(false)
 
 const getCurrentRequest = () => {
-  return props.requests.find(r => r.id === props.currentRequestId)
+  return props.requests.find((r) => r.id === props.currentRequestId)
 }
 
 const handleSelect = (requestId) => {
-  emit('select', requestId)
+  emit("select", requestId)
   isOpen.value = false
 }
 
@@ -51,13 +46,13 @@ const toggleDropdown = () => {
 
 // Update position on scroll or resize
 onMounted(() => {
-  window.addEventListener('scroll', updatePosition, true)
-  window.addEventListener('resize', updatePosition)
+  window.addEventListener("scroll", updatePosition, true)
+  window.addEventListener("resize", updatePosition)
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', updatePosition, true)
-  window.removeEventListener('resize', updatePosition)
+  window.removeEventListener("scroll", updatePosition, true)
+  window.removeEventListener("resize", updatePosition)
 })
 </script>
 
@@ -90,7 +85,7 @@ onUnmounted(() => {
       class="absolute z-50 w-full bg-white border border-stone-200 rounded-md shadow-lg max-h-60 overflow-auto"
       :class="{
         'bottom-[calc(100%+0.25rem)]': showAbove,
-        'mt-1': !showAbove
+        'mt-1': !showAbove,
       }"
     >
       <div class="py-1">
@@ -98,12 +93,13 @@ onUnmounted(() => {
           v-for="request in requests"
           :key="request.id"
           @click="handleSelect(request.id)"
-          class="w-full px-2 py-1.5 text-left text-sm hover:bg-stone-100"
+          class="w-full px-2 py-1.5 flex items-center justify-start space-x-2 text-sm hover:bg-stone-200"
           :class="{ 'bg-stone-100': request.id === currentRequestId }"
         >
-          {{ request.pathWithVerb }}
+          <span>{{ request.meta.method }}</span>
+          <span class="truncate">{{ request.meta.path }}</span>
         </button>
       </div>
     </div>
   </div>
-</template> 
+</template>
