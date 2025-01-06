@@ -8,7 +8,7 @@ Dir.glob("#{fixtures_dir}/*").each { |p| File.delete(p) }
 
 Net::HTTP.start('127.0.0.1', 3000) do |http|
   [
-    '/post-list',
+    '/post-list?with-external-data=true',
     '/slow-page',
     '/random',
     '/post/240',
@@ -29,4 +29,3 @@ Net::HTTP.start('127.0.0.1', 3000) do |http|
     File.write("#{fixtures_dir}/#{name}.json", JSON.pretty_generate(item))
   end
 end
-

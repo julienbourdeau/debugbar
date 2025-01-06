@@ -164,8 +164,8 @@ export class BackendRequest {
     }, []).length
   }
 
-  get pathWithVerb(): string {
-    return `${this.meta.method.toUpperCase()} ${this.meta.path}`
+  get httpCount(): number {
+    return this.httpCalls.length
   }
 
   get routeAlias(): string {
@@ -205,6 +205,7 @@ export class BackendRequest {
     if (this.httpCalls.length > 0) {
       tabs["http"] = {
         label: "Http",
+        count: this.httpCount,
       }
     }
 

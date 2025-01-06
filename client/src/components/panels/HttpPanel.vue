@@ -13,7 +13,7 @@ defineProps<{
 }>()
 
 const state = reactive({
-  idOpen: "",
+  open: {},
 })
 </script>
 
@@ -21,12 +21,12 @@ const state = reactive({
   <div v-for="req in requests" :key="req.id">
     <h1
       class="flex items-center my-4 mx-2 space-x-2 px-2 py-2.5 bg-stone-100 border border-stone-300 tracking-wide text-sm rounded cursor-pointer"
-      @click="state.idOpen = state.idOpen === req.id ? '' : req.id"
+      @click="state.open[req.id] = !state.open[req.id]"
     >
       <chevron-down-icon
         class="size-4"
         :class="{
-          '-rotate-90': state.idOpen !== req.id,
+          '-rotate-90': state.open[req.id],
         }"
       />
       <status-code :code="req.response?.status" />
@@ -37,7 +37,7 @@ const state = reactive({
       </span>
     </h1>
 
-    <div v-if="state.idOpen == req.id" class="flex">
+    <div v-if="state.open[req.id]" class="flex">
       <http-request-panel :request="req.request" class="w-1/2" />
       <http-response-panel :response="req.response" class="w-1/2" />
     </div>

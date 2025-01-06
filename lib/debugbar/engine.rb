@@ -21,6 +21,27 @@ module Debugbar
         app.config.action_cable.disable_request_forgery_protection = true
         log "Debugbar: Action Cable request forgery protection is enabled. This can cause issues with Debugbar. Overriding setting config.action_cable.disable_request_forgery_protection = true now. Update your configuration to get rid of this message."
       end
+
+      if defined? HttpLog
+        HttpLog.configure do |config|
+          config.enabled = true
+
+          config.json_log = true
+          config.prefix = ''
+
+          config.logger = Debugbar::HttpLogger.new
+          config.logger_method = :log
+
+          config.log_connect   = true
+          config.log_request   = true
+          config.log_headers   = true
+          config.log_data      = true
+          config.log_status    = true
+          config.log_response  = true
+          config.log_benchmark = true
+
+        end
+      end
     end
 
     initializer 'debugbar.init' do |app|
