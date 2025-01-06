@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Job } from "@/models/Request.ts"
 import Panel from "@/components/panels/Panel.vue"
+import JsonCode from "@/components/ui/JsonCode.vue"
 
 const props = defineProps<{
   jobs: Job[]
@@ -38,7 +39,7 @@ function formatTs(ts: number) {
             </div>
           </td>
           <td class="whitespace-nowrap px-3 p-4 pr-8 text-sm">
-            <highlightjs language="json" :code="JSON.stringify(v.args, null, 2)" />
+            <json-code :json="v.args" />
           </td>
           <td class="whitespace-nowrap px-3 p-4 pr-8 text-sm text-stone-500">
             <div v-for="(log, k) in v.logs" v-html="(k > 0 ? '&nbsp; '.repeat(k) + '↳ ' : '') + log" class="" />
