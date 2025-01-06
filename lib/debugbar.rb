@@ -6,13 +6,16 @@ module Debugbar
   autoload :Request, "debugbar/request"
   autoload :RequestBuffer, "debugbar/buffers/request_buffer"
   autoload :SimpleLogger, "debugbar/loggers/simple_logger"
+  autoload :HttpLogger, "debugbar/loggers/http_logger"
+  autoload :HttpRequest, "debugbar/http/http"
+  autoload :HttpResponse, "debugbar/http/http"
 
   TIME_FORMAT = "%H:%M:%S.%L"
 
   module Tracker
     class << self
       SETTERS = %i[request response headers meta].freeze
-      METHODS = %i[inc_model add_query add_job add_cache add_log].freeze
+      METHODS = %i[inc_model add_query add_job add_cache add_log add_http_call].freeze
 
       SETTERS.each do |m|
         define_method("#{m}=") do |val|

@@ -26,7 +26,6 @@ module Debugbar
         Debugbar::Tracker.request = request
         Debugbar::Tracker.response = response
         Debugbar::Tracker.meta = meta
-
       end
     end
   end

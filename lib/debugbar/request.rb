@@ -1,9 +1,9 @@
 module Debugbar
   class Request
     attr_reader :request_id, :meta,
+                :request, :response,
                 :models, :queries, :jobs,
-                :messages, :cache, :logs
-    attr_accessor :request, :response, :headers
+                :messages, :cache, :logs, :http_calls
 
     def initialize(request_id)
       @request_id = request_id
@@ -13,6 +13,7 @@ module Debugbar
       @messages = []
       @cache = []
       @logs = []
+      @http_calls = []
     end
 
     alias_method :id, :request_id
@@ -22,6 +23,14 @@ module Debugbar
       meta.delete(:request)
       meta.delete(:response)
       @meta = meta
+    end
+
+    def request=(rack_request)
+      @request = HttpRequest.from_rack(rack_request)
+    end
+
+    def response=(rack_response)
+      @response = HttpResponse.from_rack(rack_response)
     end
 
     def inc_model(name)
@@ -52,47 +61,32 @@ module Debugbar
       @logs << l
     end
 
+    def add_http_call(id, request, response, extra)
+      @http_calls << {
+        id: id,
+        request: request.to_h,
+        response: response.to_h
+      }.merge(extra)
+    end
+
     def to_h
       {
         id: request_id,
         meta: meta,
-        request: request_hash,
-        response: response_hash,
+        request: request.to_h,
+        response: response&.to_h,
         models: models,
         queries: queries,
         jobs: jobs,
         messages: messages,
         cache: cache,
         logs: logs,
+        http_calls: http_calls,
       }
     end
 
     def to_json
       JSON.pretty_generate(to_h)
-    end
-
-    private
-
-    def request_hash
-      {
-        method: request.method,
-        path: request.path,
-        format: meta.dig(:format),
-        params: meta.dig(:params),
-        headers: request.env.select { |k,v| k.start_with? 'HTTP_'} # https://stackoverflow.com/a/55406700/1001125
-                        .transform_keys { |k| k.sub(/^HTTP_/, '').split('_').map(&:capitalize).join('-') }
-                        .sort.to_h
-      }
-    end
-
-    def response_hash
-      return nil if response.nil?
-
-      {
-        status: response.status,
-        headers: response.headers.to_h.transform_keys { |s| s.split('-').map(&:capitalize).join('-') },
-        body: response.body,
-      }
     end
   end
 end

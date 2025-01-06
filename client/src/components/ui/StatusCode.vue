@@ -5,7 +5,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div
+  <span
     class="px-1 py-0.5 rounded text-xs"
     :class="{
       'bg-green-600 text-white': props.code < 300,
@@ -14,7 +14,7 @@ const props = defineProps<{
       'bg-red-600 text-white': props.code >= 500,
     }"
     v-text="props.code"
-  ></div>
+  ></span>
 </template>
 
 <style scoped></style>

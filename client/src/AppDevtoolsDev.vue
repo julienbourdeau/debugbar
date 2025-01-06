@@ -43,6 +43,14 @@ onMounted(() => {
       },
     })
   }, 800)
+
+  // setTimeout(() => {
+  //   // We use `no-cors` mode because we don't need the response, we just want to trigger the request,
+  //   // fetch("http://127.0.0.1:3000/topics", { mode: "no-cors" })
+  //   fetch("http://127.0.0.1:3000/topics/random", { mode: "no-cors" })
+  //   // fetch("http://127.0.0.1:3000/topics/slow", { mode: "no-cors" })
+  //   fetch("http://127.0.0.1:3000/external-data?use_params=yes", { mode: "no-cors" })
+  // }, 600)
 })
 </script>
 
