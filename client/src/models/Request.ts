@@ -1,14 +1,15 @@
 export type BackendRequestData = {
   id: string
   meta: RequestMeta
-  request: RequestRequest
-  response: RequestResponse
+  request: HttpRequest
+  response: HttpResponse
   models: { [key: string]: number }
   queries: Query[]
   jobs: Job[]
   messages: Message[]
   cache: Cache[]
   logs: Log[]
+  http_calls: HttpCall[]
 }
 
 export type RequestMeta = {
@@ -27,15 +28,14 @@ export type RequestMeta = {
   allocations: number
 }
 
-export type RequestRequest = {
+export type HttpRequest = {
   method: string
-  path: string
-  format: string
+  url: URL
   headers: Headers
-  params: { [key: string]: any }
+  body: string
 }
 
-export type RequestResponse = {
+export type HttpResponse = {
   status: number
   headers: Headers
   body: string
@@ -91,17 +91,25 @@ export type Log = {
   progname: string
 }
 
+export type HttpCall = {
+  id: string
+  request: HttpRequest
+  response: HttpResponse
+  [key: string]: any
+}
+
 export class BackendRequest {
   id: string
   meta: RequestMeta
-  request: RequestRequest
-  response: RequestResponse
+  request: HttpRequest
+  response: HttpResponse
   models: { [key: string]: number }
   queries: Query[]
   jobs: Job[]
   messages: Message[]
   cache: Cache[]
   logs: Log[]
+  httpCalls: HttpCall[]
 
   constructor(data: BackendRequestData) {
     if (import.meta.env.DEV) {
@@ -110,14 +118,24 @@ export class BackendRequest {
 
     this.id = data?.id || "null"
     this.meta = data?.meta || ({} as unknown as RequestMeta)
-    this.request = data?.request || ({} as unknown as RequestRequest)
-    this.response = data?.response || ({} as unknown as RequestResponse)
+    this.request = {
+      ...data?.request,
+      url: data?.request?.url ? new URL(data?.request.url) : new URL("http://localhost"),
+    }
+    this.response = data?.response || ({} as unknown as HttpResponse)
     this.models = data?.models || {}
     this.queries = data?.queries || []
     this.jobs = data?.jobs || []
     this.messages = data?.messages || []
     this.cache = data?.cache || []
     this.logs = data?.logs || []
+    this.httpCalls = (data?.http_calls || []).map((call) => ({
+      ...call,
+      request: {
+        ...call.request,
+        url: call.request?.url ? new URL(call.request.url) : new URL("http://localhost"),
+      },
+    }))
   }
 
   get modelsCount(): number {
@@ -146,8 +164,8 @@ export class BackendRequest {
     }, []).length
   }
 
-  get pathWithVerb(): string {
-    return `${this.meta.method.toUpperCase()} ${this.meta.path}`
+  get httpCount(): number {
+    return this.httpCalls.length
   }
 
   get routeAlias(): string {
@@ -181,6 +199,13 @@ export class BackendRequest {
     if (this.logs.length > 0) {
       tabs["logs"] = {
         label: "Logs",
+      }
+    }
+
+    if (this.httpCalls.length > 0) {
+      tabs["http"] = {
+        label: "Http",
+        count: this.httpCount,
       }
     }
 

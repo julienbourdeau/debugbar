@@ -5,7 +5,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div
+  <span
     class="px-1 py-0.5 rounded text-xs text-white bg-slate-700"
     :class="{
       '!bg-sky-700': props.verb.toLowerCase() == 'get',
@@ -15,5 +15,5 @@ const props = defineProps<{
       '!bg-red-700': props.verb.toLowerCase() == 'delete',
     }"
     v-text="props.verb.toUpperCase()"
-  ></div>
+  ></span>
 </template>

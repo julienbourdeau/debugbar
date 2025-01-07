@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted, nextTick, computed } from "vue"
 import { BackendRequest } from "@/models/Request.ts"
 import HttpVerb from "@/components/ui/HttpVerb.vue"
 import { ChevronUpDownIcon } from "@heroicons/vue/16/solid"
+import { extractAfterPath } from "../../helpers.ts"
 
 const props = defineProps<{
   requests: BackendRequest[]
@@ -56,23 +57,6 @@ onUnmounted(() => {
   window.removeEventListener("scroll", updatePosition, true)
   window.removeEventListener("resize", updatePosition)
 })
-
-// Add this function to split the path
-const getPathParts = (request: BackendRequest) => {
-  const basePath = request.request.path
-  const fullPath = request.meta.path
-
-  // If they're the same, return the full path as the first part
-  if (basePath === fullPath) {
-    return { base: fullPath, params: "" }
-  }
-
-  // Otherwise split into base and params
-  return {
-    base: basePath,
-    params: fullPath.slice(basePath.length),
-  }
-}
 </script>
 
 <template>
@@ -84,8 +68,8 @@ const getPathParts = (request: BackendRequest) => {
     >
       <http-verb :verb="currentRequest.request.method" />
       <span class="truncate grow text-left">
-        <span class="text-stone-900">{{ getPathParts(currentRequest).base }}</span>
-        <span class="text-stone-500">{{ getPathParts(currentRequest).params }}</span>
+        <span class="text-stone-900">{{ currentRequest.request.url.pathname }}</span>
+        <span class="text-stone-500">{{ extractAfterPath(currentRequest.request.url) }}</span>
       </span>
       <chevron-up-down-icon class="size-4" :class="{ 'rotate-180': isOpen }" />
     </button>
@@ -109,8 +93,8 @@ const getPathParts = (request: BackendRequest) => {
         >
           <http-verb :verb="request.request.method" />
           <span class="">
-            <span class="text-stone-900">{{ getPathParts(request).base }}</span>
-            <span class="text-stone-500">{{ getPathParts(request).params }}</span>
+            <span class="text-stone-900">{{ request.request.url.pathname }}</span>
+            <span class="text-stone-500">{{ extractAfterPath(request.request.url) }}</span>
           </span>
         </button>
       </div>
