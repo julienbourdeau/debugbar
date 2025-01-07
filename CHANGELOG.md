@@ -2,8 +2,15 @@
 
 ## UNRELEASED
 
-* Track HTTP calls made by Rails - See [#48](https://github.com/julienbourdeau/debugbar/pull/48)
+* Use the debugbar in the browser dev tools 😎
+
+
+## v0.4.0 - 2025-01-07
+
+* Track HTTP calls made by the app - See [#48](https://github.com/julienbourdeau/debugbar/pull/48)
+  * Learn more: https://debugbar.dev/docs/http
 * Handle multi-processes service (cluster mode in Puma) - See [#45](https://github.com/julienbourdeau/debugbar/pull/45)
+  * Learn more: https://debugbar.dev/docs/puma-configuration
 * Ignore OPTIONS requests - See [08e7ee06](https://github.com/julienbourdeau/debugbar/commit/08e7ee0665f18f419a9a9bbcea00c414d05c2084)
 * ⚠️ Automatically set `action_cable.disable_request_forgery_protection` to true - See [449fc496](https://github.com/julienbourdeau/debugbar/commit/449fc49691182ecedf7cbbe1e5ca276894a70fee)
 * Some design tweak (like the select input to choose the request)
