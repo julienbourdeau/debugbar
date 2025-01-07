@@ -1,0 +1,87 @@
+{
+  "id": "e3063241-b5dd-4d60-b925-011b80461ad1",
+  "meta": {
+    "controller": "DemoController",
+    "action": "random_post",
+    "params": {
+      "controller": "demo",
+      "action": "random_post"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/random",
+    "status": 302,
+    "view_runtime": null,
+    "db_runtime": 0.724000041373074,
+    "duration": 3.535999894142151,
+    "cpu_time": 3.535041999999997,
+    "idle_time": 0.0009578941421537479,
+    "allocations": 1635
+  },
+  "request": {
+    "method": "GET",
+    "url": "http://127.0.0.1:3000/random",
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+      "Host": "127.0.0.1:3000",
+      "User-Agent": "Ruby",
+      "Version": "HTTP/1.1"
+    },
+    "body": {}
+  },
+  "response": {
+    "status": 302,
+    "headers": {
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-Xss-Protection": "0",
+      "X-Content-Type-Options": "nosniff",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Location": "http://127.0.0.1:3000/post/1683"
+    },
+    "body": ""
+  },
+  "models": {
+    "Post": 1
+  },
+  "queries": [
+    {
+      "id": "76b11ddd701d98aa8252",
+      "title": "Post Load (0.7ms)",
+      "name": "Post Load",
+      "sql": "SELECT \"posts\".* FROM \"posts\" ORDER BY RANDOM() LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.7,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "app/controllers/demo_controller.rb:30",
+        "random_post"
+      ]
+    }
+  ],
+  "jobs": [],
+  "messages": [
+    {
+      "id": "e97ce800c45ee1ec",
+      "msg": "before_action",
+      "extra": [
+        {
+          "params": {
+            "controller": "demo",
+            "action": "random_post"
+          }
+        }
+      ],
+      "source": [
+        "app/controllers/application_controller.rb:3",
+        "block in <class:ApplicationController>"
+      ]
+    }
+  ],
+  "cache": [],
+  "logs": [],
+  "http_calls": []
+}

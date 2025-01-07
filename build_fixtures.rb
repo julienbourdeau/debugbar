@@ -25,7 +25,8 @@ Net::HTTP.start('127.0.0.1', 3000) do |http|
   response = http.request Net::HTTP::Get.new('/_debugbar/poll')
   data = JSON.parse(response.body)
   data.each_with_index do |item, idx|
-    name = ("%03d" % (idx +1)) + '-' + item['meta']['controller'] + '-' + item['meta']['action']
-    File.write("#{fixtures_dir}/#{name}.json", JSON.pretty_generate(item))
+    filename = ("%03d" % (idx +1)) + '-' + item['meta']['controller'] + '-' + item['meta']['action'] + '.json'
+    puts "Writing #{filename}"
+    File.write("#{fixtures_dir}/#{filename}", JSON.pretty_generate(item))
   end
 end

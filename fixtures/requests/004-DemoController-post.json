@@ -1,0 +1,139 @@
+{
+  "id": "9dad513f-a830-44eb-8649-36679b5fd030",
+  "meta": {
+    "controller": "DemoController",
+    "action": "post",
+    "params": {
+      "controller": "demo",
+      "action": "post",
+      "id": "240"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/post/240",
+    "status": 200,
+    "view_runtime": 1.65200000628829,
+    "db_runtime": 1.1050000321120024,
+    "duration": 21.861999988555908,
+    "cpu_time": 21.784750000000003,
+    "idle_time": 0.0772499885559057,
+    "allocations": 27326
+  },
+  "request": {
+    "method": "GET",
+    "url": "http://127.0.0.1:3000/post/240",
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+      "Host": "127.0.0.1:3000",
+      "User-Agent": "Ruby",
+      "Version": "HTTP/1.1"
+    },
+    "body": {}
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-Xss-Protection": "0",
+      "X-Content-Type-Options": "nosniff",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Link": "</assets/application-a3ad8bf653523ff8778ecd0a6956a02fa62510f71d5b47a6a9f1dbe9f8b9b089.css>; rel=preload; as=style; nopush",
+      "Content-Type": "text/html; charset=utf-8",
+      "Vary": "Accept"
+    },
+    "body": "<!DOCTYPE html>\n<html>\n  <head>\n    <title>DemoApp</title>\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n    <meta name=\"csrf-param\" content=\"authenticity_token\" />\n<meta name=\"csrf-token\" content=\"2k3oK9d5szzmpA8G2-Q25sDINsEJl8FjJYyfT2_Ijupl2uaP5iK808Nfn1Ple3NIZCj979H3lfaH8tQfd2yZDw\" />\n    \n\n\n    <link rel=\"stylesheet\" href=\"/assets/application-a3ad8bf653523ff8778ecd0a6956a02fa62510f71d5b47a6a9f1dbe9f8b9b089.css\" data-turbo-track=\"reload\" />\n    <script type=\"importmap\" data-turbo-track=\"reload\">{\n  \"imports\": {\n    \"application\": \"/assets/application-2fd7d8412307b9b06976807734c8e938e9d18d95b640756eb48c512c3cb37dba.js\",\n    \"@hotwired/turbo-rails\": \"/assets/turbo.min-918a6cf2f2be8ed9555c9a11eee69c7dc2f01770802815576efc931876b327fb.js\"\n  }\n}</script>\n<link rel=\"modulepreload\" href=\"/assets/application-2fd7d8412307b9b06976807734c8e938e9d18d95b640756eb48c512c3cb37dba.js\">\n<link rel=\"modulepreload\" href=\"/assets/turbo.min-918a6cf2f2be8ed9555c9a11eee69c7dc2f01770802815576efc931876b327fb.js\">\n<script type=\"module\">import \"application\"</script>\n\n          <script defer src=\"/_debugbar/assets/script\"></script>\n\n  </head>\n\n  <body>\n    <div class=\"container mb-5\">\n\n      <nav class=\"mt-2 mb-4 navbar navbar-expand-lg navbar-light bg-light\">\n        <div class=\"container-fluid\">\n          <a class=\"navbar-brand\" href=\"/\">Rails Demo app</a>\n          <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarText\" aria-controls=\"navbarText\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n          </button>\n          <div class=\"collapse navbar-collapse\" id=\"navbarText\">\n            <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/post-list\">Post List</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/random\">Random</a>\n              </li>\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" aria-current=\"page\" href=\"/slow-page\">Slow page</a>\n              </li>\n            </ul>\n            <ul class=\"navbar-nav\">\n              <li class=\"nav-item\">\n                <a class=\"nav-link\" href=\"/export-csv\">Export</a>\n              </li>\n              <li class=\"nav-item\">\n                <button type=\"button\" class=\"nav-link\" onclick=\"fetch('/api/errors?code=404'); fetch('/api/errors?code=401'); fetch('/api/errors?code=500')\">Errors</button>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </nav>\n\n      <div class=\"mb-5\">\n        <div class=\"d-grid gap-5\">\n\n  <h1>\n    Nectar in a Sieve\n    <span class=\"text-muted\">(#240)</span>\n  </h1>\n\n  <div>\n    <h3>Provident</h3>\n\n<p>Nam doloribus non. A nemo eligendi. Et suscipit sequi.\n<code>Optio.</code></p>\n\n  </div>\n\n  <pre>\n    ### Provident\nNam doloribus non. A nemo eligendi. Et suscipit sequi.\n`Optio.`\n  </pre>\n\n  <div class=\"d-flex gap-5\">\n    <button type=\"button\" onclick=\"fetch('/api/add_reaction?name=up&post_id=240')\" class=\"btn btn-primary position-relative\">\n      Like 👍\n      <span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black\">\n        223\n      </span>\n    </button>\n\n    <button type=\"button\" onclick=\"fetch('/api/add_reaction?name=down&post_id=240')\" class=\"btn btn-danger position-relative\">\n      Nope 👎\n      <span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black\">\n        269\n      </span>\n    </button>\n\n    <button type=\"button\" onclick=\"fetch('/api/add_reaction?name=star&post_id=240')\" class=\"btn btn-success position-relative\">\n      Awesome 🤩\n      <span class=\"position-absolute top-0 start-100 translate-middle badge rounded-pill bg-black\">\n        267\n      </span>\n    </button>\n  </div>\n\n</div>\n\n      </div>\n\n    </div>\n\n    <footer class=\"container footer mt-auto py-3 bg-light\">\n      <div class=\"d-flex justify-content-between align-items-center\">\n        <ul class=\"nav\">\n          <li class=\"nav-item\">\n            <a class=\"nav-link link-secondary\" href=\"/external-data\">With HTTP calls</a>\n          </li>\n          <li class=\"nav-item\">\n            <a class=\"nav-link link-secondary\"href=\"/a/very/deeply/nested/route-with-looong-path-to-test-UI\">Long URL</a>\n          </li>\n        </ul>\n\n        <div class=\"text-muted\">Made for Debugbar &copy; 2025</div>\n      </div>\n    </footer>\n\n          <div id=\"__debugbar\" data-turbo-permanent></div>\n      <script type=\"text/javascript\" data-turbo-permanent nonce=\"\">\n        window._debugbarConfigOptions = {\"height\":800,\"mode\":\"ws\",\"active_record\":{\"adapter\":\"sqlite\"}}\n      </script>\n\n\n  </body>\n</html>\n"
+  },
+  "models": {
+    "Post": 1,
+    "PostAuthor": 7,
+    "Author": 7,
+    "Reaction": 759
+  },
+  "queries": [
+    {
+      "id": "76b11ddd701d98aa8252",
+      "title": "Post Load (0.1ms)",
+      "name": "Post Load",
+      "sql": "SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"id\" = 240 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "app/controllers/demo_controller.rb:26",
+        "post"
+      ]
+    },
+    {
+      "id": "76b11ddd701d98aa8252",
+      "title": "PostAuthor Load (0.1ms)",
+      "name": "PostAuthor Load",
+      "sql": "SELECT \"post_authors\".* FROM \"post_authors\" WHERE \"post_authors\".\"post_id\" = 240 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "app/controllers/demo_controller.rb:26",
+        "post"
+      ]
+    },
+    {
+      "id": "76b11ddd701d98aa8252",
+      "title": "Author Load (0.1ms)",
+      "name": "Author Load",
+      "sql": "SELECT \"authors\".* FROM \"authors\" WHERE \"authors\".\"id\" IN (1222, 667, 552, 793, 1768, 235, 587) ",
+      "cached": false,
+      "async": false,
+      "duration": 0.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "app/controllers/demo_controller.rb:26",
+        "post"
+      ]
+    },
+    {
+      "id": "76b11ddd701d98aa8252",
+      "title": "Reaction Load (0.8ms)",
+      "name": "Reaction Load",
+      "sql": "SELECT \"reactions\".* FROM \"reactions\" WHERE \"reactions\".\"post_id\" = 240 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.8,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "app/controllers/demo_controller.rb:26",
+        "post"
+      ]
+    }
+  ],
+  "jobs": [],
+  "messages": [
+    {
+      "id": "5b7d0f2df809646a",
+      "msg": "before_action",
+      "extra": [
+        {
+          "params": {
+            "controller": "demo",
+            "action": "post",
+            "id": "240"
+          }
+        }
+      ],
+      "source": [
+        "app/controllers/application_controller.rb:3",
+        "block in <class:ApplicationController>"
+      ]
+    }
+  ],
+  "cache": [],
+  "logs": [],
+  "http_calls": []
+}

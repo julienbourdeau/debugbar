@@ -1,0 +1,153 @@
+{
+  "id": "9ea4566d-6a09-4762-a484-c0790d7df35f",
+  "meta": {
+    "controller": "ApiController",
+    "action": "jobs",
+    "params": {
+      "name": "send_email",
+      "post_id": "123",
+      "controller": "api",
+      "action": "jobs"
+    },
+    "format": "*/*",
+    "method": "GET",
+    "path": "/api/jobs?name=send_email&post_id=123",
+    "status": 200,
+    "view_runtime": null,
+    "db_runtime": 0.1740000443533063,
+    "duration": 21.33399999141693,
+    "cpu_time": 20.589041000000066,
+    "idle_time": 0.7449589914168655,
+    "allocations": 13212
+  },
+  "request": {
+    "method": "GET",
+    "url": "http://127.0.0.1:3000/api/jobs?name=send_email&post_id=123",
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+      "Host": "127.0.0.1:3000",
+      "User-Agent": "Ruby",
+      "Version": "HTTP/1.1"
+    },
+    "body": {}
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-Xss-Protection": "0",
+      "X-Content-Type-Options": "nosniff",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Content-Type": "text/html"
+    },
+    "body": ""
+  },
+  "models": {
+    "Post": 12
+  },
+  "queries": [
+    {
+      "id": "76b11ddd701d98aa8252",
+      "title": "Post Load (0.1ms)",
+      "name": "Post Load",
+      "sql": "SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"id\" = 123 LIMIT 1 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "app/jobs/send_email_job.rb:5",
+        "perform"
+      ]
+    },
+    {
+      "id": "76b11ddd701d98aa8252",
+      "title": "Post Load (0.1ms)",
+      "name": "Post Load",
+      "sql": "SELECT \"posts\".* FROM \"posts\" ORDER BY \"posts\".\"published_at\" DESC LIMIT 5 ",
+      "cached": false,
+      "async": false,
+      "duration": 0.1,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "app/jobs/send_email_job.rb:6",
+        "perform"
+      ]
+    },
+    {
+      "id": "76b11ddd701d98aa8252",
+      "title": "CACHE Post Load (0.0ms)",
+      "name": "Post Load",
+      "sql": "SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"id\" = 123 LIMIT 1",
+      "cached": true,
+      "async": null,
+      "duration": 0.0,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "app/jobs/send_email_job.rb:5",
+        "perform"
+      ]
+    },
+    {
+      "id": "76b11ddd701d98aa8252",
+      "title": "CACHE Post Load (0.0ms)",
+      "name": "Post Load",
+      "sql": "SELECT \"posts\".* FROM \"posts\" ORDER BY \"posts\".\"published_at\" DESC LIMIT 5",
+      "cached": true,
+      "async": null,
+      "duration": 0.0,
+      "lock_wait": null,
+      "binds": null,
+      "source": [
+        "app/jobs/send_email_job.rb:6",
+        "perform"
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "id": "b80067c5-3ea5-45ee-80a7-f684b4c07ddb",
+      "class": "SendEmailJob",
+      "queue": "Inline(default)",
+      "args": [
+        "123",
+        {
+          "user_id": 99
+        }
+      ],
+      "successfully_enqueued": true,
+      "scheduled_at": null,
+      "logs": [
+        "Enqueued SendEmailJob (Job ID: b80067c5-3ea5-45ee-80a7-f684b4c07ddb) to Inline(default) with arguments: \"123\", {:user_id=>99}",
+        "/Users/julien/Personal/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
+      ]
+    },
+    {
+      "id": "dbed9e3c-131f-45e6-b3fe-10b8af6d2c68",
+      "class": "SendEmailJob",
+      "queue": "Inline(default)",
+      "args": [
+        "123",
+        {
+          "user_id": 1,
+          "admin": true
+        }
+      ],
+      "successfully_enqueued": true,
+      "scheduled_at": null,
+      "logs": [
+        "Enqueued SendEmailJob (Job ID: dbed9e3c-131f-45e6-b3fe-10b8af6d2c68) to Inline(default) with arguments: \"123\", {:user_id=>1, :admin=>true}",
+        "/Users/julien/Personal/debugbar/lib/debugbar/subscribers/active_job.rb:22:in `enqueue'"
+      ]
+    }
+  ],
+  "messages": [],
+  "cache": [],
+  "logs": [],
+  "http_calls": []
+}
