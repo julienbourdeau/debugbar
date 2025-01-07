@@ -32,6 +32,8 @@ module Debugbar
     end
 
     def self.from_rack(rack_res)
+      return nil if rack_res.nil?
+
       headers = rack_res.headers.to_h.transform_keys { |s| s.split('-').map(&:capitalize).join('-') }
 
       new(rack_res.status, headers, rack_res.body)
