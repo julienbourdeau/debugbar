@@ -84,6 +84,27 @@ module Debugbar
       Debugbar::RequestBuffer.init(adapter)
     end
 
+    initializer "debugbar.append_routes" do |app|
+      # Before 0.5.0, I asked people to mount the engine manually
+      # This will probably throw an error at some point to be ultimately removed
+      app.routes.append do
+        already_mounted = app.routes.routes.any? do |route|
+          route&.app&.app == ::Debugbar::Engine
+        end
+
+        if already_mounted
+          logger = Logger.new(STDOUT)
+          logger.warn 'Debugbar: The Debugbar engine is manually mounted in your `config/routes.rb`. The engine is now mounted automatically by the gem. Remove "mount Debugbar::Engine => Debugbar.config.prefix" from your routes to get rid of this message.'
+
+          unless Debugbar.config.enabled?
+            logger.warn "Debugbar: The Debugbar is disabled but the routes are loaded because the Debugbar::Engine is mounted manually in your `config/routes.rb`. It's recommended not to mount the engine manually since Debugbar 0.5.0"
+          end
+        else
+          mount Debugbar::Engine => Debugbar.config.prefix
+        end
+      end
+    end
+
     initializer 'debugbar.helper' do
       ActiveSupport.on_load(:action_controller) do
         ActionController::Base.helper(Debugbar::TagHelpers)
