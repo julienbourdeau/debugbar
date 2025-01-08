@@ -4,6 +4,9 @@
 
 * Use the debugbar in the browser dev tools 😎
 
+## v0.4.1 - 2025-01-07
+
+* Small fix when response is not set ([2227f4d7](https://github.com/julienbourdeau/debugbar/commit/2227f4d7e5d97ddb4b55cabd779d2bf46f9edf33))
 
 ## v0.4.0 - 2025-01-07
 
