@@ -2,7 +2,17 @@
 
 ## UNRELEASED
 
-* Use the debugbar in the browser dev tools 😎
+* Mount `Debugbar::Engine` automatically from the gem to simplify setup - See [#51](https://github.com/julienbourdeau/debugbar/pull/51)
+
+### Attention needed
+
+It's not breaking (yet) but if you have the following block in your `config/routes.rb`, please remove it!
+
+```rb
+  if defined? Debugbar
+    mount Debugbar::Engine => Debugbar.config.prefix
+  end
+```
 
 ## v0.4.1 - 2025-01-07
 
@@ -45,7 +55,7 @@
 In order to support Turbo Drive, I had to split the helper into two parts. Before the JavaScript file was loaded, 
 directly in the body, but it has to be loaded in the head now. 
 
-If you were passing configuation t `debugbar_javascript`, you must now pass it to `debugbar_body`.
+If you were passing configuration t `debugbar_javascript`, you must now pass it to `debugbar_body`.
 
 ```diff
 <!DOCTYPE html>
