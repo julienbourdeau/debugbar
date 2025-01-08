@@ -1,8 +1,10 @@
 module Debugbar::TagHelpers
   def debugbar_head
-    raw <<-HTML
+    html = <<-HTML
       <script defer src="#{Debugbar.config.prefix}/assets/script"></script>
     HTML
+
+    Debugbar.config.enabled? ? raw(html) : ""
   end
 
   def debugbar_body(opt = {})
@@ -27,7 +29,7 @@ module Debugbar::TagHelpers
       </script>
     HTML
 
-    raw html
+    Debugbar.config.enabled? ? raw(html) : ""
   end
 
   def debugbar_javascript(opt = {})
