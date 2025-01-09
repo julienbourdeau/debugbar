@@ -16,20 +16,25 @@ chrome.devtools.panels.create("Request Monitor", null, "extension/devtools.html"
 })
 
 // Create a background page connection
-const backgroundPageConnection = chrome.runtime.connect({
-  name: "devtools-page",
-})
+// const backgroundPageConnection = chrome.runtime.connect({
+//   name: "devtools-page",
+// })
 
 // Listen to network requests
 chrome.devtools.network.onRequestFinished.addListener((request) => {
-  const requestData = {
-    url: request.request.url,
-    method: request.request.method,
-    status: request.response.status,
-    timestamp: new Date().toISOString(),
-  }
+  const callToRails = request.response.headers.find((header) => header.name === "x-debugbar-on")
 
-  addRequestToList(requestData)
+  if (callToRails) {
+    addRequestToList({
+      id: request.response.headers.find((header) => header.name === "x-request-id").value,
+      url: request.request.url,
+      method: request.request.method,
+      status: request.response.status,
+      timestamp: new Date().toISOString(),
+    })
+  } else {
+    console.log("Ignored request: " + request.request.url)
+  }
 })
 
 function addRequestToList(requestData) {
@@ -41,7 +46,7 @@ function addRequestToList(requestData) {
         <br>
         ${requestData.url}
         <br>
-        <small>${requestData.timestamp}</small>
+        [${requestData.id}] <small>${requestData.timestamp}</small>
     `
   list.insertBefore(listItem, list.firstChild)
 }

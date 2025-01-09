@@ -14,7 +14,7 @@ module Debugbar
 
       Debugbar::Current.new_request!(SecureRandom.uuid)
 
-      res = @app.call(env)
+      status, headers, body = @app.call(env)
 
       # TODO: Remove this if statement?
       # We check meta because the frontend doesn't support request without meta yet.
@@ -29,7 +29,9 @@ module Debugbar
         end
       end
 
-      res
+      headers["X-Debugbar-On"] = :yes # Used for the browser extension
+
+      [status, headers, body]
     end
   end
 
