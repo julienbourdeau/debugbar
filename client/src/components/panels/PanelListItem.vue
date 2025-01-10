@@ -16,6 +16,8 @@ const state = reactive({
   showOriginFile: false,
 })
 
+const isNotExtension = () => import.meta.env.__DEBUBGBAR_MODE__ != "extension"
+
 defineEmits(["toggleFormatting"])
 </script>
 
@@ -38,7 +40,7 @@ defineEmits(["toggleFormatting"])
           v-text="props.isFormatted ? 'unformat' : 'format'"
         />
         <span
-          v-if="props.copyableText"
+          v-if="props.copyableText && isNotExtension()"
           @click="copyToClipboard(props.copyableText)"
           class="px-3 text-xs uppercase text-stone-400 cursor-pointer"
           title="Copy SQL query to clipboard"
