@@ -9,8 +9,8 @@ import {
   CodeBracketIcon,
   PauseIcon,
   PlayIcon,
-  TrashIcon,
-  XCircleIcon,
+  NoSymbolIcon,
+  XMarkIcon,
 } from "@heroicons/vue/16/solid"
 
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
@@ -213,7 +213,7 @@ const setActiveTab = (tab) => {
           :is-active="k === state.activeTab"
           :disabled="v.count == 0"
           @click="setActiveTab(k)"
-          class="text-sm flex items-center space-x-1 px-2 py-1.5 border-0"
+          class="text-sm flex items-center space-x-1 px-2 py-2 border-0"
           :class="{
             'bg-stone-300 rounded-t-sm cursor-auto': k === state.activeTab,
           }"
@@ -223,7 +223,7 @@ const setActiveTab = (tab) => {
         <button
           v-if="devMode"
           @click="setActiveTab('debug')"
-          class="px-3 py-1.5 text-stone-600"
+          class="px-3 py-2 text-stone-600"
           :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
         >
           <CodeBracketIcon class="size-4" />
@@ -253,7 +253,7 @@ const setActiveTab = (tab) => {
 
           <div class="flex items-center pl-1 space-x-2">
             <button @click="clearRequests" title="Clear all requests (frontend and backend)">
-              <trash-icon class="size-4" />
+              <no-symbol-icon class="size-3.5" />
             </button>
             <button
               v-if="configStore.config.mode == 'poll'"
@@ -267,7 +267,7 @@ const setActiveTab = (tab) => {
               <arrow-down-left-icon class="size-4" />
             </button>
             <button v-if="isOpen" @click="state.activeTab = ''" title="Close">
-              <x-circle-icon class="size-4" />
+              <x-mark-icon class="size-5" />
             </button>
           </div>
         </div>

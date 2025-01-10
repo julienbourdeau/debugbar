@@ -3,7 +3,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive } from "vue"
-import { CodeBracketIcon, XCircleIcon, TrashIcon } from "@heroicons/vue/16/solid"
+import { CodeBracketIcon, XMarkIcon, NoSymbolIcon } from "@heroicons/vue/16/solid"
 import TabButton from "@/components/TabButton.vue"
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
 import StatusCode from "@/components/ui/StatusCode.vue"
@@ -75,11 +75,25 @@ const setActiveTab = (tab) => {
 
 <template>
   <div class="">
-    <div class="px-1 flex items-center justify-between w-full bg-stone-700 text-white">
+    <!--    HEADER-->
+    <div class="px-1 flex items-center justify-between w-full bg-stone-600 text-white">
       <div @click="setActiveTab('')" class="py-0.5 cursor-pointer">{{ requestsStore.requestCount }} requests</div>
       <div class="pl-1.5 flex items-center space-x-2">
-        <button @click="clearRequests" title="Clear all requests (frontend and backend)">
-          <trash-icon class="size-3.5" />
+        <button
+          @click="clearRequests"
+          title="Clear all requests (frontend and backend)"
+          class="flex items-center space-x-1"
+        >
+          <no-symbol-icon class="size-3.5" /> <span class="text-xs uppercase">clear</span>
+        </button>
+        <button
+          v-if="isActive"
+          n
+          @click="setActiveTab('')"
+          title="Close current request"
+          class="flex items-center space-x-1"
+        >
+          <x-mark-icon class="size-4" /> <span class="text-xs uppercase">close</span>
         </button>
       </div>
     </div>
@@ -91,32 +105,44 @@ const setActiveTab = (tab) => {
           <p class="px-1 py-2">
             No request detected yet.
             <a class="text-blue-700 font-medium underline" href="https://debugbar.dev/docs/troubleshooting/"
-              >Learn more</a
+              >Troubleshooting docs</a
             >
           </p>
         </div>
 
         <!--      THE LIST-->
-        <div v-if="!isActive" class="w-full space-y-1">
-          <div
-            v-for="r in requestsStore.requests"
-            class="cursor-pointer transition-colors duration-1000"
-            :class="{ 'bg-yellow-50 transition': state.recentlyAdded[r.id] }"
-            @click="
-              (_event) => {
-                requestsStore.setCurrentRequestById(r.id)
-                state.activeTab = defaultTabName
-              }
-            "
-          >
-            <request-list-item :request="r" class="hover:bg-stone-200" />
-          </div>
+        <div v-if="!isActive" class="w-full">
+          <table class="w-full">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <request-list-item
+                :request="r"
+                v-for="r in requestsStore.requests"
+                class="cursor-pointer transition-colors duration-1000 hover:bg-stone-200"
+                :class="{ 'bg-yellow-50 transition': state.recentlyAdded[r.id] }"
+                @click="
+                  (_event) => {
+                    requestsStore.setCurrentRequestById(r.id)
+                    state.activeTab = defaultTabName
+                  }
+                "
+              />
+            </tbody>
+          </table>
         </div>
 
         <!--      THE PANEL-->
         <div v-if="isActive" class="w-full">
-          <div class="flex w-full px-1 justify-between items-center bg-stone-100">
-            <div class="py-1.5 w-full flex items-center">
+          <div class="flex w-full px-1 py-1 justify-between items-center bg-stone-100">
+            <div class="w-full flex items-center">
               <http-verb :verb="requestsStore.currentRequest.meta.method" />
               <div
                 class="pl-1 grow text-nowrap overflow-hidden font-mono"
@@ -127,15 +153,9 @@ const setActiveTab = (tab) => {
 
               <request-timings :request="requestsStore.currentRequest" />
             </div>
-
-            <div class="pl-1.5 flex items-center space-x-1">
-              <button @click="state.activeTab = ''" title="Close">
-                <x-circle-icon class="size-4" />
-              </button>
-            </div>
           </div>
 
-          <div class="flex w-full justify-end flex-wrap-reverse items-center bg-stone-50">
+          <div class="flex pt-1 pr-1 w-full justify-end flex-wrap-reverse items-center bg-stone-50">
             <div class="flex grow justify-start items-center">
               <tab-button
                 v-for="(v, k) in requestsStore.currentRequest.dataForTabs"
@@ -147,7 +167,7 @@ const setActiveTab = (tab) => {
                 @click="setActiveTab(k)"
                 class="text-xs flex items-center space-x-1 px-2 py-1.5 border-0"
                 :class="{
-                  'bg-stone-300 rounded-t-sm cursor-auto': k === state.activeTab,
+                  'bg-stone-200 rounded-t-sm cursor-auto': k === state.activeTab,
                 }"
                 >{{ v.label }}</tab-button
               >
@@ -156,7 +176,7 @@ const setActiveTab = (tab) => {
                 v-if="devMode"
                 @click="setActiveTab('debug')"
                 class="px-3 py-1.5 text-stone-600"
-                :class="{ 'bg-stone-300': state.activeTab == 'debug' }"
+                :class="{ 'bg-stone-200': state.activeTab == 'debug' }"
               >
                 <CodeBracketIcon class="size-4" />
               </button>
