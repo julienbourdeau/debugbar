@@ -2,7 +2,6 @@
 import Panel from "@/components/panels/Panel.vue"
 import Row from "@/components/ui/Row.vue"
 import KeyValueTable from "@/components/ui/KeyValueTable.vue"
-import Foldable from "@/components/ui/Foldable.vue"
 import { HttpRequest } from "@/models/Request.ts"
 import JsonCode from "@/components/ui/JsonCode.vue"
 import SubHeading from "@/components/ui/SubHeading.vue"
@@ -24,18 +23,7 @@ defineProps<{
       <row label="Params">
         <json-code :json="extractQueryParams(request.url)" />
       </row>
-      <row label="Header: Version">
-        {{ request.headers["Version"] }}
-      </row>
-      <row label="Header: Cache-Control">
-        {{ request.headers["Cache-Control"] }}
-      </row>
+      <row v-for="(v, k) in request.headers" :key="k" :label="k as unknown as string">{{ v }}</row>
     </key-value-table>
-
-    <foldable class="py-4" label="All Headers">
-      <key-value-table>
-        <row v-for="(v, k) in request.headers" :key="k" :label="k as unknown as string">{{ v }}</row>
-      </key-value-table>
-    </foldable>
   </panel>
 </template>

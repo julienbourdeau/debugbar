@@ -19,7 +19,7 @@ defineProps<{
     <key-value-table>
       <row label="Status"><status-code :code="response.status" /></row>
       <row label="Body">{{ response.body.substring(0, 140) }}</row>
-      <row label="Header: Content-Type">
+      <row label="Content-Type">
         {{ response.headers["Content-Type"] }}
       </row>
     </key-value-table>

@@ -20,13 +20,13 @@ const state = reactive({
 <template>
   <div v-for="req in requests" :key="req.id">
     <h1
-      class="flex items-center my-4 mx-2 space-x-2 px-2 py-2.5 bg-stone-100 border border-stone-300 tracking-wide text-sm rounded cursor-pointer"
+      class="flex items-center my-4 space-x-2 px-2 py-2.5 tracking-wide text-sm rounded cursor-pointer"
       @click="state.open[req.id] = !state.open[req.id]"
     >
       <chevron-down-icon
         class="size-4"
         :class="{
-          '-rotate-90': state.open[req.id],
+          '-rotate-90': !state.open[req.id],
         }"
       />
       <status-code :code="req.response?.status" />
@@ -37,9 +37,9 @@ const state = reactive({
       </span>
     </h1>
 
-    <div v-if="state.open[req.id]" class="flex">
-      <http-request-panel :request="req.request" class="w-1/2" />
-      <http-response-panel :response="req.response" class="w-1/2" />
+    <div v-if="state.open[req.id]" class="lg:flex">
+      <http-request-panel :request="req.request" class="lg:w-1/2 min-w-[450px]" />
+      <http-response-panel :response="req.response" class="lg:w-1/2 min-w-[450px]" />
     </div>
   </div>
 </template>
