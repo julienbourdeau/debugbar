@@ -1,5 +1,9 @@
 module Debugbar
   class NullBuffer
+    def get
+      {}
+    end
+
     def push(_request)
     end
 

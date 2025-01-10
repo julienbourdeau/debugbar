@@ -7,12 +7,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <button
-    class="text-sm flex items-center space-x-1 px-2 py-1.5 border-0"
-    :class="{
-      'bg-stone-300 rounded-t-sm cursor-auto': props.isActive,
-    }"
-  >
+  <button>
     <span :class="{ 'font-medium': props.isActive }"><slot /></span>
     <span
       v-if="props.count != undefined"

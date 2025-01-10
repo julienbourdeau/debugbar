@@ -3,6 +3,10 @@ module Debugbar
     protect_from_forgery with: :null_session
     before_action :cors_set_access_control_headers
 
+    def get
+      render json: RequestBuffer.get(params[:id])
+    end
+
     def poll
       render json: RequestBuffer.to_h
     end

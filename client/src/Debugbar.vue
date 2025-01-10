@@ -213,6 +213,10 @@ const setActiveTab = (tab) => {
           :is-active="k === state.activeTab"
           :disabled="v.count == 0"
           @click="setActiveTab(k)"
+          class="text-sm flex items-center space-x-1 px-2 py-1.5 border-0"
+          :class="{
+            'bg-stone-300 rounded-t-sm cursor-auto': k === state.activeTab,
+          }"
           >{{ v.label }}</tab-button
         >
 

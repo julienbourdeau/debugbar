@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ChevronDownIcon } from "@heroicons/vue/16/solid"
 import { reactive } from "vue"
+import { capitalize } from "lodash"
 import { copyToClipboard } from "@/helpers.ts"
 
 const props = defineProps<{
@@ -23,7 +24,7 @@ defineEmits(["toggleFormatting"])
     <div class="flex items-center space-x-4">
       <button class="flex items-center space-x-1" @click="state.isOpen = !state.isOpen">
         <chevron-down-icon class="size-4" :class="{ '-rotate-90': !state.isOpen }" />
-        <span class="font-semibold text-lg">{{ props.title }}</span>
+        <span class="font-bold text-sm">{{ capitalize(props.title) }}</span>
       </button>
 
       <slot name="title-details" />
