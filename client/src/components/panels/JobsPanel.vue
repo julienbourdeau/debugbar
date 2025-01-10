@@ -32,7 +32,7 @@ function formatTs(ts: number) {
       <tbody class="divide-y divide-stone-200">
         <tr v-for="(v, _k) in props.jobs" :key="v.id">
           <td class="whitespace-nowrap p-4 pr-8 text-stone-900">
-            <div class="text-lg font-bold" v-text="v.class"></div>
+            <div class="font-semibold" v-text="v.class"></div>
             <div class="text-stone-600 text-sm">
               <div v-text="'Queue: ' + v.queue"></div>
               <div v-text="'At: ' + formatTs(v.scheduled_at)"></div>

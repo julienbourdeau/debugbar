@@ -5,6 +5,10 @@ module Debugbar
         @adapter = adapter
       end
 
+      def get(id)
+        @adapter.get(id)
+      end
+
       def push(request)
         @adapter.push(request)
         nil # Why not return self?

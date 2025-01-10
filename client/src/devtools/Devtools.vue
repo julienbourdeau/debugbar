@@ -2,12 +2,10 @@
 <!--It's imported in the different App*.vue components.-->
 
 <script setup lang="ts">
-import { createConsumer } from "@rails/actioncable"
-import { computed, reactive } from "vue"
-import { CodeBracketIcon, XCircleIcon, PauseIcon, PlayIcon, TrashIcon } from "@heroicons/vue/16/solid"
+import { computed, onMounted, reactive } from "vue"
+import { CodeBracketIcon, XCircleIcon, TrashIcon } from "@heroicons/vue/16/solid"
 import TabButton from "@/components/TabButton.vue"
 import { useRequestsStore } from "@/stores/RequestsStore.ts"
-import { useConfigStore } from "@/stores/configStore.ts"
 import StatusCode from "@/components/ui/StatusCode.vue"
 import RequestListItem from "@/components/RequestListItem.vue"
 import RequestTimings from "@/components/RequestTimings.vue"
@@ -15,13 +13,11 @@ import HttpVerb from "@/components/ui/HttpVerb.vue"
 import DebugbarBody from "@/DebugbarBody.vue"
 
 let requestsStore = useRequestsStore()
-let configStore = useConfigStore()
 
 const state = reactive({
-  mode: configStore.config.mode,
   activeTab: "",
   isConnected: false,
-  isPolling: configStore.config.mode === "poll",
+  recentlyAdded: {},
 })
 
 const defaultTabName = "queries"
@@ -34,84 +30,42 @@ const devMode = computed(() => {
   return import.meta.env.DEV
 })
 
-let debugbarChannel = null
-
-if (configStore.config.mode === "ws") {
-  debugbarChannel = createConsumer(configStore.config.actionCableUrl).subscriptions.create(
-    { channel: configStore.config.cable.channelName },
-    {
-      connected() {
-        state.isConnected = true
-        debugbarChannel.send({ ids: [] })
-      },
-
-      disconnected() {
-        state.isConnected = false
-      },
-      received(data) {
-        if (data.length == 0) {
-          return
-        }
-
-        const ids = requestsStore.addRequests(data)
-
-        if (!isActive.value) {
-          requestsStore.setCurrentRequestById(ids[ids.length - 1])
-        }
-
-        setTimeout(() => {
-          debugbarChannel.send({ ids: ids })
-        }, 50)
-      },
-    }
-  )
-} else if (configStore.config.mode === "poll") {
-  console.log(
-    `Using debugbar in "polling mode". Consider using "ws" mode for better performance (requires ActionCable).`
-  )
-  setInterval(() => {
-    if (!state.isPolling) {
-      return
-    }
-
-    fetch(configStore.config.pollUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.length == 0) {
-          return
-        }
-
-        console.log(data)
-
-        const ids = requestsStore.addRequests(data)
-
-        if (!isActive.value) {
-          requestsStore.setCurrentRequestById(ids[ids.length - 1])
-        }
-
-        fetch(configStore.config.pollUrl + "/confirm", {
-          // mode: "no-cors",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ ids: ids }),
-        })
-      })
-  }, configStore.config.poll.interval)
-} else {
-  console.log(`Using debugbar in "offline mode", ideal for demos using fixtures.`)
+const retrieveRequestData = (metadataUrl) => {
+  fetch(metadataUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      requestsStore.addRequests([data])
+      state.recentlyAdded[data.id] = true
+      setTimeout(() => {
+        state.recentlyAdded[data.id] = false // TODO: Delete instead?
+      }, 750)
+    })
 }
+
+const setupExtensionListener = () => {
+  chrome.devtools.network.onRequestFinished.addListener((request) => {
+    const metadataUrl = request.response.headers.find((header) => header.name === "x-debugbar-url")
+
+    if (metadataUrl?.value) {
+      console.log(`Valid request`, metadataUrl, request)
+      retrieveRequestData(metadataUrl.value)
+    } else if (devMode) {
+      console.log(
+        `Ignored request: ${request.request.method.toUpperCase()} ${request.request.url} (${request.response.status})`
+      )
+    }
+  })
+}
+
+onMounted(() => {
+  if (chrome !== undefined && chrome.devtools !== undefined) {
+    setupExtensionListener()
+  }
+})
 
 const clearRequests = () => {
   state.activeTab = ""
   requestsStore.clearRequests()
-  debugbarChannel?.send({ clear: true })
-  state.isPolling = true
-}
-
-const togglePolling = () => {
-  state.isPolling = !state.isPolling
 }
 
 const setActiveTab = (tab) => {
@@ -122,47 +76,32 @@ const setActiveTab = (tab) => {
 <template>
   <div class="">
     <div class="px-1 flex items-center justify-between w-full bg-stone-700 text-white">
-      <div class="py-0.5">{{ requestsStore.requestCount }} requests</div>
+      <div @click="setActiveTab('')" class="py-0.5 cursor-pointer">{{ requestsStore.requestCount }} requests</div>
       <div class="pl-1.5 flex items-center space-x-2">
-        <div
-          v-if="state.mode == 'ws'"
-          class="rounded-full w-2 h-2"
-          :class="{
-            'bg-emerald-500': state.isConnected,
-            'bg-rose-500': !state.isConnected,
-          }"
-          :title="state.isConnected ? 'Connected to backend via websocket' : 'Cannot connect to backend via websocket'"
-        ></div>
-        <button
-          @click="togglePolling"
-          v-if="state.mode == 'poll'"
-          :title="state.isPolling ? 'Pause polling' : 'Resume polling'"
-        >
-          <pause-icon v-if="state.isPolling" class="size-4" />
-          <play-icon v-if="!state.isPolling" class="size-4" />
-        </button>
-
         <button @click="clearRequests" title="Clear all requests (frontend and backend)">
           <trash-icon class="size-3.5" />
         </button>
       </div>
     </div>
 
-    <!--  No request yet, the debugbar is full width but empty  -->
-    <div v-if="requestsStore.currentRequest == null">
-      <p class="px-1 py-2">
-        No request detected yet.
-        <a class="text-blue-700 font-medium underline" href="https://debugbar.dev/docs/troubleshooting/">Learn more</a>
-      </p>
-    </div>
+    <div v-if="requestsStore.requestCount > 0" class="z-[9999] text-stone-900 w-full">
+      <div id="debugbar-header" class="flex flex-col items-center justify-between">
+        <!--        EMPTY STATE-->
+        <div v-if="requestsStore.requestCount == 0">
+          <p class="px-1 py-2">
+            No request detected yet.
+            <a class="text-blue-700 font-medium underline" href="https://debugbar.dev/docs/troubleshooting/"
+              >Learn more</a
+            >
+          </p>
+        </div>
 
-    <div v-if="requestsStore.currentRequest" class="z-[9999] text-stone-900 w-full">
-      <div id="debugbar-header" class="flex flex-col px-1 items-center justify-between bg-stone-50">
         <!--      THE LIST-->
         <div v-if="!isActive" class="w-full space-y-1">
           <div
             v-for="r in requestsStore.requests"
-            class="cursor-pointer"
+            class="cursor-pointer transition-colors duration-1000"
+            :class="{ 'bg-yellow-50 transition': state.recentlyAdded[r.id] }"
             @click="
               (_event) => {
                 requestsStore.setCurrentRequestById(r.id)
@@ -176,7 +115,7 @@ const setActiveTab = (tab) => {
 
         <!--      THE PANEL-->
         <div v-if="isActive" class="w-full">
-          <div class="flex w-full justify-between items-center">
+          <div class="flex w-full px-1 justify-between items-center bg-stone-100">
             <div class="py-1.5 w-full flex items-center">
               <http-verb :verb="requestsStore.currentRequest.meta.method" />
               <div
@@ -190,22 +129,13 @@ const setActiveTab = (tab) => {
             </div>
 
             <div class="pl-1.5 flex items-center space-x-1">
-              <button
-                v-if="configStore.config.mode == 'poll'"
-                @click="togglePolling"
-                :title="state.isPolling ? 'Pause polling' : 'Resume polling'"
-              >
-                <pause-icon v-if="state.isPolling" class="size-4" />
-                <play-icon v-if="!state.isPolling" class="size-4" />
-              </button>
-
               <button @click="state.activeTab = ''" title="Close">
                 <x-circle-icon class="size-4" />
               </button>
             </div>
           </div>
 
-          <div class="flex w-full justify-end flex-wrap-reverse items-center">
+          <div class="flex w-full justify-end flex-wrap-reverse items-center bg-stone-50">
             <div class="flex grow justify-start items-center">
               <tab-button
                 v-for="(v, k) in requestsStore.currentRequest.dataForTabs"
@@ -215,6 +145,10 @@ const setActiveTab = (tab) => {
                 :is-active="k === state.activeTab"
                 :disabled="v.count == 0"
                 @click="setActiveTab(k)"
+                class="text-xs flex items-center space-x-1 px-2 py-1.5 border-0"
+                :class="{
+                  'bg-stone-300 rounded-t-sm cursor-auto': k === state.activeTab,
+                }"
                 >{{ v.label }}</tab-button
               >
 
