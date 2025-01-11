@@ -1,17 +1,18 @@
 # Changelog
 
-## UNRELEASED
+## v0.4.2 - 2025-01-11
 
 * Mount `Debugbar::Engine` automatically from the gem to simplify setup - See [#51](https://github.com/julienbourdeau/debugbar/pull/51)
+* Fix error if ActiveCable is not available - See [#53](https://github.com/julienbourdeau/debugbar/pull/53)
 
 ### Attention needed
 
 It's not breaking (yet) but if you have the following block in your `config/routes.rb`, please remove it!
 
-```rb
-  if defined? Debugbar
-    mount Debugbar::Engine => Debugbar.config.prefix
-  end
+```diff
+-  if defined? Debugbar
+-    mount Debugbar::Engine => Debugbar.config.prefix
+-  end
 ```
 
 ## v0.4.1 - 2025-01-07
