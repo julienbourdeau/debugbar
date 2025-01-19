@@ -88,7 +88,6 @@ const setActiveTab = (tab) => {
         </button>
         <button
           v-if="isActive"
-          n
           @click="setActiveTab('')"
           title="Close current request"
           class="flex items-center space-x-1"
@@ -104,7 +103,10 @@ const setActiveTab = (tab) => {
         <div v-if="requestsStore.requestCount == 0">
           <p class="px-1 py-2">
             No request detected yet.
-            <a class="text-blue-700 font-medium underline" href="https://debugbar.dev/docs/troubleshooting/"
+            <a
+              target="_blank"
+              class="text-blue-700 font-medium underline"
+              href="https://debugbar.dev/docs/troubleshooting/"
               >Troubleshooting docs</a
             >
           </p>
