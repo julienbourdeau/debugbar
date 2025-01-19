@@ -7,6 +7,7 @@ import vue from "@vitejs/plugin-vue"
 export default defineConfig({
   define: {
     __VUE_PROD_DEVTOOLS__: true, // nice for demo mode
+    __DEBUBGBAR_MODE__: "web",
   },
   plugins: [
     vue({

@@ -13,12 +13,12 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex">
-    <div class="w-1/2">
+  <div class="lg:flex">
+    <div class="lg:w-1/2 min-w-[450px]">
       <http-request-panel :request="request.request" />
     </div>
 
-    <div class="w-1/2">
+    <div class="lg:w-1/2 min-w-[450px]">
       <panel>
         <sub-heading>Routing</sub-heading>
 

@@ -4,6 +4,10 @@ module Debugbar
       @collection = {}
     end
 
+    def get(id)
+      @collection[id].to_h
+    end
+
     def push(request)
       @collection[request.id] = request
     end

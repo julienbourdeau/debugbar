@@ -12,9 +12,10 @@ module Debugbar
 
       return @app.call(env) if Debugbar::Current.ignore?
 
-      Debugbar::Current.new_request!(SecureRandom.uuid)
+      req_id = SecureRandom.uuid
+      Debugbar::Current.new_request!(req_id)
 
-      res = @app.call(env)
+      status, headers, body = @app.call(env)
 
       # TODO: Remove this if statement?
       # We check meta because the frontend doesn't support request without meta yet.
@@ -29,7 +30,11 @@ module Debugbar
         end
       end
 
-      res
+      # We can't use Rails.application.url_helper here because 1. we have to set up manually the hosts, 2. the route I
+      # want is inside the engine routes and I didn't manage to access them via the helper
+      headers["X-Debugbar-Url"] = "#{ActionDispatch::Request.new(env).base_url}#{Debugbar.config.prefix}/get/#{req_id}"
+
+      [status, headers, body]
     end
   end
 

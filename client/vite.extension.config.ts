@@ -11,6 +11,7 @@ const isNotProd = () => process.env.NODE_ENV != "production"
 export default defineConfig({
   define: {
     __VUE_PROD_DEVTOOLS__: isNotProd(),
+    __DEBUBGBAR_MODE__: "extension",
   },
   plugins: [
     vue({
@@ -32,7 +33,7 @@ export default defineConfig({
     },
   },
   build: {
-    manifest: true,
+    manifest: false,
     sourcemap: isNotProd(),
     emptyOutDir: true,
     outDir: "./dist-extension",

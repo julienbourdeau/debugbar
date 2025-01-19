@@ -6,6 +6,6 @@ if (chrome) {
 }
 _browser.devtools.panels.create(
   "Debugbar", // title
-  "todo.png", // icon
+  null, // icon
   "extension/devtools.html" // content
 )

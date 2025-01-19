@@ -10,7 +10,7 @@ import { createPinia } from "pinia"
 
 import "../src/style.css"
 
-// hljs.registerLanguage("sql", sql) // I don't know why my editor gives me an error here.
+hljs.registerLanguage("sql", sql as any)
 hljs.registerLanguage("json", json)
 
 const pinia = createPinia()

@@ -1,5 +1,9 @@
 module Debugbar
   class CacheBuffer
+    def get(id)
+      get_collection[id].to_h
+    end
+
     def push(request)
       collection = get_collection
       collection[request.id] = request.to_h
