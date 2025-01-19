@@ -49,7 +49,7 @@ module Debugbar
     initializer 'debugbar.init' do |app|
       # Display error message if running in multi-process mode without proper configuration
       if ENV["WEB_CONCURRENCY"].to_i > 1
-        cache_nok = %i[null_store memory_store].include?(Rails.configuration.cache_store.first.to_sym)
+        cache_nok = %i[null_store memory_store].include?(Rails.configuration.cache_store.to_sym)
         action_cable_nok = ActionCable.server.config.cable[:adapter].to_s == "async"
         adapter_nok = app.config.debugbar.buffer_adapter != :cache
 
