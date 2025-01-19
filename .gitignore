@@ -8,6 +8,7 @@
 /tmp/
 client/dist/
 debugbar*.gem
+extension.zip
 public/debugbar.js
 
 package-lock.json

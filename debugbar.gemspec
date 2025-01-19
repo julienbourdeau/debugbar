@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
     client/
     .git .circleci appveyor Gemfile package.json package-lock.json .prettierrc
     release.sh build_client.sh build_demo.sh build_fixtures.rb build_gem.sh
+    extension.zip
   ]
 
   spec.files = Dir.chdir(__dir__) do

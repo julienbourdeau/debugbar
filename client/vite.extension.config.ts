@@ -33,7 +33,7 @@ export default defineConfig({
     },
   },
   build: {
-    manifest: true,
+    manifest: false,
     sourcemap: isNotProd(),
     emptyOutDir: true,
     outDir: "./dist-extension",
