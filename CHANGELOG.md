@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.3 - 2025-02-04
+
+* Small fixes - See [#54](https://github.com/julienbourdeau/debugbar/issues/54) and [#56](https://github.com/julienbourdeau/debugbar/issues/56)
+
 ## v0.4.2 - 2025-01-11
 
 * Mount `Debugbar::Engine` automatically from the gem to simplify setup - See [#51](https://github.com/julienbourdeau/debugbar/pull/51)
